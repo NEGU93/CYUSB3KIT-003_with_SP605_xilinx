@@ -25,7 +25,7 @@ As I had no experience with Xilinx FPGA's, I used some tutorials to practice and
   1. First check the board is working correcly: [EZ-USB FX3TM SUPERSPEED EXPLORER KIT QUICK START GUIDE](http://www.cypress.com/file/133831/download)
   2. Then follow a very good documented guide. Learn how to communicate, program and run UART and debugging tools [SuperSpeed Explorer Kit User Guide](http://www.cypress.com/file/133836/download)
     
-## Communicate with the FPGA
+## Communicating with the FPGA
 This part uploads a firmware to the FPGA using the ISE software and then communicates the computer with the FPGA via the USB3 provided by the Cypress module.
 
 The following documentation was used: [AN65974](http://www.cypress.com/documentation/application-notes/an65974-designing-ez-usb-fx3-slave-fifo-interface)
@@ -41,6 +41,11 @@ the Cypress Interconnect Board. This way, no change was done to the CYUSB3KIT fi
 
 ## Program and communicate with the FPGA
 TODO: merge last two sections
+
+## Citations
+
+I would like to know if this explanatios or code was usefull to somebody so if it's the case let me know (star the project for ex.)
+Just use this as you need!
 
 ## Note:
 This project is still under development. It started on Nov 2018.
