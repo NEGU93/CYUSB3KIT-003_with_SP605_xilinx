@@ -1,0 +1,125 @@
+xst -intstyle ise -ifn "D:/scratch_rahul/repo/cypress/slaveFIFO/fpga_slavefifo2b_verilog/slavefifo2b_verilog_feb20/slaveFIFO2b_fpga_top.xst" -ofn "D:/scratch_rahul/repo/cypress/slaveFIFO/fpga_slavefifo2b_verilog/slavefifo2b_verilog_feb20/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc D:/scratch_rahul/repo/cypress/slaveFIFO/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+xst -intstyle ise -ifn "D:/scratch_rahul/repo/cypress/slaveFIFO/fpga_slavefifo2b_verilog/slavefifo2b_verilog_feb20/slaveFIFO2b_fpga_top.xst" -ofn "D:/scratch_rahul/repo/cypress/slaveFIFO/fpga_slavefifo2b_verilog/slavefifo2b_verilog_feb20/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc D:/scratch_rahul/repo/cypress/slaveFIFO/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/Users/keaj/Desktop/AN65974 - Source files for FPGA code and FX3 firmware/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/Users/keaj/Desktop/AN65974 - Source files for FPGA code and FX3 firmware/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/Users/keaj/Desktop/AN65974 - Source files for FPGA code and FX3 firmware/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/Users/keaj/Desktop/AN65974 - Source files for FPGA code and FX3 firmware/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+xst -intstyle ise -ifn "C:/Users/rskv/Desktop/New folder (2)/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.xst" -ofn "C:/Users/rskv/Desktop/New folder (2)/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc slaveFIFO2b_fpga_top.ucf -p xc6slx16-csg324-3 "slaveFIFO2b_fpga_top.ngc" slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf -ucf slaveFIFO2b_fpga_top.ucf 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 

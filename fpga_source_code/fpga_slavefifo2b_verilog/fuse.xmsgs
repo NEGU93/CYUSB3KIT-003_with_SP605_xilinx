@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="370" delta="unknown" >"C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.v" Line 23: Empty port in module declaration
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/../testbench/fpga_master_tb.v" Line 48: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">PMODE</arg>&gt;. Formal port size is <arg fmt="%d" index="2">2</arg>-bit while actual signal size is <arg fmt="%d" index="1">1</arg>-bit.
+</msg>
+
+</messages>
+

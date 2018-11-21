@@ -1,0 +1,8 @@
+verilog work "fifo.v"
+verilog work "slaveFIFO2b_ZLP.v"
+verilog work "slaveFIFO2b_streamOUT.v"
+verilog work "slaveFIFO2b_streamIN.v"
+verilog work "slaveFIFO2b_partial.v"
+verilog work "slaveFIFO2b_loopback.v"
+verilog work "clk_wiz_v3_2_2.v"
+verilog work "slaveFIFO2b_fpga_top.v"

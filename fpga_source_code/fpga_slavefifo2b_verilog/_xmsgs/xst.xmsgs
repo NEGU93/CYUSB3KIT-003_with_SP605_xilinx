@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="370" delta="old" >"C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\slaveFIFO2b_fpga_top.v" Line 23: Empty port in module declaration
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\clk_wiz_v3_2_2.v" Line 116: Assignment to <arg fmt="%s" index="1">clkout1_unused</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\clk_wiz_v3_2_2.v" Line 117: Assignment to <arg fmt="%s" index="1">clkout2_unused</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\clk_wiz_v3_2_2.v" Line 118: Assignment to <arg fmt="%s" index="1">clkout3_unused</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\clk_wiz_v3_2_2.v" Line 119: Assignment to <arg fmt="%s" index="1">clkout4_unused</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\clk_wiz_v3_2_2.v" Line 120: Assignment to <arg fmt="%s" index="1">clkout5_unused</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\slaveFIFO2b_fpga_top.v" Line 246: Assignment to <arg fmt="%s" index="1">sloe_streamOUT_</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\slaveFIFO2b_fpga_top.v</arg>&quot; line <arg fmt="%s" index="2">237</arg>: Output port &lt;<arg fmt="%s" index="3">sloe_streamOUT_</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">stream_out_inst</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\slaveFIFO2b_loopback.v</arg>&quot; line <arg fmt="%s" index="2">192</arg>: Output port &lt;<arg fmt="%s" index="3">fifo_full</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">fifo_inst</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\slaveFIFO2b_loopback.v</arg>&quot; line <arg fmt="%s" index="2">192</arg>: Output port &lt;<arg fmt="%s" index="3">fifo_empty</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">fifo_inst</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">stream_out_data_from_fx3</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="1767" delta="old" >HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+</msg>
+
+<msg type="info" file="Xst" num="3226" delta="old" >The RAM &lt;<arg fmt="%s" index="1">Mram_data_array</arg>&gt; will be implemented as a BLOCK RAM, absorbing the following register(s):</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">fifo_address_d_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">slaveFIFO2b_fpga_top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;fifo_address_d_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="1901" delta="old" >Instance <arg fmt="%s" index="1">inst_clk/pll_base_inst</arg> in unit <arg fmt="%s" index="2">inst_clk/pll_base_inst</arg> of type <arg fmt="%s" index="3">PLL_BASE</arg> has been replaced by <arg fmt="%s" index="4">PLL_ADV</arg>
+</msg>
+
+</messages>
+

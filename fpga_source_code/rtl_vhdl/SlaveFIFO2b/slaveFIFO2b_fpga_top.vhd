@@ -221,10 +221,10 @@ begin  -- architecture begin
 --generating the clock(PLL instantiation)
 inst_clk : clk_wiz_v3_6_2
 	port map (
-         CLK_IN1	=> clk,
-	      CLK_OUT1	=> clk_100,
-			RESET    => reset2pll,
-         LOCKED	=> lock);
+                CLK_IN1	      => clk,
+	        CLK_OUT1      => clk_100,
+		RESET         => reset2pll,
+                LOCKED	      => lock);
 
 --used for TB
 --clk_100 <= clk;

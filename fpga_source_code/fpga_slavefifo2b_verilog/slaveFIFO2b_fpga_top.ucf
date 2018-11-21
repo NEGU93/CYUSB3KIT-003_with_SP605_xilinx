@@ -1,0 +1,123 @@
+
+
+NET "clk_100" TNM_NET = "clk_100";
+TIMESPEC TS_clk_100 = PERIOD "clk_100" 10ns HIGH 50 %;
+
+NET "clk" TNM_NET = "clk";
+TIMESPEC TS_clk = PERIOD "clk" 37.037000ns HIGH 50 %;
+
+NET "clk_out" TNM_NET = "clk_out";
+TIMESPEC TS_clk_out = PERIOD "clk_out" 10ns HIGH 50 %;
+
+//timing for clk62d5 to clk62d5 
+NET "clk_100" TNM_NET =  FFS "clk_100_ff";
+TIMEGRP clk_100_ff_posedge = RISING  "clk_100_ff";
+TIMEGRP clk_100_ff_negedge = FALLING  "clk_100_ff";
+
+TIMESPEC TS_clk_100_to_clk_100 = FROM "clk_100_ff_posedge" TO "clk_100_ff_posedge" 10 ns;
+
+
+NET "fdata[0]"  LOC = C10;
+NET "fdata[1]"  LOC = C15;
+NET "fdata[2]"  LOC = A15;
+NET "fdata[3]"  LOC = B16;
+NET "fdata[4]"  LOC = A16;
+NET "fdata[5]"  LOC = E7;
+NET "fdata[6]"  LOC = E8;
+NET "fdata[7]"  LOC = B12;
+NET "fdata[8]"  LOC = A12;
+NET "fdata[9]"  LOC = G9;
+NET "fdata[10]" LOC = F9;
+NET "fdata[11]" LOC = N6;
+NET "fdata[12]" LOC = P7;
+NET "fdata[13]" LOC = T4;
+NET "fdata[14]" LOC = V4;
+NET "fdata[15]" LOC = U8;
+NET "fdata[16]" LOC = V8;
+NET "fdata[17]" LOC = U11;
+NET "fdata[18]" LOC = V11;
+NET "fdata[19]" LOC = T12;
+NET "fdata[20]" LOC = V12;
+NET "fdata[21]" LOC = U15;
+NET "fdata[22]" LOC = V15;
+NET "fdata[23]" LOC = T9;
+NET "fdata[24]" LOC = V9;
+NET "fdata[25]" LOC = C13;
+NET "fdata[26]" LOC = A13;
+NET "fdata[27]" LOC = F11;
+NET "fdata[28]" LOC = E11;
+NET "fdata[29]" LOC = D6;
+NET "fdata[30]" LOC = C6;
+NET "fdata[31]" LOC = C7;
+
+
+NET "faddr[0]" LOC = N9 ;
+NET "faddr[1]" LOC = M10;
+
+//NET "sync" LOC = V13;
+
+NET "clk" LOC     = V10;
+NET "clk_out" LOC = D9;
+
+NET "slcs" LOC = A7;
+NET "sloe" LOC = P8;
+NET "slrd" LOC = R7;
+NET "slwr" LOC = N7;
+
+NET "flaga" LOC = T7;
+NET "flagb" LOC = M11;
+NET "flagc" LOC = N11;
+NET "flagd" LOC = N8;
+
+NET "pktend" LOC = M8;
+
+NET "mode_p[0]" LOC = D14;
+NET "mode_p[1]" LOC = E12;
+NET "mode_p[2]" LOC = F12;
+
+
+
+
+
+
+//NET "PMODE_2" LOC = G11;
+NET "PMODE[1]" LOC = A14;
+NET "PMODE[0]" LOC = B14;
+
+NET "RESET" LOC = B11;
+//NET "int_n" LOC = F10;
+NET "reset_in_" LOC = F10;
+
+//NET "tri_state[0]" LOC = D12;
+//NET "tri_state[1]" LOC = C12;
+//NET "tri_state[2]" LOC = B2; 
+//NET "tri_state[3]" LOC = A2; 
+//NET "tri_state[4]" LOC = R10;
+//NET "tri_state[5]" LOC = T10;
+//NET "tri_state[6]" LOC = R11;
+//NET "tri_state[7]" LOC = T11;
+//NET "tri_state[8]" LOC = A11;
+//NET "tri_state[9]" LOC = N5; 
+//NET "tri_state[10]" LOC = P6;
+//NET "tri_state[11]" LOC = U7;
+//NET "tri_state[12]" LOC = V7;
+
+
+
+NET "fdata*" TNM = "tnm_fdata";
+TIMEGRP "tnm_fdata" OFFSET = OUT 8ns AFTER "clk" REFERENCE_PIN "clk_out" RISING;
+
+NET "faddr*" TNM = "tnm_faddr";
+TIMEGRP "tnm_faddr" OFFSET = OUT 8ns AFTER "clk" REFERENCE_PIN "clk_out" RISING;
+
+NET "slwr" TNM = "tnm_slwr";
+TIMEGRP "tnm_slwr" OFFSET = OUT 8ns AFTER "clk" REFERENCE_PIN "clk_out" RISING;
+
+NET "pktend" TNM = "tnm_pktend";
+TIMEGRP "tnm_pktend" OFFSET = OUT 8ns AFTER "clk" REFERENCE_PIN "clk_out" RISING;
+
+#Created by Constraints Editor (xc6slx16-csg324-3) - 2014/10/02
+TIMEGRP "FDATA_IN" = PADS("fdata<0>") PADS("fdata<1>") PADS("fdata<2>") PADS("fdata<3>") PADS("fdata<4>") PADS("fdata<5>") PADS("fdata<6>") PADS("fdata<7>") PADS("fdata<8>") PADS("fdata<9>") PADS("fdata<10>") PADS("fdata<11>") PADS("fdata<12>") PADS("fdata<13>") PADS("fdata<14>") PADS("fdata<15>") PADS("fdata<16>") PADS("fdata<17>") PADS("fdata<18>") PADS("fdata<19>") PADS("fdata<20>") PADS("fdata<21>") PADS("fdata<22>") PADS("fdata<23>") PADS("fdata<24>") PADS("fdata<25>") PADS("fdata<26>") PADS("fdata<27>") PADS("fdata<28>") PADS("fdata<29>") PADS("fdata<30>") PADS("fdata<31>");
+#Created by Constraints Editor (xc6slx16-csg324-3) - 2014/10/02
+TIMEGRP "FDATA_IN" OFFSET = IN 2.5ns BEFORE "clk" RISING;
+

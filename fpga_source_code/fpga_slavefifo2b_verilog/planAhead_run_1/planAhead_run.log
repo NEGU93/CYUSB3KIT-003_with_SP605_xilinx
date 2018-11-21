@@ -1,0 +1,61 @@
+
+****** PlanAhead v14.2 (64-bit)
+  **** Build 194362 by xbuild on Fri Jul 20 18:52:11 MDT 2012
+    ** Copyright 1986-1999, 2001-2012 Xilinx, Inc. All Rights Reserved.
+
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Device 21-36] Loading parts and site information from C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/pa.fromNetlist.tcl
+# create_project -name slavefifo2b_verilog_feb20 -dir "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/planAhead_run_2" -part xc6slx16csg324-3
+Parsing template File [C:/Xilinx/2/14.2/ISE_DS/ISE/data/projnav/templates/verilog.xml].
+Finished parsing template File [C:/Xilinx/2/14.2/ISE_DS/ISE/data/projnav/templates/verilog.xml].
+Parsing template File [C:/Xilinx/2/14.2/ISE_DS/ISE/data/projnav/templates/vhdl.xml].
+Finished parsing template File [C:/Xilinx/2/14.2/ISE_DS/ISE/data/projnav/templates/vhdl.xml].
+Parsing template File [C:/Xilinx/2/14.2/ISE_DS/ISE/data/projnav/templates/ucf.xml].
+Finished parsing template File [C:/Xilinx/2/14.2/ISE_DS/ISE/data/projnav/templates/ucf.xml].
+create_project: Time (s): elapsed = 00:00:10 . Memory (MB): peak = 412.855 ; gain = 62.051
+# set_property design_mode GateLvl [get_property srcset [current_run -impl]]
+# set_property edif_top_file "C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.ngc" [ get_property srcset [ current_run ] ]
+# add_files -norecurse { {C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog} }
+# set_property target_constrs_file "slaveFIFO2b_fpga_top.ucf" [current_fileset -constrset]
+Adding file 'C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.ucf' to fileset 'constrs_1'
+# add_files [list {slaveFIFO2b_fpga_top.ucf}] -fileset [get_property constrset [current_run]]
+# link_design
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+Design is defaulting to project part: xc6slx16csg324-3
+Release 14.2 - ngc2edif P.28xd (nt64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+Reading design slaveFIFO2b_fpga_top.ngc ...
+WARNING:NetListWriters:298 - No output is written to slaveFIFO2b_fpga_top.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+  finished :Prep
+Writing EDIF netlist file slaveFIFO2b_fpga_top.edif ...
+ngc2edif: Total memory usage is 82704 kilobytes
+
+Parsing EDIF File [./planAhead_run_2/slavefifo2b_verilog_feb20.data/cache/slaveFIFO2b_fpga_top_ngc_191cf71c.edif]
+Finished Parsing EDIF File [./planAhead_run_2/slavefifo2b_verilog_feb20.data/cache/slaveFIFO2b_fpga_top_ngc_191cf71c.edif]
+INFO: [Netlist 29-17] Analyzing 32 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+Loading clock regions from C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx16/ClockRegion.xml
+Loading clock buffers from C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx16/ClockBuffers.xml
+Loading package pin functions from C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/PinFunctions.xml...
+Loading package from C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx16/csg324/Package.xml
+Loading io standards from C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data\./parts/xilinx/spartan6/IOStandards.xml
+Loading device configuration modes from C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/ConfigModes.xml
+Loading list of drcs for the architecture : C:/Xilinx/2/14.2/ISE_DS/PlanAhead/data\./parts/xilinx/spartan6/drc.xml
+Parsing UCF File [C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.ucf]
+Finished Parsing UCF File [C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.ucf]
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 32 instances were transformed.
+  IOBUF => IOBUF (OBUFT, IBUF): 32 instances
+
+Phase 0 | Netlist Checksum: 6c1a08ef
+link_design: Time (s): elapsed = 00:00:57 . Memory (MB): peak = 555.242 ; gain = 142.387

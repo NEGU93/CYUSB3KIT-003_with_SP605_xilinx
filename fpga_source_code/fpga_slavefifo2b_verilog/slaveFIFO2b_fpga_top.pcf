@@ -1,0 +1,712 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Mon Oct 06 09:33:58 2014
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "clk" LOCATE = SITE "V10" LEVEL 1;
+COMP "fdata<10>" LOCATE = SITE "F9" LEVEL 1;
+COMP "fdata<11>" LOCATE = SITE "N6" LEVEL 1;
+COMP "fdata<12>" LOCATE = SITE "P7" LEVEL 1;
+COMP "fdata<20>" LOCATE = SITE "V12" LEVEL 1;
+COMP "fdata<13>" LOCATE = SITE "T4" LEVEL 1;
+COMP "fdata<21>" LOCATE = SITE "U15" LEVEL 1;
+COMP "fdata<14>" LOCATE = SITE "V4" LEVEL 1;
+COMP "fdata<22>" LOCATE = SITE "V15" LEVEL 1;
+COMP "fdata<30>" LOCATE = SITE "C6" LEVEL 1;
+COMP "fdata<15>" LOCATE = SITE "U8" LEVEL 1;
+COMP "fdata<23>" LOCATE = SITE "T9" LEVEL 1;
+COMP "fdata<31>" LOCATE = SITE "C7" LEVEL 1;
+COMP "fdata<16>" LOCATE = SITE "V8" LEVEL 1;
+COMP "fdata<24>" LOCATE = SITE "V9" LEVEL 1;
+COMP "fdata<17>" LOCATE = SITE "U11" LEVEL 1;
+COMP "fdata<25>" LOCATE = SITE "C13" LEVEL 1;
+COMP "fdata<18>" LOCATE = SITE "V11" LEVEL 1;
+COMP "fdata<26>" LOCATE = SITE "A13" LEVEL 1;
+COMP "fdata<19>" LOCATE = SITE "T12" LEVEL 1;
+COMP "fdata<27>" LOCATE = SITE "F11" LEVEL 1;
+COMP "fdata<28>" LOCATE = SITE "E11" LEVEL 1;
+COMP "fdata<29>" LOCATE = SITE "D6" LEVEL 1;
+COMP "slcs" LOCATE = SITE "A7" LEVEL 1;
+COMP "sloe" LOCATE = SITE "P8" LEVEL 1;
+COMP "slrd" LOCATE = SITE "R7" LEVEL 1;
+COMP "RESET" LOCATE = SITE "B11" LEVEL 1;
+COMP "clk_out" LOCATE = SITE "D9" LEVEL 1;
+COMP "flaga" LOCATE = SITE "T7" LEVEL 1;
+COMP "flagb" LOCATE = SITE "M11" LEVEL 1;
+COMP "flagc" LOCATE = SITE "N11" LEVEL 1;
+COMP "flagd" LOCATE = SITE "N8" LEVEL 1;
+COMP "mode_p<0>" LOCATE = SITE "D14" LEVEL 1;
+COMP "mode_p<1>" LOCATE = SITE "E12" LEVEL 1;
+COMP "mode_p<2>" LOCATE = SITE "F12" LEVEL 1;
+COMP "faddr<0>" LOCATE = SITE "N9" LEVEL 1;
+COMP "faddr<1>" LOCATE = SITE "M10" LEVEL 1;
+COMP "fdata<0>" LOCATE = SITE "C10" LEVEL 1;
+COMP "fdata<1>" LOCATE = SITE "C15" LEVEL 1;
+COMP "fdata<2>" LOCATE = SITE "A15" LEVEL 1;
+COMP "fdata<3>" LOCATE = SITE "B16" LEVEL 1;
+COMP "fdata<4>" LOCATE = SITE "A16" LEVEL 1;
+COMP "fdata<5>" LOCATE = SITE "E7" LEVEL 1;
+COMP "fdata<6>" LOCATE = SITE "E8" LEVEL 1;
+COMP "fdata<7>" LOCATE = SITE "B12" LEVEL 1;
+COMP "fdata<8>" LOCATE = SITE "A12" LEVEL 1;
+COMP "fdata<9>" LOCATE = SITE "G9" LEVEL 1;
+COMP "reset_in_" LOCATE = SITE "F10" LEVEL 1;
+COMP "pktend" LOCATE = SITE "M8" LEVEL 1;
+COMP "slwr" LOCATE = SITE "N7" LEVEL 1;
+COMP "PMODE<0>" LOCATE = SITE "B14" LEVEL 1;
+COMP "PMODE<1>" LOCATE = SITE "A14" LEVEL 1;
+PIN oddr_y_pins<0> = BEL "oddr_y" PINNAME CK0;
+PIN oddr_y_pins<1> = BEL "oddr_y" PINNAME CK1;
+PIN loopback_inst/fifo_inst/Mram_data_array_pins<16> = BEL
+        "loopback_inst/fifo_inst/Mram_data_array" PINNAME CLKAWRCLK;
+PIN loopback_inst/fifo_inst/Mram_data_array_pins<17> = BEL
+        "loopback_inst/fifo_inst/Mram_data_array" PINNAME CLKBRDCLK;
+TIMEGRP clk_100 = BEL "mode_0" BEL "mode_1" BEL "mode_2" BEL "flaga_d" BEL
+        "flagb_d" BEL "flagc_d" BEL "flagd_d" BEL "fifo_address_d_0" BEL
+        "current_fpga_master_mode_FSM_FFd3" BEL
+        "current_fpga_master_mode_FSM_FFd2" BEL
+        "current_fpga_master_mode_FSM_FFd1" BEL
+        "stream_in_inst/data_gen_stream_in_0" BEL
+        "stream_in_inst/data_gen_stream_in_1" BEL
+        "stream_in_inst/data_gen_stream_in_2" BEL
+        "stream_in_inst/data_gen_stream_in_3" BEL
+        "stream_in_inst/data_gen_stream_in_4" BEL
+        "stream_in_inst/data_gen_stream_in_5" BEL
+        "stream_in_inst/data_gen_stream_in_6" BEL
+        "stream_in_inst/data_gen_stream_in_7" BEL
+        "stream_in_inst/data_gen_stream_in_8" BEL
+        "stream_in_inst/data_gen_stream_in_9" BEL
+        "stream_in_inst/data_gen_stream_in_10" BEL
+        "stream_in_inst/data_gen_stream_in_11" BEL
+        "stream_in_inst/data_gen_stream_in_12" BEL
+        "stream_in_inst/data_gen_stream_in_13" BEL
+        "stream_in_inst/data_gen_stream_in_14" BEL
+        "stream_in_inst/data_gen_stream_in_15" BEL
+        "stream_in_inst/data_gen_stream_in_16" BEL
+        "stream_in_inst/data_gen_stream_in_17" BEL
+        "stream_in_inst/data_gen_stream_in_18" BEL
+        "stream_in_inst/data_gen_stream_in_19" BEL
+        "stream_in_inst/data_gen_stream_in_20" BEL
+        "stream_in_inst/data_gen_stream_in_21" BEL
+        "stream_in_inst/data_gen_stream_in_22" BEL
+        "stream_in_inst/data_gen_stream_in_23" BEL
+        "stream_in_inst/data_gen_stream_in_24" BEL
+        "stream_in_inst/data_gen_stream_in_25" BEL
+        "stream_in_inst/data_gen_stream_in_26" BEL
+        "stream_in_inst/data_gen_stream_in_27" BEL
+        "stream_in_inst/data_gen_stream_in_28" BEL
+        "stream_in_inst/data_gen_stream_in_29" BEL
+        "stream_in_inst/data_gen_stream_in_30" BEL
+        "stream_in_inst/data_gen_stream_in_31" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd2" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd1" PIN "oddr_y_pins<0>"
+        PIN "oddr_y_pins<1>" PIN "oddr_y_pins<0>" PIN "oddr_y_pins<1>" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd1" BEL
+        "loopback_inst/oe_delay_cnt_1" BEL "loopback_inst/oe_delay_cnt_0" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd2" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd4" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd5" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd6" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd7" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd8" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd9" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd10" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd11" BEL
+        "loopback_inst/slrd_loopback_d3_" BEL
+        "loopback_inst/slrd_loopback_d2_" BEL
+        "loopback_inst/slrd_loopback_d1_" BEL
+        "loopback_inst/fifo_inst/read_occupancy_8" BEL
+        "loopback_inst/fifo_inst/read_occupancy_7" BEL
+        "loopback_inst/fifo_inst/read_occupancy_6" BEL
+        "loopback_inst/fifo_inst/read_occupancy_5" BEL
+        "loopback_inst/fifo_inst/read_occupancy_4" BEL
+        "loopback_inst/fifo_inst/read_occupancy_3" BEL
+        "loopback_inst/fifo_inst/read_occupancy_2" BEL
+        "loopback_inst/fifo_inst/read_occupancy_1" BEL
+        "loopback_inst/fifo_inst/read_occupancy_0" BEL
+        "loopback_inst/fifo_inst/write_occupancy_8" BEL
+        "loopback_inst/fifo_inst/write_occupancy_7" BEL
+        "loopback_inst/fifo_inst/write_occupancy_6" BEL
+        "loopback_inst/fifo_inst/write_occupancy_5" BEL
+        "loopback_inst/fifo_inst/write_occupancy_4" BEL
+        "loopback_inst/fifo_inst/write_occupancy_3" BEL
+        "loopback_inst/fifo_inst/write_occupancy_2" BEL
+        "loopback_inst/fifo_inst/write_occupancy_1" BEL
+        "loopback_inst/fifo_inst/write_occupancy_0" BEL
+        "loopback_inst/fifo_inst/write_ptr_7" BEL
+        "loopback_inst/fifo_inst/write_ptr_6" BEL
+        "loopback_inst/fifo_inst/write_ptr_5" BEL
+        "loopback_inst/fifo_inst/write_ptr_4" BEL
+        "loopback_inst/fifo_inst/write_ptr_3" BEL
+        "loopback_inst/fifo_inst/write_ptr_2" BEL
+        "loopback_inst/fifo_inst/write_ptr_1" BEL
+        "loopback_inst/fifo_inst/write_ptr_0" BEL
+        "loopback_inst/fifo_inst/read_ptr_7" BEL
+        "loopback_inst/fifo_inst/read_ptr_6" BEL
+        "loopback_inst/fifo_inst/read_ptr_5" BEL
+        "loopback_inst/fifo_inst/read_ptr_4" BEL
+        "loopback_inst/fifo_inst/read_ptr_3" BEL
+        "loopback_inst/fifo_inst/read_ptr_2" BEL
+        "loopback_inst/fifo_inst/read_ptr_1" BEL
+        "loopback_inst/fifo_inst/read_ptr_0" BEL
+        "loopback_inst/fifo_inst/fifo_full" BEL
+        "loopback_inst/fifo_inst/fifo_empty" BEL
+        "loopback_inst/fifo_inst/write_busy_d" BEL "partial_inst/strob_cnt_3"
+        BEL "partial_inst/strob_cnt_2" BEL "partial_inst/strob_cnt_1" BEL
+        "partial_inst/strob_cnt_0" BEL "partial_inst/data_gen_partial_31" BEL
+        "partial_inst/data_gen_partial_30" BEL
+        "partial_inst/data_gen_partial_29" BEL
+        "partial_inst/data_gen_partial_28" BEL
+        "partial_inst/data_gen_partial_27" BEL
+        "partial_inst/data_gen_partial_26" BEL
+        "partial_inst/data_gen_partial_25" BEL
+        "partial_inst/data_gen_partial_24" BEL
+        "partial_inst/data_gen_partial_23" BEL
+        "partial_inst/data_gen_partial_22" BEL
+        "partial_inst/data_gen_partial_21" BEL
+        "partial_inst/data_gen_partial_20" BEL
+        "partial_inst/data_gen_partial_19" BEL
+        "partial_inst/data_gen_partial_18" BEL
+        "partial_inst/data_gen_partial_17" BEL
+        "partial_inst/data_gen_partial_16" BEL
+        "partial_inst/data_gen_partial_15" BEL
+        "partial_inst/data_gen_partial_14" BEL
+        "partial_inst/data_gen_partial_13" BEL
+        "partial_inst/data_gen_partial_12" BEL
+        "partial_inst/data_gen_partial_11" BEL
+        "partial_inst/data_gen_partial_10" BEL
+        "partial_inst/data_gen_partial_9" BEL
+        "partial_inst/data_gen_partial_8" BEL
+        "partial_inst/data_gen_partial_7" BEL
+        "partial_inst/data_gen_partial_6" BEL
+        "partial_inst/data_gen_partial_5" BEL
+        "partial_inst/data_gen_partial_4" BEL
+        "partial_inst/data_gen_partial_3" BEL
+        "partial_inst/data_gen_partial_2" BEL
+        "partial_inst/data_gen_partial_1" BEL
+        "partial_inst/data_gen_partial_0" BEL "partial_inst/short_pkt_cnt_3"
+        BEL "partial_inst/short_pkt_cnt_2" BEL "partial_inst/short_pkt_cnt_1"
+        BEL "partial_inst/short_pkt_cnt_0" BEL
+        "partial_inst/current_partial_state_FSM_FFd2" BEL
+        "partial_inst/current_partial_state_FSM_FFd3" BEL
+        "partial_inst/current_partial_state_FSM_FFd1" BEL
+        "zlp_inst/strob_cnt_3" BEL "zlp_inst/strob_cnt_2" BEL
+        "zlp_inst/strob_cnt_1" BEL "zlp_inst/strob_cnt_0" BEL
+        "zlp_inst/data_gen_zlp_31" BEL "zlp_inst/data_gen_zlp_30" BEL
+        "zlp_inst/data_gen_zlp_29" BEL "zlp_inst/data_gen_zlp_28" BEL
+        "zlp_inst/data_gen_zlp_27" BEL "zlp_inst/data_gen_zlp_26" BEL
+        "zlp_inst/data_gen_zlp_25" BEL "zlp_inst/data_gen_zlp_24" BEL
+        "zlp_inst/data_gen_zlp_23" BEL "zlp_inst/data_gen_zlp_22" BEL
+        "zlp_inst/data_gen_zlp_21" BEL "zlp_inst/data_gen_zlp_20" BEL
+        "zlp_inst/data_gen_zlp_19" BEL "zlp_inst/data_gen_zlp_18" BEL
+        "zlp_inst/data_gen_zlp_17" BEL "zlp_inst/data_gen_zlp_16" BEL
+        "zlp_inst/data_gen_zlp_15" BEL "zlp_inst/data_gen_zlp_14" BEL
+        "zlp_inst/data_gen_zlp_13" BEL "zlp_inst/data_gen_zlp_12" BEL
+        "zlp_inst/data_gen_zlp_11" BEL "zlp_inst/data_gen_zlp_10" BEL
+        "zlp_inst/data_gen_zlp_9" BEL "zlp_inst/data_gen_zlp_8" BEL
+        "zlp_inst/data_gen_zlp_7" BEL "zlp_inst/data_gen_zlp_6" BEL
+        "zlp_inst/data_gen_zlp_5" BEL "zlp_inst/data_gen_zlp_4" BEL
+        "zlp_inst/data_gen_zlp_3" BEL "zlp_inst/data_gen_zlp_2" BEL
+        "zlp_inst/data_gen_zlp_1" BEL "zlp_inst/data_gen_zlp_0" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd2" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd3" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd1" BEL
+        "stream_out_inst/current_stream_out_state_FSM_FFd1" BEL
+        "stream_out_inst/current_stream_out_state_FSM_FFd2" BEL
+        "stream_out_inst/oe_delay_cnt_1" BEL "stream_out_inst/oe_delay_cnt_0"
+        BEL "stream_out_inst/current_stream_out_state_FSM_FFd3" BEL
+        "loopback_inst/rd_oe_delay_cnt" BEL "partial_inst/strob" BEL
+        "zlp_inst/strob" BEL "stream_out_inst/rd_oe_delay_cnt" BEL
+        "current_fpga_master_mode_FSM_FFd2_1" BEL
+        "current_fpga_master_mode_FSM_FFd3_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_2" BEL
+        "partial_inst/current_partial_state_FSM_FFd2_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd2_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd3_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd1_1" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_3" BEL
+        "current_fpga_master_mode_FSM_FFd1_4" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd3_2" BEL
+        "current_fpga_master_mode_FSM_FFd3_3" BEL
+        "current_fpga_master_mode_FSM_FFd2_2" BEL
+        "current_fpga_master_mode_FSM_FFd2_3" BEL
+        "current_fpga_master_mode_FSM_FFd2_4" BEL
+        "current_fpga_master_mode_FSM_FFd2_5" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3_1" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3_2" BEL
+        "loopback_inst/slrd_loopback_d3__1" BEL
+        "loopback_inst/slrd_loopback_d3__2" BEL "fdata_d_31" BEL
+        "data_out_reg_31" BEL "fdata_d_30" BEL "data_out_reg_30" BEL
+        "fdata_d_29" BEL "data_out_reg_29" BEL "fdata_d_28" BEL
+        "data_out_reg_28" BEL "fdata_d_27" BEL "data_out_reg_27" BEL
+        "fdata_d_26" BEL "data_out_reg_26" BEL "fdata_d_25" BEL
+        "data_out_reg_25" BEL "fdata_d_24" BEL "data_out_reg_24" BEL
+        "fdata_d_23" BEL "data_out_reg_23" BEL "fdata_d_22" BEL
+        "data_out_reg_22" BEL "fdata_d_21" BEL "data_out_reg_21" BEL
+        "fdata_d_20" BEL "data_out_reg_20" BEL "fdata_d_19" BEL
+        "data_out_reg_19" BEL "fdata_d_18" BEL "data_out_reg_18" BEL
+        "fdata_d_17" BEL "data_out_reg_17" BEL "fdata_d_16" BEL
+        "data_out_reg_16" BEL "fdata_d_15" BEL "data_out_reg_15" BEL
+        "fdata_d_14" BEL "data_out_reg_14" BEL "fdata_d_13" BEL
+        "data_out_reg_13" BEL "fdata_d_12" BEL "data_out_reg_12" BEL
+        "fdata_d_11" BEL "data_out_reg_11" BEL "fdata_d_10" BEL
+        "data_out_reg_10" BEL "fdata_d_9" BEL "data_out_reg_9" BEL "fdata_d_8"
+        BEL "data_out_reg_8" BEL "fdata_d_7" BEL "data_out_reg_7" BEL
+        "fdata_d_6" BEL "data_out_reg_6" BEL "fdata_d_5" BEL "data_out_reg_5"
+        BEL "fdata_d_4" BEL "data_out_reg_4" BEL "fdata_d_3" BEL
+        "data_out_reg_3" BEL "fdata_d_2" BEL "data_out_reg_2" BEL "fdata_d_1"
+        BEL "data_out_reg_1" BEL "fdata_d_0" BEL "slwr" BEL "data_out_reg_0"
+        PIN "loopback_inst/fifo_inst/Mram_data_array_pins<16>" PIN
+        "loopback_inst/fifo_inst/Mram_data_array_pins<17>";
+TIMEGRP clk_100_ff = BEL "mode_0" BEL "mode_1" BEL "mode_2" BEL "flaga_d" BEL
+        "flagb_d" BEL "flagc_d" BEL "flagd_d" BEL "fifo_address_d_0" BEL
+        "current_fpga_master_mode_FSM_FFd3" BEL
+        "current_fpga_master_mode_FSM_FFd2" BEL
+        "current_fpga_master_mode_FSM_FFd1" BEL
+        "stream_in_inst/data_gen_stream_in_0" BEL
+        "stream_in_inst/data_gen_stream_in_1" BEL
+        "stream_in_inst/data_gen_stream_in_2" BEL
+        "stream_in_inst/data_gen_stream_in_3" BEL
+        "stream_in_inst/data_gen_stream_in_4" BEL
+        "stream_in_inst/data_gen_stream_in_5" BEL
+        "stream_in_inst/data_gen_stream_in_6" BEL
+        "stream_in_inst/data_gen_stream_in_7" BEL
+        "stream_in_inst/data_gen_stream_in_8" BEL
+        "stream_in_inst/data_gen_stream_in_9" BEL
+        "stream_in_inst/data_gen_stream_in_10" BEL
+        "stream_in_inst/data_gen_stream_in_11" BEL
+        "stream_in_inst/data_gen_stream_in_12" BEL
+        "stream_in_inst/data_gen_stream_in_13" BEL
+        "stream_in_inst/data_gen_stream_in_14" BEL
+        "stream_in_inst/data_gen_stream_in_15" BEL
+        "stream_in_inst/data_gen_stream_in_16" BEL
+        "stream_in_inst/data_gen_stream_in_17" BEL
+        "stream_in_inst/data_gen_stream_in_18" BEL
+        "stream_in_inst/data_gen_stream_in_19" BEL
+        "stream_in_inst/data_gen_stream_in_20" BEL
+        "stream_in_inst/data_gen_stream_in_21" BEL
+        "stream_in_inst/data_gen_stream_in_22" BEL
+        "stream_in_inst/data_gen_stream_in_23" BEL
+        "stream_in_inst/data_gen_stream_in_24" BEL
+        "stream_in_inst/data_gen_stream_in_25" BEL
+        "stream_in_inst/data_gen_stream_in_26" BEL
+        "stream_in_inst/data_gen_stream_in_27" BEL
+        "stream_in_inst/data_gen_stream_in_28" BEL
+        "stream_in_inst/data_gen_stream_in_29" BEL
+        "stream_in_inst/data_gen_stream_in_30" BEL
+        "stream_in_inst/data_gen_stream_in_31" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd2" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd1" PIN "oddr_y_pins<0>"
+        PIN "oddr_y_pins<1>" PIN "oddr_y_pins<0>" PIN "oddr_y_pins<1>" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd1" BEL
+        "loopback_inst/oe_delay_cnt_1" BEL "loopback_inst/oe_delay_cnt_0" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd2" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd4" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd5" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd6" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd7" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd8" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd9" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd10" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd11" BEL
+        "loopback_inst/slrd_loopback_d3_" BEL
+        "loopback_inst/slrd_loopback_d2_" BEL
+        "loopback_inst/slrd_loopback_d1_" BEL
+        "loopback_inst/fifo_inst/read_occupancy_8" BEL
+        "loopback_inst/fifo_inst/read_occupancy_7" BEL
+        "loopback_inst/fifo_inst/read_occupancy_6" BEL
+        "loopback_inst/fifo_inst/read_occupancy_5" BEL
+        "loopback_inst/fifo_inst/read_occupancy_4" BEL
+        "loopback_inst/fifo_inst/read_occupancy_3" BEL
+        "loopback_inst/fifo_inst/read_occupancy_2" BEL
+        "loopback_inst/fifo_inst/read_occupancy_1" BEL
+        "loopback_inst/fifo_inst/read_occupancy_0" BEL
+        "loopback_inst/fifo_inst/write_occupancy_8" BEL
+        "loopback_inst/fifo_inst/write_occupancy_7" BEL
+        "loopback_inst/fifo_inst/write_occupancy_6" BEL
+        "loopback_inst/fifo_inst/write_occupancy_5" BEL
+        "loopback_inst/fifo_inst/write_occupancy_4" BEL
+        "loopback_inst/fifo_inst/write_occupancy_3" BEL
+        "loopback_inst/fifo_inst/write_occupancy_2" BEL
+        "loopback_inst/fifo_inst/write_occupancy_1" BEL
+        "loopback_inst/fifo_inst/write_occupancy_0" BEL
+        "loopback_inst/fifo_inst/write_ptr_7" BEL
+        "loopback_inst/fifo_inst/write_ptr_6" BEL
+        "loopback_inst/fifo_inst/write_ptr_5" BEL
+        "loopback_inst/fifo_inst/write_ptr_4" BEL
+        "loopback_inst/fifo_inst/write_ptr_3" BEL
+        "loopback_inst/fifo_inst/write_ptr_2" BEL
+        "loopback_inst/fifo_inst/write_ptr_1" BEL
+        "loopback_inst/fifo_inst/write_ptr_0" BEL
+        "loopback_inst/fifo_inst/read_ptr_7" BEL
+        "loopback_inst/fifo_inst/read_ptr_6" BEL
+        "loopback_inst/fifo_inst/read_ptr_5" BEL
+        "loopback_inst/fifo_inst/read_ptr_4" BEL
+        "loopback_inst/fifo_inst/read_ptr_3" BEL
+        "loopback_inst/fifo_inst/read_ptr_2" BEL
+        "loopback_inst/fifo_inst/read_ptr_1" BEL
+        "loopback_inst/fifo_inst/read_ptr_0" BEL
+        "loopback_inst/fifo_inst/fifo_full" BEL
+        "loopback_inst/fifo_inst/fifo_empty" BEL
+        "loopback_inst/fifo_inst/write_busy_d" BEL "partial_inst/strob_cnt_3"
+        BEL "partial_inst/strob_cnt_2" BEL "partial_inst/strob_cnt_1" BEL
+        "partial_inst/strob_cnt_0" BEL "partial_inst/data_gen_partial_31" BEL
+        "partial_inst/data_gen_partial_30" BEL
+        "partial_inst/data_gen_partial_29" BEL
+        "partial_inst/data_gen_partial_28" BEL
+        "partial_inst/data_gen_partial_27" BEL
+        "partial_inst/data_gen_partial_26" BEL
+        "partial_inst/data_gen_partial_25" BEL
+        "partial_inst/data_gen_partial_24" BEL
+        "partial_inst/data_gen_partial_23" BEL
+        "partial_inst/data_gen_partial_22" BEL
+        "partial_inst/data_gen_partial_21" BEL
+        "partial_inst/data_gen_partial_20" BEL
+        "partial_inst/data_gen_partial_19" BEL
+        "partial_inst/data_gen_partial_18" BEL
+        "partial_inst/data_gen_partial_17" BEL
+        "partial_inst/data_gen_partial_16" BEL
+        "partial_inst/data_gen_partial_15" BEL
+        "partial_inst/data_gen_partial_14" BEL
+        "partial_inst/data_gen_partial_13" BEL
+        "partial_inst/data_gen_partial_12" BEL
+        "partial_inst/data_gen_partial_11" BEL
+        "partial_inst/data_gen_partial_10" BEL
+        "partial_inst/data_gen_partial_9" BEL
+        "partial_inst/data_gen_partial_8" BEL
+        "partial_inst/data_gen_partial_7" BEL
+        "partial_inst/data_gen_partial_6" BEL
+        "partial_inst/data_gen_partial_5" BEL
+        "partial_inst/data_gen_partial_4" BEL
+        "partial_inst/data_gen_partial_3" BEL
+        "partial_inst/data_gen_partial_2" BEL
+        "partial_inst/data_gen_partial_1" BEL
+        "partial_inst/data_gen_partial_0" BEL "partial_inst/short_pkt_cnt_3"
+        BEL "partial_inst/short_pkt_cnt_2" BEL "partial_inst/short_pkt_cnt_1"
+        BEL "partial_inst/short_pkt_cnt_0" BEL
+        "partial_inst/current_partial_state_FSM_FFd2" BEL
+        "partial_inst/current_partial_state_FSM_FFd3" BEL
+        "partial_inst/current_partial_state_FSM_FFd1" BEL
+        "zlp_inst/strob_cnt_3" BEL "zlp_inst/strob_cnt_2" BEL
+        "zlp_inst/strob_cnt_1" BEL "zlp_inst/strob_cnt_0" BEL
+        "zlp_inst/data_gen_zlp_31" BEL "zlp_inst/data_gen_zlp_30" BEL
+        "zlp_inst/data_gen_zlp_29" BEL "zlp_inst/data_gen_zlp_28" BEL
+        "zlp_inst/data_gen_zlp_27" BEL "zlp_inst/data_gen_zlp_26" BEL
+        "zlp_inst/data_gen_zlp_25" BEL "zlp_inst/data_gen_zlp_24" BEL
+        "zlp_inst/data_gen_zlp_23" BEL "zlp_inst/data_gen_zlp_22" BEL
+        "zlp_inst/data_gen_zlp_21" BEL "zlp_inst/data_gen_zlp_20" BEL
+        "zlp_inst/data_gen_zlp_19" BEL "zlp_inst/data_gen_zlp_18" BEL
+        "zlp_inst/data_gen_zlp_17" BEL "zlp_inst/data_gen_zlp_16" BEL
+        "zlp_inst/data_gen_zlp_15" BEL "zlp_inst/data_gen_zlp_14" BEL
+        "zlp_inst/data_gen_zlp_13" BEL "zlp_inst/data_gen_zlp_12" BEL
+        "zlp_inst/data_gen_zlp_11" BEL "zlp_inst/data_gen_zlp_10" BEL
+        "zlp_inst/data_gen_zlp_9" BEL "zlp_inst/data_gen_zlp_8" BEL
+        "zlp_inst/data_gen_zlp_7" BEL "zlp_inst/data_gen_zlp_6" BEL
+        "zlp_inst/data_gen_zlp_5" BEL "zlp_inst/data_gen_zlp_4" BEL
+        "zlp_inst/data_gen_zlp_3" BEL "zlp_inst/data_gen_zlp_2" BEL
+        "zlp_inst/data_gen_zlp_1" BEL "zlp_inst/data_gen_zlp_0" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd2" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd3" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd1" BEL
+        "stream_out_inst/current_stream_out_state_FSM_FFd1" BEL
+        "stream_out_inst/current_stream_out_state_FSM_FFd2" BEL
+        "stream_out_inst/oe_delay_cnt_1" BEL "stream_out_inst/oe_delay_cnt_0"
+        BEL "stream_out_inst/current_stream_out_state_FSM_FFd3" BEL
+        "loopback_inst/rd_oe_delay_cnt" BEL "partial_inst/strob" BEL
+        "zlp_inst/strob" BEL "stream_out_inst/rd_oe_delay_cnt" BEL
+        "current_fpga_master_mode_FSM_FFd2_1" BEL
+        "current_fpga_master_mode_FSM_FFd3_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_2" BEL
+        "partial_inst/current_partial_state_FSM_FFd2_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd2_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd3_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd1_1" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_3" BEL
+        "current_fpga_master_mode_FSM_FFd1_4" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd3_2" BEL
+        "current_fpga_master_mode_FSM_FFd3_3" BEL
+        "current_fpga_master_mode_FSM_FFd2_2" BEL
+        "current_fpga_master_mode_FSM_FFd2_3" BEL
+        "current_fpga_master_mode_FSM_FFd2_4" BEL
+        "current_fpga_master_mode_FSM_FFd2_5" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3_1" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3_2" BEL
+        "loopback_inst/slrd_loopback_d3__1" BEL
+        "loopback_inst/slrd_loopback_d3__2" BEL "fdata_d_31" BEL
+        "data_out_reg_31" BEL "fdata_d_30" BEL "data_out_reg_30" BEL
+        "fdata_d_29" BEL "data_out_reg_29" BEL "fdata_d_28" BEL
+        "data_out_reg_28" BEL "fdata_d_27" BEL "data_out_reg_27" BEL
+        "fdata_d_26" BEL "data_out_reg_26" BEL "fdata_d_25" BEL
+        "data_out_reg_25" BEL "fdata_d_24" BEL "data_out_reg_24" BEL
+        "fdata_d_23" BEL "data_out_reg_23" BEL "fdata_d_22" BEL
+        "data_out_reg_22" BEL "fdata_d_21" BEL "data_out_reg_21" BEL
+        "fdata_d_20" BEL "data_out_reg_20" BEL "fdata_d_19" BEL
+        "data_out_reg_19" BEL "fdata_d_18" BEL "data_out_reg_18" BEL
+        "fdata_d_17" BEL "data_out_reg_17" BEL "fdata_d_16" BEL
+        "data_out_reg_16" BEL "fdata_d_15" BEL "data_out_reg_15" BEL
+        "fdata_d_14" BEL "data_out_reg_14" BEL "fdata_d_13" BEL
+        "data_out_reg_13" BEL "fdata_d_12" BEL "data_out_reg_12" BEL
+        "fdata_d_11" BEL "data_out_reg_11" BEL "fdata_d_10" BEL
+        "data_out_reg_10" BEL "fdata_d_9" BEL "data_out_reg_9" BEL "fdata_d_8"
+        BEL "data_out_reg_8" BEL "fdata_d_7" BEL "data_out_reg_7" BEL
+        "fdata_d_6" BEL "data_out_reg_6" BEL "fdata_d_5" BEL "data_out_reg_5"
+        BEL "fdata_d_4" BEL "data_out_reg_4" BEL "fdata_d_3" BEL
+        "data_out_reg_3" BEL "fdata_d_2" BEL "data_out_reg_2" BEL "fdata_d_1"
+        BEL "data_out_reg_1" BEL "fdata_d_0" BEL "slwr" BEL "data_out_reg_0";
+TIMEGRP inst_clk_clkout0 = BEL "mode_0" BEL "mode_1" BEL "mode_2" BEL
+        "flaga_d" BEL "flagb_d" BEL "flagc_d" BEL "flagd_d" BEL
+        "fifo_address_d_0" BEL "current_fpga_master_mode_FSM_FFd3" BEL
+        "current_fpga_master_mode_FSM_FFd2" BEL
+        "current_fpga_master_mode_FSM_FFd1" BEL
+        "stream_in_inst/data_gen_stream_in_0" BEL
+        "stream_in_inst/data_gen_stream_in_1" BEL
+        "stream_in_inst/data_gen_stream_in_2" BEL
+        "stream_in_inst/data_gen_stream_in_3" BEL
+        "stream_in_inst/data_gen_stream_in_4" BEL
+        "stream_in_inst/data_gen_stream_in_5" BEL
+        "stream_in_inst/data_gen_stream_in_6" BEL
+        "stream_in_inst/data_gen_stream_in_7" BEL
+        "stream_in_inst/data_gen_stream_in_8" BEL
+        "stream_in_inst/data_gen_stream_in_9" BEL
+        "stream_in_inst/data_gen_stream_in_10" BEL
+        "stream_in_inst/data_gen_stream_in_11" BEL
+        "stream_in_inst/data_gen_stream_in_12" BEL
+        "stream_in_inst/data_gen_stream_in_13" BEL
+        "stream_in_inst/data_gen_stream_in_14" BEL
+        "stream_in_inst/data_gen_stream_in_15" BEL
+        "stream_in_inst/data_gen_stream_in_16" BEL
+        "stream_in_inst/data_gen_stream_in_17" BEL
+        "stream_in_inst/data_gen_stream_in_18" BEL
+        "stream_in_inst/data_gen_stream_in_19" BEL
+        "stream_in_inst/data_gen_stream_in_20" BEL
+        "stream_in_inst/data_gen_stream_in_21" BEL
+        "stream_in_inst/data_gen_stream_in_22" BEL
+        "stream_in_inst/data_gen_stream_in_23" BEL
+        "stream_in_inst/data_gen_stream_in_24" BEL
+        "stream_in_inst/data_gen_stream_in_25" BEL
+        "stream_in_inst/data_gen_stream_in_26" BEL
+        "stream_in_inst/data_gen_stream_in_27" BEL
+        "stream_in_inst/data_gen_stream_in_28" BEL
+        "stream_in_inst/data_gen_stream_in_29" BEL
+        "stream_in_inst/data_gen_stream_in_30" BEL
+        "stream_in_inst/data_gen_stream_in_31" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd2" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd1" PIN "oddr_y_pins<0>"
+        PIN "oddr_y_pins<1>" PIN "oddr_y_pins<0>" PIN "oddr_y_pins<1>" BEL
+        "inst_clk/clkout1_buf" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd1" BEL
+        "loopback_inst/oe_delay_cnt_1" BEL "loopback_inst/oe_delay_cnt_0" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd2" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd4" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd5" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd6" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd7" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd8" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd9" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd10" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd11" BEL
+        "loopback_inst/slrd_loopback_d3_" BEL
+        "loopback_inst/slrd_loopback_d2_" BEL
+        "loopback_inst/slrd_loopback_d1_" BEL
+        "loopback_inst/fifo_inst/read_occupancy_8" BEL
+        "loopback_inst/fifo_inst/read_occupancy_7" BEL
+        "loopback_inst/fifo_inst/read_occupancy_6" BEL
+        "loopback_inst/fifo_inst/read_occupancy_5" BEL
+        "loopback_inst/fifo_inst/read_occupancy_4" BEL
+        "loopback_inst/fifo_inst/read_occupancy_3" BEL
+        "loopback_inst/fifo_inst/read_occupancy_2" BEL
+        "loopback_inst/fifo_inst/read_occupancy_1" BEL
+        "loopback_inst/fifo_inst/read_occupancy_0" BEL
+        "loopback_inst/fifo_inst/write_occupancy_8" BEL
+        "loopback_inst/fifo_inst/write_occupancy_7" BEL
+        "loopback_inst/fifo_inst/write_occupancy_6" BEL
+        "loopback_inst/fifo_inst/write_occupancy_5" BEL
+        "loopback_inst/fifo_inst/write_occupancy_4" BEL
+        "loopback_inst/fifo_inst/write_occupancy_3" BEL
+        "loopback_inst/fifo_inst/write_occupancy_2" BEL
+        "loopback_inst/fifo_inst/write_occupancy_1" BEL
+        "loopback_inst/fifo_inst/write_occupancy_0" BEL
+        "loopback_inst/fifo_inst/write_ptr_7" BEL
+        "loopback_inst/fifo_inst/write_ptr_6" BEL
+        "loopback_inst/fifo_inst/write_ptr_5" BEL
+        "loopback_inst/fifo_inst/write_ptr_4" BEL
+        "loopback_inst/fifo_inst/write_ptr_3" BEL
+        "loopback_inst/fifo_inst/write_ptr_2" BEL
+        "loopback_inst/fifo_inst/write_ptr_1" BEL
+        "loopback_inst/fifo_inst/write_ptr_0" BEL
+        "loopback_inst/fifo_inst/read_ptr_7" BEL
+        "loopback_inst/fifo_inst/read_ptr_6" BEL
+        "loopback_inst/fifo_inst/read_ptr_5" BEL
+        "loopback_inst/fifo_inst/read_ptr_4" BEL
+        "loopback_inst/fifo_inst/read_ptr_3" BEL
+        "loopback_inst/fifo_inst/read_ptr_2" BEL
+        "loopback_inst/fifo_inst/read_ptr_1" BEL
+        "loopback_inst/fifo_inst/read_ptr_0" BEL
+        "loopback_inst/fifo_inst/fifo_full" BEL
+        "loopback_inst/fifo_inst/fifo_empty" BEL
+        "loopback_inst/fifo_inst/write_busy_d" BEL "partial_inst/strob_cnt_3"
+        BEL "partial_inst/strob_cnt_2" BEL "partial_inst/strob_cnt_1" BEL
+        "partial_inst/strob_cnt_0" BEL "partial_inst/data_gen_partial_31" BEL
+        "partial_inst/data_gen_partial_30" BEL
+        "partial_inst/data_gen_partial_29" BEL
+        "partial_inst/data_gen_partial_28" BEL
+        "partial_inst/data_gen_partial_27" BEL
+        "partial_inst/data_gen_partial_26" BEL
+        "partial_inst/data_gen_partial_25" BEL
+        "partial_inst/data_gen_partial_24" BEL
+        "partial_inst/data_gen_partial_23" BEL
+        "partial_inst/data_gen_partial_22" BEL
+        "partial_inst/data_gen_partial_21" BEL
+        "partial_inst/data_gen_partial_20" BEL
+        "partial_inst/data_gen_partial_19" BEL
+        "partial_inst/data_gen_partial_18" BEL
+        "partial_inst/data_gen_partial_17" BEL
+        "partial_inst/data_gen_partial_16" BEL
+        "partial_inst/data_gen_partial_15" BEL
+        "partial_inst/data_gen_partial_14" BEL
+        "partial_inst/data_gen_partial_13" BEL
+        "partial_inst/data_gen_partial_12" BEL
+        "partial_inst/data_gen_partial_11" BEL
+        "partial_inst/data_gen_partial_10" BEL
+        "partial_inst/data_gen_partial_9" BEL
+        "partial_inst/data_gen_partial_8" BEL
+        "partial_inst/data_gen_partial_7" BEL
+        "partial_inst/data_gen_partial_6" BEL
+        "partial_inst/data_gen_partial_5" BEL
+        "partial_inst/data_gen_partial_4" BEL
+        "partial_inst/data_gen_partial_3" BEL
+        "partial_inst/data_gen_partial_2" BEL
+        "partial_inst/data_gen_partial_1" BEL
+        "partial_inst/data_gen_partial_0" BEL "partial_inst/short_pkt_cnt_3"
+        BEL "partial_inst/short_pkt_cnt_2" BEL "partial_inst/short_pkt_cnt_1"
+        BEL "partial_inst/short_pkt_cnt_0" BEL
+        "partial_inst/current_partial_state_FSM_FFd2" BEL
+        "partial_inst/current_partial_state_FSM_FFd3" BEL
+        "partial_inst/current_partial_state_FSM_FFd1" BEL
+        "zlp_inst/strob_cnt_3" BEL "zlp_inst/strob_cnt_2" BEL
+        "zlp_inst/strob_cnt_1" BEL "zlp_inst/strob_cnt_0" BEL
+        "zlp_inst/data_gen_zlp_31" BEL "zlp_inst/data_gen_zlp_30" BEL
+        "zlp_inst/data_gen_zlp_29" BEL "zlp_inst/data_gen_zlp_28" BEL
+        "zlp_inst/data_gen_zlp_27" BEL "zlp_inst/data_gen_zlp_26" BEL
+        "zlp_inst/data_gen_zlp_25" BEL "zlp_inst/data_gen_zlp_24" BEL
+        "zlp_inst/data_gen_zlp_23" BEL "zlp_inst/data_gen_zlp_22" BEL
+        "zlp_inst/data_gen_zlp_21" BEL "zlp_inst/data_gen_zlp_20" BEL
+        "zlp_inst/data_gen_zlp_19" BEL "zlp_inst/data_gen_zlp_18" BEL
+        "zlp_inst/data_gen_zlp_17" BEL "zlp_inst/data_gen_zlp_16" BEL
+        "zlp_inst/data_gen_zlp_15" BEL "zlp_inst/data_gen_zlp_14" BEL
+        "zlp_inst/data_gen_zlp_13" BEL "zlp_inst/data_gen_zlp_12" BEL
+        "zlp_inst/data_gen_zlp_11" BEL "zlp_inst/data_gen_zlp_10" BEL
+        "zlp_inst/data_gen_zlp_9" BEL "zlp_inst/data_gen_zlp_8" BEL
+        "zlp_inst/data_gen_zlp_7" BEL "zlp_inst/data_gen_zlp_6" BEL
+        "zlp_inst/data_gen_zlp_5" BEL "zlp_inst/data_gen_zlp_4" BEL
+        "zlp_inst/data_gen_zlp_3" BEL "zlp_inst/data_gen_zlp_2" BEL
+        "zlp_inst/data_gen_zlp_1" BEL "zlp_inst/data_gen_zlp_0" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd2" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd3" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd1" BEL
+        "stream_out_inst/current_stream_out_state_FSM_FFd1" BEL
+        "stream_out_inst/current_stream_out_state_FSM_FFd2" BEL
+        "stream_out_inst/oe_delay_cnt_1" BEL "stream_out_inst/oe_delay_cnt_0"
+        BEL "stream_out_inst/current_stream_out_state_FSM_FFd3" BEL
+        "loopback_inst/rd_oe_delay_cnt" BEL "partial_inst/strob" BEL
+        "zlp_inst/strob" BEL "stream_out_inst/rd_oe_delay_cnt" BEL
+        "current_fpga_master_mode_FSM_FFd2_1" BEL
+        "current_fpga_master_mode_FSM_FFd3_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_2" BEL
+        "partial_inst/current_partial_state_FSM_FFd2_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd2_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd3_1" BEL
+        "zlp_inst/current_zlp_state_FSM_FFd1_1" BEL
+        "stream_in_inst/current_stream_in_state_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd1_3" BEL
+        "current_fpga_master_mode_FSM_FFd1_4" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd1_1" BEL
+        "current_fpga_master_mode_FSM_FFd3_2" BEL
+        "current_fpga_master_mode_FSM_FFd3_3" BEL
+        "current_fpga_master_mode_FSM_FFd2_2" BEL
+        "current_fpga_master_mode_FSM_FFd2_3" BEL
+        "current_fpga_master_mode_FSM_FFd2_4" BEL
+        "current_fpga_master_mode_FSM_FFd2_5" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3_1" BEL
+        "loopback_inst/current_loop_back_state_FSM_FFd3_2" BEL
+        "loopback_inst/slrd_loopback_d3__1" BEL
+        "loopback_inst/slrd_loopback_d3__2" BEL "fdata_d_31" BEL
+        "data_out_reg_31" BEL "fdata_d_30" BEL "data_out_reg_30" BEL
+        "fdata_d_29" BEL "data_out_reg_29" BEL "fdata_d_28" BEL
+        "data_out_reg_28" BEL "fdata_d_27" BEL "data_out_reg_27" BEL
+        "fdata_d_26" BEL "data_out_reg_26" BEL "fdata_d_25" BEL
+        "data_out_reg_25" BEL "fdata_d_24" BEL "data_out_reg_24" BEL
+        "fdata_d_23" BEL "data_out_reg_23" BEL "fdata_d_22" BEL
+        "data_out_reg_22" BEL "fdata_d_21" BEL "data_out_reg_21" BEL
+        "fdata_d_20" BEL "data_out_reg_20" BEL "fdata_d_19" BEL
+        "data_out_reg_19" BEL "fdata_d_18" BEL "data_out_reg_18" BEL
+        "fdata_d_17" BEL "data_out_reg_17" BEL "fdata_d_16" BEL
+        "data_out_reg_16" BEL "fdata_d_15" BEL "data_out_reg_15" BEL
+        "fdata_d_14" BEL "data_out_reg_14" BEL "fdata_d_13" BEL
+        "data_out_reg_13" BEL "fdata_d_12" BEL "data_out_reg_12" BEL
+        "fdata_d_11" BEL "data_out_reg_11" BEL "fdata_d_10" BEL
+        "data_out_reg_10" BEL "fdata_d_9" BEL "data_out_reg_9" BEL "fdata_d_8"
+        BEL "data_out_reg_8" BEL "fdata_d_7" BEL "data_out_reg_7" BEL
+        "fdata_d_6" BEL "data_out_reg_6" BEL "fdata_d_5" BEL "data_out_reg_5"
+        BEL "fdata_d_4" BEL "data_out_reg_4" BEL "fdata_d_3" BEL
+        "data_out_reg_3" BEL "fdata_d_2" BEL "data_out_reg_2" BEL "fdata_d_1"
+        BEL "data_out_reg_1" BEL "fdata_d_0" BEL "slwr" BEL "data_out_reg_0"
+        PIN "loopback_inst/fifo_inst/Mram_data_array_pins<16>" PIN
+        "loopback_inst/fifo_inst/Mram_data_array_pins<17>";
+TIMEGRP tnm_fdata = PIN "loopback_inst/fifo_inst/Mram_data_array_pins<16>" PIN
+        "loopback_inst/fifo_inst/Mram_data_array_pins<17>" BEL "fdata<31>" BEL
+        "fdata<30>" BEL "fdata<29>" BEL "fdata<28>" BEL "fdata<27>" BEL
+        "fdata<26>" BEL "fdata<25>" BEL "fdata<24>" BEL "fdata<23>" BEL
+        "fdata<22>" BEL "fdata<21>" BEL "fdata<20>" BEL "fdata<19>" BEL
+        "fdata<18>" BEL "fdata<17>" BEL "fdata<16>" BEL "fdata<15>" BEL
+        "fdata<14>" BEL "fdata<13>" BEL "fdata<12>" BEL "fdata<11>" BEL
+        "fdata<10>" BEL "fdata<9>" BEL "fdata<8>" BEL "fdata<7>" BEL
+        "fdata<6>" BEL "fdata<5>" BEL "fdata<4>" BEL "fdata<3>" BEL "fdata<2>"
+        BEL "fdata<1>" BEL "fdata<0>";
+TIMEGRP tnm_faddr = BEL "faddr<1>" BEL "faddr<0>";
+TIMEGRP tnm_slwr = BEL "slwr.PAD";
+TIMEGRP clk_out = BEL "clk_out";
+TIMEGRP tnm_pktend = BEL "pktend";
+PIN SP6_BUFIO2_INSERT_PLL1_ML_BUFIO2_0_pins<0> = BEL
+        "SP6_BUFIO2_INSERT_PLL1_ML_BUFIO2_0" PINNAME DIVCLK;
+PIN inst_clk/pll_base_inst/PLL_ADV_pins<2> = BEL
+        "inst_clk/pll_base_inst/PLL_ADV" PINNAME CLKIN1;
+TIMEGRP clk = PIN "SP6_BUFIO2_INSERT_PLL1_ML_BUFIO2_0_pins<0>" PIN
+        "inst_clk/pll_base_inst/PLL_ADV_pins<2>";
+TIMEGRP clk_100_ff_posedge = RISING TIMEGRP "clk_100_ff";
+TIMEGRP clk_100_ff_negedge = FALLING TIMEGRP "clk_100_ff";
+TIMEGRP FDATA_IN = BEL "fdata<31>" BEL "fdata<30>" BEL "fdata<29>" BEL
+        "fdata<28>" BEL "fdata<27>" BEL "fdata<26>" BEL "fdata<25>" BEL
+        "fdata<24>" BEL "fdata<23>" BEL "fdata<22>" BEL "fdata<21>" BEL
+        "fdata<20>" BEL "fdata<19>" BEL "fdata<18>" BEL "fdata<17>" BEL
+        "fdata<16>" BEL "fdata<15>" BEL "fdata<14>" BEL "fdata<13>" BEL
+        "fdata<12>" BEL "fdata<11>" BEL "fdata<10>" BEL "fdata<9>" BEL
+        "fdata<8>" BEL "fdata<7>" BEL "fdata<6>" BEL "fdata<5>" BEL "fdata<4>"
+        BEL "fdata<3>" BEL "fdata<2>" BEL "fdata<1>" BEL "fdata<0>";
+TS_clk_100 = PERIOD TIMEGRP "clk_100" 10 ns HIGH 50%;
+TS_clk = PERIOD TIMEGRP "clk" 37.037 ns HIGH 50%;
+TS_clk_out = PERIOD TIMEGRP "clk_out" 10 ns HIGH 50%;
+TS_clk_100_to_clk_100 = MAXDELAY FROM TIMEGRP "clk_100_ff_posedge" TO TIMEGRP
+        "clk_100_ff_posedge" 10 ns;
+TS_inst_clk_clkout0 = PERIOD TIMEGRP "inst_clk_clkout0" TS_clk / 3.7 HIGH 50%;
+TIMEGRP "tnm_fdata" OFFSET = OUT 8 ns AFTER COMP "clk" REFERENCE_PIN BEL
+        "clk_out" "RISING";
+TIMEGRP "tnm_faddr" OFFSET = OUT 8 ns AFTER COMP "clk" REFERENCE_PIN BEL
+        "clk_out" "RISING";
+TIMEGRP "tnm_slwr" OFFSET = OUT 8 ns AFTER COMP "clk" REFERENCE_PIN BEL
+        "clk_out" "RISING";
+TIMEGRP "tnm_pktend" OFFSET = OUT 8 ns AFTER COMP "clk" REFERENCE_PIN BEL
+        "clk_out" "RISING";
+TIMEGRP "FDATA_IN" OFFSET = IN 2.5 ns BEFORE COMP "clk" "RISING";
+SCHEMATIC END;
+

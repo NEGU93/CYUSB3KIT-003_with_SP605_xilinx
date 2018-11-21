@@ -1,1 +1,0 @@
-xst -intstyle ise -ifn "/home/ise/AN65974/fx3_slavefifo2b_vhdl_proj/testbench_lb.xst" -ofn "/home/ise/AN65974/fx3_slavefifo2b_vhdl_proj/testbench_lb.syr" 

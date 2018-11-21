@@ -1,0 +1,40 @@
+Running: C:\Xilinx\14.1\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/testbench_lb_isim_beh.exe -prj C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/testbench_lb_beh.prj work.testbench_lb work.glbl 
+ISim P.15xf (signature 0xc3576ebc)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/fifo.v" into library work
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_ZLP.v" into library work
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_streamOUT.v" into library work
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_streamIN.v" into library work
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_partial.v" into library work
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_loopback.v" into library work
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/clk_wiz_v3_2_2.v" into library work
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.v" into library work
+WARNING:HDLCompiler:370 - "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/slaveFIFO2b_fpga_top.v" Line 23: Empty port in module declaration
+Analyzing Verilog file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/../testbench/fpga_master_tb.v" into library work
+Analyzing Verilog file "C:/Xilinx/14.1/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+WARNING:HDLCompiler:189 - "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/../testbench/fpga_master_tb.v" Line 48: Size mismatch in connection of port <PMODE>. Formal port size is 2-bit while actual signal size is 1-bit.
+Completed static elaboration
+Compiling module IBUFG
+Compiling module PLL_ADV(BANDWIDTH="OPTIMIZED",CL...
+Compiling module PLL_BASE(CLKFBOUT_MULT=37,CLKIN_...
+Compiling module BUFG
+Compiling module clk_wiz_v3_2_2
+Compiling module ODDR2_default
+Compiling module fifo
+Compiling module slaveFIFO2b_loopback
+Compiling module slaveFIFO2b_partial
+Compiling module slaveFIFO2b_ZLP
+Compiling module slaveFIFO2b_streamIN
+Compiling module slaveFIFO2b_streamOUT
+Compiling module slaveFIFO2b_fpga_top
+Compiling module testbench_lb
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 2 sub-compilation(s) to finish...
+Compiled 15 Verilog Units
+Built simulation executable C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_verilog/testbench_lb_isim_beh.exe
+Fuse Memory Usage: 42432 KB
+Fuse CPU Usage: 841 ms

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="946" delta="unknown" >"C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 239: Actual for formal port <arg fmt="%s" index="1">c1</arg> is neither a static name nor a globally static expression
+</msg>
+
+</messages>
+

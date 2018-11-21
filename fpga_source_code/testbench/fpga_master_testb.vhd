@@ -71,10 +71,10 @@ begin  -- architecture begin
 
  	
   slave_top:slaveFIFO2b_fpga_top port map(
-		reset_in_n => reset_in_n,               ---input reset active low
+		reset_in_n => reset_in_n,                              ---input reset active low
 		clk     => clk,                         ---input clk 27 Mhz  
-		clk_out	=> clk_out,                    ---output clk 100 Mhz and 180 phase shift 
-		slcs 	=> slcs,                          ---output chip select
+		clk_out	=> clk_out,                              ---output clk 100 Mhz and 180 phase shift 
+		slcs 	=> slcs,                              ---output chip select
 		fdata   => fdata,      
 		faddr   => faddr,           ---output fifo address
 		slrd	=> slrd,                              ---output read select

@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\slaveFIFO2b_fpga_top.ncd
+OUTFILE=C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog\slaveFIFO2b_fpga_top.bit
+FAMILY=Spartan6
+PART=xc6slx16-3csg324
+WORKINGDIR=C:\Users\rskv\Desktop\New folder (2)\fpga_slavefifo2b_verilog\fpga_slavefifo2b_verilog
+LICENSE=WebPack
+USER_INFO=210805034_0_0_364

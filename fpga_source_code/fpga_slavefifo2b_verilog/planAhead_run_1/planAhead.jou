@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# PlanAhead v14.2 (64-bit)
+# Build 194362 by xbuild on Fri Jul 20 18:52:11 MDT 2012
+# Start of session at: Fri Aug 01 14:39:33 2014
+# Process ID: 23372
+# Log file: C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/planAhead_run_1/planAhead.log
+# Journal file: C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source C:/unzipped/fpga_slavefifo2b_verilog/fpga_slavefifo2b_verilog/pa.fromNetlist.tcl
