@@ -1,0 +1,6 @@
+vhdl work "../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd"
+vhdl work "../../rtl_vhdl/SlaveFIFO2b/fifo.vhd"
+vhdl work "../clk_wiz_v3_2.vhd"
+
+
+

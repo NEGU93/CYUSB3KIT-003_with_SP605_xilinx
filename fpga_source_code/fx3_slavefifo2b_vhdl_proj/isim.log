@@ -1,0 +1,15 @@
+ISim log file
+Running: C:\Users\savj\Desktop\AN65974\AN65974_Source Files\FPGA Source files\fx3_slaveFIFO2b_xilinx\fpga_slavefifo2b_vhdl\fx3_slavefifo2b_vhdl_proj\testbench_lb_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/testbench_lb_isim_beh.wdb 
+ISim P.15xf (signature 0xc3576ebc)
+This is a Full version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /testbench_lb/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /testbench_lb/slave_top/loopback_inst/fifo_inst/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /testbench_lb/slave_top/loopback_inst/fifo_inst/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /testbench_lb/slave_top/loopback_inst/fifo_inst/ : Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+Finished circuit initialization process.
+# run 15.00us

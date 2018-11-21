@@ -1,0 +1,15 @@
+run
+-ifn slaveFIFO2b_fpga_top.prj
+-ifmt mixed
+-ofn slaveFIFO2b_fpga_top
+-ofmt NGC
+-p xc6slx16-3-csg324
+-top slaveFIFO2b_fpga_top
+-opt_mode SPEED
+-opt_level 2
+-max_fanout 50
+-equivalent_register_removal NO
+-bufg 0
+-keep_hierarchy NO
+-use_new_parser yes
+

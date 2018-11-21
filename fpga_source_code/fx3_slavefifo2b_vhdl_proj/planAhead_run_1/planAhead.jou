@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:24:36 MDT 2013
+# Start of session at: Wed Nov 21 10:05:52 2018
+# Process ID: 2887
+# Log file: /home/ise/AN65974/fx3_slavefifo2b_vhdl_proj/planAhead_run_1/planAhead.log
+# Journal file: /home/ise/AN65974/fx3_slavefifo2b_vhdl_proj/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source /home/ise/AN65974/fx3_slavefifo2b_vhdl_proj/pa.fromNetlist.tcl

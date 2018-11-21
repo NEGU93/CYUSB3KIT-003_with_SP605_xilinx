@@ -1,0 +1,115 @@
+
+
+NET "clk_100" TNM_NET = "clk_100";
+TIMESPEC TS_clk_100 = PERIOD "clk_100" 10ns HIGH 50 %;
+
+NET "clk" TNM_NET = "clk";
+TIMESPEC TS_clk = PERIOD "clk" 37.037000ns HIGH 50 %;
+
+NET "clk_out" TNM_NET = "clk_out";
+TIMESPEC TS_clk_out = PERIOD "clk_out" 10ns HIGH 50 %;
+
+//timing for clk62d5 to clk62d5 
+NET "clk_100" TNM_NET =  FFS "clk_100_ff";
+TIMEGRP clk_100_ff_posedge = RISING  "clk_100_ff";
+TIMEGRP clk_100_ff_negedge = FALLING  "clk_100_ff";
+
+TIMESPEC TS_clk_100_to_clk_100 = FROM "clk_100_ff_posedge" TO "clk_100_ff_posedge" 10 ns;
+							
+NET "fdata[0]"  LOC = H12;	// C10; -> // J63 FMC LPC: H4
+NET "fdata[1]"  LOC = G8; 	// C15; -> // J63 FMC LPC: H7
+NET "fdata[2]"  LOC = F8;	// A15; -> // J63 FMC LPC: H8
+NET "fdata[3]"  LOC = C19;	// B16; -> // J63 FMC LPC: H10
+NET "fdata[4]"  LOC = A19;	// A16; -> // J63 FMC LPC: H11
+NET "fdata[5]"  LOC = B2;	// E7;  -> // J63 FMC LPC: H13
+NET "fdata[6]"  LOC = A2;	// E8;  -> // J63 FMC LPC: H14
+NET "fdata[7]"  LOC = H14;	// B12; -> // J63 FMC LPC: H16
+NET "fdata[8]"  LOC = G15;	// A12; -> // J63 FMC LPC: H17
+NET "fdata[9]"  LOC = D18;	// G9;  -> // J63 FMC LPC: H19
+NET "fdata[10]" LOC = G19;	// F9;  -> // J63 FMC LPC: H20
+NET "fdata[11]" LOC = R11;	// N6;  -> // J63 FMC LPC: H22
+NET "fdata[12]" LOC = T11;	// P7;  -> // J63 FMC LPC: H23
+NET "fdata[13]" LOC = V11;	// T4;  -> // J63 FMC LPC: H25
+NET "fdata[14]" LOC = W11; // V4;  -> // J63 FMC LPC: H26
+NET "fdata[15]" LOC = AA14;// U8;  -> // J63 FMC LPC: H28
+NET "fdata[16]" LOC = AB14;// V8;  -> // J63 FMC LPC: H29
+NET "fdata[17]" LOC = AA16;// U11; -> // J63 FMC LPC: H31
+NET "fdata[18]" LOC = AB16;// V11; -> // J63 FMC LPC: H32
+NET "fdata[19]" LOC = Y15; // T12; -> // J63 FMC LPC: H34
+NET "fdata[20]" LOC = AB15;// V12; -> // J63 FMC LPC: H35
+NET "fdata[21]" LOC = W17;	// U15; -> // J63 FMC LPC: H37
+NET "fdata[22]" LOC = Y18;	// V15; -> // J63 FMC LPC: H38
+NET "fdata[23]" LOC = E16;	// T9;  -> // J63 FMC LPC: G2
+NET "fdata[24]" LOC = F16;	// V9;  -> // J63 FMC LPC: G3
+NET "fdata[25]" LOC = B18;	// C13; -> // J63 FMC LPC: G9
+NET "fdata[26]" LOC = A18;	// A13; -> // J63 FMC LPC: G10
+NET "fdata[27]" LOC = B20;	// F11; -> // J63 FMC LPC: G12
+NET "fdata[28]" LOC = A20;	// E11; -> // J63 FMC LPC: G13
+NET "fdata[29]" LOC = H13; // D6;  -> // J63 FMC LPC: G15
+NET "fdata[30]" LOC = G13; // C6;  -> // J63 FMC LPC: G16
+NET "fdata[31]" LOC = C5;	// C7;  -> // J63 FMC LPC: G18
+
+
+NET "faddr[0]" LOC = Y17;	// N9 ;  -> // J63 FMC LPC: G36
+NET "faddr[1]" LOC = AB17;	// M10;  -> // J63 FMC LPC: G37
+
+//NET "sync" LOC = V13;
+
+NET "clk" LOC     = AB13;	// V10; 	-> // X2 27 MHz OSC
+NET "clk_out" LOC = G9;		// D9;	-> // J63 FMC LPC: G6
+
+NET "slcs" LOC = A5;			// A7;	-> // J63 FMC LPC: G19
+NET "sloe" LOC = R8;			// P8;	-> // J63 FMC LPC: G22
+NET "slrd" LOC = V7;			// R7;	-> // J63 FMC LPC: G24
+NET "slwr" LOC = R9;			// N7;	-> // J63 FMC LPC: G21
+
+NET "flaga" LOC = W8;		// T7;	-> // J63 FMC LPC: G25
+NET "flagb" LOC = W14;		// M11;	-> // J63 FMC LPC: G27
+NET "flagc" LOC = Y14;		// N11;	-> // J63 FMC LPC: G28
+NET "flagd" LOC = U15;		// N8;	-> // J63 FMC LPC: G31
+
+NET "pktend" LOC = Y14;		// M8;	-> // J63 FMC LPC: G30
+// USER DIP SWITCH
+NET "mode_p[0]" LOC = C18;	// D14; 
+NET "mode_p[1]" LOC = Y6;	// E12;	 
+NET "mode_p[2]" LOC = W6;	// F12;  
+
+//NET "PMODE_2" LOC = G11;
+NET "PMODE[1]" LOC = A4;	// A14;	-> // J63 FMC LPC: D12
+NET "PMODE[0]" LOC = C4;	// B14;	-> // J63 FMC LPC: D11
+
+NET "RESET" LOC = G16;		// B11;	-> // J63 FMC LPC: D17
+//NET "int_n" LOC = F10;
+NET "reset_in_n" LOC = F8;	// F10; 	-> // J63 FMC LPC: D15
+ 
+//NET "tri_state[0]" LOC = D12;
+//NET "tri_state[1]" LOC = C12;
+//NET "tri_state[2]" LOC = B2; 
+//NET "tri_state[3]" LOC = A2; 
+//NET "tri_state[4]" LOC = R10;
+//NET "tri_state[5]" LOC = T10;
+//NET "tri_state[6]" LOC = R11;
+//NET "tri_state[7]" LOC = T11;
+//NET "tri_state[8]" LOC = A11;
+//NET "tri_state[9]" LOC = N5; 
+//NET "tri_state[10]" LOC = P6;
+//NET "tri_state[11]" LOC = U7;
+//NET "tri_state[12]" LOC = V7;
+
+
+NET "fdata*" TNM = "tnm_fdata";
+TIMEGRP "tnm_fdata" OFFSET = OUT 9ns AFTER "clk" REFERENCE_PIN "clk_out" RISING;
+
+//NET "faddr*" TNM = "tnm_faddr";
+//TIMEGRP "tnm_faddr" OFFSET = OUT 9ns AFTER "clk" REFERENCE_PIN "clk_out" RISING;
+
+NET "slwr" TNM = "tnm_slwr";
+TIMEGRP "tnm_slwr" OFFSET = OUT 9ns AFTER "clk" REFERENCE_PIN "clk_out" RISING;
+
+NET "pktend" TNM = "tnm_pktend";
+TIMEGRP "tnm_pktend" OFFSET = OUT 9ns AFTER "clk" REFERENCE_PIN "clk_out" RISING;
+
+#Created by Constraints Editor (xc6slx16-csg324-3) - 2014/10/02
+TIMEGRP "FDATA_IN" = PADS("fdata<0>") PADS("fdata<1>") PADS("fdata<2>") PADS("fdata<3>") PADS("fdata<4>") PADS("fdata<5>") PADS("fdata<6>") PADS("fdata<7>") PADS("fdata<8>") PADS("fdata<9>") PADS("fdata<10>") PADS("fdata<11>") PADS("fdata<12>") PADS("fdata<13>") PADS("fdata<14>") PADS("fdata<15>") PADS("fdata<16>") PADS("fdata<17>") PADS("fdata<18>") PADS("fdata<19>") PADS("fdata<20>") PADS("fdata<21>") PADS("fdata<22>") PADS("fdata<23>") PADS("fdata<24>") PADS("fdata<25>") PADS("fdata<26>") PADS("fdata<27>") PADS("fdata<28>") PADS("fdata<29>") PADS("fdata<30>") PADS("fdata<31>");
+#Created by Constraints Editor (xc6slx16-csg324-3) - 2014/10/02
+TIMEGRP "FDATA_IN" OFFSET = IN 2.5ns BEFORE "clk" RISING;

@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\Users\savj\Desktop\AN65974\AN65974_Source Files\FPGA Source files\fx3_slaveFIFO2b_xilinx\fpga_slavefifo2b_vhdl\fx3_slavefifo2b_vhdl_proj\slaveFIFO2b_fpga_top.ncd
+OUTFILE=C:\Users\savj\Desktop\AN65974\AN65974_Source Files\FPGA Source files\fx3_slaveFIFO2b_xilinx\fpga_slavefifo2b_vhdl\fx3_slavefifo2b_vhdl_proj\slaveFIFO2b_fpga_top.bit
+FAMILY=Spartan6
+PART=xc6slx16-3csg324
+WORKINGDIR=C:\Users\savj\Desktop\AN65974\AN65974_Source Files\FPGA Source files\fx3_slaveFIFO2b_xilinx\fpga_slavefifo2b_vhdl\fx3_slavefifo2b_vhdl_proj
+LICENSE=WebPack
+USER_INFO=__0_0_0

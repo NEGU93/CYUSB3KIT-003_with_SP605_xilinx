@@ -1,0 +1,4 @@
+# Be sure to just append LIB_MAP because 
+# this file can be included by other hdl.var's
+
+define LIB_MAP ( $LIB_MAP, .\ => syncad_verilog_lib )

@@ -1,0 +1,510 @@
+<!DOCTYPE SimulationProject SYSTEM "hdl-prj.dtd">
+<SimulationProject ProductVersion="20.06" Language="Verilog" FileNamesShown="True" HideEmptyLists="True">
+  <ProjectSettings CurrentConfiguration="SimExtreme_Release">
+    <ProjectSettingsConfiguration ConfigurationName="SimExtreme_Release">
+      <GeneralConfiguration LogFileName="simulation.log" AddTopLevelSignals="True" ShowWatchSignals="True" DumpWatchSignals="False" BreakAtTimeZeroAfterCompile="False" ClearLogFileBeforeCompile="True" AutoParseProject="False" GenerateTestBenchOnBuildProject="True" DisablePeriodicWaveformUpdate="False" CompileVerilogFiles="True" CompileVHDLFiles="False" CompileCppFiles="False" MakeConstantsWatchable="True" MakeArrayElementsWatchable="False" WatchableArrayElementSize="0" EnableSimulatorDebugging="True"></GeneralConfiguration>
+      <LanguageSettings Language="verilog">
+        <SimTool>Verilogger Extreme</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <LibraryDirectories>
+          <Directory>.\lib\verilog</Directory>
+          <Directory>.\lib</Directory>
+          <Directory>.\lib\verilog\</Directory>
+        </LibraryDirectories>
+        <LibraryExtensions>
+          <Extension>.v</Extension>
+          <Extension>.vo</Extension>
+        </LibraryExtensions>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="vhdl">
+        <SimTool>VHDL Extreme</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="bluespecverilog">
+        <SimTool>Bluespec Compiler</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="systemc">
+        <SimTool>Microsoft C/C++ (cl.exe)</SimTool>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions>/MD /W3 /GR /GX /D NDEBUG /c</BuildOptions>
+        <LinkerOptions> /dll /machine:I386 /PDB:NONE kernel32.lib</LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="c++">
+        <SimTool>Microsoft C/C++ (cl.exe)</SimTool>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+    </ProjectSettingsConfiguration>
+    <ProjectSettingsConfiguration ConfigurationName="SimExtreme_Debug">
+      <GeneralConfiguration LogFileName="simulation.log" AddTopLevelSignals="True" ShowWatchSignals="True" DumpWatchSignals="False" BreakAtTimeZeroAfterCompile="False" ClearLogFileBeforeCompile="True" AutoParseProject="False" GenerateTestBenchOnBuildProject="True" DisablePeriodicWaveformUpdate="False" CompileVerilogFiles="True" CompileVHDLFiles="False" CompileCppFiles="False" MakeConstantsWatchable="True" MakeArrayElementsWatchable="False" WatchableArrayElementSize="0" EnableSimulatorDebugging="True"></GeneralConfiguration>
+      <LanguageSettings Language="verilog">
+        <SimTool>Verilogger Extreme</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <LibraryDirectories>
+          <Directory>.\lib\verilog</Directory>
+          <Directory>.\lib</Directory>
+        </LibraryDirectories>
+        <LibraryExtensions>
+          <Extension>.v</Extension>
+          <Extension>.vo</Extension>
+        </LibraryExtensions>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions>+define+_DEBUG</BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="vhdl">
+        <SimTool>VHDL Extreme</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions>+define+_DEBUG</BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="bluespecverilog">
+        <SimTool>Bluespec Compiler</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="systemc">
+        <SimTool>Microsoft C/C++ (cl.exe)</SimTool>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions>/Zi /MDd /W3 /GR /GX /Od /GZ /D _DEBUG /c</BuildOptions>
+        <LinkerOptions> /dll /debug /machine:I386 /PDB:NONE kernel32.lib</LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="c++">
+        <SimTool>Microsoft C/C++ (cl.exe)</SimTool>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+    </ProjectSettingsConfiguration>
+    <ProjectSettingsConfiguration ConfigurationName="NCSim">
+      <GeneralConfiguration LogFileName="simulation.log" AddTopLevelSignals="True" ShowWatchSignals="True" DumpWatchSignals="False" BreakAtTimeZeroAfterCompile="False" ClearLogFileBeforeCompile="True" AutoParseProject="False" GenerateTestBenchOnBuildProject="True" DisablePeriodicWaveformUpdate="False" CompileVerilogFiles="True" CompileVHDLFiles="False" CompileCppFiles="False" MakeConstantsWatchable="True" MakeArrayElementsWatchable="False" WatchableArrayElementSize="0" EnableSimulatorDebugging="True"></GeneralConfiguration>
+      <LanguageSettings Language="verilog">
+        <SimTool>NC Verilog</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <LibraryDirectories>
+          <Directory>.\lib\verilog</Directory>
+          <Directory>.\lib</Directory>
+        </LibraryDirectories>
+        <LibraryExtensions>
+          <Extension>.v</Extension>
+          <Extension>.vo</Extension>
+        </LibraryExtensions>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="vhdl">
+        <SimTool>NC VHDL</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="bluespecverilog">
+        <SimTool>Bluespec Compiler</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="systemc">
+        <SimTool>Microsoft C/C++ (cl.exe)</SimTool>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions>/MD /W3 /GR /GX /D NDEBUG /c</BuildOptions>
+        <LinkerOptions> /dll /machine:I386 /PDB:NONE kernel32.lib</LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="c++">
+        <SimTool>Microsoft C/C++ (cl.exe)</SimTool>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+    </ProjectSettingsConfiguration>
+    <ProjectSettingsConfiguration ConfigurationName="ModelSim">
+      <GeneralConfiguration LogFileName="simulation.log" AddTopLevelSignals="True" ShowWatchSignals="True" DumpWatchSignals="False" BreakAtTimeZeroAfterCompile="False" ClearLogFileBeforeCompile="True" AutoParseProject="False" GenerateTestBenchOnBuildProject="True" DisablePeriodicWaveformUpdate="False" CompileVerilogFiles="True" CompileVHDLFiles="False" CompileCppFiles="False" MakeConstantsWatchable="True" MakeArrayElementsWatchable="False" WatchableArrayElementSize="0" EnableSimulatorDebugging="True"></GeneralConfiguration>
+      <LanguageSettings Language="verilog">
+        <SimTool>ModelSim Verilog Command-Line</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <LibraryDirectories>
+          <Directory>.\lib\verilog</Directory>
+          <Directory>.\lib</Directory>
+        </LibraryDirectories>
+        <LibraryExtensions>
+          <Extension>.v</Extension>
+          <Extension>.vo</Extension>
+        </LibraryExtensions>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="vhdl">
+        <SimTool>ModelSim VHDL Command-Line SE</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="bluespecverilog">
+        <SimTool>Bluespec Compiler</SimTool>
+        <IncludeDirectories>
+          <Directory>.\</Directory>
+        </IncludeDirectories>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="systemc">
+        <SimTool>Microsoft C/C++ (cl.exe)</SimTool>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions>/MD /W3 /GR /GX /D NDEBUG /c</BuildOptions>
+        <LinkerOptions> /dll /machine:I386 /PDB:NONE kernel32.lib</LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+      <LanguageSettings Language="c++">
+        <SimTool>Microsoft C/C++ (cl.exe)</SimTool>
+        <UseVhdl93Defaults>True</UseVhdl93Defaults>
+        <DelayType>1</DelayType>
+        <PliDriven>False</PliDriven>
+        <ActiveSnapshotName></ActiveSnapshotName>
+        <DestinationLibraryName>work</DestinationLibraryName>
+        <AdditionalExtensions></AdditionalExtensions>
+        <BuildOptions></BuildOptions>
+        <LinkerOptions></LinkerOptions>
+        <RuntimeOptions></RuntimeOptions>
+        <RunOutputFileExecutable>False</RunOutputFileExecutable>
+        <ForceTopLevel>False</ForceTopLevel>
+      </LanguageSettings>
+    </ProjectSettingsConfiguration>
+  </ProjectSettings>
+  <Vhdl2VerilogTranslationOptions>
+    <v2v-ncc Enabled="True"></v2v-ncc>
+  </Vhdl2VerilogTranslationOptions>
+  <Verilog2VhdlTranslationOptions>
+    <v2v-ncc Enabled="True"></v2v-ncc>
+  </Verilog2VhdlTranslationOptions>
+  <UserSourceFileList>
+    <File IsLibrary="False">..\fpga_master_tb.v</File>
+  </UserSourceFileList>
+  <StimulusAndResultsFile>.\StimulusAndResults.btim</StimulusAndResultsFile>
+  <LogFile>.\simulation.log</LogFile>
+  <ProjectSDCFileList></ProjectSDCFileList>
+  <SynopsysDesignConstraintLinkedElements>
+    <LinkedSDCFiles></LinkedSDCFiles>
+    <LinkedSDCElementList></LinkedSDCElementList>
+  </SynopsysDesignConstraintLinkedElements>
+  <TBenchProperties>
+    <TBenchProp Value="True">GenerateVeraTestTop</TBenchProp>
+    <TBenchProp Value="True">EnableTransactionManager</TBenchProp>
+    <TBenchProp Value="True">EnableTransactionLogging</TBenchProp>
+    <TBenchProp Value="False">EnableTransactionRecording</TBenchProp>
+    <TBenchProp Value="False">EnableReferenceModel</TBenchProp>
+    <TBenchProp Value="True">AddTimeStamp</TBenchProp>
+    <TBenchProp Value="2">IndentSize</TBenchProp>
+    <TBenchProp>PrefixLine</TBenchProp>
+    <TBenchProp Value="work">DestinationLibrary</TBenchProp>
+    <TBenchProp Value="Unclocked">CycleClock</TBenchProp>
+    <TBenchProp Value="pos">CycleClockEdge</TBenchProp>
+    <TBenchProp Value="False">DisplayAppliedInputs</TBenchProp>
+    <TBenchProp Value="1">EDelaySetting</TBenchProp>
+    <TBenchProp Value="0">EFixedDelayAfterClockEdge</TBenchProp>
+    <TBenchProp Value="False">EIncludeDelayTime</TBenchProp>
+    <TBenchProp Value="False">EPliDriven</TBenchProp>
+    <TBenchProp Value="0">ETimeOutLength</TBenchProp>
+    <TBenchProp Value="ViaApplyCall">ExecuteMethod</TBenchProp>
+    <TBenchProp Value="True">GenerateDelayHdlCode</TBenchProp>
+    <TBenchProp Value="True">GenerateMarkerHdlCode</TBenchProp>
+    <TBenchProp Value="True">GenerateSampleHdlCode</TBenchProp>
+    <TBenchProp Value="1">PipeliningCount</TBenchProp>
+    <TBenchProp Value="Display Message">SampleElse</TBenchProp>
+    <TBenchProp Value="Sample state matches">SampleIf</TBenchProp>
+    <TBenchProp Value="Do Nothing">SampleThen</TBenchProp>
+    <TBenchProp Value="output">SignalDirection</TBenchProp>
+    <TBenchProp Value="4_state">SignalType</TBenchProp>
+    <TBenchProp Value="1">SystemCDelaySetting</TBenchProp>
+    <TBenchProp Value="0">SystemCFixedDelayAfterClockEdge</TBenchProp>
+    <TBenchProp Value="True">SystemCGenerateAbortCode</TBenchProp>
+    <TBenchProp Value="False">SystemCIncludeDelayTime</TBenchProp>
+    <TBenchProp Value="False">SystemCPliDriven</TBenchProp>
+    <TBenchProp Value="0">SystemCTimeOutLength</TBenchProp>
+    <TBenchProp Value="1">SystemVerilogDelaySetting</TBenchProp>
+    <TBenchProp Value="0">SystemVerilogFixedDelayAfterClockEdge</TBenchProp>
+    <TBenchProp Value="False">SystemVerilogIncludeDelayTime</TBenchProp>
+    <TBenchProp Value="False">SystemVerilogPliDriven</TBenchProp>
+    <TBenchProp Value="0">SystemVerilogTimeOutLength</TBenchProp>
+    <TBenchProp Value="1">TestBuilderDelaySetting</TBenchProp>
+    <TBenchProp Value="0">TestBuilderFixedDelayAfterClockEdge</TBenchProp>
+    <TBenchProp Value="False">TestBuilderIncludeDelayTime</TBenchProp>
+    <TBenchProp Value="False">TestBuilderPliDriven</TBenchProp>
+    <TBenchProp Value="0">TestBuilderTimeOutLength</TBenchProp>
+    <TBenchProp Value="Master">TransactorType</TBenchProp>
+    <TBenchProp Value="1">VeraDelaySetting</TBenchProp>
+    <TBenchProp Value="0">VeraFixedDelayAfterClockEdge</TBenchProp>
+    <TBenchProp Value="False">VeraIncludeDelayTime</TBenchProp>
+    <TBenchProp Value="False">VeraPliDriven</TBenchProp>
+    <TBenchProp Value="0">VeraTimeOutLength</TBenchProp>
+    <TBenchProp Value="False">VerboseDelays</TBenchProp>
+    <TBenchProp Value="False">VerboseMarkers</TBenchProp>
+    <TBenchProp Value="False">VerboseSamples</TBenchProp>
+    <TBenchProp Value="False">VerboseSequenceVerification</TBenchProp>
+    <TBenchProp Value="1">VerilogDelaySetting</TBenchProp>
+    <TBenchProp Value="0">VerilogFixedDelayAfterClockEdge</TBenchProp>
+    <TBenchProp Value="False">VerilogIncludeDelayTime</TBenchProp>
+    <TBenchProp Value="False">VerilogPliDriven</TBenchProp>
+    <TBenchProp Value="0">VerilogTimeOutLength</TBenchProp>
+    <TBenchProp Value="1">VhdlDelaySetting</TBenchProp>
+    <TBenchProp Value="0">VhdlFixedDelayAfterClockEdge</TBenchProp>
+    <TBenchProp Value="True">VhdlGenerateAbortCode</TBenchProp>
+    <TBenchProp Value="False">VhdlIncludeDelayTime</TBenchProp>
+    <TBenchProp Value="False">VhdlPliDriven</TBenchProp>
+    <TBenchProp Value="0">VhdlTimeOutLength</TBenchProp>
+  </TBenchProperties>
+  <DiagramSettingsList>
+    <DiagramSettings>.\StimulusAndResults.btim
+      <DiagramSetting Value="Unclocked">CycleClock</DiagramSetting>
+      <DiagramSetting Value="pos">CycleClockEdge</DiagramSetting>
+      <DiagramSetting Value="False">DisplayAppliedInputs</DiagramSetting>
+      <DiagramSetting Value="1">EDelaySetting</DiagramSetting>
+      <DiagramSetting Value="0">EFixedDelayAfterClockEdge</DiagramSetting>
+      <DiagramSetting Value="False">EIncludeDelayTime</DiagramSetting>
+      <DiagramSetting Value="False">EPliDriven</DiagramSetting>
+      <DiagramSetting Value="0">ETimeOutLength</DiagramSetting>
+      <DiagramSetting Value="ViaApplyCall">ExecuteMethod</DiagramSetting>
+      <DiagramSetting Value="True">GenerateDelayHdlCode</DiagramSetting>
+      <DiagramSetting Value="True">GenerateMarkerHdlCode</DiagramSetting>
+      <DiagramSetting Value="True">GenerateSampleHdlCode</DiagramSetting>
+      <DiagramSetting Value="1">PipeliningCount</DiagramSetting>
+      <DiagramSetting Value="Display Message">SampleElse</DiagramSetting>
+      <DiagramSetting Value="Sample state matches">SampleIf</DiagramSetting>
+      <DiagramSetting Value="Do Nothing">SampleThen</DiagramSetting>
+      <DiagramSetting Value="output">SignalDirection</DiagramSetting>
+      <DiagramSetting Value="4_state">SignalType</DiagramSetting>
+      <DiagramSetting Value="1">SystemCDelaySetting</DiagramSetting>
+      <DiagramSetting Value="0">SystemCFixedDelayAfterClockEdge</DiagramSetting>
+      <DiagramSetting Value="True">SystemCGenerateAbortCode</DiagramSetting>
+      <DiagramSetting Value="False">SystemCIncludeDelayTime</DiagramSetting>
+      <DiagramSetting Value="False">SystemCPliDriven</DiagramSetting>
+      <DiagramSetting Value="0">SystemCTimeOutLength</DiagramSetting>
+      <DiagramSetting Value="1">SystemVerilogDelaySetting</DiagramSetting>
+      <DiagramSetting Value="0">SystemVerilogFixedDelayAfterClockEdge</DiagramSetting>
+      <DiagramSetting Value="False">SystemVerilogIncludeDelayTime</DiagramSetting>
+      <DiagramSetting Value="False">SystemVerilogPliDriven</DiagramSetting>
+      <DiagramSetting Value="0">SystemVerilogTimeOutLength</DiagramSetting>
+      <DiagramSetting Value="1">TestBuilderDelaySetting</DiagramSetting>
+      <DiagramSetting Value="0">TestBuilderFixedDelayAfterClockEdge</DiagramSetting>
+      <DiagramSetting Value="False">TestBuilderIncludeDelayTime</DiagramSetting>
+      <DiagramSetting Value="False">TestBuilderPliDriven</DiagramSetting>
+      <DiagramSetting Value="0">TestBuilderTimeOutLength</DiagramSetting>
+      <DiagramSetting Value="Master">TransactorType</DiagramSetting>
+      <DiagramSetting Value="1">VeraDelaySetting</DiagramSetting>
+      <DiagramSetting Value="0">VeraFixedDelayAfterClockEdge</DiagramSetting>
+      <DiagramSetting Value="False">VeraIncludeDelayTime</DiagramSetting>
+      <DiagramSetting Value="False">VeraPliDriven</DiagramSetting>
+      <DiagramSetting Value="0">VeraTimeOutLength</DiagramSetting>
+      <DiagramSetting Value="False">VerboseDelays</DiagramSetting>
+      <DiagramSetting Value="False">VerboseMarkers</DiagramSetting>
+      <DiagramSetting Value="False">VerboseSamples</DiagramSetting>
+      <DiagramSetting Value="False">VerboseSequenceVerification</DiagramSetting>
+      <DiagramSetting Value="1">VerilogDelaySetting</DiagramSetting>
+      <DiagramSetting Value="0">VerilogFixedDelayAfterClockEdge</DiagramSetting>
+      <DiagramSetting Value="False">VerilogIncludeDelayTime</DiagramSetting>
+      <DiagramSetting Value="False">VerilogPliDriven</DiagramSetting>
+      <DiagramSetting Value="0">VerilogTimeOutLength</DiagramSetting>
+      <DiagramSetting Value="1">VhdlDelaySetting</DiagramSetting>
+      <DiagramSetting Value="0">VhdlFixedDelayAfterClockEdge</DiagramSetting>
+      <DiagramSetting Value="True">VhdlGenerateAbortCode</DiagramSetting>
+      <DiagramSetting Value="False">VhdlIncludeDelayTime</DiagramSetting>
+      <DiagramSetting Value="False">VhdlPliDriven</DiagramSetting>
+      <DiagramSetting Value="0">VhdlTimeOutLength</DiagramSetting>
+    </DiagramSettings>
+  </DiagramSettingsList>
+  <DataStructureLibraryList>
+    <DataStructureLibrary Default="True">.\untitled.hpjl</DataStructureLibrary>
+  </DataStructureLibraryList>
+</SimulationProject>

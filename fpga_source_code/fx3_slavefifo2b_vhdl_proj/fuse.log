@@ -1,0 +1,48 @@
+Running: C:\Xilinx\14.1\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -lib secureip -o C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/testbench_lb_isim_beh.exe -prj C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/testbench_lb_beh.prj testbench_lb 
+ISim P.15xf (signature 0xc3576ebc)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/fifo.vhd" into library work
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" into library work
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" into library work
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" into library work
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" into library work
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" into library work
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../clk_wiz_v3_6_2.vhd" into library work
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" into library work
+WARNING:HDLCompiler:946 - "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 239: Actual for formal port c1 is neither a static name nor a globally static expression
+Parsing VHDL file "C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/../../testbench/fpga_master_testb.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package std_logic_arith
+Compiling package std_logic_unsigned
+Compiling package vcomponents
+Compiling package numeric_std
+Compiling package textio
+Compiling package vital_timing
+Compiling package vital_primitives
+Compiling package vpkg
+Compiling package std_logic_signed
+Compiling architecture ibufg_v of entity IBUFG [\IBUFG("DONT_CARE","0",true,"DEF...]
+Compiling architecture pll_adv_v of entity PLL_ADV [\PLL_ADV("OPTIMIZED","CLKFBOUT",...]
+Compiling architecture pll_base_v of entity PLL_BASE [\PLL_BASE("OPTIMIZED",37,0.0,37....]
+Compiling architecture bufg_v of entity BUFG [bufg_default]
+Compiling architecture xilinx of entity clk_wiz_v3_6_2 [clk_wiz_v3_6_2_default]
+Compiling architecture oddr2_v of entity ODDR2 [\ODDR2("NONE",'0',"SYNC")(1,4,1,...]
+Compiling architecture slavefifo2b_partial_arch of entity slaveFIFO2b_partial [slavefifo2b_partial_default]
+Compiling architecture slavefifo2b_zlp_arch of entity slaveFIFO2b_ZLP [slavefifo2b_zlp_default]
+Compiling architecture slavefifo2b_streamin_arch of entity slaveFIFO2b_streamIN [slavefifo2b_streamin_default]
+Compiling architecture slavefifo2b_streamout_arch of entity slaveFIFO2b_streamOUT [slavefifo2b_streamout_default]
+Compiling architecture fifo_arch of entity fifo [fifo_default]
+Compiling architecture slavefifo2b_loopback_arch of entity slaveFIFO2b_loopback [slavefifo2b_loopback_default]
+Compiling architecture slavefifo2b_fpga_top_arch of entity slaveFIFO2b_fpga_top [slavefifo2b_fpga_top_default]
+Compiling architecture testbench of entity testbench_lb
+Time Resolution for simulation is 1ps.
+Waiting for 14 sub-compilation(s) to finish...
+Compiled 38 VHDL Units
+Built simulation executable C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/testbench_lb_isim_beh.exe
+Fuse Memory Usage: 59220 KB
+Fuse CPU Usage: 1559 ms

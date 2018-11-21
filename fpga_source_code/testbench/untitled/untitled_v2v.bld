@@ -1,0 +1,46 @@
+<!DOCTYPE HdlBuildFileList SYSTEM "hdl-buildfile.dtd">
+<HdlBuildFile TopLevelLanguage="verilog" TbpVersion="20.06" IdlVersion="x.x" HvlLanguage="language_invalid" HdlLanguage="verilog" BaseTimeUnit="ns" DisplayTimeUnit="ns">
+  <TopLevelComponents></TopLevelComponents>
+  <ExternalSimulatorSettings>
+    <Tool Name="Verilog to VHDL">verilog</Tool>
+  </ExternalSimulatorSettings>
+  <GeneralConfiguration LogFileName="simulation.log" AddTopLevelSignals="True" ShowWatchSignals="True" DumpWatchSignals="False" BreakAtTimeZeroAfterCompile="False" ClearLogFileBeforeCompile="True" AutoParseProject="False" GenerateTestBenchOnBuildProject="True" DisablePeriodicWaveformUpdate="False" CompileVerilogFiles="True" CompileVHDLFiles="False" CompileCppFiles="False" MakeConstantsWatchable="True" MakeArrayElementsWatchable="False" WatchableArrayElementSize="0" EnableSimulatorDebugging="True"></GeneralConfiguration>
+  <ProjectLanguageConfigurationList>
+    <LanguageSettings Language="verilog">
+      <SimTool>Verilogger Extreme</SimTool>
+      <IncludeDirectories>
+        <Directory>.\</Directory>
+      </IncludeDirectories>
+      <LibraryDirectories>
+        <Directory>.\lib\verilog</Directory>
+        <Directory>.\lib</Directory>
+        <Directory>.\lib\verilog\</Directory>
+      </LibraryDirectories>
+      <LibraryExtensions>
+        <Extension>.v</Extension>
+        <Extension>.vo</Extension>
+      </LibraryExtensions>
+      <UseVhdl93Defaults>True</UseVhdl93Defaults>
+      <DelayType>1</DelayType>
+      <PliDriven>False</PliDriven>
+      <ActiveSnapshotName></ActiveSnapshotName>
+      <DestinationLibraryName>work</DestinationLibraryName>
+      <AdditionalExtensions></AdditionalExtensions>
+      <BuildOptions></BuildOptions>
+      <LinkerOptions>+linedebug</LinkerOptions>
+      <RuntimeOptions>+linedebug</RuntimeOptions>
+      <RunOutputFileExecutable>False</RunOutputFileExecutable>
+      <ForceTopLevel>False</ForceTopLevel>
+    </LanguageSettings>
+  </ProjectLanguageConfigurationList>
+  <Verilog2VhdlTranslationOptions>
+    <v2v-ncc Enabled="True"></v2v-ncc>
+  </Verilog2VhdlTranslationOptions>
+  <SourceFileGroup Language="verilog">
+    <SourceFile Library="False">..\fpga_master_tb.v</SourceFile>
+  </SourceFileGroup>
+  <SourceFileGroup Language="language_invalid"></SourceFileGroup>
+  <SourceFileGroup Language="language_invalid"></SourceFileGroup>
+  <SourceFileGroup Language="language_invalid"></SourceFileGroup>
+  <SourceFileGroup Language="language_invalid"></SourceFileGroup>
+</HdlBuildFile>

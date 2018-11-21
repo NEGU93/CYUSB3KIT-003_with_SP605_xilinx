@@ -1,0 +1,30 @@
+<!DOCTYPE Desktop SYSTEM "hdl-prj.dtd">
+<DockedDesktop>
+  <ProjectWindow>
+    <Column>476</Column>
+    <Column>120</Column>
+    <Column>75</Column>
+  </ProjectWindow>
+  <WatchDlg WindowTop="-1" WindowBottom="-1" WindowLeft="-1" WindowRight="-1" CaptureLBClick="True" CaptureMouseMove="False" CaptureFromSimulator="True" SelectedTabNum="0">
+    <WatchTab InspectedTime="0" ColumnWidth="0">Inspect 1</WatchTab>
+    <WatchTab InspectedTime="0" ColumnWidth="0">Inspect 2</WatchTab>
+    <WatchTab InspectedTime="0" ColumnWidth="0">Inspect 3</WatchTab>
+    <WatchTab InspectedTime="0" ColumnWidth="0">Inspect 4</WatchTab>
+    <WatchTab InspectedTime="0" ColumnWidth="0">Inspect 5</WatchTab>
+    <WatchTab InspectedTime="0" ColumnWidth="0">Inspect 6</WatchTab>
+    <WatchTab InspectedTime="0" ColumnWidth="0">Inspect 7</WatchTab>
+  </WatchDlg>
+  <DockablePaneList>
+    <DockablePane SystemPane="3">0</DockablePane>
+    <DockablePane SystemPane="0">1</DockablePane>
+    <DockablePane SystemPane="1">3</DockablePane>
+  </DockablePaneList>
+  <TabWindowList>
+    <Tab PaneIndex="0" SubPaneIndex="0" SystemTabID="0" Type="Text" Line="7">.\simulation.log</Tab>
+    <Tab PaneIndex="0" SubPaneIndex="0" SystemTabID="1" Type="Text" Line="0">.\waveperl.log</Tab>
+    <Tab PaneIndex="0" SubPaneIndex="0" SystemTabID="2" Type="Misc">Breakpoints</Tab>
+    <Tab PaneIndex="0" SubPaneIndex="0" SystemTabID="3" Type="Misc">Errors</Tab>
+    <Tab PaneIndex="1" SubPaneIndex="0" SystemTabID="20" Type="Misc">C:\Users\mddd\Desktop\AN65974\AN65974_Source Files\FPGA Source files\fx3_slaveFIFO2b_xilinx\testbench\untitled\untitled.hpj</Tab>
+    <Tab PaneIndex="3" SubPaneIndex="0" SystemTabID="9" Type="Diagram">.\StimulusAndResults.btim</Tab>
+  </TabWindowList>
+</DockedDesktop>

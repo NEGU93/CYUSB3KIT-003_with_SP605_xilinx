@@ -1,0 +1,885 @@
+Release 14.7 - xst P.20160913 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.10 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.10 secs
+ 
+--> 
+Reading design: slaveFIFO2b_fpga_top.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "slaveFIFO2b_fpga_top.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "slaveFIFO2b_fpga_top"
+Output Format                      : NGC
+Target Device                      : xc6slx45t-3-fgg484
+
+---- Source Options
+Top Module Name                    : slaveFIFO2b_fpga_top
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/fifo.vhd" into library work
+Parsing entity <fifo>.
+Parsing architecture <fifo_arch> of entity <fifo>.
+Parsing VHDL file "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" into library work
+Parsing entity <slaveFIFO2b_ZLP>.
+Parsing architecture <slaveFIFO2b_ZLP_arch> of entity <slavefifo2b_zlp>.
+Parsing VHDL file "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" into library work
+Parsing entity <slaveFIFO2b_streamOUT>.
+Parsing architecture <slaveFIFO2b_streamOUT_arch> of entity <slavefifo2b_streamout>.
+Parsing VHDL file "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" into library work
+Parsing entity <slaveFIFO2b_streamIN>.
+Parsing architecture <slaveFIFO2b_streamIN_arch> of entity <slavefifo2b_streamin>.
+Parsing VHDL file "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" into library work
+Parsing entity <slaveFIFO2b_partial>.
+Parsing architecture <slaveFIFO2b_partial_arch> of entity <slavefifo2b_partial>.
+Parsing VHDL file "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" into library work
+Parsing entity <slaveFIFO2b_loopback>.
+Parsing architecture <slaveFIFO2b_loopback_arch> of entity <slavefifo2b_loopback>.
+Parsing VHDL file "/home/ise/AN65974/clk_wiz_v3_6_2.vhd" into library work
+Parsing entity <clk_wiz_v3_6_2>.
+Parsing architecture <xilinx> of entity <clk_wiz_v3_6_2>.
+Parsing VHDL file "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" into library work
+Parsing entity <slaveFIFO2b_fpga_top>.
+Parsing architecture <slaveFIFO2b_fpga_top_arch> of entity <slavefifo2b_fpga_top>.
+WARNING:HDLCompiler:946 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 239: Actual for formal port c1 is neither a static name nor a globally static expression
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <slaveFIFO2b_fpga_top> (architecture <slaveFIFO2b_fpga_top_arch>) from library <work>.
+
+Elaborating entity <clk_wiz_v3_6_2> (architecture <xilinx>) from library <work>.
+WARNING:HDLCompiler:89 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 45: <oddr2> remains a black-box since it has no binding entity.
+
+Elaborating entity <slaveFIFO2b_partial> (architecture <slaveFIFO2b_partial_arch>) from library <work>.
+INFO:HDLCompiler:679 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" Line 144. Case statement is complete. others clause is never selected
+
+Elaborating entity <slaveFIFO2b_ZLP> (architecture <slaveFIFO2b_ZLP_arch>) from library <work>.
+INFO:HDLCompiler:679 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" Line 127. Case statement is complete. others clause is never selected
+
+Elaborating entity <slaveFIFO2b_streamIN> (architecture <slaveFIFO2b_streamIN_arch>) from library <work>.
+INFO:HDLCompiler:679 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" Line 75. Case statement is complete. others clause is never selected
+
+Elaborating entity <slaveFIFO2b_streamOUT> (architecture <slaveFIFO2b_streamOUT_arch>) from library <work>.
+INFO:HDLCompiler:679 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" Line 131. Case statement is complete. others clause is never selected
+
+Elaborating entity <slaveFIFO2b_loopback> (architecture <slaveFIFO2b_loopback_arch>) from library <work>.
+
+Elaborating entity <fifo> (architecture <fifo_arch>) from library <work>.
+INFO:HDLCompiler:679 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 147. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 161. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" Line 283. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 578. Case statement is complete. others clause is never selected
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <slaveFIFO2b_fpga_top>.
+    Related source file is "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd".
+    Found 1-bit register for signal <pktend>.
+    Found 1-bit register for signal <slwr>.
+    Found 3-bit register for signal <mode>.
+    Found 3-bit register for signal <current_fpga_master_mode>.
+    Found 2-bit register for signal <faddr>.
+    Found 32-bit register for signal <data_out_d>.
+    Found 32-bit register for signal <fdata_d>.
+    Found 1-bit register for signal <flaga_d>.
+    Found 1-bit register for signal <flagb_d>.
+    Found 1-bit register for signal <flagc_d>.
+    Found 1-bit register for signal <flagd_d>.
+    Found finite state machine <FSM_0> for signal <current_fpga_master_mode>.
+    -----------------------------------------------------------------------
+    | States             | 6                                              |
+    | Transitions        | 17                                             |
+    | Inputs             | 8                                              |
+    | Outputs            | 9                                              |
+    | Clock              | clk_100 (rising_edge)                          |
+    | Reset              | lock (negative)                                |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | fpga_master_mode_idle                          |
+    | Power Up State     | fpga_master_mode_idle                          |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 1-bit 7-to-1 multiplexer for signal <slwr_n> created at line 427.
+    Found 32-bit 7-to-1 multiplexer for signal <data_out> created at line 587.
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<31>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<30>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<29>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<28>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<27>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<26>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<25>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<24>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<23>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<22>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<21>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<20>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<19>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<18>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<17>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<16>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<15>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<14>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<13>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<12>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<11>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<10>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<9>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<8>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<7>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<6>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<5>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<4>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<3>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<2>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<1>> created at line 616
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<0>> created at line 616
+    Summary:
+	inferred  75 D-type flip-flop(s).
+	inferred  18 Multiplexer(s).
+	inferred  32 Tristate(s).
+	inferred   1 Finite State Machine(s).
+Unit <slaveFIFO2b_fpga_top> synthesized.
+
+Synthesizing Unit <clk_wiz_v3_6_2>.
+    Related source file is "/home/ise/AN65974/clk_wiz_v3_6_2.vhd".
+    Summary:
+	no macro.
+Unit <clk_wiz_v3_6_2> synthesized.
+
+Synthesizing Unit <slaveFIFO2b_partial>.
+    Related source file is "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd".
+    Found 4-bit register for signal <strob_cnt>.
+    Found 4-bit register for signal <short_pkt_cnt>.
+    Found 3-bit register for signal <current_partial_state>.
+    Found 32-bit register for signal <data_gen_partial>.
+    Found 1-bit register for signal <strob>.
+    Found finite state machine <FSM_1> for signal <current_partial_state>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 5                                              |
+    | Outputs            | 6                                              |
+    | Clock              | clk_100 (rising_edge)                          |
+    | Reset              | reset_n (negative)                             |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | partial_idle                                   |
+    | Power Up State     | partial_idle                                   |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 4-bit adder for signal <short_pkt_cnt[3]_GND_12_o_add_3_OUT> created at line 51.
+    Found 4-bit adder for signal <strob_cnt[3]_GND_12_o_add_9_OUT> created at line 66.
+    Found 32-bit adder for signal <data_gen_partial[31]_GND_12_o_add_24_OUT> created at line 159.
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+	inferred  41 D-type flip-flop(s).
+	inferred   3 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <slaveFIFO2b_partial> synthesized.
+
+Synthesizing Unit <slaveFIFO2b_ZLP>.
+    Related source file is "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd".
+    Found 3-bit register for signal <current_zlp_state>.
+    Found 32-bit register for signal <data_gen_zlp>.
+    Found 4-bit register for signal <strob_cnt>.
+    Found 1-bit register for signal <strob>.
+    Found finite state machine <FSM_2> for signal <current_zlp_state>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 11                                             |
+    | Inputs             | 5                                              |
+    | Outputs            | 3                                              |
+    | Clock              | clk_100 (rising_edge)                          |
+    | Reset              | reset_n (negative)                             |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | zlp_idle                                       |
+    | Power Up State     | zlp_idle                                       |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 4-bit adder for signal <strob_cnt[3]_GND_13_o_add_3_OUT> created at line 50.
+    Found 32-bit adder for signal <data_gen_zlp[31]_GND_13_o_add_18_OUT> created at line 139.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  37 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <slaveFIFO2b_ZLP> synthesized.
+
+Synthesizing Unit <slaveFIFO2b_streamIN>.
+    Related source file is "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd".
+    Found 32-bit register for signal <data_gen_stream_in>.
+    Found 2-bit register for signal <current_stream_in_state>.
+    Found finite state machine <FSM_3> for signal <current_stream_in_state>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 8                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 1                                              |
+    | Clock              | clk_100 (rising_edge)                          |
+    | Reset              | reset_n (negative)                             |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | stream_in_idle                                 |
+    | Power Up State     | stream_in_idle                                 |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 32-bit adder for signal <data_gen_stream_in[31]_GND_14_o_add_6_OUT> created at line 87.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  32 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <slaveFIFO2b_streamIN> synthesized.
+
+Synthesizing Unit <slaveFIFO2b_streamOUT>.
+    Related source file is "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd".
+WARNING:Xst:647 - Input <stream_out_data_from_fx3> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 2-bit register for signal <oe_delay_cnt>.
+    Found 2-bit register for signal <rd_oe_delay_cnt>.
+    Found 3-bit register for signal <current_stream_out_state>.
+    Found finite state machine <FSM_4> for signal <current_stream_out_state>.
+    -----------------------------------------------------------------------
+    | States             | 6                                              |
+    | Transitions        | 12                                             |
+    | Inputs             | 5                                              |
+    | Outputs            | 3                                              |
+    | Clock              | clk_100 (rising_edge)                          |
+    | Reset              | reset_n (negative)                             |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | stream_out_idle                                |
+    | Power Up State     | stream_out_idle                                |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 2-bit subtractor for signal <GND_15_o_GND_15_o_sub_9_OUT<1:0>> created at line 58.
+    Found 2-bit subtractor for signal <GND_15_o_GND_15_o_sub_16_OUT<1:0>> created at line 73.
+    Found 2-bit comparator greater for signal <GND_15_o_rd_oe_delay_cnt[1]_LessThan_8_o> created at line 57
+    Found 2-bit comparator greater for signal <GND_15_o_oe_delay_cnt[1]_LessThan_15_o> created at line 72
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred   4 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred   2 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <slaveFIFO2b_streamOUT> synthesized.
+
+Synthesizing Unit <slaveFIFO2b_loopback>.
+    Related source file is "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd".
+INFO:Xst:3210 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_full> of the instance <fifo_inst> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_empty> of the instance <fifo_inst> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <slrd_looback_d2_n>.
+    Found 1-bit register for signal <slrd_looback_d3_n>.
+    Found 1-bit register for signal <slrd_looback_d4_n>.
+    Found 1-bit register for signal <slrd_looback_d1_n>.
+    Found 2-bit register for signal <rd_oe_delay_cnt>.
+    Found 2-bit register for signal <oe_delay_cnt>.
+    Found 4-bit register for signal <current_loop_back_state>.
+    Found finite state machine <FSM_5> for signal <current_loop_back_state>.
+    -----------------------------------------------------------------------
+    | States             | 11                                             |
+    | Transitions        | 20                                             |
+    | Inputs             | 7                                              |
+    | Outputs            | 7                                              |
+    | Clock              | clk_100 (rising_edge)                          |
+    | Reset              | reset_n (negative)                             |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | loop_back_idle                                 |
+    | Power Up State     | loop_back_idle                                 |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 2-bit subtractor for signal <GND_16_o_GND_16_o_sub_18_OUT<1:0>> created at line 182.
+    Found 2-bit subtractor for signal <GND_16_o_GND_16_o_sub_25_OUT<1:0>> created at line 197.
+    Found 2-bit comparator greater for signal <GND_16_o_rd_oe_delay_cnt[1]_LessThan_17_o> created at line 181
+    Found 2-bit comparator greater for signal <GND_16_o_oe_delay_cnt[1]_LessThan_24_o> created at line 196
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred   8 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred   3 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <slaveFIFO2b_loopback> synthesized.
+
+Synthesizing Unit <fifo>.
+    Related source file is "/home/ise/AN65974/rtl_vhdl/SlaveFIFO2b/fifo.vhd".
+    Found 256x32-bit dual-port RAM <Mram_data_array> for signal <data_array>.
+    Found 1-bit register for signal <fifo_empty_s>.
+    Found 8-bit register for signal <read_ptr>.
+    Found 8-bit register for signal <write_ptr>.
+    Found 9-bit register for signal <write_occupancy>.
+    Found 9-bit register for signal <read_occupancy>.
+    Found 1-bit register for signal <write_busy_d>.
+    Found 1-bit register for signal <fifo_full_s>.
+    Found 32-bit register for signal <dout>.
+    Found 8-bit adder for signal <write_ptr[7]_GND_17_o_add_1_OUT> created at line 59.
+    Found 8-bit adder for signal <read_ptr[7]_GND_17_o_add_4_OUT> created at line 78.
+    Found 9-bit adder for signal <read_occupancy[8]_GND_17_o_add_15_OUT> created at line 145.
+    Found 9-bit adder for signal <write_occupancy[8]_GND_17_o_add_19_OUT> created at line 159.
+    Found 9-bit subtractor for signal <GND_17_o_GND_17_o_sub_15_OUT<8:0>> created at line 144.
+    Found 9-bit subtractor for signal <GND_17_o_GND_17_o_sub_19_OUT<8:0>> created at line 158.
+    Found 9-bit 4-to-1 multiplexer for signal <read_occ_case_sel[1]_read_occupancy[8]_wide_mux_16_OUT> created at line 142.
+    Found 9-bit 4-to-1 multiplexer for signal <write_occ_case_sel[1]_write_occupancy[8]_wide_mux_20_OUT> created at line 156.
+    Summary:
+	inferred   1 RAM(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  69 D-type flip-flop(s).
+	inferred  11 Multiplexer(s).
+Unit <fifo> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 256x32-bit dual-port RAM                              : 1
+# Adders/Subtractors                                   : 14
+ 2-bit subtractor                                      : 4
+ 32-bit adder                                          : 3
+ 4-bit adder                                           : 3
+ 8-bit adder                                           : 2
+ 9-bit addsub                                          : 2
+# Registers                                            : 34
+ 1-bit register                                        : 15
+ 2-bit register                                        : 5
+ 3-bit register                                        : 1
+ 32-bit register                                       : 6
+ 4-bit register                                        : 3
+ 8-bit register                                        : 2
+ 9-bit register                                        : 2
+# Comparators                                          : 4
+ 2-bit comparator greater                              : 4
+# Multiplexers                                         : 40
+ 1-bit 2-to-1 multiplexer                              : 13
+ 1-bit 7-to-1 multiplexer                              : 1
+ 2-bit 2-to-1 multiplexer                              : 4
+ 32-bit 2-to-1 multiplexer                             : 7
+ 32-bit 7-to-1 multiplexer                             : 1
+ 4-bit 2-to-1 multiplexer                              : 3
+ 8-bit 2-to-1 multiplexer                              : 3
+ 9-bit 2-to-1 multiplexer                              : 8
+# Tristates                                            : 32
+ 1-bit tristate buffer                                 : 32
+# FSMs                                                 : 6
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <fifo>.
+The following registers are absorbed into accumulator <write_occupancy>: 1 register on signal <write_occupancy>.
+The following registers are absorbed into accumulator <read_occupancy>: 1 register on signal <read_occupancy>.
+The following registers are absorbed into accumulator <read_ptr>: 1 register on signal <read_ptr>.
+The following registers are absorbed into accumulator <write_ptr>: 1 register on signal <write_ptr>.
+INFO:Xst:3226 - The RAM <Mram_data_array> will be implemented as a BLOCK RAM, absorbing the following register(s): <dout>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 256-word x 32-bit                   |          |
+    |     mode           | read-first                          |          |
+    |     clkA           | connected to signal <fifo_clk>      | rise     |
+    |     weA            | connected to signal <write_busy>    | high     |
+    |     addrA          | connected to signal <write_ptr>     |          |
+    |     diA            | connected to signal <din>           |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 256-word x 32-bit                   |          |
+    |     mode           | read-first                          |          |
+    |     clkB           | connected to signal <fifo_clk>      | rise     |
+    |     addrB          | connected to signal <read_index>    |          |
+    |     doB            | connected to signal <dout>          |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <fifo> synthesized (advanced).
+
+Synthesizing (advanced) Unit <slaveFIFO2b_ZLP>.
+The following registers are absorbed into counter <data_gen_zlp>: 1 register on signal <data_gen_zlp>.
+The following registers are absorbed into counter <strob_cnt>: 1 register on signal <strob_cnt>.
+Unit <slaveFIFO2b_ZLP> synthesized (advanced).
+
+Synthesizing (advanced) Unit <slaveFIFO2b_loopback>.
+The following registers are absorbed into counter <rd_oe_delay_cnt>: 1 register on signal <rd_oe_delay_cnt>.
+The following registers are absorbed into counter <oe_delay_cnt>: 1 register on signal <oe_delay_cnt>.
+Unit <slaveFIFO2b_loopback> synthesized (advanced).
+
+Synthesizing (advanced) Unit <slaveFIFO2b_partial>.
+The following registers are absorbed into counter <strob_cnt>: 1 register on signal <strob_cnt>.
+The following registers are absorbed into counter <short_pkt_cnt>: 1 register on signal <short_pkt_cnt>.
+The following registers are absorbed into counter <data_gen_partial>: 1 register on signal <data_gen_partial>.
+Unit <slaveFIFO2b_partial> synthesized (advanced).
+
+Synthesizing (advanced) Unit <slaveFIFO2b_streamIN>.
+The following registers are absorbed into counter <data_gen_stream_in>: 1 register on signal <data_gen_stream_in>.
+Unit <slaveFIFO2b_streamIN> synthesized (advanced).
+
+Synthesizing (advanced) Unit <slaveFIFO2b_streamOUT>.
+The following registers are absorbed into counter <oe_delay_cnt>: 1 register on signal <oe_delay_cnt>.
+The following registers are absorbed into counter <rd_oe_delay_cnt>: 1 register on signal <rd_oe_delay_cnt>.
+Unit <slaveFIFO2b_streamOUT> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 256x32-bit dual-port block RAM                        : 1
+# Adders/Subtractors                                   : 3
+ 8-bit adder                                           : 1
+ 9-bit addsub                                          : 2
+# Counters                                             : 10
+ 2-bit down counter                                    : 4
+ 32-bit up counter                                     : 3
+ 4-bit up counter                                      : 3
+# Accumulators                                         : 4
+ 8-bit up loadable accumulator                         : 2
+ 9-bit updown loadable accumulator                     : 2
+# Registers                                            : 84
+ Flip-Flops                                            : 84
+# Comparators                                          : 4
+ 2-bit comparator greater                              : 4
+# Multiplexers                                         : 29
+ 1-bit 2-to-1 multiplexer                              : 13
+ 1-bit 7-to-1 multiplexer                              : 1
+ 32-bit 2-to-1 multiplexer                             : 4
+ 32-bit 7-to-1 multiplexer                             : 1
+ 8-bit 2-to-1 multiplexer                              : 2
+ 9-bit 2-to-1 multiplexer                              : 8
+# FSMs                                                 : 6
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:2261 - The FF/Latch <fifo_address_d_0> in Unit <slaveFIFO2b_fpga_top> is equivalent to the following FF/Latch, which will be removed : <fifo_address_d_1> 
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <current_fpga_master_mode[1:3]> with user encoding.
+-----------------------------------------
+ State                       | Encoding
+-----------------------------------------
+ fpga_master_mode_idle       | 000
+ fpga_master_mode_loopback   | 001
+ fpga_master_mode_partial    | 010
+ fpga_master_mode_zlp        | 011
+ fpga_master_mode_stream_in  | 100
+ fpga_master_mode_stream_out | 101
+-----------------------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_3> on signal <current_stream_in_state[1:2]> with gray encoding.
+--------------------------------------
+ State                    | Encoding
+--------------------------------------
+ stream_in_idle           | 00
+ stream_in_wait_flagb     | 01
+ stream_in_write          | 11
+ stream_in_write_wr_delay | 10
+--------------------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <partial_inst/FSM_1> on signal <current_partial_state[1:3]> with user encoding.
+------------------------------------
+ State                  | Encoding
+------------------------------------
+ partial_idle           | 000
+ partial_wait_flagb     | 001
+ partial_write          | 010
+ partial_write_wr_delay | 011
+ partial_wait           | 100
+------------------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <zlp_inst/FSM_2> on signal <current_zlp_state[1:3]> with user encoding.
+--------------------------------
+ State              | Encoding
+--------------------------------
+ zlp_idle           | 000
+ zlp_wait_flagb     | 001
+ zlp_write          | 010
+ zlp_write_wr_delay | 011
+ zlp_wait           | 100
+--------------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <streamOUT_inst/FSM_4> on signal <current_stream_out_state[1:3]> with user encoding.
+---------------------------------------------
+ State                           | Encoding
+---------------------------------------------
+ stream_out_idle                 | 000
+ stream_out_flagc_rcvd           | 001
+ stream_out_wait_flagd           | 010
+ stream_out_read                 | 011
+ stream_out_read_rd_and_oe_delay | 100
+ stream_out_read_oe_delay        | 101
+---------------------------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <loopback_inst/FSM_5> on signal <current_loop_back_state[1:11]> with one-hot encoding.
+-----------------------------------------------
+ State                          | Encoding
+-----------------------------------------------
+ loop_back_idle                 | 00000000001
+ loop_back_flagc_rcvd           | 00000000010
+ loop_back_wait_flagd           | 00000000100
+ loop_back_read                 | 00000001000
+ loop_back_read_rd_and_oe_delay | 00000010000
+ loop_back_read_oe_delay        | 00000100000
+ loop_back_wait_flaga           | 00001000000
+ loop_back_wait_flagb           | 00010000000
+ loop_back_write                | 00100000000
+ loop_back_write_wr_delay       | 01000000000
+ loop_back_flush_fifo           | 10000000000
+-----------------------------------------------
+INFO:Xst:1901 - Instance inst_clk/pll_base_inst in unit inst_clk/pll_base_inst of type PLL_BASE has been replaced by PLL_ADV
+
+Optimizing unit <slaveFIFO2b_fpga_top> ...
+
+Optimizing unit <slaveFIFO2b_partial> ...
+
+Optimizing unit <slaveFIFO2b_ZLP> ...
+
+Optimizing unit <slaveFIFO2b_streamOUT> ...
+
+Optimizing unit <slaveFIFO2b_loopback> ...
+
+Optimizing unit <fifo> ...
+WARNING:Xst:1710 - FF/Latch <streamOUT_inst/rd_oe_delay_cnt_1> (without init value) has a constant value of 0 in block <slaveFIFO2b_fpga_top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <loopback_inst/rd_oe_delay_cnt_1> (without init value) has a constant value of 0 in block <slaveFIFO2b_fpga_top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <loopback_inst/oe_delay_cnt_1> (without init value) has a constant value of 0 in block <slaveFIFO2b_fpga_top>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block slaveFIFO2b_fpga_top, actual ratio is 1.
+FlipFlop current_fpga_master_mode_FSM_FFd1 has been replicated 4 time(s)
+FlipFlop current_fpga_master_mode_FSM_FFd2 has been replicated 6 time(s)
+FlipFlop current_fpga_master_mode_FSM_FFd3 has been replicated 6 time(s)
+FlipFlop flagb_d has been replicated 4 time(s)
+INFO:Xst:1843 - HDL ADVISOR - FlipFlop flagb_d connected to a primary input has been replicated
+FlipFlop loopback_inst/current_loop_back_state_FSM_FFd1 has been replicated 1 time(s)
+FlipFlop loopback_inst/current_loop_back_state_FSM_FFd3 has been replicated 2 time(s)
+FlipFlop loopback_inst/slrd_looback_d4_n has been replicated 1 time(s)
+FlipFlop partial_inst/current_partial_state_FSM_FFd2 has been replicated 1 time(s)
+FlipFlop partial_inst/current_partial_state_FSM_FFd3 has been replicated 2 time(s)
+FlipFlop streamIN_inst/current_stream_in_state_FSM_FFd1 has been replicated 1 time(s)
+FlipFlop streamIN_inst/current_stream_in_state_FSM_FFd2 has been replicated 1 time(s)
+FlipFlop zlp_inst/current_zlp_state_FSM_FFd2 has been replicated 1 time(s)
+FlipFlop zlp_inst/current_zlp_state_FSM_FFd3 has been replicated 2 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 287
+ Flip-Flops                                            : 287
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : slaveFIFO2b_fpga_top.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 586
+#      GND                         : 1
+#      INV                         : 3
+#      LUT2                        : 32
+#      LUT3                        : 55
+#      LUT4                        : 21
+#      LUT5                        : 57
+#      LUT6                        : 188
+#      MUXCY                       : 109
+#      MUXF7                       : 5
+#      VCC                         : 1
+#      XORCY                       : 114
+# FlipFlops/Latches                : 288
+#      FDC                         : 168
+#      FDCE                        : 110
+#      FDP                         : 9
+#      ODDR2                       : 1
+# RAMS                             : 1
+#      RAMB8BWER                   : 1
+# Clock Buffers                    : 2
+#      BUFG                        : 2
+# IO Buffers                       : 52
+#      IBUF                        : 8
+#      IBUFG                       : 1
+#      IOBUF                       : 32
+#      OBUF                        : 11
+# Others                           : 1
+#      PLL_ADV                     : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45tfgg484-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             288  out of  54576     0%  
+ Number of Slice LUTs:                  356  out of  27288     1%  
+    Number used as Logic:               356  out of  27288     1%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    402
+   Number with an unused Flip Flop:     114  out of    402    28%  
+   Number with an unused LUT:            46  out of    402    11%  
+   Number of fully used LUT-FF pairs:   242  out of    402    60%  
+   Number of unique control sets:         8
+
+IO Utilization: 
+ Number of IOs:                          52
+ Number of bonded IOBs:                  52  out of    296    17%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:                1  out of    116     0%  
+    Number using Block RAM only:          1
+ Number of BUFG/BUFGCTRLs:                2  out of     16    12%  
+ Number of PLL_ADVs:                      1  out of      4    25%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+inst_clk/pll_base_inst/CLKOUT0     | BUFG                   | 290   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 3.581ns (Maximum Frequency: 279.236MHz)
+   Minimum input arrival time before clock: 2.038ns
+   Maximum output required time after clock: 6.471ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'inst_clk/pll_base_inst/CLKOUT0'
+  Clock period: 3.581ns (frequency: 279.236MHz)
+  Total number of paths / destination ports: 12240 / 406
+-------------------------------------------------------------------------
+Delay:               3.581ns (Levels of Logic = 3)
+  Source:            current_fpga_master_mode_FSM_FFd1_1 (FF)
+  Destination:       loopback_inst/fifo_inst/write_ptr_6 (FF)
+  Source Clock:      inst_clk/pll_base_inst/CLKOUT0 rising
+  Destination Clock: inst_clk/pll_base_inst/CLKOUT0 rising
+
+  Data Path: current_fpga_master_mode_FSM_FFd1_1 to loopback_inst/fifo_inst/write_ptr_6
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              1   0.447   0.827  current_fpga_master_mode_FSM_FFd1_1 (current_fpga_master_mode_FSM_FFd1_1)
+     LUT4:I0->O           12   0.203   0.909  loopback_inst/fifo_push1 (loopback_inst/fifo_push)
+     LUT4:I3->O            4   0.205   0.684  loopback_inst/fifo_inst/Result<2>111 (loopback_inst/fifo_inst/Result<2>1_bdd0)
+     LUT4:I3->O            1   0.205   0.000  loopback_inst/fifo_inst/Result<3>11 (loopback_inst/fifo_inst/Result<3>1)
+     FDC:D                     0.102          loopback_inst/fifo_inst/write_ptr_3
+    ----------------------------------------
+    Total                      3.581ns (1.162ns logic, 2.419ns route)
+                                       (32.4% logic, 67.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'inst_clk/pll_base_inst/CLKOUT0'
+  Total number of paths / destination ports: 43 / 43
+-------------------------------------------------------------------------
+Offset:              2.038ns (Levels of Logic = 1)
+  Source:            flagb (PAD)
+  Destination:       flagb_d (FF)
+  Destination Clock: inst_clk/pll_base_inst/CLKOUT0 rising
+
+  Data Path: flagb to flagb_d
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             5   1.222   0.714  flagb_IBUF (flagb_IBUF)
+     FDC:D                     0.102          flagb_d
+    ----------------------------------------
+    Total                      2.038ns (1.324ns logic, 0.714ns route)
+                                       (65.0% logic, 35.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'inst_clk/pll_base_inst/CLKOUT0'
+  Total number of paths / destination ports: 89 / 39
+-------------------------------------------------------------------------
+Offset:              6.471ns (Levels of Logic = 3)
+  Source:            current_fpga_master_mode_FSM_FFd1 (FF)
+  Destination:       sloe (PAD)
+  Source Clock:      inst_clk/pll_base_inst/CLKOUT0 rising
+
+  Data Path: current_fpga_master_mode_FSM_FFd1 to sloe
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q             70   0.447   1.784  current_fpga_master_mode_FSM_FFd1 (current_fpga_master_mode_FSM_FFd1)
+     LUT5:I3->O            1   0.203   0.684  Mmux_sloe11 (Mmux_sloe1)
+     LUT6:I4->O            1   0.203   0.579  Mmux_sloe12 (sloe_OBUF)
+     OBUF:I->O                 2.571          sloe_OBUF (sloe)
+    ----------------------------------------
+    Total                      6.471ns (3.424ns logic, 3.047ns route)
+                                       (52.9% logic, 47.1% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock inst_clk/pll_base_inst/CLKOUT0
+------------------------------+---------+---------+---------+---------+
+                              | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                  |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+------------------------------+---------+---------+---------+---------+
+inst_clk/pll_base_inst/CLKOUT0|    3.581|         |         |         |
+------------------------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 32.00 secs
+Total CPU time to Xst completion: 29.04 secs
+ 
+--> 
+
+
+Total memory usage is 404796 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    6 (   0 filtered)
+Number of infos    :    7 (   0 filtered)
+

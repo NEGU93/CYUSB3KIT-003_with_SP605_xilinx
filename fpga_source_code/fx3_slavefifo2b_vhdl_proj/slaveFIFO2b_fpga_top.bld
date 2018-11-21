@@ -1,0 +1,51 @@
+Release 14.7 ngdbuild P.20160913 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Command Line: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/ngdbuild -intstyle
+ise -dd _ngo -nt timestamp -uc /home/ise/AN65974/slaveFIFO2b_fpga_top.ucf -p
+xc6slx45t-fgg484-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd
+
+Reading NGO file
+"/home/ise/AN65974/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ngc" ...
+Gathering constraint information from source properties...
+Done.
+
+Annotating constraints to design from ucf file
+"/home/ise/AN65974/slaveFIFO2b_fpga_top.ucf" ...
+Resolving constraint associations...
+Checking Constraint Associations...
+INFO:ConstraintSystem:178 - TNM 'clk', used in period specification 'TS_clk',
+   was traced into PLL_ADV instance PLL_ADV. The following new TNM groups and
+   period specifications were generated at the PLL_ADV output(s): 
+   CLKOUT0: <TIMESPEC TS_inst_clk_clkout0 = PERIOD "inst_clk_clkout0" TS_clk /
+   3.7 HIGH 50%>
+
+WARNING:ConstraintSystem - The Offset constraint <TIMEGRP "FDATA_IN" OFFSET = IN
+   2.5ns BEFORE "clk" RISING;>
+   [/home/ise/AN65974/slaveFIFO2b_fpga_top.ucf(121)], is specified without a
+   duration.  This will result in a lack of hold time checks in timing reports. 
+   If hold time checks are desired a duration value should be specified
+   following the 'VALID' keyword.
+
+Done...
+
+Checking expanded design ...
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   1
+
+Total memory usage is 402416 kilobytes
+
+Writing NGD file "slaveFIFO2b_fpga_top.ngd" ...
+Total REAL time to NGDBUILD completion:  15 sec
+Total CPU time to NGDBUILD completion:   14 sec
+
+Writing NGDBUILD log file "slaveFIFO2b_fpga_top.bld"...
