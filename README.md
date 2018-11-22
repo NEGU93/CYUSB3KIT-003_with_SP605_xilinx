@@ -1,10 +1,9 @@
 # CYUSB3KIT-003 with SP605 xilinx
 
 This project aim was to use the Cypress [CYUSB3KIT-003 EZ-USB FX3 SuperSpeed Explorer Kit](http://www.cypress.com/documentation/development-kitsboards/cyusb3kit-003-ez-usb-fx3-superspeed-explorer-kit) 
-to both **program** and **communicate** with a Xilinx Spartan 6 FPGA embedded on the [SP605 Evaluation Kit](https://www.xilinx.com/products/boards-and-kits/ek-s6-sp605-g.html).
+to both **program** (upload the firmware of the FPGA using the kit) and **communicate** (make the FPGA send info and receive it with the PC and vice versa) with a Xilinx Spartan 6 FPGA embedded on the [SP605 Evaluation Kit](https://www.xilinx.com/products/boards-and-kits/ek-s6-sp605-g.html).
 
-In order to connect both boards, the [CYUSB3ACC-005 FMC Interconnect Board](http://www.cypress.com/documentation/development-kitsboards/cyusb3acc-005-fmc-interconnect-board-ez-usb-fx3-superspeed)
-was used.
+In order to connect both boards, the [CYUSB3ACC-005 FMC Interconnect Board](http://www.cypress.com/documentation/development-kitsboards/cyusb3acc-005-fmc-interconnect-board-ez-usb-fx3-superspeed) was used.
 
 ## Getting Started
 ### Installing Software
@@ -18,7 +17,7 @@ As I had no experience with Xilinx FPGA's, I used some tutorials to practice and
   2. Try to create/simulate and program a simple FPGA program and check it works: [ISE 10.1 QuickStart Tutorial](http://www.eng.ucy.ac.cy/theocharides/Courses/ECE408/qst.pdf)
    
   Some thing may be taken into account: 
-    - If the case (using SP605) on step 2, just select the board disectly instead of selecting the Spartan 6 board.
+    - If the case (using SP605) when doing step 2 on the manual, just select the board disectly instead of selecting the Spartan 6 board.
     - If you have problems when doing the pin assignment: [How to assign physical pins of FPGA to Xilinx ISE Verilog modules?](https://electronics.stackexchange.com/questions/86961/how-to-assign-physical-pins-of-fpga-to-xilinx-ise-verilog-modules/406913#406913)
 
 ### Playing with Cypress SuperSpeed Explorer Kit
@@ -104,6 +103,14 @@ Here some output examples of the code working correctly:
 <img src="/img/fpga_com/StreamerIN.png" width="400"/> <img src="/img/fpga_com/ZLP.png" width="400"/> 
 
 ## Program the FPGA
+
+This section aim is to program the FPGA using the FX3 kit directly and not the JTAG. For it, the SPI x4 Flash is used and connected to the FX3 board.
+
+The following documentation was used: [AN84868](http://www.cypress.com/documentation/application-notes/an84868-configuring-fpga-over-usb-using-cypress-ez-usb-fx3)
+
+In order to do that, two cables must be sold to the FPGA. In this case, as the board is different, the image of the instruction won't be good enough so the LED's where measured with an ammeter to know the right side of the LED and the conclusion can be seen in the folliwng image:
+
+![init_done_leds](/img/fpga_prog/where_to_sold.png)
 
 [Convert bit to bin](https://electronics.stackexchange.com/questions/407801/convert-bit-to-bin-xilinx-file)
 
