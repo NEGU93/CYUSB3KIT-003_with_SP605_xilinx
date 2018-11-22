@@ -97,7 +97,7 @@ NET "reset_in_n" LOC = F8;  // F10; 	-> // J63 FMC LPC: D15
 
 When following section 10.5 from [AN65974](http://www.cypress.com/documentation/application-notes/an65974-designing-ez-usb-fx3-slave-fifo-interface), the switch SW8 will not really exist. The USER DIP SWITCH must be used instead. For the rest just follow the instructions as needed. Configure the USER DIP SWITCH according to the following table:
 
-![Dip Switch Config Table](img/FPGA com/DS_conf_table.png)
+![Dip Switch Config Table](/img/fpga_com/DS_conf_table.png)
 
 ## Program the FPGA
 
