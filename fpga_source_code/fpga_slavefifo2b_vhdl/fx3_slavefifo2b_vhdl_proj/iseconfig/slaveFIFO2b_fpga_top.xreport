@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2015-10-27T17:15:25</DateModified>
+  <DateModified>2018-11-22T09:05:30</DateModified>
   <ModuleName>slaveFIFO2b_fpga_top</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/savj/Desktop/AN65974/AN65974_Source Files/FPGA Source files/fx3_slaveFIFO2b_xilinx/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj\</ImplementationReportsDirectory>
+  <SavedFilePath>/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/</ImplementationReportsDirectory>
   <DateInitialized>2013-11-19T18:38:50</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

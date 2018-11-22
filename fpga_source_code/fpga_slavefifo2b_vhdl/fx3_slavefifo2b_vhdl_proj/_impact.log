@@ -1,0 +1,106 @@
+iMPACT Version: 14.7
+
+iMPACT log file Started on Thu Nov 22 10:56:25 2018
+
+Welcome to iMPACT
+iMPACT Version: 14.7
+// *** BATCH CMD : setMode -bs
+GUI --- Auto connect to cable...
+// *** BATCH CMD : setCable -port auto
+INFO:iMPACT - Digilent Plugin: Plugin Version: 2.5.2
+INFO:iMPACT - Digilent Plugin: no JTAG device was found.
+AutoDetecting cable. Please wait.
+*** WARNING ***: When port is set to auto detect mode, cable speed is set todefault 6 MHz regardless of explicit arguments supplied for setting the baudrates
+PROGRESS_START - Starting Operation.
+Connecting to cable (Usb Port - USB21).
+Checking cable driver.
+File version of /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/xusbdfwu.hex = 1030.
+File version of /usr/share/xusbdfwu.hex = 1030.
+ Using libusb.
+ Kernel release = 2.6.32-358.el6.x86_64.
+ Max current requested during enumeration is 74 mA.
+Type = 0x0004.
+ Cable Type = 3, Revision = 0.
+ Setting cable speed to 6 MHz.
+Cable connection established.
+Firmware version = 1028.
+File version of /opt/Xilinx/14.7/ISE_DS/ISE/data/xusb_xlp.hex = 1303.
+Firmware hex file version = 1303.
+Downloading /opt/Xilinx/14.7/ISE_DS/ISE/data/xusb_xlp.hex.
+Downloaded firmware version = 1303.
+PLD file version = 0012h.
+ PLD version = 0012h.
+PROGRESS_END - End Operation.
+Elapsed time =      5 sec.
+Type = 0x0004.
+ESN option: 0000153725B701.
+Attempting to identify devices in the boundary-scan chain configuration...
+INFO:iMPACT - Current time: 22 Nov 2018 10:56:33
+// *** BATCH CMD : Identify -inferir 
+PROGRESS_START - Starting Operation.
+Identifying chain contents...'0': : Manufacturer's ID = Xilinx xc6slx45t, Version : 4
+INFO:iMPACT:1777 - 
+   Reading /opt/Xilinx/14.7/ISE_DS/ISE/spartan6/data/xc6slx45t.bsd...
+INFO:iMPACT:501 - '1': Added Device xc6slx45t successfully.
+----------------------------------------------------------------------
+INFO:iMPACT:1588 - '1':The part does not appear to be Xilinx Part.
+'1': : Manufacturer's ID =Unknown , Version : 0
+INFO:iMPACT:501 - '1': Added Device UNKNOWN successfully.
+----------------------------------------------------------------------
+done.
+ERROR:iMPACT - Bsdl reader is not available for device 1.
+PROGRESS_END - End Operation.
+Elapsed time =      0 sec.
+// *** BATCH CMD : identifyMPM 
+// *** BATCH CMD : assignFile -p 1 -file"/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/unknown_0_8.bsd"
+INFO:iMPACT:1777 - 
+   Reading   /home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefi   fo2b_vhdl/fx3_slavefifo2b_vhdl_proj/unknown_0_8.bsd...
+INFO:iMPACT - The UNKNOWN device BSDL file(s) are saved to this location:   '/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavef   ifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/'
+// *** BATCH CMD : assignFile -p 2 -file"/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bit"
+'2': Loading file'/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bit' ...
+done.
+INFO:iMPACT:2257 - Startup Clock has been changed to 'JtagClk' in the bitstream   stored in memory,
+   but the original bitstream file remains unchanged.
+UserID read from the bitstream file = 0xFFFFFFFF.
+Data width read from the bitstream file = 1.
+----------------------------------------------------------------------
+INFO:iMPACT:501 - '2': Added Device xc6slx45t successfully.
+----------------------------------------------------------------------
+INFO:iMPACT - Current time: 22 Nov 2018 10:56:46
+// *** BATCH CMD : Program -p 2 
+PROGRESS_START - Starting Operation.
+Maximum TCK operating frequency for this device chain: 6000000.
+Validating chain...
+Boundary-scan chain validated successfully.
+'2': Programming device...
+ LCK_cycle = NoWait.
+LCK cycle: NoWait
+done.
+'2': Reading status register contents...
+[0] CRC ERROR                                                              :        0
+[1] IDCODE ERROR                                                           :        0
+[2] DCM LOCK STATUS                                                        :        1
+[3] GTS_CFG_B STATUS                                                       :        1
+[4] GWE STATUS                                                             :        1
+[5] GHIGH STATUS                                                           :        1
+[6] DECRYPTION ERROR                                                       :        0
+[7] DECRYPTOR ENABLE                                                       :        0
+[8] HSWAPEN PIN                                                            :        1
+[9] MODE PIN M[0]                                                          :        1
+[10] MODE PIN M[1]                                                         :        1
+[11] RESERVED                                                              :        0
+[12] INIT_B PIN                                                            :        1
+[13] DONE PIN                                                              :        1
+[14] SUSPEND STATUS                                                        :        0
+[15] FALLBACK STATUS                                                       :        0
+INFO:iMPACT:2219 - Status register values:
+INFO:iMPACT - 0011 1100 1110 1100 
+INFO:iMPACT:579 - '2': Completed downloading bit file to device.
+INFO:iMPACT:188 - '2': Programming completed successfully.
+ LCK_cycle = NoWait.
+LCK cycle: NoWait
+INFO:iMPACT - '2': Checking done pin....done.
+'2': Programmed successfully.
+PROGRESS_END - End Operation.
+Elapsed time =      7 sec.
+Cable is not connected.
