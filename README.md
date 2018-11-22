@@ -99,6 +99,10 @@ When following section 10.5 from [AN65974](http://www.cypress.com/documentation/
 
 ![Dip Switch Config Table](/img/fpga_com/DS_conf_table.png)
 
+Here some output examples of the code working correctly:
+
+<img src="/img/fpga_com/StreamerIN.png" width="400"/> <img src="/img/fpga_com/ZLP.png" width="400"/> 
+
 ## Program the FPGA
 
 [Convert bit to bin](https://electronics.stackexchange.com/questions/407801/convert-bit-to-bin-xilinx-file)
