@@ -1,6 +1,6 @@
 # CYUSB3KIT-003 with SP605 xilinx
 
-This project aim was to use the Cypress [CYUSB3KIT-003 EZ-USB FX3 SuperSpeed Explorer Kit](http://www.cypress.com/documentation/development-kitsboards/cyusb3kit-003-ez-usb-fx3-superspeed-explorer-kit) 
+This project aim was to use the Cypress [CYUSB3KIT-003 EZ-USB FX3 SuperSpeed Explorer Kit](http://www.cypress.com/documentation/development-kitsboards/cyusb3kit-003-ez-usb-fx3-superspeed-explorer-kit)
 to both **program** (upload the firmware of the FPGA using the kit) and **communicate** (make the FPGA send info and receive it with the PC and vice versa) with a Xilinx Spartan 6 FPGA embedded on the [SP605 Evaluation Kit](https://www.xilinx.com/products/boards-and-kits/ek-s6-sp605-g.html).
 
 In order to connect both boards, the [CYUSB3ACC-005 FMC Interconnect Board](http://www.cypress.com/documentation/development-kitsboards/cyusb3acc-005-fmc-interconnect-board-ez-usb-fx3-superspeed) was used.
@@ -11,25 +11,66 @@ For this project, the following software was installed:
   1. [ISE Design Suite for Windows 10](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/design-tools.html): Will enable to compile the FPGA source code and to program the FPGA for the firsts steps
   2. [EZ-USB FX3 Software Development Kit](http://www.cypress.com/documentation/software-and-drivers/ez-usb-fx3-software-development-kit): To use the Cypress board
 
+### Switching to Debian
+
+Because of the final application, I was forced to move to a linux distribution. In order to do that download the linux tar installer and follow the instructions on `fx3_firmware_linux.tar.gz/cyfx3sdk/FX3_SDK_Linux_Support.pdf`. Some bugs where found during the installation but they where easily fixed searching on the Cypress forum (I don recall all of them right now. Sorry).
+
+#### cyusb_linux
+
+Try to configure and get a loopback response with cyusb_linux. The following thread may help: https://community.cypress.com/thread/41993.
+
+#### Using compiled scripts
+
+Go to `/Cypress/cyusb_linux_1.0.5/src` and run the make command. Many scripts will be compiled that may help you debug and test your board.
+
+You can test the scripts using `cyusb_linux_1.0.5/docs/cyusb_linux_programmers_guide.pdf` document.
+
+Problems encountered when running scripts:
+
+1. `./04_kerneldriver`
+```
+This device has no kernel driver attached to this interface
+Do you wish to attach/reattach a kernel driver ? (1=yes,0=no) : 1
+Entity not found
+```
+2. `./06_setalternate`
+```
+Enter interface number you wish to claim : 0
+Interface 0 claimed successfully
+Enter alternate interface you wish to set : 1
+Entity not found
+```
+ - When running `./05_claiminterface` with 1 as input it also fails. It seams I have issues with other interfaces (1-4).
+3. `./08_cybulk`
+```
+Successfully claimed interface
+Input/output error
+libusb: error [submit_bulk_transfer] submiturb failed error -1 errno=9
+Input/output error
+Segmentation fault (core dumped)
+```
+ - I am not sure here the correct firmware I need to upload to make it work. I believe the issue is something like that.
+
+
 ### Getting started with Xilinx and the SDK
 As I had no experience with Xilinx FPGA's, I used some tutorials to practice and get to know the board:
   1. First check the board is working correclty: [Getting Started with SP605 Evaluation Kit](https://www.xilinx.com/support/documentation/boards_and_kits/ug525.pdf)
   2. Try to create/simulate and program a simple FPGA program and check it works: [ISE 10.1 QuickStart Tutorial](http://www.eng.ucy.ac.cy/theocharides/Courses/ECE408/qst.pdf)
-   
-  Some thing may be taken into account: 
+
+  Some thing may be taken into account:
     - If the case (using SP605) when doing step 2 on the manual, just select the board disectly instead of selecting the Spartan 6 board.
     - If you have problems when doing the pin assignment: [How to assign physical pins of FPGA to Xilinx ISE Verilog modules?](https://electronics.stackexchange.com/questions/86961/how-to-assign-physical-pins-of-fpga-to-xilinx-ise-verilog-modules/406913#406913)
 
 ### Playing with Cypress SuperSpeed Explorer Kit
   1. First check the board is working correcly: [EZ-USB FX3TM SUPERSPEED EXPLORER KIT QUICK START GUIDE](http://www.cypress.com/file/133831/download)
   2. Then follow a very good documented guide. Learn how to communicate, program and run UART and debugging tools [SuperSpeed Explorer Kit User Guide](http://www.cypress.com/file/133836/download)
-    
+
 ## Communicating with the FPGA
 This part uploads a firmware to the FPGA using the ISE software and then communicates the computer with the FPGA via the USB3 provided by the Cypress module.
 
 The following documentation was used: [AN65974](http://www.cypress.com/documentation/application-notes/an65974-designing-ez-usb-fx3-slave-fifo-interface)
 
-Although it was needed to addapt from the SP601 board to the SP605. 
+Although it was needed to addapt from the SP601 board to the SP605.
 The pin assignment was changed using both [SP605 Hardware User Guide](https://www.xilinx.com/support/documentation/boards_and_kits/ug526.pdf)
 and [SP601 Hardware User Guide](https://www.xilinx.com/support/documentation/boards_and_kits/ug518.pdf) to make the interface pin compatible with the Cypress Interconnect Board. This way, no change was done to the CYUSB3KIT firmware.
 
@@ -83,7 +124,7 @@ NET "flagc" LOC = Y14;      // N11;	-> // J63 FMC LPC: G28
 NET "flagd" LOC = U15;      // N8;	-> // J63 FMC LPC: G31
 NET "pktend" LOC = T15;     // M8;	-> // J63 FMC LPC: G30
 // USER DIP SWITCH
-NET "mode_p[0]" LOC = C18;  // D14; 
+NET "mode_p[0]" LOC = C18;  // D14;
 NET "mode_p[1]" LOC = Y6;   // E12;	 
 NET "mode_p[2]" LOC = W6;   // F12;  
 //NET "PMODE_2" LOC = G11;
@@ -100,7 +141,7 @@ When following section 10.5 from [AN65974](http://www.cypress.com/documentation/
 
 Here some output examples of the code working correctly:
 
-<img src="/img/fpga_com/StreamerIN.png" width="400"/> <img src="/img/fpga_com/ZLP.png" width="400"/> 
+<img src="/img/fpga_com/StreamerIN.png" width="400"/> <img src="/img/fpga_com/ZLP.png" width="400"/>
 
 ## Program the FPGA
 
