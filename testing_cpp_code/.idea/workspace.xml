@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="testing_cpp_code" targetName="testing_cpp_code" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a22401c3-d919-4d90-87ad-e2ec006c8ca5" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <ignored path="$PROJECT_DIR$/CMakeFiles/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/libcyusb.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="143" column="20" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
+              <folding>
+                <element signature="e#563#581#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="50" column="27" lean-forward="true" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="27" />
+              <folding>
+                <element signature="e#724#742#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>cyusb_gethandle</find>
+      <find>cyusb_open</find>
+      <find>libusb_open</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/cyusb.h" />
+        <option value="$PROJECT_DIR$/src/main.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+      </list>
+    </option>
+  </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="10" />
+    <option name="y" value="20" />
+    <option name="width" value="1260" />
+    <option name="height" value="957" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="testing_cpp_code" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testing_cpp_code" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="testing_cpp_code" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="testing_cpp_code" TARGET_NAME="testing_cpp_code" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="testing_cpp_code" RUN_TARGET_NAME="testing_cpp_code">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a22401c3-d919-4d90-87ad-e2ec006c8ca5" name="Default Changelist" comment="" />
+      <created>1544458517601</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1544458517601</updated>
+      <workItem from="1544458524981" duration="2273000" />
+      <workItem from="1544518215389" duration="5818000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="8091000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="-1" width="1280" height="997" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959481" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info active="true" anchor="bottom" id="Messages" order="8" visible="true" weight="0.3298969" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="CMake" order="12" weight="0.3298969" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/01_getdesc.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cyusb.h" />
+    <entry file="file://$PROJECT_DIR$/../../MimacTools/acquisition/sensor/src/CypressLibUsb/CypressLibUsb.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-165">
+          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+          <folding>
+            <element signature="e#1155#1234#0" />
+            <element signature="e#1637#5359#0" />
+            <element signature="e#5361#5878#0" />
+            <element signature="e#5882#5961#0" />
+            <element signature="e#6264#7043#0" />
+            <element signature="e#7046#7411#0" />
+            <element signature="e#7750#8705#0" />
+            <element signature="e#8707#9676#0" />
+            <element signature="e#9678#10595#0" />
+            <element signature="e#10598#14162#0" />
+            <element signature="e#11450#11871#0" />
+            <element signature="e#13414#13514#0" />
+            <element signature="e#14462#14646#0" />
+            <element signature="e#14658#14773#1" />
+            <element signature="e#14799#15476#0" />
+            <element signature="e#15115#15246#0" />
+            <element signature="e#15478#17495#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../MimacTools/acquisition/sensor/src/CypressLibUsb/CypressLibUsb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../MimacTools/acquisition/sensor/src/MimacUsbConnection/MimacUsbConnection.hh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3752">
+          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../MimacTools/acquisition/sensor/src/MimacUsbConnection/MimacUsbConnection.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="532" column="25" lean-forward="true" selection-start-line="532" selection-start-column="25" selection-end-line="532" selection-end-column="25" />
+          <folding>
+            <element signature="e#240#259#0" />
+            <element signature="e#323#493#0" />
+            <element signature="e#690#1214#0" />
+            <element signature="e#690#4095#0" />
+            <element signature="e#4171#4238#0" />
+            <element signature="e#4171#5376#0" />
+            <element signature="e#5452#5619#0" />
+            <element signature="e#5452#6777#0" />
+            <element signature="e#6853#7217#0" />
+            <element signature="e#6853#9385#0" />
+            <element signature="e#9461#9863#0" />
+            <element signature="e#9461#14871#0" />
+            <element signature="e#14947#15197#0" />
+            <element signature="e#14947#16413#0" />
+            <element signature="e#16508#18019#0" />
+            <element signature="e#18115#18652#0" />
+            <element signature="e#18749#18972#0" />
+            <element signature="e#19067#19233#0" />
+            <element signature="e#19331#19383#0" />
+            <element signature="e#19331#19686#0" />
+            <element signature="e#19688#20848#0" />
+            <element signature="e#20948#21099#0" />
+            <element signature="e#20948#22393#0" />
+            <element signature="e#22469#22929#0" />
+            <element signature="e#22469#23506#0" />
+            <element signature="e#23587#23747#0" />
+            <element signature="e#23587#23996#0" />
+            <element signature="e#24072#24265#0" />
+            <element signature="e#24072#24755#0" />
+            <element signature="e#24831#24939#0" />
+            <element signature="e#24831#25318#0" />
+            <element signature="e#25394#25533#0" />
+            <element signature="e#25394#28420#0" />
+            <element signature="e#28496#28706#0" />
+            <element signature="e#28496#29108#0" />
+            <element signature="e#29184#29450#0" />
+            <element signature="e#29184#32047#0" />
+            <element signature="e#32123#32179#0" />
+            <element signature="e#32123#32425#0" />
+            <element signature="e#32501#32629#0" />
+            <element signature="e#32501#33370#0" />
+            <element signature="e#33446#33588#0" />
+            <element signature="e#33446#33864#0" />
+            <element signature="e#33940#34104#0" />
+            <element signature="e#33940#34377#0" />
+            <element signature="e#34453#34598#0" />
+            <element signature="e#34453#34883#0" />
+            <element signature="e#34959#35131#0" />
+            <element signature="e#34959#35298#0" />
+            <element signature="e#35374#35489#0" />
+            <element signature="e#35374#35754#0" />
+            <element signature="e#35830#35907#0" />
+            <element signature="e#35830#36049#0" />
+            <element signature="e#36125#36212#0" />
+            <element signature="e#36125#36354#0" />
+            <element signature="e#36430#36579#0" />
+            <element signature="e#36430#36702#0" />
+            <element signature="e#36778#36926#0" />
+            <element signature="e#36778#37049#0" />
+            <element signature="e#37125#37345#0" />
+            <element signature="e#37125#38259#0" />
+            <element signature="e#38335#38416#0" />
+            <element signature="e#38335#38611#0" />
+            <element signature="e#38613#38853#0" />
+            <element signature="e#38855#39115#0" />
+            <element signature="e#39117#39371#0" />
+            <element signature="e#39373#39727#0" />
+            <element signature="e#39803#39974#0" />
+            <element signature="e#39803#40152#0" />
+            <element signature="e#40228#40418#0" />
+            <element signature="e#40420#40857#0" />
+            <element signature="e#40859#41195#0" />
+            <element signature="e#41197#41447#0" />
+            <element signature="e#41449#41691#0" />
+            <element signature="e#41767#42150#0" />
+            <element signature="e#42226#42440#0" />
+            <element signature="e#42516#42756#0" />
+            <element signature="e#42516#42933#0" />
+            <element signature="e#43009#43249#0" />
+            <element signature="e#43009#43421#0" />
+            <element signature="e#43497#43746#0" />
+            <element signature="e#43497#43914#0" />
+            <element signature="e#43990#44280#0" />
+            <element signature="e#43990#44573#0" />
+            <element signature="e#44649#44851#0" />
+            <element signature="e#44927#45107#0" />
+            <element signature="e#45183#45432#0" />
+            <element signature="e#45508#45842#0" />
+            <element signature="e#45918#46073#0" />
+            <element signature="e#46149#46288#0" />
+            <element signature="e#46149#46439#0" />
+            <element signature="e#46515#46613#0" />
+            <element signature="e#46515#48129#0" />
+            <element signature="e#48205#48248#0" />
+            <element signature="e#48205#49688#0" />
+            <element signature="e#49690#50096#0" />
+            <element signature="e#50098#51031#0" />
+            <element signature="e#51107#51224#0" />
+            <element signature="e#51107#51573#0" />
+            <element signature="e#51649#51788#0" />
+            <element signature="e#51649#52522#0" />
+            <element signature="e#52524#52727#0" />
+            <element signature="e#52803#53184#0" />
+            <element signature="e#52803#53455#0" />
+            <element signature="e#53493#54335#0" />
+            <element signature="e#54338#54576#0" />
+            <element signature="e#54578#54826#0" />
+            <element signature="e#54902#54949#0" />
+            <element signature="e#54902#55297#0" />
+            <element signature="e#55373#55459#0" />
+            <element signature="e#55373#55958#0" />
+            <element signature="e#56034#56065#0" />
+            <element signature="e#56034#56844#0" />
+            <element signature="e#56920#56945#0" />
+            <element signature="e#56920#58059#0" />
+            <element signature="e#58135#58223#0" />
+            <element signature="e#58299#58669#0" />
+            <element signature="e#58745#58785#0" />
+            <element signature="e#58745#58894#0" />
+            <element signature="e#58970#59117#0" />
+            <element signature="e#58970#59189#0" />
+            <element signature="e#59265#59349#0" />
+            <element signature="e#59265#59464#0" />
+            <element signature="e#59540#59624#0" />
+            <element signature="e#59540#59715#0" />
+            <element signature="e#59791#60009#0" />
+            <element signature="e#59791#60236#0" />
+            <element signature="e#60312#60532#0" />
+            <element signature="e#60312#60832#0" />
+            <element signature="e#60908#61006#0" />
+            <element signature="e#60908#61116#0" />
+            <element signature="e#61192#61331#0" />
+            <element signature="e#61192#61570#0" />
+            <element signature="e#61572#63014#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+          <folding>
+            <element signature="e#1354#1759#0" />
+            <element signature="e#1973#2247#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cylib/cyusb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/libusb-1.0/libusb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="1756" column="24" selection-start-line="1756" selection-start-column="24" selection-end-line="1756" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="50" column="27" lean-forward="true" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="27" />
+          <folding>
+            <element signature="e#724#742#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libcyusb.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="143" column="20" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
+          <folding>
+            <element signature="e#563#581#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
