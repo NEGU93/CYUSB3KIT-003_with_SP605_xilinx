@@ -60,6 +60,21 @@ As I had no experience with Xilinx FPGA's, I used some tutorials to practice and
   Some thing may be taken into account:
     - If the case (using SP605) when doing step 2 on the manual, just select the board disectly instead of selecting the Spartan 6 board.
     - If you have problems when doing the pin assignment: [How to assign physical pins of FPGA to Xilinx ISE Verilog modules?](https://electronics.stackexchange.com/questions/86961/how-to-assign-physical-pins-of-fpga-to-xilinx-ise-verilog-modules/406913#406913)
+    
+   #### Installing for linux:
+   Follow [ISE Design Suite: Installation and Licensing Guide](https://www.xilinx.com/support/documentation/sw_manuals/xilinx13_2/iil.pdf)
+   Once installed for linux, you may run the following:
+```
+ise            - Project Navigator
+xps            - EDK Platform Studio
+planAhead      - PlanAhead
+fpga_editor    - FPGA editor
+coregen        - Core Generator
+timingan       - Timing Analyzer
+smartxplorer   - SmartXplorer
+sysgen         - System Generator
+analyzer       - Chipscope Analyzer
+```
 
 ### Playing with Cypress SuperSpeed Explorer Kit
   1. First check the board is working correcly: [EZ-USB FX3TM SUPERSPEED EXPLORER KIT QUICK START GUIDE](http://www.cypress.com/file/133831/download)
