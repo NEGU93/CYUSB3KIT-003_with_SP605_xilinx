@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/testing_cpp_code.dir/main.cpp.o"
-  "CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o"
   "testing_cpp_code.pdb"
   "testing_cpp_code"
 )

@@ -4,6 +4,3 @@
 CMakeFiles/testing_cpp_code.dir/main.cpp.o: include/cyusb.h
 CMakeFiles/testing_cpp_code.dir/main.cpp.o: main.cpp
 
-CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o: include/cyusb.h
-CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o: src/libcyusb.cpp
-

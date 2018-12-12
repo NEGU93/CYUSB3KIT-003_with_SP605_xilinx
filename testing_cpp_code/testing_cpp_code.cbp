@@ -75,9 +75,6 @@
 		<Unit filename="/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/main.cpp">
 			<Option target="testing_cpp_code"/>
 		</Unit>
-		<Unit filename="/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/libcyusb.cpp">
-			<Option target="testing_cpp_code"/>
-		</Unit>
 		<Unit filename="/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

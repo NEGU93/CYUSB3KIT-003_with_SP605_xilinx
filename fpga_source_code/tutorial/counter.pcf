@@ -1,0 +1,16 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Tue Dec 11 15:44:43 2018
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "DIRECTION" LOCATE = SITE "C18" LEVEL 1;
+COMP "CLOCK" LOCATE = SITE "AB13" LEVEL 1;
+COMP "COUNT_OUT<0>" LOCATE = SITE "D17" LEVEL 1;
+COMP "COUNT_OUT<1>" LOCATE = SITE "AB4" LEVEL 1;
+COMP "COUNT_OUT<2>" LOCATE = SITE "D21" LEVEL 1;
+COMP "COUNT_OUT<3>" LOCATE = SITE "W15" LEVEL 1;
+TIMEGRP CLOCK = BEL "count_int_0" BEL "count_int_1" BEL "count_int_2" BEL
+        "count_int_3" BEL "CLOCK_BUFGP/BUFG";
+TS_CLOCK = PERIOD TIMEGRP "CLOCK" 40 ns HIGH 50%;
+SCHEMATIC END;
+

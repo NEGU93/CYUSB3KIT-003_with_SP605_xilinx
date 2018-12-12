@@ -150,33 +150,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/testing_cpp_code.dir/build.make CMakeFiles/testing_cpp_code.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/libcyusb.o: src/libcyusb.cpp.o
-
-.PHONY : src/libcyusb.o
-
-# target to build an object file
-src/libcyusb.cpp.o:
-	$(MAKE) -f CMakeFiles/testing_cpp_code.dir/build.make CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o
-.PHONY : src/libcyusb.cpp.o
-
-src/libcyusb.i: src/libcyusb.cpp.i
-
-.PHONY : src/libcyusb.i
-
-# target to preprocess a source file
-src/libcyusb.cpp.i:
-	$(MAKE) -f CMakeFiles/testing_cpp_code.dir/build.make CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.i
-.PHONY : src/libcyusb.cpp.i
-
-src/libcyusb.s: src/libcyusb.cpp.s
-
-.PHONY : src/libcyusb.s
-
-# target to generate assembly for a file
-src/libcyusb.cpp.s:
-	$(MAKE) -f CMakeFiles/testing_cpp_code.dir/build.make CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.s
-.PHONY : src/libcyusb.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +162,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/libcyusb.o"
-	@echo "... src/libcyusb.i"
-	@echo "... src/libcyusb.s"
 .PHONY : help
 
 

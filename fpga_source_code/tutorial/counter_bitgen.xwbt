@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/counter.ncd
+OUTFILE=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/counter.bit
+FAMILY=Spartan6
+PART=xc6slx45t-3fgg484
+WORKINGDIR=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial
+LICENSE=WebPack
+USER_INFO=211633378_0_0_250

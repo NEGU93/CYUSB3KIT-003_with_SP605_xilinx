@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/impact.xsl
+OUTFILE=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/impact.xsl
+FAMILY=Single
+PART=Single
+WORKINGDIR=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial
+LICENSE=iMPACT
+USER_INFO=iMPACT
