@@ -170,6 +170,11 @@ In order to do that, two cables must be sold to the FPGA. In this case, as the b
 
 [Convert bit to bin](https://electronics.stackexchange.com/questions/407801/convert-bit-to-bin-xilinx-file)
 
+### Current state
+https://community.cypress.com/message/179915?et=watches.email.thread#179915
+For the FPGA signal out of the CLK I have to configure M\[0 .. 1\] correctly.
+Why the FX3 does not output the CLK I still don't know.
+
 ## Program and communicate with the FPGA
 TODO: merge last two sections
 
