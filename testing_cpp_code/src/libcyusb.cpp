@@ -86,7 +86,7 @@ parse_configfile (
 	char *cp1, *cp2, *cp3;
 	int i;
 
-	inp = fopen("/etc/cyusb.conf", "r");
+	inp = fopen("/etc/cyusb.conf", "rStatus");
 	if (inp == NULL)
 		return;
 
@@ -746,7 +746,7 @@ cyusb_download_fx2 (
 	unsigned char *dbuf = NULL;
 	int i;
 
-	fp = fopen(filename, "r" );
+	fp = fopen(filename, "rStatus" );
 	tbuf1[2] ='\0';
 	tbuf2[4] = '\0';
 	tbuf3[2] = '\0';

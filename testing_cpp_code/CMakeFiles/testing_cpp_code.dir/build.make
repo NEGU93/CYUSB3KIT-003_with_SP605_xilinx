@@ -70,18 +70,47 @@ CMakeFiles/testing_cpp_code.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing_cpp_code.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/main.cpp -o CMakeFiles/testing_cpp_code.dir/main.cpp.s
 
+CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o: CMakeFiles/testing_cpp_code.dir/flags.make
+CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o: src/MimacUSB3Connection.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o -c /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/MimacUSB3Connection.cpp
+
+CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/MimacUSB3Connection.cpp > CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.i
+
+CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/MimacUSB3Connection.cpp -o CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.s
+
+CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o: CMakeFiles/testing_cpp_code.dir/flags.make
+CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o: src/libcyusb.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o -c /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/libcyusb.cpp
+
+CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/libcyusb.cpp > CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.i
+
+CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/libcyusb.cpp -o CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.s
+
 # Object files for target testing_cpp_code
 testing_cpp_code_OBJECTS = \
-"CMakeFiles/testing_cpp_code.dir/main.cpp.o"
+"CMakeFiles/testing_cpp_code.dir/main.cpp.o" \
+"CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" \
+"CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o"
 
 # External object files for target testing_cpp_code
 testing_cpp_code_EXTERNAL_OBJECTS =
 
 testing_cpp_code: CMakeFiles/testing_cpp_code.dir/main.cpp.o
+testing_cpp_code: CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o
+testing_cpp_code: CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o
 testing_cpp_code: CMakeFiles/testing_cpp_code.dir/build.make
-testing_cpp_code: /src/libcyusb.so
 testing_cpp_code: CMakeFiles/testing_cpp_code.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable testing_cpp_code"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable testing_cpp_code"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/testing_cpp_code.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

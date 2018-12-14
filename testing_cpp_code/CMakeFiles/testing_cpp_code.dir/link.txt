@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/testing_cpp_code.dir/main.cpp.o  -o testing_cpp_code -Wl,-rpath,/src /src/libcyusb.so 
+/usr/bin/c++  -g   CMakeFiles/testing_cpp_code.dir/main.cpp.o CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o  -o testing_cpp_code -lusb-1.0 -lpthread 

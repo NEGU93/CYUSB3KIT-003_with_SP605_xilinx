@@ -16,11 +16,15 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <string.h>
+#include <iostream>
 
 #include "include/cyusb.h"
+#include "include/MimacUSB3Connection.h"
+
+using namespace std;
 
 /********** Cut and paste the following & modify as required  **********/
-static const char * program_name;
+static const char *program_name;
 static const char *out_filename = "stdout";
 static const char *const short_options = "hvV:P:o:";
 static const struct option long_options[] = {
@@ -37,7 +41,7 @@ static int next_option;
 static void print_usage(FILE *stream, int exit_code) {
 	fprintf(stream, "Usage: %s options\n", program_name);
 	fprintf(stream,
-		"  -h  --help           Display this usage information.\n"
+		"  -device_handle  --help           Display this usage information.\n"
 		"  -v  --version        Print version.\n"
 		"  -V  --Vendor		Input Vendor  ID in hexadecimal.\n"
 		"  -P  --Product	Input Product ID in hexadecimal.\n"
@@ -62,15 +66,14 @@ static void validate_inputs() {
 
 int main(int argc, char **argv) {
 	int r;
-	struct libusb_device_descriptor desc{};
-	char user_input = 'n';
+	bool user_input;
 
 	program_name = argv[0];
 
 	while ( (next_option = getopt_long(argc, argv, short_options,
 					   long_options, nullptr) ) != -1 ) {
 		switch ( next_option ) {
-			case 'h': /* -h or --help  */
+			case 'h': /* -device_handle or --help  */
 				  print_usage(stdout, 0);
 			case 'v': /* -v or --version */
 				  printf("%s (Ver 1.0)\n",program_name);
@@ -98,53 +101,27 @@ int main(int argc, char **argv) {
 	}
 
 	validate_inputs();
+	user_input = (vendor_provided) && (product_provided);
 
-	if ( (vendor_provided) && (product_provided) ) {
-        user_input = 'y';
-    }
-	else { user_input = 'n'; }
-	if ( user_input == 'y' ) {
-	   r = cyusb_open(vid, pid);
-	   if ( r < 0 ) {
-	      printf("Error opening library\n");
-	      return -1;
-	   }
-	   else if ( r == 0 ) {
-		   printf("No device found\n");
-		   return 0;
-	   }
+	try {
+		MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(user_input, pid, vid);
+		//MimacUSB3Connection::device_handle = nullptr;
+        //mimacUSB3Connection.get_device_descriptor();
+        mimacUSB3Connection.print_config_descriptor();
+        //mimacUSB3Connection.claim_interface();
+        //mimacUSB3Connection.cybulk();
+        char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/fx3_images/cyfxbulksrcsink.img");
+        char *tgt_str = const_cast<char *>("ram");
+        mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
+        mimacUSB3Connection.test_performance();
 	}
-	else {
-	   r = cyusb_open();
-	   if ( r < 0 ) {
-	      printf("Error opening library\n");
-	      return -1;
-	   }
-	   else if ( r == 0 ) {
-		   printf("No device found\n");
-		   return 0;
-	   }
+	catch (ErrorOpeningLib& e) {
+		printf("Error opening library\n");
+		return -1;
 	}
-	r = cyusb_get_device_descriptor(cyusb_gethandle(0), &desc);
-	if ( r ) {
-	   printf("error getting device descriptor\n");
-	   return -2;
+	catch (NoDeviceFound& e) {
+		printf("No device found\n");
+		return 0;
 	}
-	fprintf(fp,"bLength             = %d\n",       desc.bLength);
-	fprintf(fp,"bDescriptorType     = %d\n",       desc.bDescriptorType);
-	fprintf(fp,"bcdUSB              = 0x%04x\n",   desc.bcdUSB);
-	fprintf(fp,"bDeviceClass        = 0x%02x\n",   desc.bDeviceClass);
-	fprintf(fp,"bDeviceSubClass     = 0x%02x\n",   desc.bDeviceSubClass);
-	fprintf(fp,"bDeviceProtocol     = 0x%02x\n",   desc.bDeviceProtocol);
-	fprintf(fp,"bMaxPacketSize      = %d\n",       desc.bMaxPacketSize0);
-	fprintf(fp,"idVendor            = 0x%04x\n",   desc.idVendor);
-	fprintf(fp,"idProduct           = 0x%04x\n",   desc.idProduct);
-	fprintf(fp,"bcdDevice           = 0x%04x\n",   desc.bcdDevice);
-	fprintf(fp,"iManufacturer       = %d\n",       desc.iManufacturer);
-	fprintf(fp,"iProduct            = %d\n",       desc.iProduct);
-	fprintf(fp,"iSerialNumber       = %d\n",       desc.iSerialNumber);
-	fprintf(fp,"bNumConfigurations  = %d\n",       desc.bNumConfigurations);
-
-	cyusb_close();
 	return 0;
 }
