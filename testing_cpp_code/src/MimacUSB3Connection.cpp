@@ -11,7 +11,29 @@
 #include <fcntl.h>
 #include "../include/MimacUSB3Connection.h"
 
+//#define DEBUG
+
 cyusb_handle *MimacUSB3Connection::device_handle;
+
+unsigned int MimacUSB3Connection::endpoint;   //= 129;	// Endpoint to be tested
+unsigned int MimacUSB3Connection::reqsize;    //= 16;	// Request size in number of packets
+unsigned int MimacUSB3Connection::queuedepth; //= 16;	// Number of requests to queue
+unsigned int MimacUSB3Connection::duration;   //= 100;	// Duration of the test in seconds
+
+unsigned char MimacUSB3Connection::eptype;		// Type of endpoint (transfer type)
+unsigned int MimacUSB3Connection::pktsize;		// Maximum packet size for the endpoint
+
+bool	MimacUSB3Connection::stop_transfers;	        // Request to stop data transfers
+int		MimacUSB3Connection::rqts_in_flight;	    // Number of transfers that are in progress
+
+unsigned int MimacUSB3Connection::success_count;	    // Number of successful transfers
+unsigned int MimacUSB3Connection::failure_count;	    // Number of failed transfers
+unsigned int MimacUSB3Connection::transfer_size;	    // Size of data transfers performed so far
+unsigned int MimacUSB3Connection::transfer_index;	    // Write index into the transfer_size array
+
+struct timeval	MimacUSB3Connection::start_ts;	// Data transfer start time stamp.
+struct timeval	MimacUSB3Connection::end_ts;		// Data transfer stop time stamp.
+
 
 MimacUSB3Connection::MimacUSB3Connection() {
     fp = stdout;
@@ -123,11 +145,8 @@ int MimacUSB3Connection::print_config_descriptor() {
  * This program is a CLI program to claim an interface for a device which has an unclaimed
  * interface
  * */
-int MimacUSB3Connection::claim_interface() {
-    int interface;
+int MimacUSB3Connection::claim_interface(int interface) {
     int kernel_attached = 0;
-    printf("Enter interface number you wish to claim : ");
-    scanf("%d",&interface);
 
     rStatus = cyusb_kernel_driver_active(cyusb_gethandle(0), interface);
     if ( rStatus == 1 ) {
@@ -159,6 +178,8 @@ int MimacUSB3Connection::claim_interface() {
         cyusb_close();
         return rStatus;
     }
+
+    return rStatus;
 }
 
 
@@ -329,53 +350,57 @@ int MimacUSB3Connection::test_performance() {
     struct libusb_transfer **transfers = nullptr;		// List of transfer structures.
     unsigned char **databuffers = nullptr;			// List of data buffers.
 
-    unsigned int endpoint   = 129;	// Endpoint to be tested
-    unsigned int reqsize    = 32;   //16;	// Request size in number of packets
-    unsigned int queuedepth = 8;    //16;	// Number of requests to queue
-    unsigned int duration   = 100;	// Duration of the test in seconds
+    endpoint   = 129;	// Endpoint to be tested
+    reqsize    = 32;   //16;	// Request size in number of packets
+    queuedepth = 8;    //16;	// Number of requests to queue
+    duration   = 100;	// Duration of the test in seconds
 
-    unsigned char		eptype;			// Type of endpoint (transfer type)
-    unsigned int		pktsize;		// Maximum packet size for the endpoint
+    success_count = 0;	    // Number of successful transfers
+    failure_count = 0;	    // Number of failed transfers
+    transfer_size = 0;	    // Size of data transfers performed so far
+    transfer_index = 0;     // Write index into the transfer_size array
 
-    unsigned int        success_count = 0;	// Number of successful transfers
-    unsigned int        failure_count = 0;	// Number of failed transfers
-    unsigned int 		transfer_size = 0;	// Size of data transfers performed so far
-    unsigned int		transfer_index = 0;	// Write index into the transfer_size array
-
-    struct timeval		start_ts{};		// Data transfer start time stamp.
-    struct timeval		end_ts{};		// Data transfer stop time stamp
-
-    volatile bool		stop_transfers = false;	// Request to stop data transfers
-    volatile int		rqts_in_flight = 0;	    // Number of transfers that are in progress
+    stop_transfers = false;	// Request to stop data transfers
+    rqts_in_flight = 0;	    // Number of transfers that are in progress
 
     // Step 1: Get a handle to the first CyUSB device.
-    device_handle = cyusb_gethandle (0);
+    device_handle = cyusb_gethandle(0);
     if (device_handle == nullptr) {
         printf ("test_performance: Failed to get CyUSB device handle\n");
         return -EACCES;
     }
 
     // Step 2: Read the configuration descriptor.
-    rStatus = get_device_descriptor();
+    rStatus = get_device_config();
 
     // Step 3: Check each of the interfaces one by one and check if we can find the desired endpoint there.
+#ifdef DEBUG
+    printf("Checking all the the %d interfaces\n", configDesc->bNumInterfaces);
+    fflush(stdout);
+#endif
     for (int i = 0; i < configDesc->bNumInterfaces; i++) {
         // Step 3.a: Claim the interface
-        rStatus = cyusb_claim_interface (device_handle, i);
-        if (rStatus != 0) {
-            printf ("test_performance: Failed to claim interface %d\n", i);
-            cyusb_free_config_descriptor (configDesc);
-            cyusb_close ();
-            return -EACCES;
-        }
-
+        rStatus = cyusb_claim_interface(device_handle, i);
+#ifdef DEBUG
+        printf("Claiming interface %d\n", i);
+        fflush(stdout);
+#endif
+        claim_interface(i);
+#ifdef DEBUG
+        printf("Good, lets keep on\n");
+        fflush(stdout);
+#endif
         // Step 3.b: Get each of the interface descriptors and check if the endpoint is present.
         if_numsettings = configDesc->interface[i].num_altsetting;
         for (int j = 0; j < if_numsettings; j++) {
 
             interfaceDesc = (libusb_interface_descriptor *)&(configDesc->interface[i].altsetting[j]);
 
-            // Step 4.b.1: Check if the desired endpoint is present.
+            // Step 3.b.1: Check if the desired endpoint is present.
+#ifdef DEBUG
+            printf("Checking all the the %d endpoints for interface %d, desc %d\n", interfaceDesc->bNumEndpoints, i, j);
+            fflush(stdout);
+#endif
             for (int k = 0; k < interfaceDesc->bNumEndpoints; k++) {
 
                 endpointDesc = (libusb_endpoint_descriptor *)&(interfaceDesc->endpoint[k]);
@@ -637,85 +662,6 @@ void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
 
             default:
                 break;
-        }
-    }
-}
-
-/*******************
- * Not working yet *
- ******************/
-
-int MimacUSB3Connection::cybulk() {
-    pthread_t tid1, tid2;
-    if ( rStatus > 1 ) {
-        printf("More than 1 devices of interest found. Disconnect unwanted devices\n");
-        return 0;
-    }
-    device_handle = cyusb_gethandle(0);
-    if ( cyusb_getvendor(device_handle) != 0x04b4 ) {
-        printf("Cypress chipset not detected\n");
-        cyusb_close();
-        return 0;
-    }
-    rStatus = cyusb_kernel_driver_active(device_handle, 0);
-    if ( rStatus != 0 ) {
-        printf("kernel driver active. Exiting\n");
-        cyusb_close();
-        return 0;
-    }
-    rStatus = cyusb_claim_interface(device_handle, 0);
-    if ( rStatus != 0 ) {
-        printf("Error in claiming interface\n");
-        cyusb_close();
-        return 0;
-    }
-    else printf("Successfully claimed interface\n");
-    rStatus = pthread_create(&tid1, nullptr, reader, nullptr);
-    rStatus = pthread_create(&tid2, nullptr, writer, nullptr);
-    while (true) {
-        pause();
-    }
-}
-
-void *MimacUSB3Connection::reader(void *arg) {
-    int r;
-    int timeout = 0;
-    unsigned char buf[64];
-    int transferred = 0;
-
-    memset(buf,'\0',64);
-    while (1) {
-        r = cyusb_bulk_transfer(device_handle, 0x86, buf, 64, &transferred, timeout * 1000);
-        if ( r == 0 ) {
-            printf("%s", buf);
-            memset(buf,'\0',64);
-            continue;
-        }
-        else {
-            cyusb_error(r);
-            cyusb_close();
-            return nullptr;
-        }
-    }
-}
-
-void *MimacUSB3Connection::writer(void *arg) {
-    int r, nbr;
-    int timeout = 0;
-    unsigned char buf[64];
-    int transferred = 0;
-
-    memset(buf,'\0',64);
-    while ( nbr = read(0, buf, 64) ) {
-        r = cyusb_bulk_transfer(device_handle, 0x02, buf, nbr, &transferred, timeout * 1000);
-        if ( r == 0 ) {
-            memset(buf,'\0',64);
-            continue;
-        }
-        else {
-            cyusb_error(r);
-            cyusb_close();
-            return nullptr;
         }
     }
 }

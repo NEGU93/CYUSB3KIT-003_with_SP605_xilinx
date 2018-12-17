@@ -64,6 +64,13 @@ static void validate_inputs() {
 	}
 }
 
+void program() {
+	MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(false, pid, vid);
+	char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/fx3_images/cyfxbulksrcsink.img");
+	char *tgt_str = const_cast<char *>("ram");
+	mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
+}
+
 int main(int argc, char **argv) {
 	int r;
 	bool user_input;
@@ -104,15 +111,13 @@ int main(int argc, char **argv) {
 	user_input = (vendor_provided) && (product_provided);
 
 	try {
+		//program();
 		MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(user_input, pid, vid);
 		//MimacUSB3Connection::device_handle = nullptr;
-        //mimacUSB3Connection.get_device_descriptor();
-        mimacUSB3Connection.print_config_descriptor();
-        //mimacUSB3Connection.claim_interface();
-        //mimacUSB3Connection.cybulk();
-        char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/fx3_images/cyfxbulksrcsink.img");
-        char *tgt_str = const_cast<char *>("ram");
-        mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
+        //mimacUSB3Connection.print_device_descriptor();
+        //mimacUSB3Connection.print_config_descriptor();
+        //mimacUSB3Connection.claim_interface(0);
+		//mimacUSB3Connection.claim_interface(0);
         mimacUSB3Connection.test_performance();
 	}
 	catch (ErrorOpeningLib& e) {
