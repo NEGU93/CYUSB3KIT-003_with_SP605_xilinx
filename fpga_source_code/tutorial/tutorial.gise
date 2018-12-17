@@ -30,6 +30,7 @@
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/trce.xmsgs"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_REPORT" xil_pn:name="counter.bgn" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:fileType="FILE_BIN" xil_pn:name="counter.bin"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BIT" xil_pn:name="counter.bit" xil_pn:subbranch="FPGAConfiguration"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="counter.bld"/>
     <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="counter.cmd_log"/>
@@ -52,6 +53,7 @@
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_REPORT" xil_pn:name="counter.ut" xil_pn:subbranch="FPGAConfiguration"/>
     <file xil_pn:fileType="FILE_XPI" xil_pn:name="counter.xpi"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="counter.xst"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="counter_envsettings.html"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="counter_guide.ncd" xil_pn:origination="imported"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="counter_map.map" xil_pn:subbranch="Map"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="counter_map.mrp" xil_pn:subbranch="Map"/>
@@ -103,7 +105,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1544536215" xil_pn:in_ck="156947386046798128" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="1336660093155725949" xil_pn:start_ts="1544536205">
+    <transform xil_pn:end_ts="1545065240" xil_pn:in_ck="156947386046798128" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="1336660093155725949" xil_pn:start_ts="1545065231">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
@@ -124,7 +126,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1544539469" xil_pn:in_ck="-1293128037861074030" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="6053795728418744975" xil_pn:start_ts="1544539460">
+    <transform xil_pn:end_ts="1545065247" xil_pn:in_ck="-1293128037861074030" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="6053795728418744975" xil_pn:start_ts="1545065240">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_ngo"/>
@@ -133,11 +135,9 @@
       <outfile xil_pn:name="counter.ngd"/>
       <outfile xil_pn:name="counter_ngdbuild.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1544539485" xil_pn:in_ck="-1242585931347347213" xil_pn:name="TRANEXT_map_spartan6" xil_pn:prop_ck="4807565132092422995" xil_pn:start_ts="1544539469">
+    <transform xil_pn:end_ts="1545065262" xil_pn:in_ck="-1242585931347347213" xil_pn:name="TRANEXT_map_spartan6" xil_pn:prop_ck="4807565132092422995" xil_pn:start_ts="1545065247">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
       <outfile xil_pn:name="counter.pcf"/>
       <outfile xil_pn:name="counter_map.map"/>
@@ -148,7 +148,7 @@
       <outfile xil_pn:name="counter_summary.xml"/>
       <outfile xil_pn:name="counter_usage.xml"/>
     </transform>
-    <transform xil_pn:end_ts="1544539505" xil_pn:in_ck="548570531502834796" xil_pn:name="TRANEXT_par_spartan6" xil_pn:prop_ck="3214117756270688487" xil_pn:start_ts="1544539485">
+    <transform xil_pn:end_ts="1545065280" xil_pn:in_ck="548570531502834796" xil_pn:name="TRANEXT_par_spartan6" xil_pn:prop_ck="3214117756270688487" xil_pn:start_ts="1545065262">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
@@ -162,12 +162,12 @@
       <outfile xil_pn:name="counter_pad.txt"/>
       <outfile xil_pn:name="counter_par.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1544539666" xil_pn:in_ck="156947386046789251" xil_pn:name="TRANEXT_bitFile_spartan6" xil_pn:prop_ck="396117104113915555" xil_pn:start_ts="1544539654">
+    <transform xil_pn:end_ts="1545065293" xil_pn:in_ck="156947386046789251" xil_pn:name="TRANEXT_bitFile_spartan6" xil_pn:prop_ck="4970201210546912173" xil_pn:start_ts="1545065280">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForProperties"/>
       <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>
       <outfile xil_pn:name="counter.bgn"/>
+      <outfile xil_pn:name="counter.bin"/>
       <outfile xil_pn:name="counter.bit"/>
       <outfile xil_pn:name="counter.drc"/>
       <outfile xil_pn:name="counter.ut"/>
@@ -178,9 +178,10 @@
     <transform xil_pn:end_ts="1544540161" xil_pn:in_ck="156947386046776397" xil_pn:name="TRAN_impactProgrammingTool" xil_pn:prop_ck="2682241697568822907" xil_pn:start_ts="1544540161">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
     </transform>
-    <transform xil_pn:end_ts="1544539505" xil_pn:in_ck="-7914143991159287057" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416185" xil_pn:start_ts="1544539498">
+    <transform xil_pn:end_ts="1545065280" xil_pn:in_ck="-7914143991159287057" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416185" xil_pn:start_ts="1545065274">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>

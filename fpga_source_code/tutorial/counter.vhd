@@ -36,15 +36,19 @@ end counter;
 
 architecture Behavioral of counter is
 signal count_int : std_logic_vector(3 downto 0) := "0000";
+signal delayed_int : std_logic_vector(23 downto 0) := "000000000000000000000000";
 begin
 process(CLOCK)
 begin
 	if CLOCK='1' and CLOCK'event then
-		if DIRECTION='1' then
-			count_int <= count_int + 1;
-		else
-			count_int <= count_int - 1;
+		if delayed_int = "000000000000000000000000" then
+			if DIRECTION='1' then
+				count_int <= count_int + 1;
+			else
+				count_int <= count_int - 1;
+			end if;
 		end if;
+		delayed_int <= delayed_int + 1;
 	end if;
 end process;
 

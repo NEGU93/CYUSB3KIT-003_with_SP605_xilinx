@@ -5,9 +5,9 @@ Loading device for application Rf_Device from file '6slx45t.nph' in environment
    "counter" is an NCD, version 3.2, device xc6slx45t, package fgg484, speed -3
 Opened constraints file counter.pcf.
 
-Tue Dec 11 15:47:38 2018
+Mon Dec 17 17:48:05 2018
 
-/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/bitgen -intstyle ise -w -g DebugBitstream:No -g Binary:no -g CRC:Enable -g Reset_on_err:No -g ConfigRate:2 -g ProgPin:PullUp -g TckPin:PullUp -g TdiPin:PullUp -g TdoPin:PullUp -g TmsPin:PullUp -g UnusedPin:PullDown -g UserID:0xFFFFFFFF -g ExtMasterCclk_en:No -g SPI_buswidth:1 -g TIMER_CFG:0xFFFF -g multipin_wakeup:No -g StartUpClk:CClk -g DONE_cycle:4 -g GTS_cycle:5 -g GWE_cycle:6 -g LCK_cycle:NoWait -g Security:None -g DonePipe:No -g DriveDone:No -g en_sw_gsr:No -g drive_awake:No -g sw_clk:Startupclk -g sw_gwe_cycle:5 -g sw_gts_cycle:4 counter.ncd 
+/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/bitgen -intstyle ise -w -g DebugBitstream:No -g Binary:yes -g CRC:Enable -g Reset_on_err:No -g ConfigRate:2 -g ProgPin:PullUp -g TckPin:PullUp -g TdiPin:PullUp -g TdoPin:PullUp -g TmsPin:PullUp -g UnusedPin:PullDown -g UserID:0xFFFFFFFF -g ExtMasterCclk_en:No -g SPI_buswidth:1 -g TIMER_CFG:0xFFFF -g multipin_wakeup:No -g StartUpClk:CClk -g DONE_cycle:4 -g GTS_cycle:5 -g GWE_cycle:6 -g LCK_cycle:NoWait -g Security:None -g DonePipe:Yes -g DriveDone:No -g en_sw_gsr:No -g drive_awake:No -g sw_clk:Startupclk -g sw_gwe_cycle:5 -g sw_gts_cycle:4 counter.ncd 
 
 Summary of Bitgen Options:
 +----------------------+----------------------+
@@ -51,7 +51,7 @@ Summary of Bitgen Options:
 +----------------------+----------------------+
 | DriveDone            | No**                 |
 +----------------------+----------------------+
-| DonePipe             | No**                 |
+| DonePipe             | Yes                  |
 +----------------------+----------------------+
 | Security             | None**               |
 +----------------------+----------------------+
@@ -119,7 +119,7 @@ Summary of Bitgen Options:
 +----------------------+----------------------+
 | IEEE1532             | No*                  |
 +----------------------+----------------------+
-| Binary               | No**                 |
+| Binary               | Yes                  |
 +----------------------+----------------------+
  *  Default setting.
  ** The specified setting matches the default setting.
@@ -131,4 +131,5 @@ Running DRC.
 DRC detected 0 errors and 0 warnings.
 Creating bit map...
 Saving bit stream in "counter.bit".
+Saving bit stream in "counter.bin".
 Bitstream generation is complete.

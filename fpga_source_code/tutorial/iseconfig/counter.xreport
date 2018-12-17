@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-12-17T17:16:43</DateModified>
+  <DateModified>2018-12-17T17:36:16</DateModified>
   <ModuleName>counter</ModuleName>
   <SummaryTimeStamp>2018-12-11T15:45:05</SummaryTimeStamp>
   <SavedFilePath>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/iseconfig/counter.xreport</SavedFilePath>

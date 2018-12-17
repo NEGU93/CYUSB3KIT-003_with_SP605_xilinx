@@ -7,3 +7,15 @@ map -intstyle ise -p xc6slx45t-fgg484-3 -w -logic_opt off -ol high -t 1 -xt 0 -r
 par -w -intstyle ise -ol high -mt off counter_map.ncd counter.ncd counter.pcf 
 trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml counter.twx counter.ncd -o counter.twr counter.pcf -ucf counter.ucf 
 bitgen -intstyle ise -f counter.ut counter.ncd 
+xst -intstyle ise -ifn "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/counter.xst" -ofn "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/counter.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc counter.ucf -p xc6slx45t-fgg484-3 counter.ngc counter.ngd  
+map -intstyle ise -p xc6slx45t-fgg484-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o counter_map.ncd counter.ngd counter.pcf 
+par -w -intstyle ise -ol high -mt off counter_map.ncd counter.ncd counter.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml counter.twx counter.ncd -o counter.twr counter.pcf -ucf counter.ucf 
+bitgen -intstyle ise -f counter.ut counter.ncd 
+xst -intstyle ise -ifn "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/counter.xst" -ofn "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/counter.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc counter.ucf -p xc6slx45t-fgg484-3 counter.ngc counter.ngd  
+map -intstyle ise -p xc6slx45t-fgg484-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o counter_map.ncd counter.ngd counter.pcf 
+par -w -intstyle ise -ol high -mt off counter_map.ncd counter.ncd counter.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml counter.twx counter.ncd -o counter.twr counter.pcf -ucf counter.ucf 
+bitgen -intstyle ise -f counter.ut counter.ncd 

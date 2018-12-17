@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Tue Dec 11 15:44:43 2018
+// Written by: Map P.20131013 on Mon Dec 17 17:47:40 2018
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -10,7 +10,15 @@ COMP "COUNT_OUT<1>" LOCATE = SITE "AB4" LEVEL 1;
 COMP "COUNT_OUT<2>" LOCATE = SITE "D21" LEVEL 1;
 COMP "COUNT_OUT<3>" LOCATE = SITE "W15" LEVEL 1;
 TIMEGRP CLOCK = BEL "count_int_0" BEL "count_int_1" BEL "count_int_2" BEL
-        "count_int_3" BEL "CLOCK_BUFGP/BUFG";
+        "count_int_3" BEL "delayed_int_0" BEL "delayed_int_1" BEL
+        "delayed_int_2" BEL "delayed_int_3" BEL "delayed_int_4" BEL
+        "delayed_int_5" BEL "delayed_int_6" BEL "delayed_int_7" BEL
+        "delayed_int_8" BEL "delayed_int_9" BEL "delayed_int_10" BEL
+        "delayed_int_11" BEL "delayed_int_12" BEL "delayed_int_13" BEL
+        "delayed_int_14" BEL "delayed_int_15" BEL "delayed_int_16" BEL
+        "delayed_int_17" BEL "delayed_int_18" BEL "delayed_int_19" BEL
+        "delayed_int_20" BEL "delayed_int_21" BEL "delayed_int_22" BEL
+        "delayed_int_23" BEL "CLOCK_BUFGP/BUFG";
 TS_CLOCK = PERIOD TIMEGRP "CLOCK" 40 ns HIGH 50%;
 SCHEMATIC END;
 
