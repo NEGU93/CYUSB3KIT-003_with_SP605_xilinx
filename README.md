@@ -75,6 +75,14 @@ smartxplorer   - SmartXplorer
 sysgen         - System Generator
 analyzer       - Chipscope Analyzer
 ```
+iMPACT had some problems with drivers which I couldn't fix. What I did is install *Vivado_Lab* to upload the .bin generated with *ise* to the FPGA board. You cannot program the code directly on *Vivado_Lab* as it does not support Spartan 6. Although it seams as an ugly fix, doing this gets better programming time as Vivado's programmer greatelly outperforms the one fo iMPACT. I recommend to add the following lines to `.bashrc` file:
+
+```
+alias vivado='source /opt/Xilinx/Vivado_Lab/2018.2/settings64.sh && vivado_lab'
+alias ise='source /opt/Xilinx/14.7/ISE_DS/settings64.sh && ise'
+```
+
+With those lines you can now run ise and vivado from the terminal in a simple way.
 
 ### Playing with Cypress SuperSpeed Explorer Kit
   1. First check the board is working correcly: [EZ-USB FX3TM SUPERSPEED EXPLORER KIT QUICK START GUIDE](http://www.cypress.com/file/133831/download)
