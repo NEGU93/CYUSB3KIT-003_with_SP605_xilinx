@@ -18,6 +18,24 @@ stdlib.h
 libusb-1.0/libusb.h
 -
 
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/main.cpp
+stdio.h
+-
+unistd.h
+-
+stdlib.h
+-
+getopt.h
+-
+string.h
+-
+iostream
+-
+include/cyusb.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/include/cyusb.h
+include/MimacUSB3Connection.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/include/MimacUSB3Connection.h
+
 /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/MimacUSB3Connection.cpp
 exception
 -

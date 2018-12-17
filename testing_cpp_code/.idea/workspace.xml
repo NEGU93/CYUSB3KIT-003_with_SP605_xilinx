@@ -13,14 +13,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a22401c3-d919-4d90-87ad-e2ec006c8ca5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/count.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/MimacUSB3Connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/MimacUSB3Connection.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing_cpp_code" beforeDir="false" afterPath="$PROJECT_DIR$/testing_cpp_code" afterDir="false" />
     </list>
@@ -47,8 +43,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="120" column="31" selection-start-line="120" selection-start-column="31" selection-end-line="120" selection-end-column="31" />
+            <state relative-caret-position="269">
+              <caret line="120" column="37" selection-start-line="120" selection-start-column="37" selection-end-line="120" selection-end-column="37" />
               <folding>
                 <element signature="e#724#742#0" expanded="true" />
                 <element signature="e#2055#2325#0" />
@@ -60,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="77" column="19" lean-forward="true" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
+            <state relative-caret-position="-305">
+              <caret line="67" column="61" lean-forward="true" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
               <folding>
                 <element signature="e#140#157#0" expanded="true" />
               </folding>
@@ -72,23 +68,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MimacUSB3Connection.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="375" column="53" lean-forward="true" selection-start-line="375" selection-start-column="53" selection-end-line="375" selection-end-column="53" />
+            <state relative-caret-position="359">
+              <caret line="228" column="68" selection-start-line="228" selection-start-column="68" selection-end-line="228" selection-end-column="68" />
               <folding>
                 <element signature="e#45#65#0" expanded="true" />
+                <element signature="e#280#479#0" />
                 <element signature="e#481#823#0" />
+                <element signature="e#825#891#0" />
+                <element signature="e#893#1343#0" />
                 <element signature="e#1344#2567#0" />
                 <element signature="e#2569#3281#0" />
                 <element signature="e#3283#4347#0" />
+                <element signature="e#4349#5565#0" />
+                <element signature="e#5568#6859#0" />
                 <element signature="e#6862#8783#0" />
+                <element signature="e#9972#10628#0" />
                 <element signature="e#8785#10362#0" />
+                <element signature="e#11499#20663#0" />
                 <element signature="e#13154#13249#0" expanded="true" />
                 <element signature="e#13437#13498#0" expanded="true" />
                 <element signature="e#13555#13610#0" expanded="true" />
                 <element signature="e#14030#14166#0" expanded="true" />
                 <element signature="e#19762#20598#0" />
-                <element signature="e#21503#24010#0" />
-                <element signature="e#23109#23765#0" />
+                <element signature="e#21618#24147#0" />
               </folding>
             </state>
           </provider>
@@ -97,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/download_fx3.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="561" column="33" lean-forward="true" selection-start-line="561" selection-start-column="33" selection-end-line="561" selection-end-column="33" />
+            <state relative-caret-position="-1850">
+              <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
               <folding>
                 <element signature="e#0#131#0" />
                 <element signature="e#1447#1617#0" />
@@ -138,6 +140,8 @@
       <find>failure_count</find>
       <find>MAX_FWIMG_SIZE</find>
       <find>cyusb_gethandle</find>
+      <find>Transfer Counts</find>
+      <find>fx3_ram_write</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -152,8 +156,8 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/download_fx3.cpp" />
         <option value="$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/09_cyusb_performance.cpp" />
-        <option value="$PROJECT_DIR$/include/MimacUSB3Connection.h" />
         <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/include/MimacUSB3Connection.h" />
         <option value="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" />
       </list>
     </option>
@@ -241,22 +245,23 @@
       <workItem from="1544711459706" duration="236000" />
       <workItem from="1544711712699" duration="4032000" />
       <workItem from="1544776409119" duration="13909000" />
-      <workItem from="1545035190006" duration="6846000" />
+      <workItem from="1545035190006" duration="10712000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39186000" />
+    <option name="totallyTimeSpent" value="43052000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1280" height="997" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27633712" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298969" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3298969" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -544,10 +549,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/libcyusb.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="503" column="38" lean-forward="true" selection-start-line="503" selection-start-column="38" selection-end-line="503" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#561#0" />
+            <element signature="e#1342#1447#0" />
+            <element signature="e#1448#1606#1" />
+            <element signature="e#2248#2344#0" />
+            <element signature="e#2248#2546#0" />
+            <element signature="e#2548#2651#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="120" column="37" selection-start-line="120" selection-start-column="37" selection-end-line="120" selection-end-column="37" />
+          <folding>
+            <element signature="e#724#742#0" expanded="true" />
+            <element signature="e#2055#2325#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-305">
+          <caret line="67" column="61" lean-forward="true" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+          <folding>
+            <element signature="e#140#157#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/download_fx3.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="561" column="33" lean-forward="true" selection-start-line="561" selection-start-column="33" selection-end-line="561" selection-end-column="33" />
+        <state relative-caret-position="-1850">
+          <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
           <folding>
             <element signature="e#0#131#0" />
             <element signature="e#1447#1617#0" />
@@ -567,61 +608,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libcyusb.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="503" column="38" lean-forward="true" selection-start-line="503" selection-start-column="38" selection-end-line="503" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#561#0" />
-            <element signature="e#1342#1447#0" />
-            <element signature="e#1448#1606#1" />
-            <element signature="e#2248#2344#0" />
-            <element signature="e#2248#2546#0" />
-            <element signature="e#2548#2651#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="77" column="19" lean-forward="true" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
-          <folding>
-            <element signature="e#140#157#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="120" column="31" selection-start-line="120" selection-start-column="31" selection-end-line="120" selection-end-column="31" />
-          <folding>
-            <element signature="e#724#742#0" expanded="true" />
-            <element signature="e#2055#2325#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MimacUSB3Connection.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="375" column="53" lean-forward="true" selection-start-line="375" selection-start-column="53" selection-end-line="375" selection-end-column="53" />
+        <state relative-caret-position="359">
+          <caret line="228" column="68" selection-start-line="228" selection-start-column="68" selection-end-line="228" selection-end-column="68" />
           <folding>
             <element signature="e#45#65#0" expanded="true" />
+            <element signature="e#280#479#0" />
             <element signature="e#481#823#0" />
+            <element signature="e#825#891#0" />
+            <element signature="e#893#1343#0" />
             <element signature="e#1344#2567#0" />
             <element signature="e#2569#3281#0" />
             <element signature="e#3283#4347#0" />
+            <element signature="e#4349#5565#0" />
+            <element signature="e#5568#6859#0" />
             <element signature="e#6862#8783#0" />
+            <element signature="e#9972#10628#0" />
             <element signature="e#8785#10362#0" />
+            <element signature="e#11499#20663#0" />
             <element signature="e#13154#13249#0" expanded="true" />
             <element signature="e#13437#13498#0" expanded="true" />
             <element signature="e#13555#13610#0" expanded="true" />
             <element signature="e#14030#14166#0" expanded="true" />
             <element signature="e#19762#20598#0" />
-            <element signature="e#21503#24010#0" />
-            <element signature="e#23109#23765#0" />
+            <element signature="e#21618#24147#0" />
           </folding>
         </state>
       </provider>

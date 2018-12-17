@@ -84,24 +84,24 @@ private:
     static cyusb_handle *device_handle;
 
     // Transfer Performance
-    static unsigned int endpoint;   //= 129;	// Endpoint to be tested
-    static unsigned int reqsize;    //= 16;	// Request size in number of packets
-    static unsigned int queuedepth; //= 16;	// Number of requests to queue
-    static unsigned int duration;   //= 100;	// Duration of the test in seconds
+    static unsigned int endpoint;           // Endpoint to be tested
+    static unsigned int reqsize;            // Request size in number of packets
+    static unsigned int queuedepth;         // Number of requests to queue
+    static unsigned int duration;           // Duration of the test in seconds
 
-    static unsigned char eptype;		// Type of endpoint (transfer type)
-    static unsigned int pktsize;		// Maximum packet size for the endpoint
+    static unsigned char eptype;		    // Type of endpoint (transfer type)
+    static unsigned int pktsize;		    // Maximum packet size for the endpoint
 
-    static bool	stop_transfers;	        // Request to stop data transfers
-    static int	rqts_in_flight;	        // Number of transfers that are in progress
+    static bool	        stop_transfers;	    // Request to stop data transfers
+    static int	        rqts_in_flight;	    // Number of transfers that are in progress
 
     static unsigned int success_count;	    // Number of successful transfers
     static unsigned int failure_count;	    // Number of failed transfers
     static unsigned int transfer_size;	    // Size of data transfers performed so far
     static unsigned int transfer_index;	    // Write index into the transfer_size array
 
-    static struct timeval	start_ts;	// Data transfer start time stamp.
-    static struct timeval	end_ts;		// Data transfer stop time stamp.
+    static struct timeval	start_ts;	    // Data transfer start time stamp.
+    static struct timeval	end_ts;		    // Data transfer stop time stamp.
 
     //! Methods
     int get_device_descriptor();

@@ -13,28 +13,29 @@
 
 //#define DEBUG
 
+// static variables
 cyusb_handle *MimacUSB3Connection::device_handle;
 
-unsigned int MimacUSB3Connection::endpoint;   //= 129;	// Endpoint to be tested
-unsigned int MimacUSB3Connection::reqsize;    //= 16;	// Request size in number of packets
-unsigned int MimacUSB3Connection::queuedepth; //= 16;	// Number of requests to queue
-unsigned int MimacUSB3Connection::duration;   //= 100;	// Duration of the test in seconds
+unsigned int MimacUSB3Connection::endpoint;         // Endpoint to be tested
+unsigned int MimacUSB3Connection::reqsize;          // Request size in number of packets
+unsigned int MimacUSB3Connection::queuedepth;       // Number of requests to queue
+unsigned int MimacUSB3Connection::duration;         // Duration of the test in seconds
 
-unsigned char MimacUSB3Connection::eptype;		// Type of endpoint (transfer type)
-unsigned int MimacUSB3Connection::pktsize;		// Maximum packet size for the endpoint
+unsigned char MimacUSB3Connection::eptype;		    // Type of endpoint (transfer type)
+unsigned int MimacUSB3Connection::pktsize;		    // Maximum packet size for the endpoint
 
-bool	MimacUSB3Connection::stop_transfers;	        // Request to stop data transfers
+bool	MimacUSB3Connection::stop_transfers;	    // Request to stop data transfers
 int		MimacUSB3Connection::rqts_in_flight;	    // Number of transfers that are in progress
 
-unsigned int MimacUSB3Connection::success_count;	    // Number of successful transfers
-unsigned int MimacUSB3Connection::failure_count;	    // Number of failed transfers
-unsigned int MimacUSB3Connection::transfer_size;	    // Size of data transfers performed so far
-unsigned int MimacUSB3Connection::transfer_index;	    // Write index into the transfer_size array
+unsigned int MimacUSB3Connection::success_count;	// Number of successful transfers
+unsigned int MimacUSB3Connection::failure_count;	// Number of failed transfers
+unsigned int MimacUSB3Connection::transfer_size;	// Size of data transfers performed so far
+unsigned int MimacUSB3Connection::transfer_index;	// Write index into the transfer_size array
 
-struct timeval	MimacUSB3Connection::start_ts;	// Data transfer start time stamp.
+struct timeval	MimacUSB3Connection::start_ts;	    // Data transfer start time stamp.
 struct timeval	MimacUSB3Connection::end_ts;		// Data transfer stop time stamp.
 
-
+// Methods
 MimacUSB3Connection::MimacUSB3Connection() {
     fp = stdout;
     rStatus = cyusb_open();
@@ -182,7 +183,6 @@ int MimacUSB3Connection::claim_interface(int interface) {
     return rStatus;
 }
 
-
 /**
  * Next bunch of functions are done to upload a .img firmware to the FX3 device
  * */
@@ -214,6 +214,8 @@ int MimacUSB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
             //rStatus = fx3_spiboot_download(filename);
             break;
         // Impossible to reach default
+        case FW_TARGET_NONE:
+            break;
     }
     if (rStatus != 0) {
         fprintf (stderr, "Error: FX3 firmware programming failed\n");
@@ -223,7 +225,6 @@ int MimacUSB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
 
     return rStatus;
 }
-
 
 int MimacUSB3Connection::fx3_usbboot_download(const char *filename) {
     unsigned char *fwBuf;
@@ -286,11 +287,31 @@ int MimacUSB3Connection::fx3_usbboot_download(const char *filename) {
     return 0;
 }
 
+int MimacUSB3Connection::fx3_ram_write(unsigned char *buf, unsigned int ramAddress, unsigned short len) {
+    int r;
+    int index = 0;
+    unsigned short size;
+
+    while (len > 0) {
+        size = static_cast<unsigned short>((len > MAX_WRITE_SIZE) ? MAX_WRITE_SIZE : len);
+        r = cyusb_control_transfer (device_handle, 0x40, 0xA0, GET_LSW(ramAddress), GET_MSW(ramAddress), &buf[index], size, VENDORCMD_TIMEOUT);
+        if (r != size) {
+            fprintf (stderr, "Error: Vendor write to FX3 RAM failed\n");
+            return -1;
+        }
+        ramAddress += size;
+        index      += size;
+        len        -= size;
+    }
+
+    return 0;
+}
+
 /** Read the firmware image from the file into a buffer. */
 int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char *buf, int *romsize, int *filesize) {
     int fd;
     int nbr;
-    struct stat filestat;
+    struct stat filestat{};
 
     if (stat (filename, &filestat) != 0) {
         fprintf (stderr, "Error: Failed to stat file %s\n", filename);
@@ -336,6 +357,8 @@ int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char
     return 0;
 }
 
+/**---------------------------------------------------------------------**/
+
 /**
 * This is a CLI program which can be used to measure the
 *   data transfer rate for data (IN or OUT endpoint) transfers
@@ -351,9 +374,9 @@ int MimacUSB3Connection::test_performance() {
     unsigned char **databuffers = nullptr;			// List of data buffers.
 
     endpoint   = 129;	// Endpoint to be tested
-    reqsize    = 32;   //16;	// Request size in number of packets
-    queuedepth = 8;    //16;	// Number of requests to queue
-    duration   = 100;	// Duration of the test in seconds
+    reqsize    = 64;    //16;	// Request size in number of packets
+    queuedepth = 16;    //16;	// Number of requests to queue
+    duration   = 60;	// Duration of the test in seconds
 
     success_count = 0;	    // Number of successful transfers
     failure_count = 0;	    // Number of failed transfers
@@ -541,7 +564,7 @@ int MimacUSB3Connection::test_performance() {
     }
 
     gettimeofday (&t1, nullptr);
-    do {
+    do {    // Wait the desired amount of seconds
         libusb_handle_events (nullptr);
         gettimeofday (&t2, nullptr);
     } while (t2.tv_sec < (t1.tv_sec + duration));
@@ -560,13 +583,14 @@ int MimacUSB3Connection::test_performance() {
 
     free_transfer_buffers (databuffers, transfers, queuedepth);
     cyusb_free_config_descriptor (configDesc);
-    cyusb_close();
+    //cyusb_close();
 
     printf ("test_performance: Test completed\n");
+    fflush(stdout);
     return 0;
 }
 
-// Function to free data buffers and transfer structures
+//! Function to free data buffers and transfer structures
 void MimacUSB3Connection::free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth) {
     // Free up any allocated data buffers
     if (databuffers != nullptr) {
@@ -591,10 +615,9 @@ void MimacUSB3Connection::free_transfer_buffers(unsigned char **databuffers, str
     }
 }
 
-// Function: xfer_callback
-// This is the call back function called by libusb upon completion of a queued data transfer.
+//! Function: xfer_callback
+//! This is the call back function called by libusb upon completion of a queued data transfer.
 void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
-
     unsigned int elapsed_time;
     int size = 0;
 
@@ -629,12 +652,11 @@ void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
     if (transfer_index == queuedepth) {
 
         gettimeofday (&end_ts, nullptr);
-        elapsed_time = static_cast<unsigned int>((end_ts.tv_sec - start_ts.tv_sec) * 1000000 +
-                                                 (end_ts.tv_usec - start_ts.tv_usec));
-
+        elapsed_time = static_cast<unsigned int>((end_ts.tv_sec - start_ts.tv_sec) * 1000000 + (end_ts.tv_usec - start_ts.tv_usec));
+//#ifdef DEBUG
         printf ("Transfer Counts: %d pass %d fail\n", success_count, failure_count);
         printf ("Data rate: %f KBps\n\n", (((double)transfer_size / 1024) / ((double)elapsed_time / 1000000)));
-
+//#endif
         transfer_index = 0;
         transfer_size  = 0;
         start_ts = end_ts;
@@ -665,31 +687,4 @@ void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
         }
     }
 }
-
-int MimacUSB3Connection::fx3_ram_write(unsigned char *buf, unsigned int ramAddress, unsigned short len) {
-    int r;
-    int index = 0;
-    unsigned short size;
-
-    while (len > 0) {
-        size = static_cast<unsigned short>((len > MAX_WRITE_SIZE) ? MAX_WRITE_SIZE : len);
-        r = cyusb_control_transfer (device_handle, 0x40, 0xA0, GET_LSW(ramAddress), GET_MSW(ramAddress), &buf[index], size, VENDORCMD_TIMEOUT);
-        if (r != size) {
-            fprintf (stderr, "Error: Vendor write to FX3 RAM failed\n");
-            return -1;
-        }
-        ramAddress += size;
-        index      += size;
-        len        -= size;
-    }
-
-    return 0;
-}
-
-
-
-
-
-
-
 
