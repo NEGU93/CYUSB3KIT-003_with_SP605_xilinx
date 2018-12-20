@@ -12,13 +12,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a22401c3-d919-4d90-87ad-e2ec006c8ca5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/include/download_fx3.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TEST.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_ngo/netlist.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_ngo/netlist.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/ngdbuild.xmsgs" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/ngdbuild.xmsgs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/par.xmsgs" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/par.xmsgs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/pn_parser.xmsgs" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/pn_parser.xmsgs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slavefifo2b_vhdl_feb20.projectmgr" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slavefifo2b_vhdl_feb20.projectmgr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/par_usage_statistics.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/par_usage_statistics.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bgn" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bgn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bit" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bit" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bld" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bld" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.cmd_log" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.cmd_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.drc" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.drc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ncd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ncd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ngd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ngd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.pad" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.pad" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.par" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.par" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.pcf" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.pcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.twr" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.twr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.twx" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.twx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.unroutes" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.unroutes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ut" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ut" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_bitgen.xwbt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_bitgen.xwbt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_envsettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_envsettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_guide.ncd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_guide.ncd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.map" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.mrp" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.mrp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.ncd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.ncd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.ngm" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.ngm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.xrpt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.xrpt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_ngdbuild.xrpt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_ngdbuild.xrpt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_pad.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_pad.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_pad.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_pad.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_par.xrpt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_par.xrpt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_summary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_summary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_usage.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_usage.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.gise" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.gise" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.xise" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.xise" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/usage_statistics_webtalk.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/usage_statistics_webtalk.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/webtalk.log" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/webtalk.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/webtalk_pn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/webtalk_pn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/xlnx_auto_0_xdb/cst.xbcd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/xlnx_auto_0_xdb/cst.xbcd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/tutorial/counter_summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/tutorial/counter_summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fpga_source_code/tutorial/iseconfig/counter.xreport" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/tutorial/iseconfig/counter.xreport" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/link.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/MimacUSB3Connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/MimacUSB3Connection.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing_cpp_code" beforeDir="false" afterPath="$PROJECT_DIR$/testing_cpp_code" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing_cpp_code.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/testing_cpp_code.cbp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
@@ -34,20 +92,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="180">
+              <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="120" column="37" selection-start-line="120" selection-start-column="37" selection-end-line="120" selection-end-column="37" />
+            <state relative-caret-position="415">
+              <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
               <folding>
-                <element signature="e#724#742#0" expanded="true" />
+                <element signature="e#99#117#0" expanded="true" />
                 <element signature="e#2055#2325#0" />
+                <element signature="e#2327#2687#0" />
+                <element signature="e#2689#4755#0" />
               </folding>
             </state>
           </provider>
@@ -56,8 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-305">
-              <caret line="67" column="61" lean-forward="true" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+            <state relative-caret-position="310">
+              <caret line="111" column="39" lean-forward="true" selection-start-line="111" selection-start-column="39" selection-end-line="111" selection-end-column="39" />
               <folding>
                 <element signature="e#140#157#0" expanded="true" />
               </folding>
@@ -65,57 +125,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MimacUSB3Connection.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="228" column="68" selection-start-line="228" selection-start-column="68" selection-end-line="228" selection-end-column="68" />
+            <state relative-caret-position="193">
+              <caret line="46" column="119" selection-start-line="46" selection-start-column="119" selection-end-line="46" selection-end-column="119" />
               <folding>
                 <element signature="e#45#65#0" expanded="true" />
-                <element signature="e#280#479#0" />
-                <element signature="e#481#823#0" />
-                <element signature="e#825#891#0" />
-                <element signature="e#893#1343#0" />
-                <element signature="e#1344#2567#0" />
-                <element signature="e#2569#3281#0" />
-                <element signature="e#3283#4347#0" />
-                <element signature="e#4349#5565#0" />
-                <element signature="e#5568#6859#0" />
-                <element signature="e#6862#8783#0" />
-                <element signature="e#9972#10628#0" />
-                <element signature="e#8785#10362#0" />
-                <element signature="e#11499#20663#0" />
-                <element signature="e#13154#13249#0" expanded="true" />
-                <element signature="e#13437#13498#0" expanded="true" />
-                <element signature="e#13555#13610#0" expanded="true" />
-                <element signature="e#14030#14166#0" expanded="true" />
-                <element signature="e#19762#20598#0" />
-                <element signature="e#21618#24147#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/download_fx3.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1850">
-              <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#131#0" />
-                <element signature="e#1447#1617#0" />
-                <element signature="e#2032#2579#0" />
-                <element signature="e#2581#4019#0" />
-                <element signature="e#4021#5575#0" />
-                <element signature="e#5577#6050#0" />
-                <element signature="e#6052#7605#0" />
-                <element signature="e#7607#8162#0" />
-                <element signature="e#8164#8956#0" />
-                <element signature="e#8958#11066#0" />
-                <element signature="e#11068#11599#0" />
-                <element signature="e#11601#12380#0" />
-                <element signature="e#12382#13650#0" />
-                <element signature="e#13652#14182#0" />
+                <element signature="e#1512#1722#0" />
+                <element signature="e#1724#2066#0" />
+                <element signature="e#2068#2134#0" />
+                <element signature="e#2136#2586#0" />
+                <element signature="e#2587#3810#0" />
+                <element signature="e#3812#4524#0" />
+                <element signature="e#4526#5590#0" />
+                <element signature="e#5592#6736#0" />
+                <element signature="e#8131#10056#0" />
+                <element signature="e#10058#10719#0" />
+                <element signature="e#10776#12295#0" />
+                <element signature="e#12318#21636#0" />
+                <element signature="e#21638#22475#0" />
+                <element signature="e#22477#24958#0" />
               </folding>
             </state>
           </provider>
@@ -142,6 +172,7 @@
       <find>cyusb_gethandle</find>
       <find>Transfer Counts</find>
       <find>fx3_ram_write</find>
+      <find>cyusb_close</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,12 +184,16 @@
         <option value="$PROJECT_DIR$/cyusb.h" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
         <option value="$PROJECT_DIR$/../../MimacTools/acquisition/sensor/src/MimacUsbConnection/MimacUsbConnection.hh" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/download_fx3.cpp" />
         <option value="$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/09_cyusb_performance.cpp" />
-        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$USER_HOME$/Cypress/cyusb_linux_1.0.5/gui_src/fx3_download.cpp" />
+        <option value="$PROJECT_DIR$/src/fx3_download.cpp" />
         <option value="$PROJECT_DIR$/include/MimacUSB3Connection.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" />
+        <option value="$PROJECT_DIR$/include/download_fx3.h" />
+        <option value="$PROJECT_DIR$/src/download_fx3.cpp" />
+        <option value="$PROJECT_DIR$/main.cpp" />
       </list>
     </option>
   </component>
@@ -246,22 +281,24 @@
       <workItem from="1544711712699" duration="4032000" />
       <workItem from="1544776409119" duration="13909000" />
       <workItem from="1545035190006" duration="10712000" />
+      <workItem from="1545122788569" duration="684000" />
+      <workItem from="1545313063114" duration="4513000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43052000" />
+    <option name="totallyTimeSpent" value="48249000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1280" height="997" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27633712" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28606158" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3298969" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298969" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -518,13 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/09_cyusb_performance.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="310">
@@ -564,37 +594,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="120" column="37" selection-start-line="120" selection-start-column="37" selection-end-line="120" selection-end-column="37" />
-          <folding>
-            <element signature="e#724#742#0" expanded="true" />
-            <element signature="e#2055#2325#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-305">
-          <caret line="67" column="61" lean-forward="true" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
-          <folding>
-            <element signature="e#140#157#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/download_fx3.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1850">
-          <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+        <state relative-caret-position="-521">
+          <caret line="143" column="27" lean-forward="true" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
           <folding>
             <element signature="e#0#131#0" />
             <element signature="e#1447#1617#0" />
             <element signature="e#2032#2579#0" />
             <element signature="e#2581#4019#0" />
-            <element signature="e#4021#5575#0" />
             <element signature="e#5577#6050#0" />
             <element signature="e#6052#7605#0" />
             <element signature="e#7607#8162#0" />
@@ -608,31 +616,111 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/gui_src/fx3_download.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="6" selection-start-line="6" selection-end-line="7" selection-end-column="16" />
+          <folding>
+            <element signature="e#1671#2159#0" />
+            <element signature="e#2161#3417#0" />
+            <element signature="e#3419#5101#0" />
+            <element signature="e#5103#5565#0" />
+            <element signature="e#5567#6930#0" />
+            <element signature="e#6932#7467#0" />
+            <element signature="e#7469#8179#0" />
+            <element signature="e#8181#10936#0" />
+            <element signature="e#10938#11416#0" />
+            <element signature="e#11418#12109#0" />
+            <element signature="e#12111#13574#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fx3_download.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4065">
+          <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/download_fx3.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="243" column="35" selection-start-line="243" selection-start-column="29" selection-end-line="243" selection-end-column="35" />
+          <folding>
+            <element signature="e#2358#3000#0" />
+            <element signature="e#2581#4019#0" />
+            <element signature="e#5577#6050#0" />
+            <element signature="e#8809#9431#0" />
+            <element signature="e#9433#10328#0" />
+            <element signature="e#10330#12973#0" />
+            <element signature="e#12858#13471#0" />
+            <element signature="e#13590#14471#0" />
+            <element signature="e#14473#15902#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/download_fx3.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#126#144#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="111" column="39" lean-forward="true" selection-start-line="111" selection-start-column="39" selection-end-line="111" selection-end-column="39" />
+          <folding>
+            <element signature="e#140#157#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/MimacUSB3Connection.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="228" column="68" selection-start-line="228" selection-start-column="68" selection-end-line="228" selection-end-column="68" />
+        <state relative-caret-position="193">
+          <caret line="46" column="119" selection-start-line="46" selection-start-column="119" selection-end-line="46" selection-end-column="119" />
           <folding>
             <element signature="e#45#65#0" expanded="true" />
-            <element signature="e#280#479#0" />
-            <element signature="e#481#823#0" />
-            <element signature="e#825#891#0" />
-            <element signature="e#893#1343#0" />
-            <element signature="e#1344#2567#0" />
-            <element signature="e#2569#3281#0" />
-            <element signature="e#3283#4347#0" />
-            <element signature="e#4349#5565#0" />
-            <element signature="e#5568#6859#0" />
-            <element signature="e#6862#8783#0" />
-            <element signature="e#9972#10628#0" />
-            <element signature="e#8785#10362#0" />
-            <element signature="e#11499#20663#0" />
-            <element signature="e#13154#13249#0" expanded="true" />
-            <element signature="e#13437#13498#0" expanded="true" />
-            <element signature="e#13555#13610#0" expanded="true" />
-            <element signature="e#14030#14166#0" expanded="true" />
-            <element signature="e#19762#20598#0" />
-            <element signature="e#21618#24147#0" />
+            <element signature="e#1512#1722#0" />
+            <element signature="e#1724#2066#0" />
+            <element signature="e#2068#2134#0" />
+            <element signature="e#2136#2586#0" />
+            <element signature="e#2587#3810#0" />
+            <element signature="e#3812#4524#0" />
+            <element signature="e#4526#5590#0" />
+            <element signature="e#5592#6736#0" />
+            <element signature="e#8131#10056#0" />
+            <element signature="e#10058#10719#0" />
+            <element signature="e#10776#12295#0" />
+            <element signature="e#12318#21636#0" />
+            <element signature="e#21638#22475#0" />
+            <element signature="e#22477#24958#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+          <folding>
+            <element signature="e#99#117#0" expanded="true" />
+            <element signature="e#2055#2325#0" />
+            <element signature="e#2327#2687#0" />
+            <element signature="e#2689#4755#0" />
           </folding>
         </state>
       </provider>

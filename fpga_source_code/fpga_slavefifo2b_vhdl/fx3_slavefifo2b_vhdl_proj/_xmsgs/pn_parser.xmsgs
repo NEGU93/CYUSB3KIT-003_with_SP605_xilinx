@@ -8,28 +8,28 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd&quot; into library work</arg>
 </msg>
 
 </messages>

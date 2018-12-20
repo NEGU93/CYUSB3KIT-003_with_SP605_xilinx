@@ -8,7 +8,7 @@ slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf
 
 Design file:              slaveFIFO2b_fpga_top.ncd
 Physical constraint file: slaveFIFO2b_fpga_top.pcf
-Device,package,speed:     xc6slx45t,fgg484,C,-3 (PRODUCTION 1.23 2016-11-22)
+Device,package,speed:     xc6slx45t,fgg484,C,-3 (PRODUCTION 1.23 2013-10-13)
 Report level:             verbose report
 
 Environment Variable      Effect 
@@ -2189,7 +2189,7 @@ Design statistics:
 ------------------------------------Footnotes-----------------------------------
 1)  The minimum period statistic assumes all single cycle delays.
 
-Analysis completed Wed Nov 21 17:00:07 2018 
+Analysis completed Thu Dec 20 10:02:30 2018 
 --------------------------------------------------------------------------------
 
 Trace Settings:

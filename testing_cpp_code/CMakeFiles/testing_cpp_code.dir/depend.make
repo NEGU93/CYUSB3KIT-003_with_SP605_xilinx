@@ -7,7 +7,12 @@ CMakeFiles/testing_cpp_code.dir/main.cpp.o: main.cpp
 
 CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o: include/MimacUSB3Connection.h
 CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o: include/cyusb.h
+CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o: include/download_fx3.h
 CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o: src/MimacUSB3Connection.cpp
+
+CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.o: include/cyusb.h
+CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.o: include/download_fx3.h
+CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.o: src/download_fx3.cpp
 
 CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o: include/cyusb.h
 CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o: src/libcyusb.cpp

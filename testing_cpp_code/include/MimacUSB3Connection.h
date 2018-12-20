@@ -108,9 +108,9 @@ private:
     int get_device_config();
 
     // Program FX3 functions
-    int fx3_usbboot_download(const char *filename);
-    int read_firmware_image (const char *filename, unsigned char *buf, int *romsize, int *filesize);
-    int fx3_ram_write (unsigned char *buf, unsigned int ramAddress, unsigned short len);
+    //int fx3_usbboot_download(const char *filename);
+    //int read_firmware_image (const char *filename, unsigned char *buf, int *romsize, int *filesize);
+    //int fx3_ram_write (unsigned char *buf, unsigned int ramAddress, unsigned short len);
     // Test performance
     void free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth);
     static void xfer_callback (struct libusb_transfer *transfer);

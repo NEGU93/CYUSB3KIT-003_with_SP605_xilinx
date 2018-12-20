@@ -1,4 +1,4 @@
-Release 14.7 Map P.20160913 (lin64)
+Release 14.7 Map P.20131013 (lin64)
 Xilinx Map Application Log File for Design 'slaveFIFO2b_fpga_top'
 
 Design Information
@@ -11,14 +11,8 @@ Target Device  : xc6slx45t
 Target Package : fgg484
 Target Speed   : -3
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Wed Nov 21 16:48:57 2018
+Mapped Date    : Thu Dec 20 09:56:52 2018
 
-vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-INFO:Security:54 - 'xc6slx45t' is a WebPack part.
-WARNING:Security:42 - Your software subscription period has lapsed. Your current
-version of Xilinx tools will continue to function, but you no longer qualify for
-Xilinx software updates or new releases.
-----------------------------------------------------------------------
 Mapping design into LUTs...
 Running directed packing...
 Running delay-based LUT packing...
@@ -26,56 +20,56 @@ Updating timing models...
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
 Running timing-driven placement...
-Total REAL time at the beginning of Placer: 30 secs 
-Total CPU  time at the beginning of Placer: 27 secs 
+Total REAL time at the beginning of Placer: 15 secs 
+Total CPU  time at the beginning of Placer: 7 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:3af652cc) REAL time: 35 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:3af652cc) REAL time: 16 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:3af652cc) REAL time: 35 secs 
+Phase 2.7  Design Feasibility Check (Checksum:3af652cc) REAL time: 16 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:3af652cc) REAL time: 35 secs 
+Phase 3.31  Local Placement Optimization (Checksum:3af652cc) REAL time: 16 secs 
 
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:e975d6f3) REAL time: 1 mins 8 secs 
+(Checksum:e975d6f3) REAL time: 23 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:e975d6f3) REAL time: 1 mins 8 secs 
+Phase 5.36  Local Placement Optimization (Checksum:e975d6f3) REAL time: 23 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:e975d6f3) REAL time: 1 mins 8 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:e975d6f3) REAL time: 23 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:e975d6f3) REAL time: 1 mins 8 secs 
+Phase 7.3  Local Placement Optimization (Checksum:e975d6f3) REAL time: 23 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:e975d6f3) REAL time: 1 mins 8 secs 
+Phase 8.5  Local Placement Optimization (Checksum:e975d6f3) REAL time: 23 secs 
 
 Phase 9.8  Global Placement
 ................
 ..............................
 .......................
 ....
-Phase 9.8  Global Placement (Checksum:f342b8a6) REAL time: 1 mins 13 secs 
+Phase 9.8  Global Placement (Checksum:f342b8a6) REAL time: 25 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:f342b8a6) REAL time: 1 mins 13 secs 
+Phase 10.5  Local Placement Optimization (Checksum:f342b8a6) REAL time: 25 secs 
 
 Phase 11.18  Placement Optimization
-Phase 11.18  Placement Optimization (Checksum:363c6447) REAL time: 1 mins 21 secs 
+Phase 11.18  Placement Optimization (Checksum:363c6447) REAL time: 27 secs 
 
 Phase 12.5  Local Placement Optimization
-Phase 12.5  Local Placement Optimization (Checksum:363c6447) REAL time: 1 mins 21 secs 
+Phase 12.5  Local Placement Optimization (Checksum:363c6447) REAL time: 27 secs 
 
 Phase 13.34  Placement Validation
-Phase 13.34  Placement Validation (Checksum:e43f04f1) REAL time: 1 mins 21 secs 
+Phase 13.34  Placement Validation (Checksum:e43f04f1) REAL time: 27 secs 
 
-Total REAL time to Placer completion: 1 mins 24 secs 
-Total CPU  time to Placer completion: 1 mins 20 secs 
+Total REAL time to Placer completion: 28 secs 
+Total CPU  time to Placer completion: 19 secs 
 Running post-placement packing...
 Writing output files...
 WARNING:PhysDesignRules:2410 - This design is using one or more 9K Block RAMs
@@ -164,9 +158,9 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                4.27
 
-Peak Memory Usage:  846 MB
-Total REAL time to MAP completion:  1 mins 27 secs 
-Total CPU time to MAP completion:   1 mins 22 secs 
+Peak Memory Usage:  798 MB
+Total REAL time to MAP completion:  1 mins 43 secs 
+Total CPU time to MAP completion:   20 secs 
 
 Mapping completed.
 See MAP report file "slaveFIFO2b_fpga_top_map.mrp" for details.

@@ -1,15 +1,4 @@
-/************************************************************************************************
- * Program Name		:	01_getdesc.cpp							*
- * Author		:	V. Radhakrishnan ( rk@atr-labs.com )				*
- * License		:	LGPL Ver 2.1							*
- * Copyright		:	Cypress Semiconductors Inc. / ATR-LABS				*
- * Date written		:	March 13, 2012							*
- * Modification Notes	:									*
- * 												*
- * This program is a CLI program to dump out the device descriptor for any USB device given its	*
- * VID/PID. The program itself accepts options : Either vid/pid on the command line OR first	*
- * VID/PID of interest in cyusb.conf   								*
-\***********************************************************************************************/
+/************************************************************************************************/
 
 #include <stdio.h>
 #include <unistd.h>
@@ -72,19 +61,17 @@ void program() {
 }
 
 int main(int argc, char **argv) {
-	int r;
 	bool user_input;
-
 	program_name = argv[0];
 
-	while ( (next_option = getopt_long(argc, argv, short_options,
-					   long_options, nullptr) ) != -1 ) {
+	while ( (next_option = getopt_long(argc, argv, short_options, long_options, nullptr) ) != -1 ) {
 		switch ( next_option ) {
 			case 'h': /* -device_handle or --help  */
 				  print_usage(stdout, 0);
 			case 'v': /* -v or --version */
-				  printf("%s (Ver 1.0)\n",program_name);
+				  printf("%s (Ver 1.0)\n", program_name);
 				  printf("Copyright (C) 2012 Cypress Semiconductors Inc. / ATR-LABS\n");
+				  printf("Modified version 2018 MIMAC gruop LPSC CNRS\n");
 				  exit(0);
 			case 'o': /* -o or --output */
 				  out_filename = optarg;
@@ -111,15 +98,16 @@ int main(int argc, char **argv) {
 	user_input = (vendor_provided) && (product_provided);
 
 	try {
-		//program();
+	    program();
+	    sleep(1);
+
 		MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(user_input, pid, vid);
-		//MimacUSB3Connection::device_handle = nullptr;
         //mimacUSB3Connection.print_device_descriptor();
         //mimacUSB3Connection.print_config_descriptor();
         //mimacUSB3Connection.claim_interface(0);
-		//mimacUSB3Connection.claim_interface(0);
+        //mimacUSB3Connection.claim_interface(0);
         mimacUSB3Connection.test_performance();
-	}
+    }
 	catch (ErrorOpeningLib& e) {
 		printf("Error opening library\n");
 		return -1;
@@ -128,5 +116,6 @@ int main(int argc, char **argv) {
 		printf("No device found\n");
 		return 0;
 	}
+
 	return 0;
 }

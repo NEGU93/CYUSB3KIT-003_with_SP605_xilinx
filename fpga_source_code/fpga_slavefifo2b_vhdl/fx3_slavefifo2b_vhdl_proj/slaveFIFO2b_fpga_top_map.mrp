@@ -1,4 +1,4 @@
-Release 14.7 Map P.20160913 (lin64)
+Release 14.7 Map P.20131013 (lin64)
 Xilinx Mapping Report File for Design 'slaveFIFO2b_fpga_top'
 
 Design Information
@@ -11,7 +11,7 @@ Target Device  : xc6slx45t
 Target Package : fgg484
 Target Speed   : -3
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Wed Nov 21 16:48:57 2018
+Mapped Date    : Thu Dec 20 09:56:52 2018
 
 Design Summary
 --------------
@@ -92,9 +92,9 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                4.27
 
-Peak Memory Usage:  846 MB
-Total REAL time to MAP completion:  1 mins 27 secs 
-Total CPU time to MAP completion:   1 mins 22 secs 
+Peak Memory Usage:  798 MB
+Total REAL time to MAP completion:  1 mins 43 secs 
+Total CPU time to MAP completion:   20 secs 
 
 Table of Contents
 -----------------
@@ -117,9 +117,6 @@ Section 1 - Errors
 
 Section 2 - Warnings
 --------------------
-WARNING:Security:42 - Your software subscription period has lapsed. Your current
-version of Xilinx tools will continue to function, but you no longer qualify for
-Xilinx software updates or new releases.
 WARNING:PhysDesignRules:2410 - This design is using one or more 9K Block RAMs
    (RAMB8BWER).  9K Block RAM initialization data, both user defined and
    default, may be incorrect and should not be used.  For more information,
@@ -127,7 +124,6 @@ WARNING:PhysDesignRules:2410 - This design is using one or more 9K Block RAMs
 
 Section 3 - Informational
 -------------------------
-INFO:Security:54 - 'xc6slx45t' is a WebPack part.
 INFO:MapLib:562 - No environment variables are currently set.
 INFO:LIT:244 - All of the single ended outputs in this design are using slew
    rate limited output drivers. The delay on speed critical single ended outputs

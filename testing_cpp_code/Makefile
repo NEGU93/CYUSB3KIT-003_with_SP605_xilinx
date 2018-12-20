@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/home/barrachina/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.4588.63/bin/cmake/linux/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/barrachina/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.4588.63/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -177,6 +177,33 @@ src/MimacUSB3Connection.cpp.s:
 	$(MAKE) -f CMakeFiles/testing_cpp_code.dir/build.make CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.s
 .PHONY : src/MimacUSB3Connection.cpp.s
 
+src/download_fx3.o: src/download_fx3.cpp.o
+
+.PHONY : src/download_fx3.o
+
+# target to build an object file
+src/download_fx3.cpp.o:
+	$(MAKE) -f CMakeFiles/testing_cpp_code.dir/build.make CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.o
+.PHONY : src/download_fx3.cpp.o
+
+src/download_fx3.i: src/download_fx3.cpp.i
+
+.PHONY : src/download_fx3.i
+
+# target to preprocess a source file
+src/download_fx3.cpp.i:
+	$(MAKE) -f CMakeFiles/testing_cpp_code.dir/build.make CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.i
+.PHONY : src/download_fx3.cpp.i
+
+src/download_fx3.s: src/download_fx3.cpp.s
+
+.PHONY : src/download_fx3.s
+
+# target to generate assembly for a file
+src/download_fx3.cpp.s:
+	$(MAKE) -f CMakeFiles/testing_cpp_code.dir/build.make CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.s
+.PHONY : src/download_fx3.cpp.s
+
 src/libcyusb.o: src/libcyusb.cpp.o
 
 .PHONY : src/libcyusb.o
@@ -219,6 +246,9 @@ help:
 	@echo "... src/MimacUSB3Connection.o"
 	@echo "... src/MimacUSB3Connection.i"
 	@echo "... src/MimacUSB3Connection.s"
+	@echo "... src/download_fx3.o"
+	@echo "... src/download_fx3.i"
+	@echo "... src/download_fx3.s"
 	@echo "... src/libcyusb.o"
 	@echo "... src/libcyusb.i"
 	@echo "... src/libcyusb.s"

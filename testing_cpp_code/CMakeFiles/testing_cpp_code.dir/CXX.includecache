@@ -36,21 +36,3 @@ include/cyusb.h
 include/MimacUSB3Connection.h
 /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/include/MimacUSB3Connection.h
 
-/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/src/MimacUSB3Connection.cpp
-exception
--
-zconf.h
--
-pthread.h
--
-cstring
--
-cerrno
--
-sys/stat.h
--
-fcntl.h
--
-../include/MimacUSB3Connection.h
-/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/include/MimacUSB3Connection.h
-

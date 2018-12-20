@@ -1,4 +1,4 @@
-Release 14.7 - Bitgen P.20160913 (lin64)
+Release 14.7 - Bitgen P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 Loading device for application Rf_Device from file '6slx45t.nph' in environment
 /opt/Xilinx/14.7/ISE_DS/ISE/.
@@ -6,9 +6,9 @@ Loading device for application Rf_Device from file '6slx45t.nph' in environment
 fgg484, speed -3
 Opened constraints file slaveFIFO2b_fpga_top.pcf.
 
-Wed Nov 21 17:00:29 2018
+Thu Dec 20 09:56:09 2018
 
-/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/bitgen -intstyle ise -w -g DebugBitstream:No -g Binary:no -g CRC:Enable -g Reset_on_err:No -g ConfigRate:2 -g ProgPin:PullUp -g TckPin:PullUp -g TdiPin:PullUp -g TdoPin:PullUp -g TmsPin:PullUp -g UnusedPin:PullDown -g UserID:0xFFFFFFFF -g ExtMasterCclk_en:No -g SPI_buswidth:1 -g TIMER_CFG:0xFFFF -g multipin_wakeup:No -g StartUpClk:CClk -g DONE_cycle:4 -g GTS_cycle:5 -g GWE_cycle:6 -g LCK_cycle:NoWait -g Security:None -g DonePipe:Yes -g DriveDone:No -g en_sw_gsr:No -g drive_awake:No -g sw_clk:Startupclk -g sw_gwe_cycle:5 -g sw_gts_cycle:4 slaveFIFO2b_fpga_top.ncd 
+/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/bitgen -intstyle ise -w -g DebugBitstream:No -g Binary:yes -g CRC:Enable -g Reset_on_err:No -g ConfigRate:2 -g ProgPin:PullUp -g TckPin:PullUp -g TdiPin:PullUp -g TdoPin:PullUp -g TmsPin:PullUp -g UnusedPin:PullDown -g UserID:0xFFFFFFFF -g ExtMasterCclk_en:No -g SPI_buswidth:1 -g TIMER_CFG:0xFFFF -g multipin_wakeup:No -g StartUpClk:CClk -g DONE_cycle:4 -g GTS_cycle:5 -g GWE_cycle:6 -g LCK_cycle:NoWait -g Security:None -g DonePipe:Yes -g DriveDone:No -g en_sw_gsr:No -g drive_awake:No -g sw_clk:Startupclk -g sw_gwe_cycle:5 -g sw_gts_cycle:4 slaveFIFO2b_fpga_top.ncd 
 
 INFO:Bitgen:341 - This design is using one or more 9K Block RAMs (RAMB8BWER). 
    9K Block RAM initialization data, both user defined and default, requires a
@@ -124,7 +124,7 @@ Summary of Bitgen Options:
 +----------------------+----------------------+
 | IEEE1532             | No*                  |
 +----------------------+----------------------+
-| Binary               | No**                 |
+| Binary               | Yes                  |
 +----------------------+----------------------+
  *  Default setting.
  ** The specified setting matches the default setting.
@@ -139,11 +139,7 @@ WARNING:PhysDesignRules:2410 - This design is using one or more 9K Block RAMs
    please reference Xilinx Answer Record 39999.
 DRC detected 0 errors and 1 warnings.  Please see the previously displayed
 individual error or warning messages for more details.
-INFO:Security:54 - 'xc6slx45t' is a WebPack part.
-WARNING:Security:42 - Your software subscription period has lapsed. Your current
-version of Xilinx tools will continue to function, but you no longer qualify for
-Xilinx software updates or new releases.
-
 Creating bit map...
 Saving bit stream in "slaveFIFO2b_fpga_top.bit".
+Saving bit stream in "slaveFIFO2b_fpga_top.bin".
 Bitstream generation is complete.

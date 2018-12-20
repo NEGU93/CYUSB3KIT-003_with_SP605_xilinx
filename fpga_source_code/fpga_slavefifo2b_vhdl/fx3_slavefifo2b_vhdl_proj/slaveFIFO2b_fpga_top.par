@@ -1,7 +1,7 @@
-Release 14.7 par P.20160913 (lin64)
+Release 14.7 par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-localhost.localdomain::  Wed Nov 21 16:50:31 2018
+barrachina-lpsc3229x::  Thu Dec 20 09:59:24 2018
 
 par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd
 slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
@@ -10,12 +10,6 @@ slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf
 Constraints file: slaveFIFO2b_fpga_top.pcf.
 Loading device for application Rf_Device from file '6slx45t.nph' in environment /opt/Xilinx/14.7/ISE_DS/ISE/.
    "slaveFIFO2b_fpga_top" is an NCD, version 3.2, device xc6slx45t, package fgg484, speed -3
-vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-INFO:Security:54 - 'xc6slx45t' is a WebPack part.
-WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue
-to function, but you no longer qualify for Xilinx software updates or new releases.
-
-----------------------------------------------------------------------
 WARNING:ConstraintSystem - The Offset constraint <TIMEGRP "FDATA_IN" OFFSET = IN 2.5 ns BEFORE COMP "clk" "RISING";>
    [slaveFIFO2b_fpga_top.pcf(724)], is specified without a duration.  This will result in a lack of hold time checks in
    timing reports.  If hold time checks are desired a duration value should be specified following the 'VALID' keyword.
@@ -25,7 +19,7 @@ Initializing temperature to 85.000 Celsius. (default - Range: 0.000 to 85.000 Ce
 Initializing voltage to 1.140 Volts. (default - Range: 1.140 to 1.260 Volts)
 
 
-Device speed data version:  "PRODUCTION 1.23 2016-11-22".
+Device speed data version:  "PRODUCTION 1.23 2013-10-13".
 
 
 
@@ -109,37 +103,37 @@ Router effort level (-rl):    High
 
 INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx
    Command Line Tools User Guide for information on generating a TSI report.
-Starting initial Timing Analysis.  REAL time: 26 secs 
-Finished initial Timing Analysis.  REAL time: 26 secs 
+Starting initial Timing Analysis.  REAL time: 15 secs 
+Finished initial Timing Analysis.  REAL time: 15 secs 
 
 Starting Router
 
 
-Phase  1  : 2279 unrouted;      REAL time: 30 secs 
+Phase  1  : 2279 unrouted;      REAL time: 17 secs 
 
-Phase  2  : 2009 unrouted;      REAL time: 36 secs 
+Phase  2  : 2009 unrouted;      REAL time: 18 secs 
 
-Phase  3  : 990 unrouted;      REAL time: 52 secs 
+Phase  3  : 990 unrouted;      REAL time: 21 secs 
 
-Phase  4  : 998 unrouted; (Setup:20564, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 17 secs 
-
-Updating file: slaveFIFO2b_fpga_top.ncd with current fully routed design.
-
-Phase  5  : 0 unrouted; (Setup:20760, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 25 secs 
-
-Phase  6  : 0 unrouted; (Setup:20266, Hold:0, Component Switching Limit:0)     REAL time: 4 mins 40 secs 
+Phase  4  : 998 unrouted; (Setup:20564, Hold:0, Component Switching Limit:0)     REAL time: 40 secs 
 
 Updating file: slaveFIFO2b_fpga_top.ncd with current fully routed design.
 
-Phase  7  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 8 mins 53 secs 
+Phase  5  : 0 unrouted; (Setup:20760, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 4 secs 
 
-Phase  8  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 8 mins 53 secs 
+Phase  6  : 0 unrouted; (Setup:20266, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 39 secs 
 
-Phase  9  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 8 mins 53 secs 
+Updating file: slaveFIFO2b_fpga_top.ncd with current fully routed design.
 
-Phase 10  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 8 mins 54 secs 
-Total REAL time to Router completion: 8 mins 54 secs 
-Total CPU time to Router completion: 8 mins 30 secs 
+Phase  7  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 43 secs 
+
+Phase  8  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 43 secs 
+
+Phase  9  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 43 secs 
+
+Phase 10  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 43 secs 
+Total REAL time to Router completion: 2 mins 44 secs 
+Total CPU time to Router completion: 2 mins 9 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -254,10 +248,10 @@ Generating Pad Report.
 
 All signals are completely routed.
 
-Total REAL time to PAR completion: 9 mins 
-Total CPU time to PAR completion: 8 mins 34 secs 
+Total REAL time to PAR completion: 2 mins 46 secs 
+Total CPU time to PAR completion: 2 mins 10 secs 
 
-Peak Memory Usage:  788 MB
+Peak Memory Usage:  830 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.

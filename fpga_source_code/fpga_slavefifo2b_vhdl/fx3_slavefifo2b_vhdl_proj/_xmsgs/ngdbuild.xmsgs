@@ -9,7 +9,7 @@
 <arg fmt="%s" index="7">CLKOUT0</arg>: <arg fmt="%s" index="8">&lt;TIMESPEC TS_inst_clk_clkout0 = PERIOD &quot;inst_clk_clkout0&quot; TS_clk / 3.7 HIGH 50%&gt;</arg>
 </msg>
 
-<msg type="warning" file="ConstraintSystem" num="0" >The Offset constraint &lt;TIMEGRP &quot;FDATA_IN&quot; OFFSET = IN 2.5ns BEFORE &quot;clk&quot; RISING;&gt; [/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf(113)], is specified without a duration.  This will result in a lack of hold time checks in timing reports.  If hold time checks are desired a duration value should be specified following the &apos;VALID&apos; keyword.
+<msg type="warning" file="ConstraintSystem" num="0" >The Offset constraint &lt;TIMEGRP &quot;FDATA_IN&quot; OFFSET = IN 2.5ns BEFORE &quot;clk&quot; RISING;&gt; [/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf(113)], is specified without a duration.  This will result in a lack of hold time checks in timing reports.  If hold time checks are desired a duration value should be specified following the &apos;VALID&apos; keyword.
 </msg>
 
 </messages>

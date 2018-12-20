@@ -3,11 +3,11 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
-<application name="pn" timeStamp="Wed Nov 21 16:50:27 2018">
+<application name="pn" timeStamp="Thu Dec 20 09:59:18 2018">
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="89D869E116554898A2FD4B8E769E3913" type="project"/>
-<property name="ProjectIteration" value="14" type="project"/>
-<property name="ProjectFile" value="/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.xise" type="project"/>
+<property name="ProjectIteration" value="15" type="project"/>
+<property name="ProjectFile" value="/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.xise" type="project"/>
 <property name="ProjectCreationTimestamp" value="2013-02-20T11:35:01" type="project"/>
 </section>
 <section name="Project Statistics" visible="true">
@@ -27,13 +27,14 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="PROP_VHDLSourceAnalysisStandard" value="VHDL-200X" type="process"/>
 <property name="PROP_intProjectCreationTimestamp" value="2013-02-20T11:35:01" type="design"/>
 <property name="PROP_intWbtProjectID" value="89D869E116554898A2FD4B8E769E3913" type="design"/>
-<property name="PROP_intWbtProjectIteration" value="14" type="process"/>
+<property name="PROP_intWbtProjectIteration" value="15" type="process"/>
 <property name="PROP_intWorkingDirLocWRTProjDir" value="Same" type="design"/>
 <property name="PROP_intWorkingDirUsed" value="No" type="design"/>
 <property name="PROP_selectedSimRootSourceNode_behav" value="work.testbench_lb" type="process"/>
 <property name="PROP_xilxBitgStart_IntDone" value="true" type="process"/>
 <property name="PROP_AutoTop" value="true" type="design"/>
 <property name="PROP_DevFamily" value="Spartan6" type="design"/>
+<property name="PROP_xilxBitgCfg_GenOpt_BinaryFile" value="true" type="process"/>
 <property name="PROP_DevDevice" value="xc6slx45t" type="design"/>
 <property name="PROP_DevFamilyPMName" value="spartan6" type="design"/>
 <property name="PROP_DevPackage" value="fgg484" type="design"/>

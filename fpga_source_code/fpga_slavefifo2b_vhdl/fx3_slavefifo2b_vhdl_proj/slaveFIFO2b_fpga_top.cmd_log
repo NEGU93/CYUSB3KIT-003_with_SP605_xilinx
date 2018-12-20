@@ -110,3 +110,8 @@ map -intstyle ise -p xc6slx45t-fgg484-3 -w -logic_opt off -ol high -t 1 -xt 0 -r
 par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
 trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf 
 bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+bitgen -intstyle ise -f slaveFIFO2b_fpga_top.ut slaveFIFO2b_fpga_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf -p xc6slx45t-fgg484-3 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd  
+map -intstyle ise -p xc6slx45t-fgg484-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ngd slaveFIFO2b_fpga_top.pcf 
+par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml slaveFIFO2b_fpga_top.twx slaveFIFO2b_fpga_top.ncd -o slaveFIFO2b_fpga_top.twr slaveFIFO2b_fpga_top.pcf 

@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "../include/MimacUSB3Connection.h"
+#include "../include/download_fx3.h"
 
 //#define DEBUG
 
@@ -187,16 +188,12 @@ int MimacUSB3Connection::claim_interface(int interface) {
  * Next bunch of functions are done to upload a .img firmware to the FX3 device
  * */
 int MimacUSB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
-    fx3_fw_target tgt = FW_TARGET_NONE;
     device_handle = cyusb_gethandle(0);
+    fx3_fw_target tgt = FW_TARGET_NONE;
 
     if (strcasecmp (tgt_str, "ram") == 0) { tgt = FW_TARGET_RAM; }
     if (strcasecmp (tgt_str, "i2c") == 0) { tgt = FW_TARGET_I2C; }
     if (strcasecmp (tgt_str, "spi") == 0) { tgt = FW_TARGET_SPI; }
-    if (tgt == FW_TARGET_NONE) {
-        fprintf (stderr, "Error: Unknown target %s\n", tgt_str);
-        return -EINVAL;
-    }
 
     if ( filename == nullptr ) {
         fprintf (stderr, "Error: Firmware binary not specified\n");
@@ -205,28 +202,26 @@ int MimacUSB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
 
     switch (tgt) {
         case FW_TARGET_RAM:
-            rStatus = fx3_usbboot_download(filename);
+            rStatus = fx3_usbboot_download(device_handle, filename);
             break;
         case FW_TARGET_I2C:
-            //rStatus = fx3_i2cboot_download(filename);
+            rStatus = fx3_i2cboot_download(device_handle, filename);
             break;
         case FW_TARGET_SPI:
-            //rStatus = fx3_spiboot_download(filename);
+            rStatus = fx3_spiboot_download(device_handle, filename);
             break;
-        // Impossible to reach default
         case FW_TARGET_NONE:
-            break;
+            fprintf (stderr, "Error: Unknown target %s\n", tgt_str);
+            return -EINVAL;
     }
-    if (rStatus != 0) {
-        fprintf (stderr, "Error: FX3 firmware programming failed\n");
-    } else {
-        printf ("FX3 firmware programming to %s completed\n", tgt_str);
-    }
+
+    if (rStatus != 0) { fprintf (stderr, "Error: FX3 firmware programming failed\n"); }
+    else { printf ("FX3 firmware programming to %s completed\n", tgt_str); }
 
     return rStatus;
 }
 
-int MimacUSB3Connection::fx3_usbboot_download(const char *filename) {
+/*int MimacUSB3Connection::fx3_usbboot_download(const char *filename) {
     unsigned char *fwBuf;
     unsigned int  *data_p;
     unsigned int i, checksum;
@@ -285,8 +280,9 @@ int MimacUSB3Connection::fx3_usbboot_download(const char *filename) {
 
     free (fwBuf);
     return 0;
-}
+}*/
 
+/*
 int MimacUSB3Connection::fx3_ram_write(unsigned char *buf, unsigned int ramAddress, unsigned short len) {
     int r;
     int index = 0;
@@ -305,9 +301,10 @@ int MimacUSB3Connection::fx3_ram_write(unsigned char *buf, unsigned int ramAddre
     }
 
     return 0;
-}
+}*/
 
 /** Read the firmware image from the file into a buffer. */
+/*
 int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char *buf, int *romsize, int *filesize) {
     int fd;
     int nbr;
@@ -330,12 +327,12 @@ int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char
         fprintf (stderr, "Error: File not found\n");
         return -3;
     }
-    nbr = read (fd, buf, 2);		/* Read first 2 bytes, must be equal to 'CY'	*/
+    nbr = read (fd, buf, 2);		// Read first 2 bytes, must be equal to 'CY'
     if (strncmp ((char *)buf,"CY",2)) {
         fprintf (stderr, "Error: Image does not have 'CY' at start.\n");
         return -4;
     }
-    nbr = read (fd, buf, 1);		/* Read 1 byte. bImageCTL	*/
+    nbr = read (fd, buf, 1);		// Read 1 byte. bImageCTL
     if (buf[0] & 0x01) {
         fprintf (stderr, "Error: Image does not contain executable code\n");
         return -5;
@@ -343,7 +340,7 @@ int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char
     if (romsize != 0)
         *romsize = i2c_eeprom_size[(buf[0] >> 1) & 0x07];
 
-    nbr = read (fd, buf, 1);		/* Read 1 byte. bImageType	*/
+    nbr = read (fd, buf, 1);		// Read 1 byte. bImageType
     if (!(buf[0] == 0xB0)) {
         fprintf (stderr, "Error: Not a normal FW binary with checksum\n");
         return -6;
@@ -356,7 +353,7 @@ int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char
     close (fd);
     return 0;
 }
-
+*/
 /**---------------------------------------------------------------------**/
 
 /**
