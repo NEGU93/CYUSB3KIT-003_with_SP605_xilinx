@@ -11,73 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a22401c3-d919-4d90-87ad-e2ec006c8ca5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/include/download_fx3.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TEST.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_ngo/netlist.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_ngo/netlist.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/ngdbuild.xmsgs" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/ngdbuild.xmsgs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/par.xmsgs" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/par.xmsgs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/pn_parser.xmsgs" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/_xmsgs/pn_parser.xmsgs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slavefifo2b_vhdl_feb20.projectmgr" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slavefifo2b_vhdl_feb20.projectmgr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/par_usage_statistics.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/par_usage_statistics.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bgn" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bgn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bit" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bit" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bld" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bld" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.cmd_log" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.cmd_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.drc" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.drc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ncd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ncd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ngd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ngd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.pad" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.pad" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.par" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.par" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.pcf" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.pcf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.twr" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.twr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.twx" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.twx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.unroutes" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.unroutes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ut" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ut" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_bitgen.xwbt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_bitgen.xwbt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_envsettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_envsettings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_guide.ncd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_guide.ncd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.map" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.mrp" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.mrp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.ncd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.ncd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.ngm" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.ngm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.xrpt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_map.xrpt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_ngdbuild.xrpt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_ngdbuild.xrpt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_pad.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_pad.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_pad.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_pad.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_par.xrpt" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_par.xrpt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_summary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_summary.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_usage.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top_usage.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.gise" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.gise" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.xise" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slavefifo2b_vhdl_feb20.xise" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/usage_statistics_webtalk.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/usage_statistics_webtalk.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/webtalk.log" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/webtalk.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/webtalk_pn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/webtalk_pn.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/xlnx_auto_0_xdb/cst.xbcd" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/xlnx_auto_0_xdb/cst.xbcd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/tutorial/counter_summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/tutorial/counter_summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fpga_source_code/tutorial/iseconfig/counter.xreport" beforeDir="false" afterPath="$PROJECT_DIR$/../fpga_source_code/tutorial/iseconfig/counter.xreport" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/MimacUSB3Connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/MimacUSB3Connection.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing_cpp_code" beforeDir="false" afterPath="$PROJECT_DIR$/testing_cpp_code" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing_cpp_code.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/testing_cpp_code.cbp" afterDir="false" />
-    </list>
+    <list default="true" id="a22401c3-d919-4d90-87ad-e2ec006c8ca5" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -101,7 +35,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
+            <state relative-caret-position="703">
               <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
               <folding>
                 <element signature="e#99#117#0" expanded="true" />
@@ -282,12 +216,12 @@
       <workItem from="1544776409119" duration="13909000" />
       <workItem from="1545035190006" duration="10712000" />
       <workItem from="1545122788569" duration="684000" />
-      <workItem from="1545313063114" duration="4513000" />
+      <workItem from="1545313063114" duration="4601000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48249000" />
+    <option name="totallyTimeSpent" value="48337000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1280" height="997" extended-state="6" />
@@ -298,7 +232,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298969" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3298969" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -714,7 +648,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
+        <state relative-caret-position="703">
           <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
           <folding>
             <element signature="e#99#117#0" expanded="true" />

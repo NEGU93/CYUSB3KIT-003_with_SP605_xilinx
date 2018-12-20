@@ -5,6 +5,12 @@ to both **program** (upload the firmware of the FPGA using the kit) and **commun
 
 In order to connect both boards, the [CYUSB3ACC-005 FMC Interconnect Board](http://www.cypress.com/documentation/development-kitsboards/cyusb3acc-005-fmc-interconnect-board-ez-usb-fx3-superspeed) was used.
 
+## Project Structure
+ - **testing_cpp_code**: Cpp project to communicate with FX3 device.
+ - **com_fpga**: firmware for both FPGA and FX3 to be able to perform a loopback communication between CPU and FPGA via FX3.
+ - **program_fpga**: Software needed to program the FPGA.
+ - **doc**: usefull documentation from Cypress and Xilinx  
+
 ## Getting Started
 ### Installing Software
 For this project, the following software was installed:
@@ -15,55 +21,9 @@ For this project, the following software was installed:
 
 Because of the final application, I was forced to move to a linux distribution. In order to do that download the linux tar installer and follow the instructions on `fx3_firmware_linux.tar.gz/cyfx3sdk/FX3_SDK_Linux_Support.pdf`. Some bugs where found during the installation but they where easily fixed searching on the Cypress forum (I don recall all of them right now. Sorry).
 
-#### cyusb_linux
-
-Try to configure and get a loopback response with cyusb_linux. The following thread may help: https://community.cypress.com/thread/41993.
-
-#### Using compiled scripts
-
-Go to `/Cypress/cyusb_linux_1.0.5/src` and run the make command. Many scripts will be compiled that may help you debug and test your board.
-
-You can test the scripts using `cyusb_linux_1.0.5/docs/cyusb_linux_programmers_guide.pdf` document.
-
-Problems encountered when running scripts:
-
-1. `./04_kerneldriver`
-```
-This device has no kernel driver attached to this interface
-Do you wish to attach/reattach a kernel driver ? (1=yes,0=no) : 1
-Entity not found
-```
-2. `./06_setalternate`
-```
-Enter interface number you wish to claim : 0
-Interface 0 claimed successfully
-Enter alternate interface you wish to set : 1
-Entity not found
-```
- - When running `./05_claiminterface` with 1 as input it also fails. It seams I have issues with other interfaces (1-4).
-3. `./08_cybulk`
-```
-Successfully claimed interface
-Input/output error
-libusb: error [submit_bulk_transfer] submiturb failed error -1 errno=9
-Input/output error
-Segmentation fault (core dumped)
-```
- - I am not sure here the correct firmware I need to upload to make it work. I believe the issue is something like that.
-
-
-### Getting started with Xilinx and the SDK
-As I had no experience with Xilinx FPGA's, I used some tutorials to practice and get to know the board:
-  1. First check the board is working correclty: [Getting Started with SP605 Evaluation Kit](https://www.xilinx.com/support/documentation/boards_and_kits/ug525.pdf)
-  2. Try to create/simulate and program a simple FPGA program and check it works: [ISE 10.1 QuickStart Tutorial](http://www.eng.ucy.ac.cy/theocharides/Courses/ECE408/qst.pdf)
-
-  Some thing may be taken into account:
-    - If the case (using SP605) when doing step 2 on the manual, just select the board disectly instead of selecting the Spartan 6 board.
-    - If you have problems when doing the pin assignment: [How to assign physical pins of FPGA to Xilinx ISE Verilog modules?](https://electronics.stackexchange.com/questions/86961/how-to-assign-physical-pins-of-fpga-to-xilinx-ise-verilog-modules/406913#406913)
-
-   #### Installing for linux:
-   Follow [ISE Design Suite: Installation and Licensing Guide](https://www.xilinx.com/support/documentation/sw_manuals/xilinx13_2/iil.pdf)
-   Once installed for linux, you may run the following:
+#### ISE linux
+ Follow [ISE Design Suite: Installation and Licensing Guide](https://www.xilinx.com/support/documentation/sw_manuals/xilinx13_2/iil.pdf)
+ Once installed for linux, you may run the following:
 ```
 ise            - Project Navigator
 xps            - EDK Platform Studio
@@ -83,9 +43,57 @@ alias ise='source /opt/Xilinx/14.7/ISE_DS/settings64.sh && ise'
 With those lines you can now run ise and vivado from the terminal in a simple way.
 There's a *.bin* file on: `CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/counter.bin` that could be used to test how to program the FPGA using *Vivado_Lab* directly.
 
+
+### Getting started with Xilinx and the SDK
+As I had no experience with Xilinx FPGA's, I used some tutorials to practice and get to know the board:
+  1. First check the board is working correctly: [Getting Started with SP605 Evaluation Kit](https://www.xilinx.com/support/documentation/boards_and_kits/ug525.pdf)
+  2. Try to create/simulate and program a simple FPGA program and check it works: [ISE 10.1 QuickStart Tutorial](http://www.eng.ucy.ac.cy/theocharides/Courses/ECE408/qst.pdf)
+
+  Some thing may be taken into account:
+    - If the case (using SP605) when doing step 2 on the manual, just select the board disectly instead of selecting the Spartan 6 board.
+    - If you have problems when doing the pin assignment: [How to assign physical pins of FPGA to Xilinx ISE Verilog modules?](https://electronics.stackexchange.com/questions/86961/how-to-assign-physical-pins-of-fpga-to-xilinx-ise-verilog-modules/406913#406913)
+
 ### Playing with Cypress SuperSpeed Explorer Kit
   1. First check the board is working correcly: [EZ-USB FX3TM SUPERSPEED EXPLORER KIT QUICK START GUIDE](http://www.cypress.com/file/133831/download)
   2. Then follow a very good documented guide. Learn how to communicate, program and run UART and debugging tools [SuperSpeed Explorer Kit User Guide](http://www.cypress.com/file/133836/download)
+
+#### cyusb_linux
+
+  Try to configure and get a loopback response with cyusb_linux.
+
+  The following thread may help: https://community.cypress.com/thread/41993.
+
+##### Using compiled scripts
+
+  Go to `/Cypress/cyusb_linux_1.0.5/src` and run the make command. Many scripts will be compiled that may help you debug and test your board.
+
+  You can test the scripts using `cyusb_linux_1.0.5/docs/cyusb_linux_programmers_guide.pdf` document.
+
+  Problems encountered when running scripts:
+
+  1. `./04_kerneldriver`
+  ```
+  This device has no kernel driver attached to this interface
+  Do you wish to attach/reattach a kernel driver ? (1=yes,0=no) : 1
+  Entity not found
+  ```
+  2. `./06_setalternate`
+  ```
+  Enter interface number you wish to claim : 0
+  Interface 0 claimed successfully
+  Enter alternate interface you wish to set : 1
+  Entity not found
+  ```
+   - When running `./05_claiminterface` with 1 as input it also fails. It seams I have issues with other interfaces (1-4).
+  3. `./08_cybulk`
+  ```
+  Successfully claimed interface
+  Input/output error
+  libusb: error [submit_bulk_transfer] submiturb failed error -1 errno=9
+  Input/output error
+  Segmentation fault (core dumped)
+  ```
+   - I am not sure here the correct firmware I need to upload to make it work. I believe the issue is something like that.
 
 ## Communicating with the FPGA
 This part uploads a firmware to the FPGA using the ISE software and then communicates the computer with the FPGA via the USB3 provided by the Cypress module.
@@ -96,7 +104,7 @@ Although it was needed to addapt from the SP601 board to the SP605.
 The pin assignment was changed using both [SP605 Hardware User Guide](https://www.xilinx.com/support/documentation/boards_and_kits/ug526.pdf)
 and [SP601 Hardware User Guide](https://www.xilinx.com/support/documentation/boards_and_kits/ug518.pdf) to make the interface pin compatible with the Cypress Interconnect Board. This way, no change was done to the CYUSB3KIT firmware.
 
-The following fragment of code shows the changes done to the ucf file to addapt the pinout to the SP605 board.
+The following fragment of code shows the changes done to the ucf file to addapt the pinout to the SP605 board. (Xilinx project is on [CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/fpga_source_code/fpga_slavefifo2b_vhdl))
 
 ```
 NET "fdata[0]"  LOC = H12;  // C10; 	-> // J63 FMC LPC: H4
@@ -181,6 +189,11 @@ In order to do that, two cables must be sold to the FPGA. In this case, as the b
 https://community.cypress.com/message/179915?et=watches.email.thread#179915
 For the FPGA signal out of the CLK I have to configure M\[0 .. 1\] correctly.
 Why the FX3 does not output the CLK I still don't know.
+
+
+## cpp Class for communicating with FX3
+
+Inside [testing_cpp_code](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/testing_cpp_code) there's a project that enables communication with the PC with the FX3. It performs download of firmware, prints descriptions and run performance tests between other things
 
 ## Program and communicate with the FPGA
 TODO: merge last two sections
