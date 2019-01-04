@@ -313,3 +313,14 @@ dismissDialog("Program Device"); // bx (ck)
 // [GUI Memory]: 74 MB (+261kb) [00:08:57]
 // [GUI Memory]: 78 MB (+330kb) [00:24:42]
 // HMemoryUtils.trashcanNow. Engine heap size: 1,365 MB. GUI used memory: 38 MB. Current time: 1/4/19 3:57:29 PM CET
+// TclEventType: HW_TARGET_NEEDS_CLOSE
+// TclEventType: HW_TARGET_CLOSE
+// TclEventType: HW_TARGET_UPDATE
+// TclEventType: DEBUG_PROBE_DELETE
+// TclEventType: HW_SERVER_UPDATE
+// Tcl Message: ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Xilinx/0000153725b701 
+// TclEventType: HW_SERVER_UPDATE
+// n (ck): Close Hardware Target: addNotify
+// Elapsed time: 1737 seconds
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (n)
+dismissDialog("Close Hardware Target"); // n (ck)
