@@ -63,7 +63,7 @@ As I had no experience with Xilinx FPGA's, I used some tutorials to practice and
 
   The following thread may help: https://community.cypress.com/thread/41993.
 
-##### Using compiled scripts
+#### Using compiled scripts
 
   Go to `/Cypress/cyusb_linux_1.0.5/src` and run the make command. Many scripts will be compiled that may help you debug and test your board.
 
@@ -172,6 +172,26 @@ When following section 10.5 from [AN65974](http://www.cypress.com/documentation/
 Here some output examples of the code working correctly:
 
 <img src="/img/fpga_com/StreamerIN.png" width="400"/> <img src="/img/fpga_com/ZLP.png" width="400"/>
+
+### Linux distribution
+
+As it was more of interest on how to make it work for the linux case. Here it is a detail description on how to do it.
+
+1. With the FPGA board OFF. Connect the FX3 device and program it with the code from the official documentation ([AN65974](http://www.cypress.com/documentation/application-notes/an65974-designing-ez-usb-fx3-slave-fifo-interface)).
+![step1](/img/fpga_com/linux/step1.png)
+![step2](/img/fpga_com/linux/step2.png)
+![step3](/img/fpga_com/linux/step3.png)
+2. Program the FPGA with the bin file of the changed code.
+![step4](/img/fpga_com/linux/step4.png)
+3. Select 'Auto connect' to detect the board.
+![step5](/img/fpga_com/linux/step5.png)
+![step6](/img/fpga_com/linux/step6.png)
+![step7](/img/fpga_com/linux/step7.png)
+![step8](/img/fpga_com/linux/step8.png)
+8. Send the information
+![step10](/img/fpga_com/linux/step10.png)
+![step11](/img/fpga_com/linux/step11.png)
+
 
 ## Program the FPGA
 

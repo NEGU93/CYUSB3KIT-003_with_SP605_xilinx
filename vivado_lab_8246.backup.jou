@@ -1,0 +1,23 @@
+#-----------------------------------------------------------
+# Vivado Lab Edition v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+# 
+# Start of session at: Fri Jan  4 15:15:10 2019
+# Process ID: 8246
+# Current directory: /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx
+# Command line: vivado_lab
+# Log file: /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/vivado_lab.log
+# Journal file: /home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/vivado_lab.jou
+#-----------------------------------------------------------
+start_gui
+open_hw
+connect_hw_server
+open_hw_target
+current_hw_device [get_hw_devices xc6slx45t_1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc6slx45t_1] 0]
+set_property PROGRAM.FILE {/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bin} [get_hw_devices xc6slx45t_1]
+set_property PROBES.FILE {} [get_hw_devices xc6slx45t_1]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc6slx45t_1]
+set_property PROGRAM.FILE {/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bin} [get_hw_devices xc6slx45t_1]
+program_hw_devices [get_hw_devices xc6slx45t_1]
+refresh_hw_device [lindex [get_hw_devices xc6slx45t_1] 0]
