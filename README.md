@@ -6,7 +6,7 @@ to both **program** (upload the firmware of the FPGA using the kit) and **commun
 In order to connect both boards, the [CYUSB3ACC-005 FMC Interconnect Board](http://www.cypress.com/documentation/development-kitsboards/cyusb3acc-005-fmc-interconnect-board-ez-usb-fx3-superspeed) was used.
 
 ## Project Structure
- - **testing_cpp_code**: Cpp project to communicate with FX3 device.
+ - **fx3_manager_cpp_source**: Cpp project to communicate with FX3 device.
  - **com_fpga**: firmware for both FPGA and FX3 to be able to perform a loopback communication between CPU and FPGA via FX3.
  - **program_fpga**: Software needed to program the FPGA.
  - **doc**: usefull documentation from Cypress and Xilinx  
