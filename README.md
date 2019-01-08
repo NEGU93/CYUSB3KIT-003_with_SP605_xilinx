@@ -178,20 +178,45 @@ Here some output examples of the code working correctly:
 As it was more of interest on how to make it work for the linux case. Here it is a detail description on how to do it.
 
 1. With the FPGA board OFF. Connect the FX3 device and program it with the code from the official documentation ([AN65974](http://www.cypress.com/documentation/application-notes/an65974-designing-ez-usb-fx3-slave-fifo-interface)).
+<p align="center">
 <img src="/img/fpga_com/linux/step1.png" width="400"/>
-<img src="/img/fpga_com/linux/step2.png" width="400"/>
-<img src="/img/fpga_com/linux/step3.png" width="400"/>
-2. Program the FPGA with the bin file of the changed code.
-<img src="/img/fpga_com/linux/step4.png" width="400"/>
-3. Select 'Auto connect' to detect the board.
-<img src="/img/fpga_com/linux/step5.png" width="400"/>
-<img src="/img/fpga_com/linux/step6.png" width="300"/>
-<img src="/img/fpga_com/linux/step7.png" width="400"/>
-<img src="/img/fpga_com/linux/step8.png" width="300"/>
-4. Send the information
-<img src="/img/fpga_com/linux/step10.png" width="400"/>
-<img src="/img/fpga_com/linux/step11.png" width="400"/>
+</p>
 
+<p align="center">
+<img src="/img/fpga_com/linux/step2.png" width="400"/>
+</p>
+
+<p align="center">
+<img src="/img/fpga_com/linux/step3.png" width="400"/>
+</p>
+2. Program the FPGA with the bin file of the changed code.
+<p align="center">
+<img src="/img/fpga_com/linux/step4.png" width="400"/>
+</p>
+3. Select 'Auto connect' to detect the board.
+<p align="center">
+<img src="/img/fpga_com/linux/step5.png" width="500"/>
+</p>
+
+<p align="center">
+<img src="/img/fpga_com/linux/step6.png" width="300"/>
+</p>
+
+<p align="center">
+<img src="/img/fpga_com/linux/step7.png" width="500"/>
+</p>
+
+<p align="center">
+<img src="/img/fpga_com/linux/step8.png" width="300"/>
+</p>
+4. Send the information
+<p align="center">
+<img src="/img/fpga_com/linux/step10.png" width="400"/>
+</p>
+
+<p align="center">
+<img src="/img/fpga_com/linux/step11.png" width="400"/>
+</p>
 
 ## Program the FPGA
 

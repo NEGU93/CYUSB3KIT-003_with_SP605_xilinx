@@ -1,18 +1,18 @@
-Release 14.7 - xst P.20160913 (lin64)
+Release 14.7 - xst P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> 
 Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.06 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.06 secs
  
 --> 
 Reading design: slaveFIFO2b_fpga_top.prj
@@ -108,31 +108,31 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Parsing VHDL file "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" into library work
 Parsing entity <fifo>.
 Parsing architecture <fifo_arch> of entity <fifo>.
-Parsing VHDL file "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" into library work
 Parsing entity <slaveFIFO2b_ZLP>.
 Parsing architecture <slaveFIFO2b_ZLP_arch> of entity <slavefifo2b_zlp>.
-Parsing VHDL file "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" into library work
 Parsing entity <slaveFIFO2b_streamOUT>.
 Parsing architecture <slaveFIFO2b_streamOUT_arch> of entity <slavefifo2b_streamout>.
-Parsing VHDL file "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" into library work
 Parsing entity <slaveFIFO2b_streamIN>.
 Parsing architecture <slaveFIFO2b_streamIN_arch> of entity <slavefifo2b_streamin>.
-Parsing VHDL file "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" into library work
 Parsing entity <slaveFIFO2b_partial>.
 Parsing architecture <slaveFIFO2b_partial_arch> of entity <slavefifo2b_partial>.
-Parsing VHDL file "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" into library work
 Parsing entity <slaveFIFO2b_loopback>.
 Parsing architecture <slaveFIFO2b_loopback_arch> of entity <slavefifo2b_loopback>.
-Parsing VHDL file "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd" into library work
 Parsing entity <clk_wiz_v3_6_2>.
 Parsing architecture <xilinx> of entity <clk_wiz_v3_6_2>.
-Parsing VHDL file "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" into library work
 Parsing entity <slaveFIFO2b_fpga_top>.
 Parsing architecture <slaveFIFO2b_fpga_top_arch> of entity <slavefifo2b_fpga_top>.
-WARNING:HDLCompiler:946 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 239: Actual for formal port c1 is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 238: Actual for formal port c1 is neither a static name nor a globally static expression
 
 =========================================================================
 *                            HDL Elaboration                            *
@@ -141,34 +141,34 @@ WARNING:HDLCompiler:946 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_
 Elaborating entity <slaveFIFO2b_fpga_top> (architecture <slaveFIFO2b_fpga_top_arch>) from library <work>.
 
 Elaborating entity <clk_wiz_v3_6_2> (architecture <xilinx>) from library <work>.
-WARNING:HDLCompiler:89 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 45: <oddr2> remains a black-box since it has no binding entity.
+WARNING:HDLCompiler:89 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 45: <oddr2> remains a black-box since it has no binding entity.
 
 Elaborating entity <slaveFIFO2b_partial> (architecture <slaveFIFO2b_partial_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" Line 144. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" Line 144. Case statement is complete. others clause is never selected
 
 Elaborating entity <slaveFIFO2b_ZLP> (architecture <slaveFIFO2b_ZLP_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" Line 127. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" Line 127. Case statement is complete. others clause is never selected
 
 Elaborating entity <slaveFIFO2b_streamIN> (architecture <slaveFIFO2b_streamIN_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" Line 75. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" Line 75. Case statement is complete. others clause is never selected
 
 Elaborating entity <slaveFIFO2b_streamOUT> (architecture <slaveFIFO2b_streamOUT_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" Line 131. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" Line 131. Case statement is complete. others clause is never selected
 
 Elaborating entity <slaveFIFO2b_loopback> (architecture <slaveFIFO2b_loopback_arch>) from library <work>.
 
 Elaborating entity <fifo> (architecture <fifo_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 147. Case statement is complete. others clause is never selected
-INFO:HDLCompiler:679 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 161. Case statement is complete. others clause is never selected
-INFO:HDLCompiler:679 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" Line 283. Case statement is complete. others clause is never selected
-INFO:HDLCompiler:679 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 578. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 147. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 161. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" Line 283. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 578. Case statement is complete. others clause is never selected
 
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
 
 Synthesizing Unit <slaveFIFO2b_fpga_top>.
-    Related source file is "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd".
     Found 1-bit register for signal <pktend>.
     Found 1-bit register for signal <slwr>.
     Found 3-bit register for signal <mode>.
@@ -194,40 +194,40 @@ Synthesizing Unit <slaveFIFO2b_fpga_top>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 1-bit 7-to-1 multiplexer for signal <slwr_n> created at line 427.
-    Found 32-bit 7-to-1 multiplexer for signal <data_out> created at line 587.
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<31>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<30>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<29>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<28>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<27>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<26>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<25>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<24>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<23>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<22>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<21>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<20>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<19>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<18>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<17>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<16>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<15>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<14>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<13>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<12>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<11>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<10>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<9>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<8>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<7>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<6>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<5>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<4>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<3>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<2>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<1>> created at line 616
-    Found 1-bit tristate buffer for signal <fpga_master_data_out<0>> created at line 616
+    Found 1-bit 7-to-1 multiplexer for signal <slwr_n> created at line 426.
+    Found 32-bit 7-to-1 multiplexer for signal <data_out> created at line 586.
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<31>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<30>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<29>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<28>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<27>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<26>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<25>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<24>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<23>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<22>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<21>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<20>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<19>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<18>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<17>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<16>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<15>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<14>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<13>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<12>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<11>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<10>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<9>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<8>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<7>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<6>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<5>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<4>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<3>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<2>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<1>> created at line 610
+    Found 1-bit tristate buffer for signal <fpga_master_data_out<0>> created at line 610
     Summary:
 	inferred  75 D-type flip-flop(s).
 	inferred  18 Multiplexer(s).
@@ -236,13 +236,13 @@ Synthesizing Unit <slaveFIFO2b_fpga_top>.
 Unit <slaveFIFO2b_fpga_top> synthesized.
 
 Synthesizing Unit <clk_wiz_v3_6_2>.
-    Related source file is "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd".
     Summary:
 	no macro.
 Unit <clk_wiz_v3_6_2> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_partial>.
-    Related source file is "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd".
     Found 4-bit register for signal <strob_cnt>.
     Found 4-bit register for signal <short_pkt_cnt>.
     Found 3-bit register for signal <current_partial_state>.
@@ -273,7 +273,7 @@ Synthesizing Unit <slaveFIFO2b_partial>.
 Unit <slaveFIFO2b_partial> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_ZLP>.
-    Related source file is "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd".
     Found 3-bit register for signal <current_zlp_state>.
     Found 32-bit register for signal <data_gen_zlp>.
     Found 4-bit register for signal <strob_cnt>.
@@ -302,7 +302,7 @@ Synthesizing Unit <slaveFIFO2b_ZLP>.
 Unit <slaveFIFO2b_ZLP> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_streamIN>.
-    Related source file is "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd".
     Found 32-bit register for signal <data_gen_stream_in>.
     Found 2-bit register for signal <current_stream_in_state>.
     Found finite state machine <FSM_3> for signal <current_stream_in_state>.
@@ -328,7 +328,7 @@ Synthesizing Unit <slaveFIFO2b_streamIN>.
 Unit <slaveFIFO2b_streamIN> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_streamOUT>.
-    Related source file is "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd".
 WARNING:Xst:647 - Input <stream_out_data_from_fx3> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 2-bit register for signal <oe_delay_cnt>.
     Found 2-bit register for signal <rd_oe_delay_cnt>.
@@ -360,9 +360,9 @@ WARNING:Xst:647 - Input <stream_out_data_from_fx3> is never used. This port will
 Unit <slaveFIFO2b_streamOUT> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_loopback>.
-    Related source file is "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd".
-INFO:Xst:3210 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_full> of the instance <fifo_inst> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_empty> of the instance <fifo_inst> is unconnected or connected to loadless signal.
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd".
+INFO:Xst:3210 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_full> of the instance <fifo_inst> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_empty> of the instance <fifo_inst> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <slrd_looback_d2_n>.
     Found 1-bit register for signal <slrd_looback_d3_n>.
     Found 1-bit register for signal <slrd_looback_d4_n>.
@@ -397,7 +397,7 @@ INFO:Xst:3210 - "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_cod
 Unit <slaveFIFO2b_loopback> synthesized.
 
 Synthesizing Unit <fifo>.
-    Related source file is "/home/ise/share/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd".
     Found 256x32-bit dual-port RAM <Mram_data_array> for signal <data_array>.
     Found 1-bit register for signal <fifo_empty_s>.
     Found 8-bit register for signal <read_ptr>.
@@ -871,13 +871,13 @@ inst_clk/pll_base_inst/CLKOUT0|    3.581|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 31.00 secs
-Total CPU time to Xst completion: 28.49 secs
+Total REAL time to Xst completion: 10.00 secs
+Total CPU time to Xst completion: 8.33 secs
  
 --> 
 
 
-Total memory usage is 501700 kilobytes
+Total memory usage is 408016 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    6 (   0 filtered)

@@ -1,0 +1,8 @@
+work	"../../rtl_vhdl/SlaveFIFO2b/fifo.vhd"
+work	"../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd"
+work	"../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd"
+work	"../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd"
+work	"../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd"
+work	"../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd"
+work	"../../rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd"
+work	"../clk_wiz_v3_6_2.vhd"

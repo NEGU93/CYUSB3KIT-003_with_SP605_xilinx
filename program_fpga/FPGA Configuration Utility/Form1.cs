@@ -165,14 +165,14 @@ namespace Template
 
         
 
-        private void button1_Click_1(object sender, EventArgs e)             // Code for Exit Button Press
+        private void button1_Click_1(object sender, EventArgs e)    // Code for Exit Button Press
         {
             Application.Exit();
         }
 
         
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)      // "Select BitStream" button
         {
             long flen = 0;
 
@@ -223,7 +223,7 @@ namespace Template
 
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)    // "Configure" button
         {
             int len = 0;
             byte[] buf = new byte[16];
@@ -244,9 +244,9 @@ namespace Template
                 CtrlEndPt.Value = 0;
                 CtrlEndPt.Index = 1;
                 len = 16;
-                CtrlEndPt.XferData(ref buf, ref len);//send vendor command to start configuration 
+                CtrlEndPt.XferData(ref buf, ref len);   //send vendor command to start configuration 
                 // myDevice.BulkOutEndPt.TimeOut = 100000;
-                myDevice.BulkOutEndPt.XferSize = 4096;//set transfer size as 4096
+                myDevice.BulkOutEndPt.XferSize = 4096;  //set transfer size as 4096
 
                 //myDevice.BulkOutEndPt.TimeOut = 1000;
 
@@ -295,7 +295,6 @@ namespace Template
                 }
                 else
                 {
-                    
                     rtConsole.AppendText ("Failed to send the Configuration data to FPGA\n");
                     StatLabel1.Text = "NEXT STEP: Please Repeat the Steps Carefully";
                 }
@@ -314,10 +313,8 @@ namespace Template
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)      // "Download Firmware" button
         {
-
-                
             CyFX3Device fx = myFX3Device as CyFX3Device;
             string tmpFilter = FOpenDialog.Filter;
             FOpenDialog.Filter = "Firmware Image files (*.img) | *.img";
@@ -371,10 +368,5 @@ namespace Template
         {
 
         }
-
-       
-        
-          
-
     }
 }

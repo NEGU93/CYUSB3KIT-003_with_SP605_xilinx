@@ -7,25 +7,25 @@ use UNISIM.vcomponents.all;
 
 entity slaveFIFO2b_fpga_top is
 	port(
-		reset_in_n : in std_logic;                                ---input reset active low
-		clk	   : in std_logic;                                ---input clk 27 Mhz  
-		clk_out	   : out std_logic;                               ---output clk 100 Mhz and 180 phase shift 
-		slcs 	   : out std_logic;                               ---output chip select
-		fdata      : inout std_logic_vector(31 downto 0);         
-		faddr      : out std_logic_vector(1 downto 0);            ---output fifo address
-		slrd	   : out std_logic;                               ---output read select
-		sloe	   : out std_logic;                               ---output output enable select
-		slwr	   : out std_logic;                               ---output write select
+		reset_in_n : in std_logic;                         ---input reset active low
+		clk	   : in std_logic;                           ---input clk 27 Mhz  
+		clk_out	: out std_logic;                       	---output clk 100 Mhz and 180 phase shift 
+		slcs 	   : out std_logic;                          ---output chip select
+		fdata    : inout std_logic_vector(31 downto 0);         
+		faddr    : out std_logic_vector(1 downto 0);     	---output fifo address
+		slrd	   : out std_logic;                          ---output read select
+		sloe	   : out std_logic;                          ---output enable select
+		slwr	   : out std_logic;                          ---output write select
                     
 		flaga	   : in std_logic;                                
 		flagb	   : in std_logic;
 		flagc	   : in std_logic;
 		flagd	   : in std_logic;
 
-		pktend	   : out std_logic;                               ---output pkt end 
+		pktend	: out std_logic;                       	---output pkt end 
 		PMODE	   : out std_logic_vector(1 downto 0);
 		RESET	   : out std_logic;
-		mode_p     : in std_logic_vector(2 downto 0)              ----signals for debugging
+		mode_p   : in std_logic_vector(2 downto 0)       	---signals for debugging
 --		PMODE_2	   : out std_logic
 --		int_n      : in std_logic;
 --		tri_state  : in std_logic_vector(12 downto 0)
@@ -58,14 +58,14 @@ end component;
 --component partial
 component slaveFIFO2b_partial
 	port(
-		reset_n			: in std_logic;
-	        clk_100			: in std_logic;
-                partial_mode_selected   : in std_logic;
-                flaga_d                 : in std_logic;
-                flagb_d 		: in std_logic;
-                slwr_partial_n		: out std_logic;
-                pktend_partial_n	: out std_logic;
-                data_out_partial	: out std_logic_vector(31 downto 0)
+		reset_n				: in std_logic;
+	   clk_100				: in std_logic;
+      partial_mode_selected   : in std_logic;
+      flaga_d           : in std_logic;
+      flagb_d 				: in std_logic;
+      slwr_partial_n		: out std_logic;
+      pktend_partial_n	: out std_logic;
+      data_out_partial	: out std_logic_vector(31 downto 0)
 	     );
 end component;
 
@@ -73,13 +73,13 @@ end component;
 component slaveFIFO2b_zlp
 	port(
 		reset_n                : in std_logic;
-                clk_100                : in std_logic;
-                zlp_mode_selected      : in std_logic;
-                flaga_d                : in std_logic;
-                flagb_d                : in std_logic;
-                slwr_zlp_n             : out std_logic;
-                pktend_zlp_n           : out std_logic;
-                data_out_zlp           : out std_logic_vector(31 downto 0)
+      clk_100                : in std_logic;
+      zlp_mode_selected      : in std_logic;
+      flaga_d                : in std_logic;
+      flagb_d                : in std_logic;
+      slwr_zlp_n             : out std_logic;
+      pktend_zlp_n           : out std_logic;
+      data_out_zlp           : out std_logic_vector(31 downto 0)
 	    );
 end component;
 
@@ -87,12 +87,12 @@ end component;
 component slaveFIFO2b_streamIN
 	port(
 		reset_n                   : in std_logic;
-                clk_100                   : in std_logic;
-                stream_in_mode_selected   : in std_logic;
-                flaga_d                   : in std_logic;
-                flagb_d                   : in std_logic;
-                slwr_streamIN_n           : out std_logic;
-                data_out_stream_in        : out std_logic_vector(31 downto 0)
+      clk_100                   : in std_logic;
+      stream_in_mode_selected   : in std_logic;
+      flaga_d                   : in std_logic;
+      flagb_d                   : in std_logic;
+      slwr_streamIN_n           : out std_logic;
+      data_out_stream_in        : out std_logic_vector(31 downto 0)
 	    );
 end component;
 
@@ -100,30 +100,31 @@ end component;
 component slaveFIFO2b_streamOUT
 	port(
 		reset_n                   : in std_logic;
-                clk_100                   : in std_logic;
-                stream_out_mode_selected  : in std_logic;
-                flagc_d                   : in std_logic;
-                flagd_d                   : in std_logic;
-                stream_out_data_from_fx3  : in std_logic_vector(31 downto 0);
-                slrd_streamOUT_n          : out std_logic;
-                sloe_streamOUT_n          : out std_logic
+      clk_100                   : in std_logic;
+      stream_out_mode_selected  : in std_logic;
+      flagc_d                   : in std_logic;
+      flagd_d                   : in std_logic;
+      stream_out_data_from_fx3  : in std_logic_vector(31 downto 0);
+      slrd_streamOUT_n          : out std_logic;
+      sloe_streamOUT_n          : out std_logic
 	     );
 end component;
 
+--component loopback
 component slaveFIFO2b_loopback
 	port(
 		 reset_n                             : in std_logic;
-		 clk_100			     : in std_logic;
-                 loopback_mode_selected              : in std_logic;
-                 flaga_d                             : in std_logic;
-                 flagb_d                             : in std_logic;
-                 flagc_d                             : in std_logic;
-                 flagd_d                             : in std_logic;
-                 data_in_loopback                    : in std_logic_vector(31 downto 0);
-                 slrd_loopback_n                     : out std_logic;
-                 sloe_loopback_n                     : out std_logic;
-                 slwr_loopback_n                     : out std_logic;
-                 loopback_rd_select_slavefifo_addr   : out std_logic;
+		 clk_100			     						 : in std_logic;
+       loopback_mode_selected              : in std_logic;
+       flaga_d                             : in std_logic;
+       flagb_d                             : in std_logic;
+       flagc_d                             : in std_logic;
+       flagd_d                             : in std_logic;
+       data_in_loopback                    : in std_logic_vector(31 downto 0);
+       slrd_loopback_n                     : out std_logic;
+       sloe_loopback_n                     : out std_logic;
+       slwr_loopback_n                     : out std_logic;
+       loopback_rd_select_slavefifo_addr   : out std_logic;
 		 data_out_loopback                   : out std_logic_vector(31 downto 0)
 	    );
 end component;
@@ -141,42 +142,42 @@ constant STREAM_OUT  : std_logic_vector(2 downto 0) := "100";
 ------------------------------
 signal reset_n			      : std_logic;
 signal clk_100			      : std_logic;
-signal clk_100_180		      : std_logic;
-signal lock			      : std_logic;
-signal mode_changed                   : std_logic;
-signal data_out			      : std_logic_vector(31 downto 0);
+signal clk_100_180		   : std_logic;
+signal lock			      	: std_logic;
+signal mode_changed        : std_logic;
+signal data_out			   : std_logic_vector(31 downto 0);
 signal data_out_d		      : std_logic_vector(31 downto 0);
-signal fpga_master_data_out	      : std_logic_vector(31 downto 0);
+signal fpga_master_data_out : std_logic_vector(31 downto 0);
 
-signal slrd_n                        : std_logic;
+signal slrd_n              : std_logic;
 signal slwr_n			      : std_logic;
-signal slwr_n_d			      : std_logic;
+signal slwr_n_d			   : std_logic;
 signal sloe_n			      : std_logic;
-signal slcs_n      		      : std_logic;
+signal slcs_n      		   : std_logic;
 
-signal fifo_address                   : std_logic_vector(1 downto 0);
-signal fifo_address_d                 : std_logic_vector(1 downto 0);
-
-
-signal mode                           : std_logic_vector(2 downto 0);
+signal fifo_address        : std_logic_vector(1 downto 0);
+signal fifo_address_d      : std_logic_vector(1 downto 0);
 
 
-signal data_out_partial	              : std_logic_vector(31 downto 0);
-signal data_out_loopback              : std_logic_vector(31 downto 0);
-signal data_out_zlp	              : std_logic_vector(31 downto 0);
-signal data_out_stream_in             : std_logic_vector(31 downto 0);
+signal mode                : std_logic_vector(2 downto 0);
+
+
+signal data_out_partial	   : std_logic_vector(31 downto 0);
+signal data_out_loopback   : std_logic_vector(31 downto 0);
+signal data_out_zlp	      : std_logic_vector(31 downto 0);
+signal data_out_stream_in  : std_logic_vector(31 downto 0);
 
 --internal counter signals to delay
 
-signal pktend_n		              : std_logic;
-signal pktend_n_d	              : std_logic;
-signal flaga_d                        : std_logic;
-signal flagb_d                        : std_logic;
-signal flagc_d                        : std_logic;
-signal flagd_d                        : std_logic;
+signal pktend_n		      : std_logic;
+signal pktend_n_d	         : std_logic;
+signal flaga_d             : std_logic;
+signal flagb_d             : std_logic;
+signal flagc_d             : std_logic;
+signal flagd_d             : std_logic;
 
 signal partial_mode_selected          : std_logic;
-signal zlp_mode_selected              : std_logic;
+signal zlp_mode_selected   			  : std_logic;
 signal stream_in_mode_selected        : std_logic;
 signal stream_out_mode_selected       : std_logic;
 signal loopback_mode_selected         : std_logic;
@@ -221,14 +222,12 @@ begin  -- architecture begin
 --generating the clock(PLL instantiation)
 inst_clk : clk_wiz_v3_6_2
 	port map (
-                CLK_IN1	      => clk,
-	        CLK_OUT1      => clk_100,
-		RESET         => reset2pll,
-                LOCKED	      => lock);
-
+         CLK_IN1	      => clk,
+	      CLK_OUT1      	=> clk_100,
+			RESET         	=> reset2pll,
+         LOCKED	      => lock);
 --used for TB
 --clk_100 <= clk;
-
 
 --ODDR2 instantiation to send the clk to FX3
 oddr_inst : ODDR2                       
@@ -245,68 +244,68 @@ oddr_inst : ODDR2
 
 partial_inst : slaveFIFO2b_partial
 	port map(
-		reset_n			=> reset_n,				
-	        clk_100			=> clk_100,			
-                partial_mode_selected   => partial_mode_selected,   
-                flaga_d                 => flaga_d,                 
-                flagb_d 		=> flagb_d,		
-                slwr_partial_n		=> slwr_partial_n,		
-                pktend_partial_n	=> pktend_partial_n,	
-                data_out_partial	=> data_out_partial	
+		reset_n						=> reset_n,				
+	   clk_100						=> clk_100,			
+      partial_mode_selected   => partial_mode_selected,   
+      flaga_d                 => flaga_d,                 
+      flagb_d 						=> flagb_d,		
+      slwr_partial_n				=> slwr_partial_n,		
+      pktend_partial_n			=> pktend_partial_n,	
+      data_out_partial			=> data_out_partial	
 	     );
 
 --component zlp
 zlp_inst : slaveFIFO2b_zlp
 	port map(
 		reset_n                 => reset_n,          
-                clk_100                 => clk_100,         
-                zlp_mode_selected       => zlp_mode_selected,
-                flaga_d                 => flaga_d,          
-                flagb_d                 => flagb_d,          
-                slwr_zlp_n              => slwr_zlp_n,       
-                pktend_zlp_n            => pktend_zlp_n,     
-                data_out_zlp            => data_out_zlp    
+      clk_100                 => clk_100,         
+      zlp_mode_selected       => zlp_mode_selected,
+      flaga_d                 => flaga_d,          
+      flagb_d                 => flagb_d,          
+      slwr_zlp_n              => slwr_zlp_n,       
+      pktend_zlp_n            => pktend_zlp_n,     
+      data_out_zlp            => data_out_zlp    
 	    );
 
 --component stremIN
 streamIN_inst : slaveFIFO2b_streamIN
 	port map(
 		reset_n                 => reset_n,                  
-                clk_100                 => clk_100,                 
-                stream_in_mode_selected => stream_in_mode_selected, 
-                flaga_d                 => flaga_d,                 
-                flagb_d                 => flagb_d,                 
-                slwr_streamIN_n         => slwr_streamIN_n,         
-                data_out_stream_in      => data_out_stream_in      
+      clk_100                 => clk_100,                 
+      stream_in_mode_selected => stream_in_mode_selected, 
+      flaga_d                 => flaga_d,                 
+      flagb_d                 => flagb_d,                 
+      slwr_streamIN_n         => slwr_streamIN_n,         
+      data_out_stream_in      => data_out_stream_in      
 	    );                                                    
 --instantiation of streamOUT
 streamOUT_inst : slaveFIFO2b_streamOUT
 	port map(
 		reset_n                   => reset_n,                 
-                clk_100                   => clk_100,                 
-                stream_out_mode_selected  => stream_out_mode_selected,
-                flagc_d                   => flagc_d,                 
-                flagd_d                   => flagd_d,                 
-                stream_out_data_from_fx3  => stream_out_data_from_fx3,
-                slrd_streamOUT_n          => slrd_streamOUT_n,        
-                sloe_streamOUT_n          => sloe_streamOUT_n        
+      clk_100                   => clk_100,                 
+      stream_out_mode_selected  => stream_out_mode_selected,
+      flagc_d                   => flagc_d,                 
+      flagd_d                   => flagd_d,                 
+      stream_out_data_from_fx3  => stream_out_data_from_fx3,
+      slrd_streamOUT_n          => slrd_streamOUT_n,        
+      sloe_streamOUT_n          => sloe_streamOUT_n        
 	     );
 
 --instantiation of loopback
 loopback_inst : slaveFIFO2b_loopback
 	port map(
 		 reset_n                             => reset_n,                           
-		 clk_100			     => clk_100,			  
-                 loopback_mode_selected              => loopback_mode_selected,           
-                 flaga_d                             => flaga_d,                          
-                 flagb_d                             => flagb_d,                          
-                 flagc_d                             => flagc_d,                          
-                 flagd_d                             => flagd_d,                          
+		 clk_100			     						 => clk_100,			  
+       loopback_mode_selected              => loopback_mode_selected,           
+       flaga_d                             => flaga_d,                          
+       flagb_d                             => flagb_d,                          
+       flagc_d                             => flagc_d,                          
+       flagd_d                             => flagd_d,                          
 		 data_in_loopback                    => loopback_data_from_fx3,                
-                 slrd_loopback_n                     => slrd_loopback_n,                   
-                 sloe_loopback_n                     => sloe_loopback_n,                   
-                 slwr_loopback_n                     => slwr_loopback_n,                   
-                 loopback_rd_select_slavefifo_addr   => loopback_rd_select_slavefifo_addr,
+       slrd_loopback_n                     => slrd_loopback_n,                   
+       sloe_loopback_n                     => sloe_loopback_n,                   
+       slwr_loopback_n                     => slwr_loopback_n,                   
+       loopback_rd_select_slavefifo_addr   => loopback_rd_select_slavefifo_addr,
 		 data_out_loopback                   => data_out_loopback                
 	    );                                       
 		                                     
@@ -339,10 +338,10 @@ end process;
 --selecting the input data for streamOUT or loopBack 
 process(current_fpga_master_mode, fdata_d)begin
 	if(current_fpga_master_mode = fpga_master_mode_loopback)then
-		loopback_data_from_fx3   <= fdata_d;
-		stream_out_data_from_fx3 <= (others => '0');
+		loopback_data_from_fx3   <= fdata_d;				
+		stream_out_data_from_fx3 <= (others => '0');		--No stream_out mode
 	elsif(current_fpga_master_mode = fpga_master_mode_stream_out)then
-		loopback_data_from_fx3   <= (others => '0');
+		loopback_data_from_fx3   <= (others => '0');		--No loopback mode
 		stream_out_data_from_fx3 <= fdata_d;
 	else
 		loopback_data_from_fx3   <= (others => '0');
@@ -388,9 +387,9 @@ end process;
 --selection of slave fifo address
 process(loopback_rd_select_slavefifo_addr, current_fpga_master_mode)begin
 	if((loopback_rd_select_slavefifo_addr = '1') or (current_fpga_master_mode = fpga_master_mode_stream_out))then
-		fifo_address <= "11";
+		fifo_address <= "11"; 	--Out mode
 	elsif((current_fpga_master_mode = fpga_master_mode_partial) or (current_fpga_master_mode = fpga_master_mode_zlp) or (current_fpga_master_mode = fpga_master_mode_stream_in))then
-		fifo_address <= "00";
+		fifo_address <= "00";	--In mode
 	else
 		fifo_address <= "00";
 	end if;	
@@ -412,7 +411,7 @@ process(current_fpga_master_mode, slrd_loopback_n, sloe_loopback_n, slrd_streamO
 	case current_fpga_master_mode is
 		when fpga_master_mode_loopback =>	
 			slrd_n <= slrd_loopback_n;
-		        sloe_n <= sloe_loopback_n;
+		   sloe_n <= sloe_loopback_n;
 		when fpga_master_mode_stream_out =>
 			slrd_n <= slrd_streamOUT_n;
 			sloe_n <= sloe_streamOUT_n;
@@ -441,9 +440,9 @@ end process;
 process(clk_100, reset_n) begin
 	if(reset_n = '0')then
 		slwr_n_d <= '1';
-        elsif(clk_100'event and clk_100 = '1')then
-                slwr_n_d <= slwr_n;
-        end if;
+   elsif(clk_100'event and clk_100 = '1')then
+      slwr_n_d <= slwr_n;
+   end if;
 end process;
 
 
@@ -462,13 +461,13 @@ end process;
 process(clk_100, reset_n) begin
 	if(reset_n = '0')then
 		pktend_n_d <= '1';
-        elsif(clk_100'event and clk_100 = '1')then
-                pktend_n_d <= pktend_n;
-        end if;
+   elsif(clk_100'event and clk_100 = '1')then
+      pktend_n_d <= pktend_n;
+   end if;
 end process;
 
 
-
+-------- Selection of modes ----------
 
 --selection of loopback mode
 process(current_fpga_master_mode)begin
@@ -515,17 +514,18 @@ process(current_fpga_master_mode)begin
 	end if;
 end process;
 
-
+----------- FSM --------------------
 
 --Mode select state machine
 fpga_master_mode_fsm_f : process(clk_100, reset_n) begin
 	if(reset_n = '0')then
-      		current_fpga_master_mode <= fpga_master_mode_idle;
-        elsif(clk_100'event and clk_100 = '1')then
-                current_fpga_master_mode <= next_fpga_master_mode;
-        end if;
+		current_fpga_master_mode <= fpga_master_mode_idle;
+   elsif(clk_100'event and clk_100 = '1')then
+      current_fpga_master_mode <= next_fpga_master_mode;
+   end if;
   end process;
 
+--If mode changed then go first to idle and then from idle to that mode.
 --Mode select state machine combo
 fpga_master_mode_fsm : process(current_fpga_master_mode, mode) begin
 	next_fpga_master_mode <= current_fpga_master_mode;
@@ -581,43 +581,37 @@ fpga_master_mode_fsm : process(current_fpga_master_mode, mode) begin
 end process;	
 
 
-
 --selection of data_out based on current mode
 process(current_fpga_master_mode, data_out_partial, data_out_zlp, data_out_stream_in, data_out_loopback)begin
 	case current_fpga_master_mode is
 	when fpga_master_mode_partial =>
 		data_out <= data_out_partial;
-
 	when fpga_master_mode_zlp =>
 		data_out <= data_out_zlp;
-
 	when fpga_master_mode_stream_in =>
 		data_out <= data_out_stream_in;
-	
 	when fpga_master_mode_loopback =>
 		data_out <= data_out_loopback;
-
 	when others =>
 		data_out <= (others => '0');
-	
 	end case;
 end process;
 
 
 process(clk_100, reset_n) begin
 	if(reset_n = '0')then
-      		data_out_d <= (others => '0');
-        elsif(clk_100'event and clk_100 = '1')then
-                data_out_d <= data_out;
-        end if;
-  end process;
+      data_out_d <= (others => '0');
+   elsif(clk_100'event and clk_100 = '1')then
+		data_out_d <= data_out;
+   end if;
+end process;
 
 
 process(slwr_n_d, data_out_d)begin
 	if(slwr_n_d = '1')then
 		fpga_master_data_out <= (others =>'Z');
 	else
-		fpga_master_data_out <= data_out_d;
+		fpga_master_data_out <= data_out_d;	--This is the actual fdata
 	end if;
 end process;
 

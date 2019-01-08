@@ -6,19 +6,19 @@ use ieee.std_logic_unsigned.all;
 
 entity slaveFIFO2b_loopback is
 	port(
-		 reset_n                             : in std_logic;
-		 clk_100			     : in std_logic;
-                 loopback_mode_selected              : in std_logic;
-                 flaga_d                             : in std_logic;
-                 flagb_d                             : in std_logic;
-                 flagc_d                             : in std_logic;
-                 flagd_d                             : in std_logic;
-                 data_in_loopback                    : in std_logic_vector(31 downto 0);
-                 slrd_loopback_n                      : out std_logic;
-                 sloe_loopback_n                      : out std_logic;
-                 slwr_loopback_n                      : out std_logic;
-                 loopback_rd_select_slavefifo_addr   : out std_logic;
-		 data_out_loopback                   : out std_logic_vector(31 downto 0)
+		 reset_n                            : in std_logic;
+		 clk_100			     						: in std_logic;
+       loopback_mode_selected             : in std_logic;
+       flaga_d                            : in std_logic;
+       flagb_d                            : in std_logic;
+       flagc_d                            : in std_logic;
+       flagd_d                            : in std_logic;
+       data_in_loopback                   : in std_logic_vector(31 downto 0);
+       slrd_loopback_n                    : out std_logic;
+       sloe_loopback_n                    : out std_logic;
+       slwr_loopback_n                    : out std_logic;
+       loopback_rd_select_slavefifo_addr  : out std_logic;
+		 data_out_loopback                  : out std_logic_vector(31 downto 0)
 	    );
 end entity slaveFIFO2b_loopback;
 
@@ -29,13 +29,13 @@ component fifo
 	  port(
 	       din           : in std_logic_vector(31 downto 0);
   	       write_busy    : in std_logic;
-               fifo_full     : out std_logic;
-               dout	     : out std_logic_vector(31 downto 0);
-               read_busy     : in std_logic;
-               fifo_empty    : out std_logic;
-               fifo_clk      : in std_logic;
-               reset_al	     : in std_logic;
-               fifo_flush    : in std_logic
+          fifo_full     : out std_logic;
+          dout	     		: out std_logic_vector(31 downto 0);
+          read_busy     : in std_logic;
+          fifo_empty    : out std_logic;
+          fifo_clk      : in std_logic;
+          reset_al	   : in std_logic;
+          fifo_flush    : in std_logic
 	      );
 end component;	 
 
@@ -72,15 +72,15 @@ begin  -- architecture begin
 --fifo instantiation for LoopBack mode
 fifo_inst : fifo
 	port map (
-		   din       	=> fifo_data_in,	
-                   write_busy   => fifo_push,
-                   fifo_full    => fifo_full,
-                   dout	        => data_out_loopback,
-                   read_busy    => fifo_pop,
-                   fifo_empty   => fifo_empty,
-                   fifo_clk     => clk_100,
-                   reset_al	=> reset_n,
-                   fifo_flush   => fifo_flush
+		   din       	 => fifo_data_in,	
+         write_busy   => fifo_push,
+         fifo_full    => fifo_full,
+         dout	       => data_out_loopback,
+         read_busy    => fifo_pop,
+         fifo_empty   => fifo_empty,
+         fifo_clk     => clk_100,
+         reset_al		 => reset_n,
+         fifo_flush   => fifo_flush
 		 ); 
 
 
@@ -108,7 +108,7 @@ process(current_loop_back_state)begin
 	if((current_loop_back_state = loop_back_write))then
 		slwr_loopback_n <= '0';
 	else
-	        slwr_loopback_n <= '1';
+	   slwr_loopback_n <= '1';
 	end if;
 end process;
 
@@ -178,7 +178,7 @@ process(clk_100, reset_n)begin
 	elsif(clk_100'event and clk_100 = '1')then	
 	 	if(current_loop_back_state = loop_back_read) then
 			rd_oe_delay_cnt <= "01";
-        	elsif((current_loop_back_state = loop_back_read_rd_and_oe_delay) and (rd_oe_delay_cnt > 0))then
+      elsif((current_loop_back_state = loop_back_read_rd_and_oe_delay) and (rd_oe_delay_cnt > 0))then
 			rd_oe_delay_cnt <= rd_oe_delay_cnt - 1;
 		else
 			rd_oe_delay_cnt <= rd_oe_delay_cnt;
@@ -193,7 +193,7 @@ process(clk_100, reset_n)begin
 	elsif(clk_100'event and clk_100 = '1')then	
 	 	if(current_loop_back_state = loop_back_read_rd_and_oe_delay) then
 			oe_delay_cnt <= "01";
-        	elsif((current_loop_back_state = loop_back_read_oe_delay) and (oe_delay_cnt > 0))then
+      elsif((current_loop_back_state = loop_back_read_oe_delay) and (oe_delay_cnt > 0))then
 			oe_delay_cnt <= oe_delay_cnt - 1;
 		else
 			oe_delay_cnt <= oe_delay_cnt;
@@ -205,10 +205,10 @@ end process;
 --loopback mode state machine 
 loopback_mode_fsm_f : process(clk_100, reset_n) begin
 	if(reset_n = '0')then
-      		current_loop_back_state <= loop_back_idle;
-        elsif(clk_100'event and clk_100 = '1')then
-                current_loop_back_state <= next_loop_back_state;
-        end if;
+      current_loop_back_state <= loop_back_idle;
+   elsif(clk_100'event and clk_100 = '1')then
+      current_loop_back_state <= next_loop_back_state;
+   end if;
 end process;
 
 --LoopBack mode state machine combo

@@ -5,15 +5,15 @@ use ieee.std_logic_arith.all;
 
 entity fifo is
 	port(
-		din		: in std_logic_vector(31 downto 0);
-                write_busy	: in std_logic;
-                fifo_full	: out std_logic;
-                dout		: out std_logic_vector(31 downto 0);
-                read_busy 	: in std_logic;
-                fifo_empty	: out std_logic;
-                fifo_clk	: in std_logic;
-                reset_al		: in std_logic; 
-                fifo_flush	: in std_logic
+		din			: in std_logic_vector(31 downto 0);
+      write_busy	: in std_logic;
+      fifo_full	: out std_logic;
+      dout			: out std_logic_vector(31 downto 0);
+      read_busy 	: in std_logic;
+      fifo_empty	: out std_logic;
+      fifo_clk		: in std_logic;
+      reset_al		: in std_logic; 
+      fifo_flush	: in std_logic
 	    );
 end entity fifo;	    
 
@@ -63,14 +63,13 @@ end process;
 
 process(fifo_clk, reset_al) begin
 	if (reset_al = '0') then 
-       		read_ptr <= "00000000";
+      read_ptr <= "00000000";
   	elsif(fifo_clk'event and fifo_clk = '1') then
 		read_ptr <= next_read_ptr;
 	end if;	
 end process;
 
 --Calculate next read pointer value
-
 process (fifo_flush, read_busy, read_ptr, fifo_empty_s) begin
 	if(fifo_flush = '1')then
 		next_read_ptr <= "00000000";
@@ -126,9 +125,9 @@ end process;
 
 process(fifo_clk, reset_al) begin
         if(reset_al = '0') then 
-                write_busy_d <= '0';
+            write_busy_d <= '0';
         elsif(fifo_clk'event and fifo_clk = '1')then    
-                write_busy_d <= write_busy;
+				write_busy_d <= write_busy;
         end if;
 end process;
 

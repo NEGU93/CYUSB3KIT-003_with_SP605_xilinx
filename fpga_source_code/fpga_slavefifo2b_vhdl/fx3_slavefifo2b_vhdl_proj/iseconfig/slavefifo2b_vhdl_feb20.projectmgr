@@ -10,13 +10,13 @@
          <ClosedNode>/slaveFIFO2b_fpga_top - slaveFIFO2b_fpga_top_arch C:|Users|rskv|Downloads|AN65974 (1)|AN65974 - Source files for FPGA code and FX3 firmware|FPGA Source files|fx3_slaveFIFO2b_xilinx|rtl_vhdl|SlaveFIFO2b|slaveFIFO2b_fpga_top.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>slaveFIFO2b_fpga_top - slaveFIFO2b_fpga_top_arch (/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd)</SelectedItem>
+         <SelectedItem>fifo_inst - fifo - fifo_arch (/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000306000000020000000000000000000000000200000064ffffffff000000810000000300000002000003060000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>slaveFIFO2b_fpga_top - slaveFIFO2b_fpga_top_arch (/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd)</CurrentItem>
+      <CurrentItem>fifo_inst - fifo - fifo_arch (/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
@@ -27,13 +27,13 @@
          <ClosedNode>User Constraints</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>Generate Programming File</SelectedItem>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >8</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000158000000010000000100000000000000000000000064ffffffff000000810000000000000001000001580000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000167000000010000000100000000000000000000000064ffffffff000000810000000000000001000001670000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>Generate Programming File</CurrentItem>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView guiview="File" >
       <ClosedNodes>
@@ -109,7 +109,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000016e000000010000000100000000000000000000000064ffffffff0000008100000000000000010000016e0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000167000000010000000100000000000000000000000064ffffffff000000810000000000000001000001670000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Design Utilities</CurrentItem>
    </ItemView>

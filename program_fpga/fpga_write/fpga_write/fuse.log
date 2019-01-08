@@ -1,0 +1,28 @@
+Running: C:\Xilinx\13.4\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -o C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/testbench_isim_beh.exe -prj C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/testbench_beh.prj work.testbench work.glbl 
+ISim O.87xd (signature 0x2f00eba5)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Analyzing Verilog file "C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/../../aug6/streamout.v" into library work
+Analyzing Verilog file "C:/Xilinx/13.4/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Parsing VHDL file "C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/testbench.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 66384 KB
+Fuse CPU Usage: 343 ms
+Compiling module glbl
+Compiling module fpga_master
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package std_logic_arith
+Compiling package std_logic_unsigned
+Compiling package numeric_std
+Compiling package vl_types
+Compiling architecture behavior of entity testbench
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 7 VHDL Units
+Compiled 2 Verilog Units
+Built simulation executable C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/testbench_isim_beh.exe
+Fuse Memory Usage: 91540 KB
+Fuse CPU Usage: 671 ms

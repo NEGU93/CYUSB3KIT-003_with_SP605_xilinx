@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated   -->
+<!--     by the Xilinx ISE software.  Any direct editing or        -->
+<!--     changes made to this file may result in unpredictable     -->
+<!--     behavior or data corruption.  It is strongly advised that -->
+<!--     users do not edit the contents of this file.              -->
+<!--                                                               -->
+<!-- Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.    -->
+
+<messages>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/for SP6/100 MHz/last mint in 100 mhz/all signlas added/zlp and partial flag 32 bit in watermark 4/fpga_write/ipcore_dir/clk_wiz_v3_6.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/for SP6/100 MHz/last mint in 100 mhz/all signlas added/zlp and partial flag 32 bit in watermark 4/fpga_write/ipcore_dir/clk_wiz_v3_6/example_design/clk_wiz_v3_6_exdes.vhd&quot; into library work</arg>
+</msg>
+
+</messages>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DARoots Version="1"
+		Minor="19">
+	<FileSet Name="sources_1"
+			Type="DesignSrcs"
+			RelSrcDir="$PSRCDIR/sources_1">
+		<Filter Type="Srcs"/>
+		<File Path="$PDATADIR/sources_1/ports.xml">
+			<FileInfo SFType="PortsDb">
+				<Attr Name="UsedInSynthesis"
+						Val="1"/>
+				<Attr Name="UsedInImplementation"
+						Val="1"/>
+				<Attr Name="UsedInSimulation"
+						Val="1"/>
+			</FileInfo>
+		</File>
+		<File Path="$PPRDIR/../../../aug6/streamout.v">
+			<FileInfo>
+				<Attr Name="UsedInSynthesis"
+						Val="1"/>
+				<Attr Name="UsedInImplementation"
+						Val="1"/>
+				<Attr Name="UsedInSimulation"
+						Val="1"/>
+			</FileInfo>
+		</File>
+		<Config>
+			<Option Name="DesignMode"
+					Val="RTL"/>
+			<Option Name="TopModule"
+					Val="fpga_master"/>
+			<Option Name="TopLib"
+					Val="work"/>
+			<Option Name="TopRTLFile"
+					Val="$PPRDIR/../../../aug6/streamout.v"/>
+			<Option Name="TopAutoSet"
+					Val="TRUE"/>
+		</Config>
+	</FileSet>
+</DARoots>

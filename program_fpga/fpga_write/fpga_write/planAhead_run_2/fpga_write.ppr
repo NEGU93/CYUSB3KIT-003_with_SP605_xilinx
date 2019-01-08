@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Project Version="4" Minor="27">
+	<FileSet Dir="sources_1" File="fileset.xml"/>
+	<FileSet Dir="constrs_1" File="fileset.xml"/>
+	<DefaultLaunch Dir="$PRUNDIR"/>
+	<DefaultPromote Dir="$PROMOTEDIR"/>
+	<Config>
+		<Option Name="Part" Val="xc3s500epq208-4"/>
+		<Option Name="TargetLanguage" Val="Verilog"/>
+		<Option Name="SourceMgmtMode" Val="All"/>
+	</Config>
+</Project>
+
