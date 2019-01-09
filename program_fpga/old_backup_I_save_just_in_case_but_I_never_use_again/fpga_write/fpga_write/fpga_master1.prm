@@ -1,0 +1,14 @@
+PROMGEN: Xilinx Prom Generator P.40xd
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+promgen -p bin -u 0 "C:\Work\work_proj\Configuring FPGA over USB using FX3\AN65974\fpga_write\fpga_write\fpga_master.bit" -o "C:\Work\work_proj\Configuring FPGA over USB using FX3\AN65974\fpga_write\fpga_write\fpga_master1.bin" 
+
+PROM C:\Work\work_proj\Configuring FPGA over USB using FX3\AN65974\fpga_write\fpga_write\fpga_master1.prm map: Fri Nov 16 17:04:21 2012
+
+Format        Bin
+Size          256K
+PROM start    00000000
+PROM end      0003ffff
+
+        Addr1        Addr2                     Date File(s)
+     00000000     00035d13     Nov 04 12:39:53 2012 C:/Work/work_proj/Configuring FPGA over USB using FX3/AN65974/fpga_write/fpga_write/fpga_master.bit

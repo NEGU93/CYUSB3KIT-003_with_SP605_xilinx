@@ -1,0 +1,109 @@
+#-----------------------------------------------------------
+# PlanAhead v13.4
+# Build 157570 by hdbuild on Fri Dec 16 12:55:36 MST 2011
+# Start of session at: Fri Aug 10 14:45:03 2012
+# Process ID: 6300
+# Log file: C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/planAhead_run_2/planAhead.log
+# Journal file: C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/planAhead_run_2/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source {C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/pa.fromHdl.tcl}
+startgroup
+set_property loc PAD157 [get_ports clk]
+endgroup
+startgroup
+set_property loc PAD169 [get_ports {faddr[0]}]
+endgroup
+startgroup
+set_property loc PAD168 [get_ports {faddr[1]}]
+endgroup
+startgroup
+set_property loc PAD166 [get_ports {fdata[0]}]
+endgroup
+startgroup
+set_property loc PAD165 [get_ports {fdata[1]}]
+endgroup
+startgroup
+set_property loc PAD164 [get_ports {fdata[2]}]
+endgroup
+startgroup
+set_property loc PAD163 [get_ports {fdata[3]}]
+endgroup
+startgroup
+set_property loc PAD156 [get_ports {fdata[4]}]
+endgroup
+startgroup
+set_property loc PAD173 [get_ports {fdata[5]}]
+endgroup
+startgroup
+set_property loc PAD172 [get_ports {fdata[6]}]
+endgroup
+startgroup
+set_property loc PAD148 [get_ports {fdata[7]}]
+endgroup
+startgroup
+set_property loc PAD141 [get_ports flaga]
+endgroup
+startgroup
+set_property loc PAD140 [get_ports flagd]
+endgroup
+startgroup
+set_property loc PAD139 [get_ports sloe]
+endgroup
+startgroup
+set_property loc PAD131 [get_ports slrd]
+endgroup
+startgroup
+set_property loc PAD130 [get_ports slwr]
+endgroup
+save_design
+set_property loc "" [get_ports [list  clk]]
+set_property loc "" [get_ports [list  {fdata[5]} {fdata[6]} {faddr[0]} {faddr[1]} {fdata[0]} {fdata[1]} {fdata[2]} {fdata[3]} {fdata[4]} {fdata[7]} flaga flagd sloe slrd slwr]]
+startgroup
+set_property loc PAD57 [get_ports {faddr[0]}]
+endgroup
+startgroup
+set_property loc PAD56 [get_ports {faddr[1]}]
+endgroup
+startgroup
+set_property loc PAD53 [get_ports {fdata[0]}]
+endgroup
+startgroup
+set_property loc PAD52 [get_ports {fdata[1]}]
+endgroup
+startgroup
+set_property loc PAD50 [get_ports {fdata[2]}]
+endgroup
+startgroup
+set_property loc PAD49 [get_ports {fdata[3]}]
+endgroup
+startgroup
+set_property loc PAD48 [get_ports {fdata[4]}]
+endgroup
+startgroup
+set_property loc PAD47 [get_ports {fdata[5]}]
+endgroup
+startgroup
+set_property loc PAD41 [get_ports {fdata[6]}]
+endgroup
+startgroup
+set_property loc PAD40 [get_ports {fdata[7]}]
+endgroup
+startgroup
+set_property loc PAD140 [get_ports clk]
+endgroup
+startgroup
+set_property loc PAD169 [get_ports flaga]
+endgroup
+startgroup
+set_property loc PAD168 [get_ports flagd]
+endgroup
+startgroup
+set_property loc PAD166 [get_ports sloe]
+endgroup
+startgroup
+set_property loc PAD165 [get_ports slrd]
+endgroup
+save_design
+exit
+stop_gui

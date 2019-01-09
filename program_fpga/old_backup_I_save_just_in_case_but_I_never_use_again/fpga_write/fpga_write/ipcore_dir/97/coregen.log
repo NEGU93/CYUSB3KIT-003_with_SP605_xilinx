@@ -1,0 +1,67 @@
+INFO:sim:172 - Generating IP...
+Applying current project options...
+Finished applying current project options.
+WARNING:sim - A core named 'clk_wiz_v3_6' already exists in the project. Output
+   products for this core may be overwritten.
+Resolving generics for 'clk_wiz_v3_6'...
+WARNING:sim - A core named 'clk_wiz_v3_6' already exists in the project. Output
+   products for this core may be overwritten.
+Applying external generics to 'clk_wiz_v3_6'...
+Delivering associated files for 'clk_wiz_v3_6'...
+WARNING:sim - Component clk_wiz_v3_6 does not have a valid model name for
+   Verilog synthesis
+Delivering EJava files for 'clk_wiz_v3_6'...
+Delivered 3 files into directory C:/Documents and Settings/shya/Desktop/cy
+project/new hrid fx3 fpga project/for SP6/100 MHz/loopback/original llop
+back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6
+Delivered 1 file into directory C:/Documents and Settings/shya/Desktop/cy
+project/new hrid fx3 fpga project/for SP6/100 MHz/loopback/original llop
+back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6
+Generating ASY schematic symbol...
+Loading device for application Rf_Device from file '6slx16.nph' in environment
+C:\shyam\14.2\ISE_DS\ISE\.
+INFO:sim:949 - Finished generation of ASY schematic symbol.
+Generating SYM schematic symbol for 'clk_wiz_v3_6'...
+Generating ISE project...
+XCO file found: clk_wiz_v3_6.xco
+XMDF file found: clk_wiz_v3_6_xmdf.tcl
+Adding C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga
+project/for SP6/100 MHz/loopback/original llop
+back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6/example_design/clk_wiz_v3_6_e
+xdes.ucf -view all -origin_type created
+Adding C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga
+project/for SP6/100 MHz/loopback/original llop
+back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6/example_design/clk_wiz_v3_6_e
+xdes.v -view all -origin_type created
+INFO:HDLCompiler:1845 - Analyzing Verilog file "C:/Documents and
+   Settings/shya/Desktop/cy project/new hrid fx3 fpga project/for SP6/100
+   MHz/loopback/original llop
+   back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6/example_design/clk_wiz_v3_
+   6_exdes.v" into library work
+INFO:ProjectMgmt - Parsing design hierarchy completed successfully.
+Adding C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga
+project/for SP6/100 MHz/loopback/original llop
+back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6.asy -view all -origin_type
+imported
+Adding C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga
+project/for SP6/100 MHz/loopback/original llop
+back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6.v -view all -origin_type
+created
+INFO:HDLCompiler:1845 - Analyzing Verilog file "C:/Documents and
+   Settings/shya/Desktop/cy project/new hrid fx3 fpga project/for SP6/100
+   MHz/loopback/original llop
+   back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6.v" into library work
+INFO:ProjectMgmt - Parsing design hierarchy completed successfully.
+Adding C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga
+project/for SP6/100 MHz/loopback/original llop
+back/fpga_write/ipcore_dir/97/tmp/_cg/clk_wiz_v3_6.veo -view all -origin_type
+imported
+WARNING: This core does not have a top level called "/clk_wiz_v3_6"
+WARNING:coreutil - WARNING: Top level has been set to "/clk_wiz_v3_6_exdes"
+Generating README file...
+Generating FLIST file...
+INFO:sim:948 - Finished FLIST file generation.
+Launching README viewer...
+Moving files to output directory...
+Finished moving files to output directory
+Wrote CGP file for project 'clk_wiz_v3_6'.

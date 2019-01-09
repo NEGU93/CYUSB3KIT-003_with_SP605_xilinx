@@ -5,23 +5,22 @@ to both **program** (upload the firmware of the FPGA using the kit) and **commun
 
 In order to connect both boards, the [CYUSB3ACC-005 FMC Interconnect Board](http://www.cypress.com/documentation/development-kitsboards/cyusb3acc-005-fmc-interconnect-board-ez-usb-fx3-superspeed) was used.
 
-## Project Structure
+## 1. Project Structure
  - **fx3_manager_cpp_source**: Cpp project to communicate with FX3 device.
  - **com_fpga**: firmware for both FPGA and FX3 to be able to perform a loopback communication between CPU and FPGA via FX3.
  - **program_fpga**: Software needed to program the FPGA.
  - **doc**: usefull documentation from Cypress and Xilinx  
 
-## Getting Started
-### Installing Software
+## 2. Getting Started
+### 2.1. Installing Software
 For this project, the following software was installed:
   1. [ISE Design Suite for Windows 10](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/design-tools.html): Will enable to compile the FPGA source code and to program the FPGA for the firsts steps
   2. [EZ-USB FX3 Software Development Kit](http://www.cypress.com/documentation/software-and-drivers/ez-usb-fx3-software-development-kit): To use the Cypress board
 
-### Switching to Debian
+### 2.2. ISE linux
 
 Because of the final application, I was forced to move to a linux distribution. In order to do that download the linux tar installer and follow the instructions on `fx3_firmware_linux.tar.gz/cyfx3sdk/FX3_SDK_Linux_Support.pdf`. Some bugs where found during the installation but they where easily fixed searching on the Cypress forum (I don recall all of them right now. Sorry).
 
-#### ISE linux
  Follow [ISE Design Suite: Installation and Licensing Guide](https://www.xilinx.com/support/documentation/sw_manuals/xilinx13_2/iil.pdf)
  Once installed for linux, you may run the following:
 ```
@@ -44,7 +43,7 @@ With those lines you can now run ise and vivado from the terminal in a simple wa
 There's a *.bin* file on: `CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/tutorial/counter.bin` that could be used to test how to program the FPGA using *Vivado_Lab* directly.
 
 
-### Getting started with Xilinx and the SDK
+### 2.3. Getting started with Xilinx and the SDK
 As I had no experience with Xilinx FPGA's, I used some tutorials to practice and get to know the board:
   1. First check the board is working correctly: [Getting Started with SP605 Evaluation Kit](https://www.xilinx.com/support/documentation/boards_and_kits/ug525.pdf)
   2. Try to create/simulate and program a simple FPGA program and check it works: [ISE 10.1 QuickStart Tutorial](http://www.eng.ucy.ac.cy/theocharides/Courses/ECE408/qst.pdf)
@@ -53,17 +52,17 @@ As I had no experience with Xilinx FPGA's, I used some tutorials to practice and
     - If the case (using SP605) when doing step 2 on the manual, just select the board disectly instead of selecting the Spartan 6 board.
     - If you have problems when doing the pin assignment: [How to assign physical pins of FPGA to Xilinx ISE Verilog modules?](https://electronics.stackexchange.com/questions/86961/how-to-assign-physical-pins-of-fpga-to-xilinx-ise-verilog-modules/406913#406913)
 
-### Playing with Cypress SuperSpeed Explorer Kit
+### 2.4. Playing with Cypress SuperSpeed Explorer Kit
   1. First check the board is working correcly: [EZ-USB FX3TM SUPERSPEED EXPLORER KIT QUICK START GUIDE](http://www.cypress.com/file/133831/download)
   2. Then follow a very good documented guide. Learn how to communicate, program and run UART and debugging tools [SuperSpeed Explorer Kit User Guide](http://www.cypress.com/file/133836/download)
 
-#### cyusb_linux
+#### 2.4.1 cyusb_linux
 
   Try to configure and get a loopback response with cyusb_linux.
 
   The following thread may help: https://community.cypress.com/thread/41993.
 
-#### Using compiled scripts
+#### 2.4.2 Using compiled scripts
 
   Go to `/Cypress/cyusb_linux_1.0.5/src` and run the make command. Many scripts will be compiled that may help you debug and test your board.
 
@@ -95,7 +94,7 @@ As I had no experience with Xilinx FPGA's, I used some tutorials to practice and
   ```
    - I am not sure here the correct firmware I need to upload to make it work. I believe the issue is something like that.
 
-## Communicating with the FPGA
+## 3. Communicating with the FPGA
 This part uploads a firmware to the FPGA using the ISE software and then communicates the computer with the FPGA via the USB3 provided by the Cypress module.
 
 The following documentation was used: [AN65974](http://www.cypress.com/documentation/application-notes/an65974-designing-ez-usb-fx3-slave-fifo-interface)
@@ -173,7 +172,7 @@ Here some output examples of the code working correctly:
 
 <img src="/img/fpga_com/StreamerIN.png" width="400"/> <img src="/img/fpga_com/ZLP.png" width="400"/>
 
-### Linux distribution
+### 3.1. Linux distribution
 
 As it was more of interest on how to make it work for the linux case. Here it is a detail description on how to do it.
 
@@ -218,32 +217,69 @@ As it was more of interest on how to make it work for the linux case. Here it is
 <img src="/img/fpga_com/linux/step11.png" width="400"/>
 </p>
 
-## Program the FPGA
+## 4. Program the FPGA
 
 This section aim is to program the FPGA using the FX3 kit directly and not the JTAG. For it, the SPI x4 Flash is used and connected to the FX3 board.
 
 The following documentation was used: [AN84868](http://www.cypress.com/documentation/application-notes/an84868-configuring-fpga-over-usb-using-cypress-ez-usb-fx3)
 
-In order to do that, two cables must be sold to the FPGA. In this case, as the board is different, the image of the instruction won't be good enough so the LED's where measured with an ammeter to know the right side of the LED and the conclusion can be seen in the folliwng image:
+### 4.1. Getting things ready
 
-![init_done_leds](/img/fpga_prog/where_to_sold.png)
+#### 4.1.1 Solding and connecting cables
 
-[Convert bit to bin](https://electronics.stackexchange.com/questions/407801/convert-bit-to-bin-xilinx-file)
+First of all, because we are using the board SP605 and not SP601 the cables we have to sold are not the same as in the instruction. The LED's where measured with an ammeter to know the right side of the LED and the conclusion can be seen in the following images:
 
-### Current state
-https://community.cypress.com/message/179915?et=watches.email.thread#179915
-For the FPGA signal out of the CLK I have to configure M\[0 .. 1\] correctly.
-Why the FX3 does not output the CLK I still don't know.
+<img src="/img/fpga_prog/Where_to_sold/IMG_20190109_104748.jpg" width="400"/>
+<img src="/img/fpga_prog/Where_to_sold/IMG_20190109_135850.jpg" width="400"/>
+
+The cables will be connected as follow:
+
+<img src="/img/fpga_prog/Where_to_sold/IMG_20190109_104715.jpg" width="400"/>
+<img src="/img/fpga_prog/Where_to_sold/IMG_20190109_104735.jpg" width="400"/>
+<img src="/img/fpga_prog/Where_to_sold/IMG_20190109_104743.jpg" width="400"/>
+
+#### 4.1.2. Jumpers and switches
+
+ * The SW1 switch on the SP605 board should have both M0 and M1 up (logic 1).
+ * The FX3 J2, J3 and J4 jumpers must be connected and J5 disconnected  
+
+### 4.2. Programming steps
+
+1. Run FPGA Configuration Utility (`FPGA Configuration Utility\bin\Release\Template.exe`).
+<p align="center">
+<img src="/img/fpga_prog/Config_Program_Steps/Image1.png" width="400"/>
+</p>
+2. Connect the FX3 device. The message: "EZ-USB FX3 Bootloader Device connected" should appear.
+ - If it doesn't appear: Check the driver is correctly installed.
+ - Check the J4 jumper is connected. #! TODO: develop a bit more.
+<p align="center">
+<img src="/img/fpga_prog/Config_Program_Steps/Image2.png" width="400"/>
+</p>
+3. Click on "Download Firmware" and select the firmware: `ConfigFpgaSlaveFifoSync.img` located on `FX3 Firmware\ConfigFpgaSlaveFifoSync\Release`.
+<p align="center">
+<img src="/img/fpga_prog/Config_Program_Steps/Image4.png" width="400"/>
+</p>
+4. Click on "Select Bitstream" and search for your bin file you want to upload to the board.
+  - To generate a bin file with ISE instead of the bit file refer to: [Convert bit to bin](https://electronics.stackexchange.com/questions/407801/convert-bit-to-bin-xilinx-file).
+5. Power up the FPGA.
+6. Select the "Configure" button.
+<p align="center">
+<img src="/img/fpga_prog/Config_Program_Steps/Image5.png" width="400"/>
+</p>
+7. Done! The following screen should appear and you must have the following result:
+<p align="center">
+<img src="/img/fpga_prog/Config_Program_Steps/Image7.png" width="400"/>
+</p>
 
 
-## cpp Class for communicating with FX3
+## 5. cpp Class for communicating with FX3
 
 Inside [testing_cpp_code](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/testing_cpp_code) there's a project that enables communication with the PC with the FX3. It performs download of firmware, prints descriptions and run performance tests between other things
 
-## Program and communicate with the FPGA
+## 6. Program and communicate with the FPGA
 TODO: merge last two sections
 
-## Citations
+## 7. Citations
 
 I would like to know if this explanatios or code was usefull to somebody so if it's the case let me know (star the project for ex.)
 Just use this as you need!

@@ -1,0 +1,10 @@
+# PROMGEN: Xilinx Prom Generator P.40xd
+# Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+SOFTWARE_VERSION P.40xd
+DATE            11/16/2012 - 17:04
+SOURCE          C:\Work\work_proj\Configuring FPGA over USB using FX3\AN65974\fpga_write\fpga_write\fpga_master1.bin
+DEVICE          256K
+DATA_WIDTH      8
+FILL_DATA       0xFF
+START_ADDRESS   0x00000000 END_ADDRESS 0x00035D13 DIRECTION_UP   "C:/Work/work_proj/Configuring FPGA over USB using FX3/AN65974/fpga_write/fpga_write/fpga_master.bit" 6slx16csg324

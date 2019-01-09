@@ -1,0 +1,3 @@
+verilog work "ipcore_dir/clk_wiz_v3_6.v"
+verilog work "ipcore_dir/clk_wiz_v3_6/example_design/clk_wiz_v3_6_exdes.v"
+verilog work "test.v"

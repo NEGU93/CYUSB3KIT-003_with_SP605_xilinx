@@ -1,0 +1,243 @@
+
+****** PlanAhead v13.4
+  **** Build 157570 by hdbuild on Fri Dec 16 12:55:36 MST 2011
+    ** Copyright 1986-1999, 2001-2011 Xilinx, Inc. All Rights Reserved.
+
+INFO: [Common-78] Attempting to get a license: PlanAhead
+INFO: [Common-82] Got a license: PlanAhead
+INFO: [Device-25] Loading parts and site information from C:/Xilinx/13.4/ISE_DS/PlanAhead\parts\arch.xmlParsing RTL primitives file [C:/Xilinx/13.4/ISE_DS/PlanAhead\parts\xilinx\rtl\prims\rtl_prims.xml]
+Finished parsing RTL primitives file [C:/Xilinx/13.4/ISE_DS/PlanAhead\parts\xilinx\rtl\prims\rtl_prims.xml]
+start_gui
+starting gui ...
+source {C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/pa.fromHdl.tcl}
+# create_project -name fpga_write -dir "C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/planAhead_run_2" -part xc3s500epq208-4
+Parsing template File [C:/Xilinx/13.4/ISE_DS/ISE\data\projnav\templates\verilog.xml].
+Finished parsing template File [C:/Xilinx/13.4/ISE_DS/ISE\data\projnav\templates\verilog.xml].
+Parsing template File [C:/Xilinx/13.4/ISE_DS/ISE\data\projnav\templates\vhdl.xml].
+Finished parsing template File [C:/Xilinx/13.4/ISE_DS/ISE\data\projnav\templates\vhdl.xml].
+Parsing template File [C:/Xilinx/13.4/ISE_DS/ISE\data\projnav\templates\ucf.xml].
+Finished parsing template File [C:/Xilinx/13.4/ISE_DS/ISE\data\projnav\templates\ucf.xml].
+# set_param project.pinAheadLayout yes
+# set srcset [get_property srcset [current_run -impl]]
+# set_property target_constrs_file "fpga_master.ucf" [current_fileset -constrset]
+Adding file 'C:\Documents and Settings\shya\Desktop\cy project\new hrid fx3 fpga project\fpga_write\fpga_write\fpga_master.ucf' to fileset 'constrs_1'
+# set hdlfile [add_files [list {../../aug6/streamout.v}]]
+# set_property file_type Verilog $hdlfile
+# set_property library work $hdlfile
+# set_property top fpga_master $srcset
+# add_files [list {fpga_master.ucf}] -fileset [get_property constrset [current_run]]
+# open_rtl_design -part xc3s500epq208-4
+INFO: [PlanAhead-58] Using Verific elaboration
+Parsing VHDL file "C:/Xilinx/13.4/ISE_DS/PlanAhead\parts\xilinx\rtl\lib\synplify\synattr.vhd" into library synplify
+Analyzing Verilog file "C:\Documents and Settings\shya\Desktop\cy project\new hrid fx3 fpga project\aug6\streamout.v" into library work
+INFO: [PlanAhead-430] Reading macro library C:/Xilinx/13.4/ISE_DS/PlanAhead\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn
+Parsing EDIF File [C:/Xilinx/13.4/ISE_DS/PlanAhead\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn]
+Finished Parsing EDIF File [C:/Xilinx/13.4/ISE_DS/PlanAhead\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn]
+Loading clock regions from C:/Xilinx/13.4/ISE_DS/PlanAhead\parts/xilinx/spartan3e/spartan3e/xc3s500e/ClockRegion.xml
+Loading clock buffers from C:/Xilinx/13.4/ISE_DS/PlanAhead\parts/xilinx/spartan3e/spartan3e/xc3s500e/ClockBuffers.xml
+Loading package from C:/Xilinx/13.4/ISE_DS/PlanAhead\parts/xilinx/spartan3e/spartan3e/xc3s500e/pq208/Package.xml
+Loading io standards from C:/Xilinx/13.4/ISE_DS/PlanAhead\./parts/xilinx/spartan3e/IOStandards.xml
+INFO: [Device-19] Loading pkg sso from C:/Xilinx/13.4/ISE_DS/PlanAhead\parts/xilinx/spartan3e/spartan3e/xc3s500e/pq208/SSORules.xml
+Loading list of drcs for the architecture : C:/Xilinx/13.4/ISE_DS/PlanAhead\./parts/xilinx/spartan3e/spartan3e/drc.xml
+INFO: [Timing-77] Reading timing library C:/Xilinx/13.4/ISE_DS/PlanAhead\parts/xilinx/spartan3e/spartan3e/spartan3e-4.lib.
+INFO: [Timing-34] Done reading timing library C:/Xilinx/13.4/ISE_DS/PlanAhead\parts/xilinx/spartan3e/spartan3e/spartan3e-4.lib.
+Parsing UCF File [C:\Documents and Settings\shya\Desktop\cy project\new hrid fx3 fpga project\fpga_write\fpga_write\fpga_master.ucf]
+Finished Parsing UCF File [C:\Documents and Settings\shya\Desktop\cy project\new hrid fx3 fpga project\fpga_write\fpga_write\fpga_master.ucf]
+INFO: [PlanAhead-566] Unisim Transformation Summary:
+No Unisim elements were transformed.open_rtl_design: Time (s): 8.132w.  Memory (MB): 428.406p 75.438g
+startgroup
+startgroup
+set_property loc PAD157 [get_ports clk]
+set_property loc PAD157 [get_ports clk]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD169 [get_ports {faddr[0]}]
+set_property loc PAD169 [get_ports {faddr[0]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD168 [get_ports {faddr[1]}]
+set_property loc PAD168 [get_ports {faddr[1]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD166 [get_ports {fdata[0]}]
+set_property loc PAD166 [get_ports {fdata[0]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD165 [get_ports {fdata[1]}]
+set_property loc PAD165 [get_ports {fdata[1]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD164 [get_ports {fdata[2]}]
+set_property loc PAD164 [get_ports {fdata[2]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD163 [get_ports {fdata[3]}]
+set_property loc PAD163 [get_ports {fdata[3]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD156 [get_ports {fdata[4]}]
+set_property loc PAD156 [get_ports {fdata[4]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD173 [get_ports {fdata[5]}]
+set_property loc PAD173 [get_ports {fdata[5]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD172 [get_ports {fdata[6]}]
+set_property loc PAD172 [get_ports {fdata[6]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD148 [get_ports {fdata[7]}]
+set_property loc PAD148 [get_ports {fdata[7]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD141 [get_ports flaga]
+set_property loc PAD141 [get_ports flaga]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD140 [get_ports flagd]
+set_property loc PAD140 [get_ports flagd]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD139 [get_ports sloe]
+set_property loc PAD139 [get_ports sloe]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD131 [get_ports slrd]
+set_property loc PAD131 [get_ports slrd]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD130 [get_ports slwr]
+set_property loc PAD130 [get_ports slwr]
+endgroup
+endgroup
+save_design
+set_property loc "" [get_ports [list  clk]]
+set_property loc "" [get_ports [list  clk]]
+set_property loc "" [get_ports [list  {fdata[5]} {fdata[6]} {faddr[0]} {faddr[1]} {fdata[0]} {fdata[1]} {fdata[2]} {fdata[3]} {fdata[4]} {fdata[7]} flaga flagd sloe slrd slwr]]
+set_property loc "" [get_ports [list  {fdata[5]} {fdata[6]} {faddr[0]} {faddr[1]} {fdata[0]} {fdata[1]} {fdata[2]} {fdata[3]} {fdata[4]} {fdata[7]} flaga flagd sloe slrd slwr]]
+startgroup
+startgroup
+set_property loc PAD57 [get_ports {faddr[0]}]
+set_property loc PAD57 [get_ports {faddr[0]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD56 [get_ports {faddr[1]}]
+set_property loc PAD56 [get_ports {faddr[1]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD53 [get_ports {fdata[0]}]
+set_property loc PAD53 [get_ports {fdata[0]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD52 [get_ports {fdata[1]}]
+set_property loc PAD52 [get_ports {fdata[1]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD50 [get_ports {fdata[2]}]
+set_property loc PAD50 [get_ports {fdata[2]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD49 [get_ports {fdata[3]}]
+set_property loc PAD49 [get_ports {fdata[3]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD48 [get_ports {fdata[4]}]
+set_property loc PAD48 [get_ports {fdata[4]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD47 [get_ports {fdata[5]}]
+set_property loc PAD47 [get_ports {fdata[5]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD41 [get_ports {fdata[6]}]
+set_property loc PAD41 [get_ports {fdata[6]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD40 [get_ports {fdata[7]}]
+set_property loc PAD40 [get_ports {fdata[7]}]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD140 [get_ports clk]
+set_property loc PAD140 [get_ports clk]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD169 [get_ports flaga]
+set_property loc PAD169 [get_ports flaga]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD168 [get_ports flagd]
+set_property loc PAD168 [get_ports flagd]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD166 [get_ports sloe]
+set_property loc PAD166 [get_ports sloe]
+endgroup
+endgroup
+startgroup
+startgroup
+set_property loc PAD165 [get_ports slrd]
+set_property loc PAD165 [get_ports slrd]
+endgroup
+endgroup
+save_design
+exit
+stop_gui
+INFO: [PlanAhead-261] Exiting PlanAhead...
+INFO: [Common-83] Releasing license: PlanAhead

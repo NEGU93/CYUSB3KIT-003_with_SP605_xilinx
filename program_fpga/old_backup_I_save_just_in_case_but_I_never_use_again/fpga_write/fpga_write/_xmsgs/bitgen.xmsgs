@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="Bitgen" num="244" delta="old" >A StartupClk setting other than JtagClk is being used to generate a bitstream in IEEE1532 format.  The IEEE1532 option implies that JTAG configuration will be used.  Using a StartupClk setting other than JtagClk could prevent proper device startup.
+</msg>
+
+</messages>
+

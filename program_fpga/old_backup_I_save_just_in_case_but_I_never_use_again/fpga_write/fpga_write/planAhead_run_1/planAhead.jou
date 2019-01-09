@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# PlanAhead v14.2
+# Build 194362 by xbuild on Fri Jul 20 18:52:36 MDT 2012
+# Start of session at: Thu Sep 06 15:21:46 2012
+# Process ID: 3876
+# Log file: C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/for SP6/100 MHz/last mint in 100 mhz/all signlas added/zlp and partial flag 32 bit in watermark 4/fpga_write/planAhead_run_1/planAhead.log
+# Journal file: C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/for SP6/100 MHz/last mint in 100 mhz/all signlas added/zlp and partial flag 32 bit in watermark 4/fpga_write/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source {C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/for SP6/100 MHz/last mint in 100 mhz/all signlas added/zlp and partial flag 32 bit in watermark 4/fpga_write/pa.fromHdl.tcl}
