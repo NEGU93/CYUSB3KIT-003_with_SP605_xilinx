@@ -261,7 +261,7 @@ The cables will be connected as follow:
  - If the following message appears **"FX3 - Xilinx Slave Serial Programmer detected"**. Check the J4 jumper is connected.
 
     <p align="center">
-    <img src="/img/fpga_prog/Image1.png" width="200"/>
+    <img src="/img/fpga_prog/Image1.png" width="300"/>
     </p>
 
 3. Click on "Download Firmware" and select the firmware: `ConfigFpgaSlaveFifoSync.img` located on `FX3 Firmware\ConfigFpgaSlaveFifoSync\Release`.
