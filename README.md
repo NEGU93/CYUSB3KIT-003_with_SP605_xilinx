@@ -250,11 +250,20 @@ The cables will be connected as follow:
 <img src="/img/fpga_prog/Config_Program_Steps/Image1.png" width="400"/>
 </p>
 2. Connect the FX3 device. The message: "EZ-USB FX3 Bootloader Device connected" should appear.
- - If it doesn't appear: Check the driver is correctly installed.
- - Check the J4 jumper is connected. #! TODO: develop a bit more.
 <p align="center">
 <img src="/img/fpga_prog/Config_Program_Steps/Image2.png" width="400"/>
 </p>
+
+ - If it doesn't appear the message, check the driver is correctly installed:
+    * To manually bind the driver, in Windows Device Manager, locate the FX3 device under "Other Devices". Right click the device and select Update Driver Sofware. Choose Browse my computer for driver software.
+    * Browse on the location `<Install Directory>/Cypress/Superspeed Explorer Kit/1.0/Driver/bin`. The default 'Install Directory' is `C:\Program Files` for 32-bit OS and `C:\Program Files (x86)` for 64-bit OS.
+    * Select a driver based on your OS and click on Next. For ex. the driver for Win10 64-bit is located at `C:/Program Files (x86)/Cypress/Superspeed Explorer Kit/1.0/Driver/bin/Win8.1/x64`.
+ - If the following message appears **"FX3 - Xilinx Slave Serial Programmer detected"**. Check the J4 jumper is connected.
+
+    <p align="center">
+    <img src="/img/fpga_prog/Image1.png" width="200"/>
+    </p>
+
 3. Click on "Download Firmware" and select the firmware: `ConfigFpgaSlaveFifoSync.img` located on `FX3 Firmware\ConfigFpgaSlaveFifoSync\Release`.
 <p align="center">
 <img src="/img/fpga_prog/Config_Program_Steps/Image4.png" width="400"/>
