@@ -221,7 +221,9 @@ As it was more of interest on how to make it work for the linux case. Here it is
 
 This section aim is to program the FPGA using the FX3 kit directly and not the JTAG. For it, the SPI x4 Flash is used and connected to the FX3 board.
 
-The following documentation was used: [AN84868](http://www.cypress.com/documentation/application-notes/an84868-configuring-fpga-over-usb-using-cypress-ez-usb-fx3)
+The following documentation was used: [AN84868](http://www.cypress.com/documentation/application-notes/an84868-configuring-fpga-over-usb-using-cypress-ez-usb-fx3).
+
+There are several options to configure an FPGA described on [Xilinx Spartan-6 FPGA Configuration User Guide](http://www.xilinx.com/support/documentation/user_guides/ug380.pdf). For this scenario we are using a Slave Serial Mode in which the FX3 device will act as a master.
 
 ### 4.1. Getting things ready
 
@@ -240,7 +242,11 @@ The cables will be connected as follow:
 
 #### 4.1.2. Jumpers and switches
 
- * The SW1 switch on the SP605 board should have both M0 and M1 up (logic 1).
+ * The SW1 switch on the SP605 board should have both M0 and M1 up (logic 1) as we are using the Slave Serial mode.
+ <p align="center">
+<img src="/img/fpga_prog/Datasheet_FPGA/M_table.png" width="400"/>
+</p>
+
  * The FX3 J2, J3 and J4 jumpers must be connected and J5 disconnected  
 
 ### 4.2. Programming steps

@@ -12,7 +12,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a22401c3-d919-4d90-87ad-e2ec006c8ca5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../doc/Cypress/SuperSpeed Explorer Kit User Guide_001-93186_A.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../doc/FPGA/ug380_Spartan_6_config.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../doc/FPGA/ug380_Spartan_6_config.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CompilerIdC/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.10.2/CompilerIdCXX/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CompilerIdC/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.13.1/CompilerIdCXX/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/feature_tests.bin" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/feature_tests.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/CXX.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/main.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing_cpp_code.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/testing_cpp_code.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../program_fpga/Template.exe.lnk" beforeDir="false" afterPath="$PROJECT_DIR$/../program_fpga/Template.exe.lnk" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
@@ -28,22 +84,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="204">
               <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+            <state relative-caret-position="1099">
+              <caret line="118" selection-start-line="118" selection-end-line="118" />
               <folding>
-                <element signature="e#99#117#0" expanded="true" />
-                <element signature="e#2055#2325#0" />
-                <element signature="e#2327#2687#0" />
-                <element signature="e#2689#4755#0" />
+                <element signature="e#100#118#0" expanded="true" />
+                <element signature="e#800#1217#0" />
+                <element signature="e#1431#1701#0" />
+                <element signature="e#1703#2063#0" />
               </folding>
             </state>
           </provider>
@@ -52,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1665">
-              <caret line="111" column="39" selection-start-line="111" selection-start-column="39" selection-end-line="111" selection-end-column="39" />
+            <state relative-caret-position="330">
+              <caret line="44" column="29" lean-forward="true" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
               <folding>
                 <element signature="e#140#157#0" expanded="true" />
               </folding>
@@ -61,27 +117,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MimacUSB3Connection.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="46" column="119" selection-start-line="46" selection-start-column="119" selection-end-line="46" selection-end-column="119" />
+            <state relative-caret-position="945">
+              <caret line="306" selection-start-line="306" selection-end-line="306" />
               <folding>
-                <element signature="e#45#65#0" expanded="true" />
-                <element signature="e#1512#1722#0" />
-                <element signature="e#1724#2066#0" />
-                <element signature="e#2068#2134#0" />
-                <element signature="e#2136#2586#0" />
-                <element signature="e#2587#3810#0" />
-                <element signature="e#3812#4524#0" />
-                <element signature="e#4526#5590#0" />
-                <element signature="e#5592#6736#0" />
-                <element signature="e#8131#10056#0" />
-                <element signature="e#10058#10719#0" />
-                <element signature="e#10776#12295#0" />
-                <element signature="e#12318#21636#0" />
-                <element signature="e#21638#22475#0" />
-                <element signature="e#22477#24958#0" />
+                <element signature="e#0#2#0" />
+                <element signature="e#1549#1759#0" />
+                <element signature="e#1761#2103#0" />
+                <element signature="e#2105#2171#0" />
+                <element signature="e#2173#2623#0" />
+                <element signature="e#2624#3847#0" />
+                <element signature="e#3849#4561#0" />
+                <element signature="e#4563#5627#0" />
+                <element signature="e#5629#6773#0" />
+                <element signature="e#6775#8047#0" />
+                <element signature="e#8049#9974#0" />
+                <element signature="e#9976#10637#0" />
+                <element signature="e#10699#12215#0" />
+                <element signature="e#12293#21611#0" />
+                <element signature="e#21613#22450#0" />
+                <element signature="e#22452#24933#0" />
               </folding>
             </state>
           </provider>
@@ -138,7 +195,7 @@
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1260" />
-    <option name="height" value="957" />
+    <option name="height" value="958" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -146,33 +203,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="testing_cpp_code" type="b2602c69:ProjectViewProjectNode" />
-              <item name="testing_cpp_code" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="testing_cpp_code" type="b2602c69:ProjectViewProjectNode" />
-              <item name="testing_cpp_code" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="testing_cpp_code" type="b2602c69:ProjectViewProjectNode" />
-              <item name="testing_cpp_code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../ForbiddenDesert" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -221,16 +258,17 @@
       <workItem from="1545313063114" duration="4601000" />
       <workItem from="1545318741181" duration="12000" />
       <workItem from="1545319185623" duration="13000" />
+      <workItem from="1548251936808" duration="856000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48362000" />
+    <option name="totallyTimeSpent" value="49218000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1280" height="997" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29578605" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -241,11 +279,11 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.21649484" />
+      <window_info active="true" anchor="bottom" id="Messages" order="8" visible="true" weight="0.25354108" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3298969" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="CMake" order="12" weight="0.32875144" />
+      <window_info anchor="bottom" id="CMake" order="12" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -256,13 +294,7 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/01_getdesc.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/01_getdesc.cpp" />
     <entry file="file://$PROJECT_DIR$/cyusb.h" />
     <entry file="file://$PROJECT_DIR$/../../MimacTools/acquisition/sensor/src/CypressLibUsb/CypressLibUsb.cc">
       <provider selected="true" editor-type-id="text-editor">
@@ -324,27 +356,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/include/asm-generic/errno-base.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/x86_64-linux-gnu/bits/stat.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="45" column="7" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/x86_64-linux-gnu/bits/fcntl-linux.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="264" selection-start-line="264" selection-end-line="264" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///usr/include/asm-generic/errno-base.h" />
+    <entry file="file:///usr/include/x86_64-linux-gnu/bits/stat.h" />
+    <entry file="file:///usr/include/x86_64-linux-gnu/bits/fcntl-linux.h" />
     <entry file="file://$PROJECT_DIR$/../../MimacTools/acquisition/sensor/src/MimacUsbConnection/MimacUsbConnection.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
@@ -492,16 +506,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/09_cyusb_performance.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="125" column="27" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
-          <folding>
-            <element signature="e#671#689#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/09_cyusb_performance.cpp" />
     <entry file="file://$PROJECT_DIR$/include/cyusb.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -509,13 +514,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/include/libusb-1.0/libusb.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="120" column="12" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///usr/include/libusb-1.0/libusb.h" />
     <entry file="file://$PROJECT_DIR$/src/libcyusb.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2">
@@ -531,48 +530,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/download_fx3.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-521">
-          <caret line="143" column="27" lean-forward="true" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#131#0" />
-            <element signature="e#1447#1617#0" />
-            <element signature="e#2032#2579#0" />
-            <element signature="e#2581#4019#0" />
-            <element signature="e#5577#6050#0" />
-            <element signature="e#6052#7605#0" />
-            <element signature="e#7607#8162#0" />
-            <element signature="e#8164#8956#0" />
-            <element signature="e#8958#11066#0" />
-            <element signature="e#11068#11599#0" />
-            <element signature="e#11601#12380#0" />
-            <element signature="e#12382#13650#0" />
-            <element signature="e#13652#14182#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/gui_src/fx3_download.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="6" selection-start-line="6" selection-end-line="7" selection-end-column="16" />
-          <folding>
-            <element signature="e#1671#2159#0" />
-            <element signature="e#2161#3417#0" />
-            <element signature="e#3419#5101#0" />
-            <element signature="e#5103#5565#0" />
-            <element signature="e#5567#6930#0" />
-            <element signature="e#6932#7467#0" />
-            <element signature="e#7469#8179#0" />
-            <element signature="e#8181#10936#0" />
-            <element signature="e#10938#11416#0" />
-            <element signature="e#11418#12109#0" />
-            <element signature="e#12111#13574#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/src/download_fx3.cpp" />
+    <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/gui_src/fx3_download.cpp" />
     <entry file="file://$PROJECT_DIR$/src/fx3_download.cpp" />
     <entry file="file://$PROJECT_DIR$/src/download_fx3.cpp">
       <provider selected="true" editor-type-id="text-editor">
@@ -604,15 +563,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="204">
           <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1099">
+          <caret line="118" selection-start-line="118" selection-end-line="118" />
+          <folding>
+            <element signature="e#100#118#0" expanded="true" />
+            <element signature="e#800#1217#0" />
+            <element signature="e#1431#1701#0" />
+            <element signature="e#1703#2063#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="111" column="39" selection-start-line="111" selection-start-column="39" selection-end-line="111" selection-end-column="39" />
+        <state relative-caret-position="330">
+          <caret line="44" column="29" lean-forward="true" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
           <folding>
             <element signature="e#140#157#0" expanded="true" />
           </folding>
@@ -621,37 +593,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MimacUSB3Connection.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="119" selection-start-line="46" selection-start-column="119" selection-end-line="46" selection-end-column="119" />
+        <state relative-caret-position="945">
+          <caret line="306" selection-start-line="306" selection-end-line="306" />
           <folding>
-            <element signature="e#45#65#0" expanded="true" />
-            <element signature="e#1512#1722#0" />
-            <element signature="e#1724#2066#0" />
-            <element signature="e#2068#2134#0" />
-            <element signature="e#2136#2586#0" />
-            <element signature="e#2587#3810#0" />
-            <element signature="e#3812#4524#0" />
-            <element signature="e#4526#5590#0" />
-            <element signature="e#5592#6736#0" />
-            <element signature="e#8131#10056#0" />
-            <element signature="e#10058#10719#0" />
-            <element signature="e#10776#12295#0" />
-            <element signature="e#12318#21636#0" />
-            <element signature="e#21638#22475#0" />
-            <element signature="e#22477#24958#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
-          <folding>
-            <element signature="e#99#117#0" expanded="true" />
-            <element signature="e#2055#2325#0" />
-            <element signature="e#2327#2687#0" />
-            <element signature="e#2689#4755#0" />
+            <element signature="e#0#2#0" />
+            <element signature="e#1549#1759#0" />
+            <element signature="e#1761#2103#0" />
+            <element signature="e#2105#2171#0" />
+            <element signature="e#2173#2623#0" />
+            <element signature="e#2624#3847#0" />
+            <element signature="e#3849#4561#0" />
+            <element signature="e#4563#5627#0" />
+            <element signature="e#5629#6773#0" />
+            <element signature="e#6775#8047#0" />
+            <element signature="e#8049#9974#0" />
+            <element signature="e#9976#10637#0" />
+            <element signature="e#10699#12215#0" />
+            <element signature="e#12293#21611#0" />
+            <element signature="e#21613#22450#0" />
+            <element signature="e#22452#24933#0" />
           </folding>
         </state>
       </provider>
