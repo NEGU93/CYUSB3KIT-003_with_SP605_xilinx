@@ -260,7 +260,7 @@ The cables will be connected as follow:
 <img src="/img/fpga_prog/Config_Program_Steps/Image2.png" width="400"/>
 </p>
 
- - If it doesn't appear the message, check the driver is correctly installed:
+ - If it doesn't appear the message, make sure the FPGA is turned off, if it was already off, check the driver is correctly installed:
     * To manually bind the driver, in Windows Device Manager, locate the FX3 device under "Other Devices". Right click the device and select Update Driver Sofware. Choose Browse my computer for driver software.
     * Browse on the location `<Install Directory>/Cypress/Superspeed Explorer Kit/1.0/Driver/bin`. The default 'Install Directory' is `C:\Program Files` for 32-bit OS and `C:\Program Files (x86)` for 64-bit OS.
     * Select a driver based on your OS and click on Next. For ex. the driver for Win10 64-bit is located at `C:/Program Files (x86)/Cypress/Superspeed Explorer Kit/1.0/Driver/bin/Win8.1/x64`.
@@ -286,17 +286,45 @@ The cables will be connected as follow:
 <img src="/img/fpga_prog/Config_Program_Steps/Image7.png" width="400"/>
 </p>
 
+### 4.3 debugging via UART
+
+The programming firmware was modified to print debugging messages over a UART interface using GPIO[46..49] of the FX3 device.
+
+To see those messages you must connect those pins to a UART device like the picture shows and use a program like *putty* or *Tera Term* to display the messages in question.
+
+TODO: add capture of messages and image of the current setup.
 
 ## 5. cpp Class for communicating with FX3
 
 Inside [testing_cpp_code](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/testing_cpp_code) there's a project that enables communication with the PC with the FX3. It performs download of firmware, prints descriptions and run performance tests between other things
 
 ## 6. Program and communicate with the FPGA
-TODO: merge last two sections
+
+To do both program and communicate with the FPGA, just follow the steps of section [4.2. Programming Steps](#4.2.-programming-steps) but when selecting the Bitstream one must choose the following `CYUSB3KIT-003_with_SP605_xilinx\com_fpga\FPGA_firmware\slaveFIFO2b_fpga_top.bin`. After successfully programming the FPGA, open *Control Center* program and follow the images that follows.
+
+<p align="center">
+<img src="/img/prog_com/Image6.5.png" width="400"/>
+</p>
+
+<p align="center">
+<img src="/img/prog_com/Image7.png" width="400"/>
+</p>
+
+<p align="center">
+<img src="/img/prog_com/Image8.png" width="400"/>
+</p>
+
+<p align="center">
+<img src="/img/prog_com/Image8.5.png" width="400"/>
+</p>
+
+<p align="center">
+<img src="/img/prog_com/Image9.png" width="400"/>
+</p>
 
 ## 7. Citations
 
-I would like to know if this explanatios or code was usefull to somebody so if it's the case let me know (star the project for ex.)
+I would like to know if this explanations or code was useful to somebody so if it's the case let me know (star the project for ex.)
 Just use this as you need!
 
 ## Note:
