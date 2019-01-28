@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2019-01-07T09:33:22</DateModified>
+  <DateModified>2019-01-25T17:24:19</DateModified>
   <ModuleName>slaveFIFO2b_fpga_top</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/</ImplementationReportsDirectory>
   <DateInitialized>2013-11-19T18:38:50</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

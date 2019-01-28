@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2012-11-02T18:06:56</DateModified>
+  <DateModified>2019-01-25T17:24:39</DateModified>
   <ModuleName>fpga_master</ModuleName>
   <SummaryTimeStamp>2012-09-08T12:30:47</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/shya/Desktop/Cyproject/final final final final final code/from web/AN65974_ExampleProjectfiles/Loopback/fpga_write/iseconfig/fpga_master.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/shya/Desktop/Cyproject/final final final final final code/from web/AN65974_ExampleProjectfiles/Loopback/fpga_write\</ImplementationReportsDirectory>
+  <SavedFilePath>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/iseconfig/fpga_master.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/</ImplementationReportsDirectory>
   <DateInitialized>2012-08-10T11:57:42</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
