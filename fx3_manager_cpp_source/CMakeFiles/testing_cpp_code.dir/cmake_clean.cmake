@@ -1,12 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/testing_cpp_code.dir/main.cpp.obj"
-  "CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.obj"
-  "CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.obj"
-  "CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.obj"
+  "CMakeFiles/testing_cpp_code.dir/main.cpp.o"
+  "CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o"
+  "CMakeFiles/testing_cpp_code.dir/src/download_fx3.cpp.o"
+  "CMakeFiles/testing_cpp_code.dir/src/libcyusb.cpp.o"
   "testing_cpp_code.pdb"
-  "testing_cpp_code.exe"
-  "testing_cpp_code.exe.manifest"
-  "libtesting_cpp_code.dll.a"
+  "testing_cpp_code"
 )
 
 # Per-language clean rules from dependency scanning.

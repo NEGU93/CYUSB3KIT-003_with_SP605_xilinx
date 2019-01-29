@@ -6,19 +6,19 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/MimacUSB3Connection.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/MimacUSB3Connection.h
 cstdio
 -
 stdlib.h
 -
 ../include/cyusb.h
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/cyusb.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/cyusb.h
 
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/cyusb.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/cyusb.h
 libusb-1.0/libusb.h
 -
 
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/download_fx3.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/download_fx3.h
 stdio.h
 -
 unistd.h
@@ -36,27 +36,9 @@ sys/stat.h
 libusb-1.0/libusb.h
 -
 cyusb.h
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/cyusb.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/cyusb.h
 
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/main.cpp
-stdio.h
--
-unistd.h
--
-stdlib.h
--
-getopt.h
--
-string.h
--
-iostream
--
-include/cyusb.h
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/cyusb.h
-include/MimacUSB3Connection.h
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/MimacUSB3Connection.h
-
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/src/MimacUSB3Connection.cpp
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/src/MimacUSB3Connection.cpp
 exception
 -
 zconf.h
@@ -72,29 +54,7 @@ sys/stat.h
 fcntl.h
 -
 ../include/MimacUSB3Connection.h
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/MimacUSB3Connection.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/MimacUSB3Connection.h
 ../include/download_fx3.h
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/download_fx3.h
-
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/src/download_fx3.cpp
-../include/download_fx3.h
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/download_fx3.h
-
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/src/libcyusb.cpp
-stdio.h
--
-unistd.h
--
-stdlib.h
--
-string.h
--
-errno.h
--
-fcntl.h
--
-libusb-1.0/libusb.h
--
-../include/cyusb.h
-C:/Users/NEGU93/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/cyusb.h
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/include/download_fx3.h
 

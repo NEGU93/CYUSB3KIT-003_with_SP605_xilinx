@@ -684,7 +684,7 @@ cyusb_control_write (
 		cyusb_handle *h,
 	       	unsigned char bmRequestType,
 	       	unsigned char bRequest,
-		unsigned short wValue,
+		    unsigned short wValue,
 	       	unsigned short wIndex,
 	       	unsigned char *data,
 	       	unsigned short wLength,

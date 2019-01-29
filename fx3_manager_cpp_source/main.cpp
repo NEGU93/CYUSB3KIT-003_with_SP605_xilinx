@@ -12,6 +12,9 @@
 
 using namespace std;
 
+#define VID         0x04B4     /**<USB Vendor ID.*/
+#define PID_FX3     0x00f3      /**FX3 Cyusb device */
+
 /********** Cut and paste the following & modify as required  **********/
 static const char *program_name;
 static const char *out_filename = "stdout";
@@ -19,8 +22,6 @@ static const char *const short_options = "hvV:P:o:";
 static const struct option long_options[] = {
 		{ "help",	    0, nullptr,	'h'	},
 		{ "version",	0, nullptr,	'v'	},
-		{ "Vendor",     1, nullptr, 'V' },
-		{ "Product",    1, nullptr, 'P' },
 		{ "Output",     1, nullptr, 'O' },
 		{nullptr,		0, nullptr,	 0	}
 };
@@ -30,38 +31,27 @@ static int next_option;
 static void print_usage(FILE *stream, int exit_code) {
 	fprintf(stream, "Usage: %s options\n", program_name);
 	fprintf(stream,
-		"  -device_handle  --help           Display this usage information.\n"
-		"  -v  --version        Print version.\n"
-		"  -V  --Vendor		Input Vendor  ID in hexadecimal.\n"
-		"  -P  --Product	Input Product ID in hexadecimal.\n"
-		"  -o  --output	 	Output file name.\n");
-
+		"  -device_handle   --help       Display this usage information.\n"
+		"  -v               --version    Print version.\n"
+		"  -o               --output	 Output file name.\n");
 	exit(exit_code);
 }
 /***********************************************************************/
 
 static FILE *fp = stdout;
-static int vendor_provided;
-static unsigned short vid;
-static int product_provided;
-static unsigned short pid;
 
-static void validate_inputs() {
-	if ( ((vendor_provided) && (!product_provided)) || ((!vendor_provided) && (product_provided)) ) {
-	   fprintf(stderr,"Must provide BOTH VID and PID or leave BOTH blank to pick up from /etc/cyusb.conf\n");
-	   print_usage(stdout, 1);
-	}
-}
 
 void program() {
-	MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(false, pid, vid);
-	char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/testing_cpp_code/fx3_images/cyfxbulksrcsink.img");
+	MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(VID, PID_FX3);
+	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
+	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulklpautoenum.img");
+	char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/FX3 Firmware/ConfigFpgaSlaveFifoSync/");
 	char *tgt_str = const_cast<char *>("ram");
 	mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
+    //mimacUSB3Connection.download_fx3_firmware_to_ram(filename);
 }
 
 int main(int argc, char **argv) {
-	bool user_input;
 	program_name = argv[0];
 
 	while ( (next_option = getopt_long(argc, argv, short_options, long_options, nullptr) ) != -1 ) {
@@ -69,23 +59,14 @@ int main(int argc, char **argv) {
 			case 'h': /* -device_handle or --help  */
 				  print_usage(stdout, 0);
 			case 'v': /* -v or --version */
-				  printf("%s (Ver 1.0)\n", program_name);
-				  printf("Copyright (C) 2012 Cypress Semiconductors Inc. / ATR-LABS\n");
-				  printf("Modified version 2018 MIMAC gruop LPSC CNRS\n");
+				  printf("%s (Ver 2.0)\n", program_name);
+				  printf("MIMAC group LPSC IN2P3 CNRS (2018)\n");
 				  exit(0);
 			case 'o': /* -o or --output */
 				  out_filename = optarg;
 				  fp = fopen(out_filename,"a");
-				  if ( !fp )
+				  if (!fp)
 				     print_usage(stdout, 1);
-				  break;
-			case 'V': /* -V or --vendor  */
-				  vendor_provided = 1;
-				  vid = static_cast<unsigned short>(strtoul(optarg, nullptr, 16));
-				  break;
-			case 'P': /* -P or --Product  */
-				  product_provided = 1;
-				  pid = static_cast<unsigned short>(strtoul(optarg, nullptr, 16));
 				  break;
 			case '?': /* Invalid option */
 				  print_usage(stdout, 1);
@@ -94,19 +75,23 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	validate_inputs();
-	user_input = (vendor_provided) && (product_provided);
-
 	try {
 	    program();
 	    sleep(1);
 
-		MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(user_input, pid, vid);
+		MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection();
+		//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
+		//char *tgt_str = const_cast<char *>("ram");
+		//mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
         //mimacUSB3Connection.print_device_descriptor();
         //mimacUSB3Connection.print_config_descriptor();
         //mimacUSB3Connection.claim_interface(0);
         //mimacUSB3Connection.claim_interface(0);
-        mimacUSB3Connection.test_performance();
+        //mimacUSB3Connection.test_performance();
+        //mimacUSB3Connection.loopback_test();
+        const char * fpga_filename = "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin";
+        mimacUSB3Connection.program_device(fpga_filename);
+		mimacUSB3Connection.send_text_file();
     }
 	catch (ErrorOpeningLib& e) {
 		printf("Error opening library\n");

@@ -44,10 +44,9 @@ MimacUSB3Connection::MimacUSB3Connection() {
     else if ( rStatus == 0 ) { throw NoDeviceFound(); }
 }
 
-MimacUSB3Connection::MimacUSB3Connection(bool user_input, unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
+MimacUSB3Connection::MimacUSB3Connection(unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
     fp = stdout;
-    if ( user_input ) { rStatus = cyusb_open(vid, pid); }
-    else { rStatus = cyusb_open(); }
+    rStatus = cyusb_open(vid, pid);
     if ( rStatus < 0 ) { throw ErrorOpeningLib(); }
     else if ( rStatus == 0 ) { throw NoDeviceFound(); }
 }
@@ -111,6 +110,8 @@ int MimacUSB3Connection::get_device_config() {
     rStatus = cyusb_get_active_config_descriptor(cyusb_gethandle(0), &configDesc);
     if ( rStatus ) {
         printf("Error retrieving config descriptor\n");
+        cyusb_error(rStatus);
+        cyusb_close();
         return rStatus;
     }
 
@@ -215,7 +216,11 @@ int MimacUSB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
             return -EINVAL;
     }
 
-    if (rStatus != 0) { fprintf (stderr, "Error: FX3 firmware programming failed\n"); }
+    if (rStatus != 0) {
+        fprintf (stderr, "Error: FX3 firmware programming failed\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+    }
     else { printf ("FX3 firmware programming to %s completed\n", tgt_str); }
 
     return rStatus;
@@ -304,8 +309,7 @@ int MimacUSB3Connection::fx3_ram_write(unsigned char *buf, unsigned int ramAddre
 }*/
 
 /** Read the firmware image from the file into a buffer. */
-/*
-int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char *buf, int *romsize, int *filesize) {
+/*int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char *buf, int *romsize, int *filesize) {
     int fd;
     int nbr;
     struct stat filestat{};
@@ -352,9 +356,70 @@ int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char
 
     close (fd);
     return 0;
-}
-*/
+}*/
+
 /**---------------------------------------------------------------------**/
+
+/**
+ * Search for a specific endpoint to see if it exists
+ * */
+int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
+    int  if_numsettings;
+    bool found_ep = false;
+
+    // Step 1: Get a handle to the first CyUSB device.
+    device_handle = cyusb_gethandle(0);
+    if (device_handle == nullptr) {
+        printf ("test_performance: Failed to get CyUSB device handle\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return -EACCES;
+    }
+
+    // Step 2: Read the configuration descriptor.
+    rStatus = get_device_config();
+
+    // Step 3: Check each of the interfaces one by one and check if we can find the desired endpoint there.
+    for (int i = 0; i < configDesc->bNumInterfaces; i++) {
+        // Step 3.a: Claim the interface
+        rStatus = cyusb_claim_interface(device_handle, i);
+        claim_interface(i);
+
+        // Step 3.b: Get each of the interface descriptors and check if the endpoint is present.
+        if_numsettings = configDesc->interface[i].num_altsetting;
+        for (int j = 0; j < if_numsettings; j++) {
+
+            interfaceDesc = (libusb_interface_descriptor *)&(configDesc->interface[i].altsetting[j]);
+
+            // Step 3.b.1: Check if the desired endpoint is present.
+            for (int k = 0; k < interfaceDesc->bNumEndpoints; k++) {
+                endpointDesc = (libusb_endpoint_descriptor *)&(interfaceDesc->endpoint[k]);
+                if (endpointDesc->bEndpointAddress == end_pt) {
+                    printf ("test_performance: Found endpoint 0x%x in interface %d, setting %d\n", end_pt, i, j);
+
+                    // If the alt setting is not 0, select it
+                    cyusb_set_interface_alt_setting (device_handle, i, j);
+                    found_ep = true;
+                    break;
+                }
+            }
+            if (found_ep) { break; }
+        }
+        if (found_ep) { break; }
+
+        // Step 3.c: Release the interface as the endpoint was not found.
+        cyusb_release_interface(device_handle, i);
+    }
+
+    if (!found_ep) {
+        printf ("test_performance: Failed to find endpoint 0x%x on device\n", end_pt);
+        cyusb_free_config_descriptor(configDesc);
+        cyusb_close ();
+        return (-ENOENT);
+    }
+
+    return 0;
+}
 
 /**
 * This is a CLI program which can be used to measure the
@@ -368,12 +433,12 @@ int MimacUSB3Connection::test_performance() {
     struct timeval t1{}, t2{};		// Timestamps used for test duration control
 
     struct libusb_transfer **transfers = nullptr;		// List of transfer structures.
-    unsigned char **databuffers = nullptr;			// List of data buffers.
+    unsigned char **databuffers = nullptr;			    // List of data buffers.
 
-    endpoint   = 129;	// Endpoint to be tested
-    reqsize    = 64;    //16;	// Request size in number of packets
-    queuedepth = 16;    //16;	// Number of requests to queue
-    duration   = 60;	// Duration of the test in seconds
+    endpoint   = 129;	    // Endpoint to be tested
+    reqsize    = 64;        //16;	// Request size in number of packets
+    queuedepth = 16;        //16;	// Number of requests to queue
+    duration   = 60;	    // Duration of the test in seconds
 
     success_count = 0;	    // Number of successful transfers
     failure_count = 0;	    // Number of failed transfers
@@ -387,6 +452,8 @@ int MimacUSB3Connection::test_performance() {
     device_handle = cyusb_gethandle(0);
     if (device_handle == nullptr) {
         printf ("test_performance: Failed to get CyUSB device handle\n");
+        cyusb_error(rStatus);
+        cyusb_close();
         return -EACCES;
     }
 
@@ -394,22 +461,11 @@ int MimacUSB3Connection::test_performance() {
     rStatus = get_device_config();
 
     // Step 3: Check each of the interfaces one by one and check if we can find the desired endpoint there.
-#ifdef DEBUG
-    printf("Checking all the the %d interfaces\n", configDesc->bNumInterfaces);
-    fflush(stdout);
-#endif
     for (int i = 0; i < configDesc->bNumInterfaces; i++) {
         // Step 3.a: Claim the interface
         rStatus = cyusb_claim_interface(device_handle, i);
-#ifdef DEBUG
-        printf("Claiming interface %d\n", i);
-        fflush(stdout);
-#endif
         claim_interface(i);
-#ifdef DEBUG
-        printf("Good, lets keep on\n");
-        fflush(stdout);
-#endif
+
         // Step 3.b: Get each of the interface descriptors and check if the endpoint is present.
         if_numsettings = configDesc->interface[i].num_altsetting;
         for (int j = 0; j < if_numsettings; j++) {
@@ -417,12 +473,7 @@ int MimacUSB3Connection::test_performance() {
             interfaceDesc = (libusb_interface_descriptor *)&(configDesc->interface[i].altsetting[j]);
 
             // Step 3.b.1: Check if the desired endpoint is present.
-#ifdef DEBUG
-            printf("Checking all the the %d endpoints for interface %d, desc %d\n", interfaceDesc->bNumEndpoints, i, j);
-            fflush(stdout);
-#endif
             for (int k = 0; k < interfaceDesc->bNumEndpoints; k++) {
-
                 endpointDesc = (libusb_endpoint_descriptor *)&(interfaceDesc->endpoint[k]);
                 if (endpointDesc->bEndpointAddress == endpoint) {
                     printf ("test_performance: Found endpoint 0x%x in interface %d, setting %d\n", endpoint, i, j);
@@ -435,7 +486,6 @@ int MimacUSB3Connection::test_performance() {
             }
             if (found_ep) { break; }
         }
-
         if (found_ep) { break; }
 
         // Step 3.c: Release the interface as the endpoint was not found.
@@ -444,7 +494,7 @@ int MimacUSB3Connection::test_performance() {
 
     if (!found_ep) {
         printf ("test_performance: Failed to find endpoint 0x%x on device\n", endpoint);
-        cyusb_free_config_descriptor (configDesc);
+        cyusb_free_config_descriptor(configDesc);
         cyusb_close ();
         return (-ENOENT);
     }
@@ -587,6 +637,156 @@ int MimacUSB3Connection::test_performance() {
     return 0;
 }
 
+/**
+ * Uses send and receive buffer to send a text file expecting a loopback.
+ * It stores the data on some files and assest the received file is equal to se sent file.
+ * */
+void MimacUSB3Connection::send_text_file() {
+    ssize_t nbr;
+    unsigned char *buf;
+    size_t maxps = 0;
+    int fd_outfile, fd_infile;
+    int transferred;
+    char *out_text_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/TEST_OUT.txt");
+    char *in_text_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/TEST_IN.txt");
+
+
+    fd_outfile = open(out_text_filename, O_RDONLY);
+    if ( fd_outfile < 0 ) {
+        printf("Output file not found!");
+        return;
+    }
+    fd_infile = open(in_text_filename, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+    if ( fd_infile < 0 ) {
+        printf("Input file creation error");
+        return;
+    }
+
+    maxps = 4096;	// If sending a file, then data is sent in 4096 byte packets
+
+    buf = (unsigned char *)malloc(maxps);
+    while ( (nbr = read(fd_outfile, buf, maxps)) ) {
+        send_buffer(buf, static_cast<int>(nbr));
+        transferred = recive_buffer(buf, static_cast<unsigned int>(nbr));
+        if(transferred < 0) {
+            printf("Error: Couldn't read the data back (error: %d)\n", rStatus);
+            return;
+        }
+        rStatus = static_cast<int>(write(fd_infile, buf, static_cast<size_t>(transferred)));
+        if (rStatus < 0) {
+            printf("Error: write returned %d\n", rStatus);
+            return;
+        }
+    }
+    free(buf);
+    ::close(fd_outfile);
+    ::close(fd_infile);
+    compare_files(out_text_filename, in_text_filename);
+}
+
+/**
+ * Compares to files and asserts they are the same.
+ * Prints the number of missmatches and returns it's value
+ * */
+int MimacUSB3Connection::compare_files(char *fp1_string, char *fp2_string) {
+    printf("Comparing both files ...\n");
+    // opening both file in read only mode
+    FILE *fp1 = fopen(fp1_string, "r");
+    FILE *fp2 = fopen(fp2_string, "r");
+    if (fp1 == nullptr || fp2 == nullptr) {
+        printf("MimacUSB3Connection::compare_files(): Error: Files not open");
+        exit(0);
+    }
+
+    // fetching character of two file
+    // in two variable ch1 and ch2
+    char ch1 = getc(fp1);
+    char ch2 = getc(fp2);
+
+    // error keeps track of number of errors
+    // pos keeps track of position of errors
+    // line keeps track of error line
+    int error = 0, pos = 0, line = 1;
+
+    // iterate loop till end of file
+    while (ch1 != EOF && ch2 != EOF) {
+        pos++;
+
+        // if both variable encounters new
+        // line then line variable is incremented
+        // and pos variable is set to 0
+        if (ch1 == '\n' && ch2 == '\n') {
+            line++;
+            pos = 0;
+        }
+
+        // if fetched data is not equal then
+        // error is incremented
+        if (ch1 != ch2) {
+            error++;
+            printf("Line Number : %d \tError"
+                   " Position : %d \n", line, pos);
+        }
+
+        // fetching character until end of file
+        ch1 = getc(fp1);
+        ch2 = getc(fp2);
+    }
+    // closing both file
+    fclose(fp1);
+    fclose(fp2);
+    printf("Total missmatches between files : %d\t", error);
+    return error;
+}
+
+/**
+ * Sends the data stored on buf of size sz to the endpoint 0x01
+ * */
+void MimacUSB3Connection::send_buffer(unsigned char *buf, int sz) {
+    int rStatus;
+    int transferred = 0;
+    unsigned int end_ptr = 0x01;
+
+    if(find_endpoint(end_ptr) != 0) {
+        printf("MimacUSB3Connection::send_buffer(): Error: endpoint (%d) not found\n", end_ptr);
+        return;
+    }
+
+    rStatus = cyusb_bulk_transfer(MimacUSB3Connection::device_handle, static_cast<unsigned char>(end_ptr), buf, sz, &transferred, 1000);
+    printf("Bytes sent to device = %d\n", transferred);
+    if (rStatus) {
+        printf("Error in bulk write!");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return ;
+    }
+}
+
+/**
+ * Reads data from endpoint 0x81 to buf and returns the size of data read
+ * (should be same as data_count)
+ * */
+int MimacUSB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count){
+    int rStatus;
+    int transferred = 0;
+    unsigned int end_ptr = 0x81;
+
+    if(find_endpoint(end_ptr) != 0) {
+        printf("MimacUSB3Connection::recive_buffer(): Error: endpoint (%d) not found\n", end_ptr);
+        return -1;
+    }
+    buf = (unsigned char *)malloc(data_count);
+    rStatus = cyusb_bulk_transfer(MimacUSB3Connection::device_handle, static_cast<unsigned char>(end_ptr), buf, data_count, &transferred, 1000);
+    printf("Bytes read from device = %d\n",transferred);
+    if ( rStatus ) {
+        printf("Error in bulk write!");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return -1;
+    }
+    return transferred;
+}
+
 //! Function to free data buffers and transfer structures
 void MimacUSB3Connection::free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth) {
     // Free up any allocated data buffers
@@ -685,3 +885,37 @@ void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
     }
 }
 
+/**
+ *
+ * */
+int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
+    size_t maxps = 0;
+    unsigned char *data;
+    unsigned short wLength;
+    unsigned int timeout = 1000;
+    unsigned short wValue = 0, wIndex = 0;
+
+    int fpga_file = open(fpga_firmware_filename, O_RDONLY);
+    if ( fpga_file < 0 ) {
+        printf("FPGA firmware %s not found", fpga_firmware_filename);
+        return -1;
+    }
+
+    maxps = 4096;	// If sending a file, then data is sent in 4096 byte packets
+    data = (unsigned char *)malloc(maxps);
+    wLength = static_cast<unsigned short>(read(fpga_file, data, maxps));
+    cyusb_control_write(
+            MimacUSB3Connection::device_handle,
+            WRITE_REQUEST_TYPE,        /* bmRequestType */
+            VND_CMD_SLAVESER_CFGLOAD,  /* bRequest */
+            wValue,      /* wValue */
+            wIndex,      /* wIndex */
+            data,        /* *data */
+            wLength,     /* wLength */
+            timeout);
+    return 0;
+}
+/*int MimacUSB3Connection::download_fx3_firmware_to_ram(char *filename) {
+    cyusb_handle *h = MimacUSB3Connection::device_handle;
+    return cyusb_download_fx3(h, filename);
+}*/

@@ -11,6 +11,9 @@
 
 using namespace std;
 
+#define OUT_ENDPOINT    0X81
+#define IN_ENDPOINT     0X01
+
 #define MAX_FWIMG_SIZE		(512 * 1024)    // Maximum size of the firmware binary.
 #define MAX_WRITE_SIZE		(2 * 1024)      // Max. size of data that can be written through one vendor command.
 
@@ -18,6 +21,12 @@ using namespace std;
 
 #define GET_LSW(v)	((unsigned short)((v) & 0xFFFF))	// Get Least Significant Word part of an integer.
 #define GET_MSW(v)	((unsigned short)((v) >> 16))		// Get Most Significant Word part of an integer.
+
+#define WRITE_REQUEST_TYPE  0x7F
+#define READ_REQUEST_TYPE   0x80
+
+#define VND_CMD_SLAVESER_CFGLOAD 0xB2       /* Command to program the FPGA */
+#define VND_CMD_SLAVESER_CFGSTAT 0xB1       /* Switch to the Slave FIFO interface */
 
 class ErrorOpeningLib : public exception {
 public:
@@ -58,7 +67,7 @@ class MimacUSB3Connection {
 public:
 
     MimacUSB3Connection();
-    MimacUSB3Connection(bool user_input, unsigned short vid, unsigned short pid);
+    MimacUSB3Connection(unsigned short vid, unsigned short pid);
     ~MimacUSB3Connection();
 
 
@@ -66,7 +75,13 @@ public:
     int print_config_descriptor();
     int claim_interface(int interface);
     int download_fx3_firmware(char *filename, char *tgt_str);
+    //int download_fx3_firmware_to_ram(char* filename);
+
     int test_performance();
+
+    void send_text_file();  // Loopback to test bulk comm
+
+    int program_device(char *fpga_firmware_filename);
 
 private:
     //! Variables
@@ -107,10 +122,16 @@ private:
     int get_device_descriptor();
     int get_device_config();
 
+    int find_endpoint(unsigned int end_pt);
+
     // Program FX3 functions
-    //int fx3_usbboot_download(const char *filename);
+    /*//int fx3_usbboot_download(const char *filename);
     //int read_firmware_image (const char *filename, unsigned char *buf, int *romsize, int *filesize);
-    //int fx3_ram_write (unsigned char *buf, unsigned int ramAddress, unsigned short len);
+    //int fx3_ram_write(unsigned char *buf, unsigned int ramAddress, unsigned short len);*/
+    // Bulk Transmision
+    int compare_files(char *fp1_string, char *fp2_string);
+    void send_buffer(unsigned char *buf, int sz);
+    int recive_buffer(unsigned char *buf, unsigned int data_count);
     // Test performance
     void free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth);
     static void xfer_callback (struct libusb_transfer *transfer);
