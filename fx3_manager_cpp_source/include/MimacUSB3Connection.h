@@ -22,7 +22,7 @@ using namespace std;
 #define GET_LSW(v)	((unsigned short)((v) & 0xFFFF))	// Get Least Significant Word part of an integer.
 #define GET_MSW(v)	((unsigned short)((v) >> 16))		// Get Most Significant Word part of an integer.
 
-#define WRITE_REQUEST_TYPE  0x7F
+#define WRITE_REQUEST_TYPE  0x40
 #define READ_REQUEST_TYPE   0x80
 
 #define VND_CMD_SLAVESER_CFGLOAD 0xB2       /* Command to program the FPGA */

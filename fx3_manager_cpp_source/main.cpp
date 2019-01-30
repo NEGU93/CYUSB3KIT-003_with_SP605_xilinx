@@ -45,7 +45,7 @@ void program() {
 	MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(VID, PID_FX3);
 	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
 	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulklpautoenum.img");
-	char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/FX3 Firmware/ConfigFpgaSlaveFifoSync/");
+	char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync.img");
 	char *tgt_str = const_cast<char *>("ram");
 	mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
     //mimacUSB3Connection.download_fx3_firmware_to_ram(filename);
@@ -89,7 +89,8 @@ int main(int argc, char **argv) {
         //mimacUSB3Connection.claim_interface(0);
         //mimacUSB3Connection.test_performance();
         //mimacUSB3Connection.loopback_test();
-        const char * fpga_filename = "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin";
+		char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/slaveFIFO2b_fpga_top.bin");
+        //char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin");
         mimacUSB3Connection.program_device(fpga_filename);
 		mimacUSB3Connection.send_text_file();
     }
