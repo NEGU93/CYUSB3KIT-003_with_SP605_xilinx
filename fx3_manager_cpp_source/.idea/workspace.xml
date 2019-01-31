@@ -13,15 +13,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a22401c3-d919-4d90-87ad-e2ec006c8ca5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Progress/count.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/MimacUSB3Connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/MimacUSB3Connection.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testing_cpp_code.dir/src/MimacUSB3Connection.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing_cpp_code" beforeDir="false" afterPath="$PROJECT_DIR$/testing_cpp_code" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
@@ -37,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="93" column="37" selection-start-line="93" selection-start-column="37" selection-end-line="93" selection-end-column="37" />
+            <state relative-caret-position="315">
+              <caret line="102" column="35" lean-forward="true" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
               <folding>
                 <element signature="e#834#1158#0" />
               </folding>
@@ -49,12 +45,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1084">
-              <caret line="38" column="7" lean-forward="true" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+            <state relative-caret-position="15">
+              <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
               <folding>
                 <element signature="e#0#2#0" />
                 <element signature="e#140#157#0" expanded="true" />
-                <element signature="e#3982#4228#0" />
               </folding>
             </state>
           </provider>
@@ -63,10 +58,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MimacUSB3Connection.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="914" column="25" lean-forward="true" selection-start-line="914" selection-start-column="25" selection-end-line="914" selection-end-column="25" />
+            <state relative-caret-position="329">
+              <caret line="918" column="24" lean-forward="true" selection-start-line="918" selection-start-column="24" selection-end-line="918" selection-end-column="24" />
               <folding>
                 <element signature="e#0#2#0" />
+                <element signature="e#45#65#0" expanded="true" />
                 <element signature="e#1549#1759#0" />
                 <element signature="e#1761#2027#0" />
                 <element signature="e#2029#2095#0" />
@@ -85,7 +81,6 @@
                 <element signature="e#27562#28416#0" />
                 <element signature="e#28418#29255#0" />
                 <element signature="e#29257#31738#0" />
-                <element signature="e#31739#31919#0" />
               </folding>
             </state>
           </provider>
@@ -94,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/libcyusb.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="693" column="29" selection-start-line="693" selection-start-column="29" selection-end-line="693" selection-end-column="29" />
+            <state relative-caret-position="4635">
+              <caret line="309" selection-start-line="309" selection-end-line="309" />
               <folding>
                 <element signature="e#563#581#0" expanded="true" />
                 <element signature="e#1342#1447#0" />
@@ -165,14 +160,6 @@
                 <element signature="e#15380#15511#0" />
                 <element signature="e#15380#15883#0" />
                 <element signature="e#15885#15967#0" />
-                <element signature="e#16970#17048#0" />
-                <element signature="e#17308#17396#0" />
-                <element signature="e#17308#17673#0" />
-                <element signature="e#17675#17781#0" />
-                <element signature="e#17675#19302#0" />
-                <element signature="e#19304#19457#0" />
-                <element signature="e#19304#20155#0" />
-                <element signature="e#20157#21987#0" />
               </folding>
             </state>
           </provider>
@@ -181,8 +168,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/include/libusb-1.0/libusb.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="1771" column="42" selection-start-line="1771" selection-start-column="42" selection-end-line="1771" selection-end-column="42" />
+            <state relative-caret-position="15870">
+              <caret line="1058" column="25" selection-start-line="1058" selection-start-column="25" selection-end-line="1058" selection-end-column="25" />
               <folding>
                 <element signature="e#0#1050#0" />
                 <element signature="e#1991#2313#0" />
@@ -318,8 +305,6 @@
                 <element signature="e#40484#40626#0" />
                 <element signature="e#40682#41247#0" />
                 <element signature="e#41248#41402#1" />
-                <element signature="e#46984#47485#0" />
-                <element signature="e#46984#47641#0" />
                 <element signature="e#47643#48143#0" />
                 <element signature="e#47643#48326#0" />
                 <element signature="e#48328#49249#0" />
@@ -342,8 +327,6 @@
                 <element signature="e#58873#59698#0" />
                 <element signature="e#58873#60248#0" />
                 <element signature="e#59839#60041#0" />
-                <element signature="e#60832#61363#0" />
-                <element signature="e#60832#61692#0" />
                 <element signature="e#61694#62314#0" />
                 <element signature="e#61694#62659#0" />
                 <element signature="e#64007#64066#0" />
@@ -361,119 +344,6 @@
                 <element signature="e#67225#68295#0" />
                 <element signature="e#68459#70529#0" />
                 <element signature="e#70846#71227#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/gui_src/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22290">
-              <caret line="1486" selection-start-line="1486" selection-end-line="1529" selection-end-column="1" />
-              <folding>
-                <element signature="e#0#543#0" />
-                <element signature="e#1244#1360#1" />
-                <element signature="e#1907#3331#0" />
-                <element signature="e#3333#4186#0" />
-                <element signature="e#4187#4470#0" />
-                <element signature="e#4472#4788#0" />
-                <element signature="e#4790#5370#0" />
-                <element signature="e#5372#5884#0" />
-                <element signature="e#5886#6447#0" />
-                <element signature="e#6449#6527#0" />
-                <element signature="e#6529#8166#0" />
-                <element signature="e#8168#8649#0" />
-                <element signature="e#8651#9141#0" />
-                <element signature="e#9143#12294#0" />
-                <element signature="e#12296#12813#0" />
-                <element signature="e#12815#13510#0" />
-                <element signature="e#13512#15280#0" />
-                <element signature="e#15283#20897#0" />
-                <element signature="e#20899#23491#0" />
-                <element signature="e#23493#24512#0" />
-                <element signature="e#24514#24983#0" />
-                <element signature="e#24985#25209#0" />
-                <element signature="e#25211#25490#0" />
-                <element signature="e#25492#25940#0" />
-                <element signature="e#25942#26107#0" />
-                <element signature="e#26109#26196#0" />
-                <element signature="e#26198#26285#0" />
-                <element signature="e#26287#26534#0" />
-                <element signature="e#26536#27086#0" />
-                <element signature="e#27088#27792#0" />
-                <element signature="e#27795#28466#0" />
-                <element signature="e#28468#28732#0" />
-                <element signature="e#28734#29226#0" />
-                <element signature="e#29228#29690#0" />
-                <element signature="e#29692#30183#0" />
-                <element signature="e#30186#30646#0" />
-                <element signature="e#30648#31109#0" />
-                <element signature="e#31111#31570#0" />
-                <element signature="e#31572#32060#0" />
-                <element signature="e#32555#33065#0" />
-                <element signature="e#33067#33372#0" />
-                <element signature="e#33374#33678#0" />
-                <element signature="e#33680#34160#0" />
-                <element signature="e#34162#34974#0" />
-                <element signature="e#34976#36977#0" />
-                <element signature="e#36979#37161#0" />
-                <element signature="e#37163#37718#0" />
-                <element signature="e#37720#38099#0" />
-                <element signature="e#38101#38480#0" />
-                <element signature="e#38482#38832#0" />
-                <element signature="e#38834#38943#0" />
-                <element signature="e#38945#39050#0" />
-                <element signature="e#39052#39155#0" />
-                <element signature="e#40154#40964#0" />
-                <element signature="e#40966#41225#0" />
-                <element signature="e#41227#41489#0" />
-                <element signature="e#43452#44828#0" />
-                <element signature="e#44831#45182#0" />
-                <element signature="e#45184#45531#0" />
-                <element signature="e#45533#45884#0" />
-                <element signature="e#45886#46233#0" />
-                <element signature="e#46235#47146#0" />
-                <element signature="e#47151#47516#0" />
-                <element signature="e#47518#48150#0" />
-                <element signature="e#48152#48965#0" />
-                <element signature="e#48967#49782#0" />
-                <element signature="e#49784#51285#0" />
-                <element signature="e#51288#52814#0" />
-                <element signature="e#52817#54148#0" />
-                <element signature="e#54150#55621#0" />
-                <element signature="e#55623#56087#0" />
-                <element signature="e#56089#56209#0" />
-                <element signature="e#56211#56334#0" />
-                <element signature="e#56336#56658#0" />
-                <element signature="e#56494#56645#0" />
-                <element signature="e#56660#56703#0" />
-                <element signature="e#56705#56905#0" />
-                <element signature="e#56907#58230#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/download_fx3.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#131#0" />
-                <element signature="e#1391#1594#0" />
-                <element signature="e#2193#2811#0" />
-                <element signature="e#2813#4383#0" />
-                <element signature="e#4385#6247#0" />
-                <element signature="e#6249#6750#0" />
-                <element signature="e#6752#8609#0" />
-                <element signature="e#8611#9192#0" />
-                <element signature="e#9194#10056#0" />
-                <element signature="e#10058#12684#0" />
-                <element signature="e#12686#13274#0" />
-                <element signature="e#13276#14140#0" />
-                <element signature="e#14142#15554#0" />
               </folding>
             </state>
           </provider>
@@ -511,6 +381,8 @@
       <find>send_data</find>
       <find>cyusb_bulk_transfer</find>
       <find>libusb_device_handle</find>
+      <find>libusb_control_transfer</find>
+      <find>LIBUSB_ERROR</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -530,14 +402,14 @@
         <option value="$PROJECT_DIR$/include/download_fx3.h" />
         <option value="$PROJECT_DIR$/src/download_fx3.cpp" />
         <option value="$PROJECT_DIR$/src/libcyusb.cpp" />
-        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/include/MimacUSB3Connection.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/src/MimacUSB3Connection.cpp" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="720" />
     <option name="width" value="550" />
     <option name="height" value="997" />
@@ -548,7 +420,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -575,6 +446,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -633,22 +505,23 @@
       <workItem from="1548665618085" duration="11177000" />
       <workItem from="1548688576849" duration="5109000" />
       <workItem from="1548749679058" duration="13513000" />
+      <workItem from="1548853963440" duration="4798000" />
+      <workItem from="1548923437294" duration="7571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79017000" />
+    <option name="totallyTimeSpent" value="91386000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1280" height="997" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31685576" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32820097" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3298969" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298969" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -908,13 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/include/unistd.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="371" column="24" selection-start-line="371" selection-start-column="24" selection-end-line="371" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/include/asm-generic/errno-base.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -922,10 +788,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/cyusb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="452" column="11" selection-start-line="452" selection-start-column="11" selection-end-line="452" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/download_fx3.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#131#0" />
+            <element signature="e#1391#1594#0" />
+            <element signature="e#2193#2811#0" />
+            <element signature="e#2813#4383#0" />
+            <element signature="e#4385#6247#0" />
+            <element signature="e#6249#6750#0" />
+            <element signature="e#6752#8609#0" />
+            <element signature="e#8611#9192#0" />
+            <element signature="e#9194#10056#0" />
+            <element signature="e#10058#12684#0" />
+            <element signature="e#12686#13274#0" />
+            <element signature="e#13276#14140#0" />
+            <element signature="e#14142#15554#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/Cypress/cyusb_linux_1.0.5/gui_src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22290">
-          <caret line="1486" selection-start-line="1486" selection-end-line="1529" selection-end-column="1" />
+        <state relative-caret-position="295">
+          <caret line="1472" column="27" lean-forward="true" selection-start-line="1472" selection-start-column="27" selection-end-line="1472" selection-end-column="27" />
           <folding>
             <element signature="e#0#543#0" />
             <element signature="e#1244#1360#1" />
@@ -1009,39 +904,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/download_fx3.cpp">
+    <entry file="file://$PROJECT_DIR$/src/libcyusb.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+        <state relative-caret-position="4635">
+          <caret line="309" selection-start-line="309" selection-end-line="309" />
           <folding>
-            <element signature="e#0#131#0" />
-            <element signature="e#1391#1594#0" />
-            <element signature="e#2193#2811#0" />
-            <element signature="e#2813#4383#0" />
-            <element signature="e#4385#6247#0" />
-            <element signature="e#6249#6750#0" />
-            <element signature="e#6752#8609#0" />
-            <element signature="e#8611#9192#0" />
-            <element signature="e#9194#10056#0" />
-            <element signature="e#10058#12684#0" />
-            <element signature="e#12686#13274#0" />
-            <element signature="e#13276#14140#0" />
-            <element signature="e#14142#15554#0" />
+            <element signature="e#563#581#0" expanded="true" />
+            <element signature="e#1342#1447#0" />
+            <element signature="e#1448#1606#1" />
+            <element signature="e#2248#2344#0" />
+            <element signature="e#2248#2546#0" />
+            <element signature="e#2548#2651#0" />
+            <element signature="e#2548#4235#0" />
+            <element signature="e#4237#4729#0" />
+            <element signature="e#4731#4803#0" />
+            <element signature="e#4731#4952#0" />
+            <element signature="e#4954#5178#0" />
+            <element signature="e#5180#6167#0" />
+            <element signature="e#6169#6261#0" />
+            <element signature="e#6169#6753#0" />
+            <element signature="e#6755#6832#0" />
+            <element signature="e#6755#7440#0" />
+            <element signature="e#7442#8588#0" />
+            <element signature="e#8590#8669#0" />
+            <element signature="e#8590#8748#0" />
+            <element signature="e#8750#8835#0" />
+            <element signature="e#8750#8998#0" />
+            <element signature="e#9000#9093#0" />
+            <element signature="e#9000#9225#0" />
+            <element signature="e#9227#9312#0" />
+            <element signature="e#9227#9446#0" />
+            <element signature="e#9448#9540#0" />
+            <element signature="e#9448#9721#0" />
+            <element signature="e#9723#9906#0" />
+            <element signature="e#9723#10095#0" />
+            <element signature="e#10097#10199#0" />
+            <element signature="e#10097#10316#0" />
+            <element signature="e#10318#10411#0" />
+            <element signature="e#10318#10527#0" />
+            <element signature="e#10529#10690#0" />
+            <element signature="e#10529#10815#0" />
+            <element signature="e#10817#10920#0" />
+            <element signature="e#10817#11042#0" />
+            <element signature="e#11044#11159#0" />
+            <element signature="e#11044#11341#0" />
+            <element signature="e#11343#11431#0" />
+            <element signature="e#11343#11547#0" />
+            <element signature="e#11549#11646#0" />
+            <element signature="e#11549#11730#0" />
+            <element signature="e#11732#11950#0" />
+            <element signature="e#11732#12085#0" />
+            <element signature="e#12087#12224#0" />
+            <element signature="e#12087#12359#0" />
+            <element signature="e#12361#12471#0" />
+            <element signature="e#12361#12606#0" />
+            <element signature="e#12608#12702#0" />
+            <element signature="e#12608#12906#0" />
+            <element signature="e#12908#13023#0" />
+            <element signature="e#12908#13245#0" />
+            <element signature="e#13247#13371#0" />
+            <element signature="e#13247#13630#0" />
+            <element signature="e#13632#13773#0" />
+            <element signature="e#13632#14094#0" />
+            <element signature="e#14096#14203#0" />
+            <element signature="e#14096#14356#0" />
+            <element signature="e#14358#14476#0" />
+            <element signature="e#14358#14729#0" />
+            <element signature="e#14731#14809#0" />
+            <element signature="e#14731#15041#0" />
+            <element signature="e#15043#15137#0" />
+            <element signature="e#15043#15378#0" />
+            <element signature="e#15380#15511#0" />
+            <element signature="e#15380#15883#0" />
+            <element signature="e#15885#15967#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/cyusb.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="452" column="11" selection-start-line="452" selection-start-column="11" selection-end-line="452" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/include/libusb-1.0/libusb.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="1771" column="42" selection-start-line="1771" selection-start-column="42" selection-end-line="1771" selection-end-column="42" />
+        <state relative-caret-position="15870">
+          <caret line="1058" column="25" selection-start-line="1058" selection-start-column="25" selection-end-line="1058" selection-end-column="25" />
           <folding>
             <element signature="e#0#1050#0" />
             <element signature="e#1991#2313#0" />
@@ -1177,8 +1120,6 @@
             <element signature="e#40484#40626#0" />
             <element signature="e#40682#41247#0" />
             <element signature="e#41248#41402#1" />
-            <element signature="e#46984#47485#0" />
-            <element signature="e#46984#47641#0" />
             <element signature="e#47643#48143#0" />
             <element signature="e#47643#48326#0" />
             <element signature="e#48328#49249#0" />
@@ -1201,8 +1142,6 @@
             <element signature="e#58873#59698#0" />
             <element signature="e#58873#60248#0" />
             <element signature="e#59839#60041#0" />
-            <element signature="e#60832#61363#0" />
-            <element signature="e#60832#61692#0" />
             <element signature="e#61694#62314#0" />
             <element signature="e#61694#62659#0" />
             <element signature="e#64007#64066#0" />
@@ -1224,119 +1163,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#140#157#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/unistd.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="362" column="15" selection-start-line="362" selection-start-column="15" selection-end-line="362" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/7/cmath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="418" column="5" lean-forward="true" selection-start-line="418" selection-start-column="5" selection-end-line="418" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="93" column="37" selection-start-line="93" selection-start-column="37" selection-end-line="93" selection-end-column="37" />
+        <state relative-caret-position="315">
+          <caret line="102" column="35" lean-forward="true" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
           <folding>
             <element signature="e#834#1158#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libcyusb.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="693" column="29" selection-start-line="693" selection-start-column="29" selection-end-line="693" selection-end-column="29" />
-          <folding>
-            <element signature="e#563#581#0" expanded="true" />
-            <element signature="e#1342#1447#0" />
-            <element signature="e#1448#1606#1" />
-            <element signature="e#2248#2344#0" />
-            <element signature="e#2248#2546#0" />
-            <element signature="e#2548#2651#0" />
-            <element signature="e#2548#4235#0" />
-            <element signature="e#4237#4729#0" />
-            <element signature="e#4731#4803#0" />
-            <element signature="e#4731#4952#0" />
-            <element signature="e#4954#5178#0" />
-            <element signature="e#5180#6167#0" />
-            <element signature="e#6169#6261#0" />
-            <element signature="e#6169#6753#0" />
-            <element signature="e#6755#6832#0" />
-            <element signature="e#6755#7440#0" />
-            <element signature="e#7442#8588#0" />
-            <element signature="e#8590#8669#0" />
-            <element signature="e#8590#8748#0" />
-            <element signature="e#8750#8835#0" />
-            <element signature="e#8750#8998#0" />
-            <element signature="e#9000#9093#0" />
-            <element signature="e#9000#9225#0" />
-            <element signature="e#9227#9312#0" />
-            <element signature="e#9227#9446#0" />
-            <element signature="e#9448#9540#0" />
-            <element signature="e#9448#9721#0" />
-            <element signature="e#9723#9906#0" />
-            <element signature="e#9723#10095#0" />
-            <element signature="e#10097#10199#0" />
-            <element signature="e#10097#10316#0" />
-            <element signature="e#10318#10411#0" />
-            <element signature="e#10318#10527#0" />
-            <element signature="e#10529#10690#0" />
-            <element signature="e#10529#10815#0" />
-            <element signature="e#10817#10920#0" />
-            <element signature="e#10817#11042#0" />
-            <element signature="e#11044#11159#0" />
-            <element signature="e#11044#11341#0" />
-            <element signature="e#11343#11431#0" />
-            <element signature="e#11343#11547#0" />
-            <element signature="e#11549#11646#0" />
-            <element signature="e#11549#11730#0" />
-            <element signature="e#11732#11950#0" />
-            <element signature="e#11732#12085#0" />
-            <element signature="e#12087#12224#0" />
-            <element signature="e#12087#12359#0" />
-            <element signature="e#12361#12471#0" />
-            <element signature="e#12361#12606#0" />
-            <element signature="e#12608#12702#0" />
-            <element signature="e#12608#12906#0" />
-            <element signature="e#12908#13023#0" />
-            <element signature="e#12908#13245#0" />
-            <element signature="e#13247#13371#0" />
-            <element signature="e#13247#13630#0" />
-            <element signature="e#13632#13773#0" />
-            <element signature="e#13632#14094#0" />
-            <element signature="e#14096#14203#0" />
-            <element signature="e#14096#14356#0" />
-            <element signature="e#14358#14476#0" />
-            <element signature="e#14358#14729#0" />
-            <element signature="e#14731#14809#0" />
-            <element signature="e#14731#15041#0" />
-            <element signature="e#15043#15137#0" />
-            <element signature="e#15043#15378#0" />
-            <element signature="e#15380#15511#0" />
-            <element signature="e#15380#15883#0" />
-            <element signature="e#15885#15967#0" />
-            <element signature="e#16970#17048#0" />
-            <element signature="e#17308#17396#0" />
-            <element signature="e#17308#17673#0" />
-            <element signature="e#17675#17781#0" />
-            <element signature="e#17675#19302#0" />
-            <element signature="e#19304#19457#0" />
-            <element signature="e#19304#20155#0" />
-            <element signature="e#20157#21987#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/MimacUSB3Connection.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1084">
-          <caret line="38" column="7" lean-forward="true" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#2#0" />
-            <element signature="e#140#157#0" expanded="true" />
-            <element signature="e#3982#4228#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MimacUSB3Connection.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="914" column="25" lean-forward="true" selection-start-line="914" selection-start-column="25" selection-end-line="914" selection-end-column="25" />
+        <state relative-caret-position="329">
+          <caret line="918" column="24" lean-forward="true" selection-start-line="918" selection-start-column="24" selection-end-line="918" selection-end-column="24" />
           <folding>
             <element signature="e#0#2#0" />
+            <element signature="e#45#65#0" expanded="true" />
             <element signature="e#1549#1759#0" />
             <element signature="e#1761#2027#0" />
             <element signature="e#2029#2095#0" />
@@ -1355,7 +1223,6 @@
             <element signature="e#27562#28416#0" />
             <element signature="e#28418#29255#0" />
             <element signature="e#29257#31738#0" />
-            <element signature="e#31739#31919#0" />
           </folding>
         </state>
       </provider>

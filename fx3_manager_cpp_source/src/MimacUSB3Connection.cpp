@@ -9,8 +9,11 @@
 #include <cerrno>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <tgmath.h>
 #include "../include/MimacUSB3Connection.h"
 #include "../include/download_fx3.h"
+
+#include <fstream>
 
 //#define DEBUG
 
@@ -891,10 +894,11 @@ void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
 int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
     size_t maxps = 0;
     unsigned char *data;
-    unsigned short wLength = 10;
+    unsigned short wLength = 16;
     unsigned int timeout = 1000;
     unsigned short wValue = 0, wIndex = 1;
-    unsigned short bin_len;
+    unsigned int bin_len;
+    unsigned int *p;
 
     int fpga_file = open(fpga_firmware_filename, O_RDONLY);
     if ( fpga_file < 0 ) {
@@ -902,27 +906,37 @@ int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
         return -1;
     }
 
-    maxps = 4096;	// If sending a file, then data is sent in 4096 byte packets
-    data = (unsigned char *)malloc(maxps);
-    bin_len = static_cast<unsigned short>(read(fpga_file, data, maxps));
-    data = &bin_len;
-    printf("Programming FPGA\n");
-    rStatus = cyusb_control_write(
-            MimacUSB3Connection::device_handle,
-            WRITE_REQUEST_TYPE,        /* bmRequestType */
-            VND_CMD_SLAVESER_CFGLOAD,  /* bRequest */
-            wValue,      /* wValue */
-            wIndex,      /* wIndex */
-            data,        /* *data */
-            wLength,     /* wLength */
-            timeout);
-    /*if( rStatus ) {
-        cyusb_error(rStatus);
-        cyusb_close();
+    maxps = static_cast<size_t>(pow(2, wLength*8)); //4096;	// If sending a file, then data is sent in 4096 byte packets
+    //data = (unsigned char *)malloc(maxps);
+    //bin_len = static_cast<unsigned short>(read(fpga_file, data, maxps));
+    std::ifstream in(fpga_firmware_filename, std::ifstream::ate | std::ifstream::binary);
+    if (in.is_open()) {
+        bin_len = static_cast<unsigned int>(in.tellg());
+        p = &bin_len;
+        //data = (unsigned char *)p;
+        printf("filelen = %d\n", bin_len);
+        printf("Programming FPGA\n");
+        rStatus = libusb_control_transfer(
+                MimacUSB3Connection::device_handle,
+                WRITE_REQUEST_TYPE,        /* bmRequestType */
+                VND_CMD_SLAVESER_CFGLOAD,  /* bRequest */
+                wValue,                    /* wValue */
+                wIndex,                    /* wIndex */
+                (unsigned char *) p,       /* *data */
+                wLength,                   /* wLength */
+                timeout);
+        if (rStatus < 0) {         /* LIB_USB_ERROR */
+            cyusb_error(rStatus);
+            cyusb_close();
+            return rStatus;
+        }
+        printf("rStatus = %d\n", rStatus);
         return rStatus;
-    }*/
-    printf("rStatus = %d\n", rStatus);
-    return rStatus;
+    }
+    else {
+        printf("Error in MimacUSB3Connection::program_device():\n\t Couldn't open firmware %s\n", fpga_firmware_filename);
+    }
+    return -1;
 }
 /*int MimacUSB3Connection::download_fx3_firmware_to_ram(char *filename) {
     cyusb_handle *h = MimacUSB3Connection::device_handle;

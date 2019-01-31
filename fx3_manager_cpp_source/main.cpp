@@ -41,6 +41,14 @@ static void print_usage(FILE *stream, int exit_code) {
 static FILE *fp = stdout;
 
 
+void wait_for_enter() {
+    cout << "Please turn on the FPGA" << endl;
+    cout<<"Press enter to continue..."<<endl;
+    cin.get();
+    //system("read");
+}
+
+
 void program() {
 	MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(VID, PID_FX3);
 	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
@@ -89,10 +97,12 @@ int main(int argc, char **argv) {
         //mimacUSB3Connection.claim_interface(0);
         //mimacUSB3Connection.test_performance();
         //mimacUSB3Connection.loopback_test();
+        wait_for_enter();
 		char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/slaveFIFO2b_fpga_top.bin");
         //char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin");
         mimacUSB3Connection.program_device(fpga_filename);
-		mimacUSB3Connection.send_text_file();
+        //wait_for_enter();
+		//mimacUSB3Connection.send_text_file();
     }
 	catch (ErrorOpeningLib& e) {
 		printf("Error opening library\n");
