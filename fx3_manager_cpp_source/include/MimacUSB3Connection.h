@@ -124,10 +124,6 @@ private:
 
     int find_endpoint(unsigned int end_pt);
 
-    // Program FX3 functions
-    /*//int fx3_usbboot_download(const char *filename);
-    //int read_firmware_image (const char *filename, unsigned char *buf, int *romsize, int *filesize);
-    //int fx3_ram_write(unsigned char *buf, unsigned int ramAddress, unsigned short len);*/
     // Bulk Transmision
     int compare_files(char *fp1_string, char *fp2_string);
     void send_buffer(unsigned char *buf, int sz);

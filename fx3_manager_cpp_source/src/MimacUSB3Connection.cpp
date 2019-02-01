@@ -177,7 +177,7 @@ int MimacUSB3Connection::claim_interface(int interface) {
     }
     rStatus = cyusb_claim_interface(cyusb_gethandle(0), interface);
     if ( rStatus == 0 ) {
-        printf("Interface %d claimed successfully\n",interface);
+        printf("\tInterface %d claimed successfully\n",interface);
     }
     else {
         cyusb_error(rStatus);
@@ -229,138 +229,6 @@ int MimacUSB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
     return rStatus;
 }
 
-/*int MimacUSB3Connection::fx3_usbboot_download(const char *filename) {
-    unsigned char *fwBuf;
-    unsigned int  *data_p;
-    unsigned int i, checksum;
-    unsigned int address;
-    unsigned short length;
-    int r, index, filesize;
-
-    fwBuf = (unsigned char *)calloc (1, MAX_FWIMG_SIZE);
-    if (fwBuf == nullptr) {
-        fprintf (stderr, "Error: Failed to allocate buffer to store firmware binary\n");
-        return -1;
-    }
-
-    // Read the firmware image into the local RAM buffer.
-    r = read_firmware_image(filename, fwBuf, nullptr, &filesize);
-    if (r != 0) {
-        fprintf (stderr, "Error: Failed to read firmware file %s\n", filename);
-        free(fwBuf);
-        return -2;
-    }
-
-    // Run through each section of code, and use vendor commands to download them to RAM.
-    index    = 4;
-    checksum = 0;
-    while (index < filesize) {
-        data_p  = (unsigned int *)(fwBuf + index);
-        length  = data_p[0];
-        address = data_p[1];
-        if (length != 0) {
-            for (i = 0; i < length; i++) {
-                checksum += data_p[2 + i];
-            }
-            r = fx3_ram_write (fwBuf + index + 8, address, length * 4);
-            if (r != 0) {
-                fprintf (stderr, "Error: Failed to download data to FX3 RAM\n");
-                free (fwBuf);
-                return -3;
-            }
-        }
-        else {
-            if (checksum != data_p[2]) {
-                fprintf (stderr, "Error: Checksum error in firmware binary\n");
-                free (fwBuf);
-                return -4;
-            }
-
-            r = cyusb_control_transfer (device_handle, 0x40, 0xA0, GET_LSW(address), GET_MSW(address), nullptr, 0, VENDORCMD_TIMEOUT);
-            if (r != 0) {
-                printf("Info: Ignored error in control transfer: %d\n", r);
-            }
-            break;
-        }
-
-        index += (8 + length * 4);
-    }
-
-    free (fwBuf);
-    return 0;
-}*/
-
-/*
-int MimacUSB3Connection::fx3_ram_write(unsigned char *buf, unsigned int ramAddress, unsigned short len) {
-    int r;
-    int index = 0;
-    unsigned short size;
-
-    while (len > 0) {
-        size = static_cast<unsigned short>((len > MAX_WRITE_SIZE) ? MAX_WRITE_SIZE : len);
-        r = cyusb_control_transfer (device_handle, 0x40, 0xA0, GET_LSW(ramAddress), GET_MSW(ramAddress), &buf[index], size, VENDORCMD_TIMEOUT);
-        if (r != size) {
-            fprintf (stderr, "Error: Vendor write to FX3 RAM failed\n");
-            return -1;
-        }
-        ramAddress += size;
-        index      += size;
-        len        -= size;
-    }
-
-    return 0;
-}*/
-
-/** Read the firmware image from the file into a buffer. */
-/*int MimacUSB3Connection::read_firmware_image(const char *filename, unsigned char *buf, int *romsize, int *filesize) {
-    int fd;
-    int nbr;
-    struct stat filestat{};
-
-    if (stat (filename, &filestat) != 0) {
-        fprintf (stderr, "Error: Failed to stat file %s\n", filename);
-        return -1;
-    }
-
-    // Verify that the file size does not exceed our limits.
-    *filesize = filestat.st_size;
-    if (*filesize > MAX_FWIMG_SIZE) {
-        fprintf (stderr, "Error: File size exceeds maximum firmware image size\n");
-        return -2;
-    }
-
-    fd = open(filename, O_RDONLY);
-    if (fd < 0) {
-        fprintf (stderr, "Error: File not found\n");
-        return -3;
-    }
-    nbr = read (fd, buf, 2);		// Read first 2 bytes, must be equal to 'CY'
-    if (strncmp ((char *)buf,"CY",2)) {
-        fprintf (stderr, "Error: Image does not have 'CY' at start.\n");
-        return -4;
-    }
-    nbr = read (fd, buf, 1);		// Read 1 byte. bImageCTL
-    if (buf[0] & 0x01) {
-        fprintf (stderr, "Error: Image does not contain executable code\n");
-        return -5;
-    }
-    if (romsize != 0)
-        *romsize = i2c_eeprom_size[(buf[0] >> 1) & 0x07];
-
-    nbr = read (fd, buf, 1);		// Read 1 byte. bImageType
-    if (!(buf[0] == 0xB0)) {
-        fprintf (stderr, "Error: Not a normal FW binary with checksum\n");
-        return -6;
-    }
-
-    // Read the complete firmware binary into a local buffer.
-    lseek (fd, 0, SEEK_SET);
-    nbr = read (fd, buf, *filesize);
-
-    close (fd);
-    return 0;
-}*/
-
 /**---------------------------------------------------------------------**/
 
 /**
@@ -374,7 +242,7 @@ int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
     // Step 1: Get a handle to the first CyUSB device.
     device_handle = cyusb_gethandle(0);
     if (device_handle == nullptr) {
-        printf ("test_performance: Failed to get CyUSB device handle\n");
+        printf ("Failed to get CyUSB device handle\n");
         cyusb_error(rStatus);
         cyusb_close();
         return -EACCES;
@@ -399,7 +267,7 @@ int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
             for (int k = 0; k < interfaceDesc->bNumEndpoints; k++) {
                 endpointDesc = (libusb_endpoint_descriptor *)&(interfaceDesc->endpoint[k]);
                 if (endpointDesc->bEndpointAddress == end_pt) {
-                    printf ("test_performance: Found endpoint 0x%x in interface %d, setting %d\n", end_pt, i, j);
+                    printf ("\tFound endpoint 0x%x in interface %d, setting %d\n", end_pt, i, j);
 
                     // If the alt setting is not 0, select it
                     cyusb_set_interface_alt_setting (device_handle, i, j);
@@ -953,7 +821,3 @@ int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
     free (buffer);
     return 0;
 }
-/*int MimacUSB3Connection::download_fx3_firmware_to_ram(char *filename) {
-    cyusb_handle *h = MimacUSB3Connection::device_handle;
-    return cyusb_download_fx3(h, filename);
-}*/
