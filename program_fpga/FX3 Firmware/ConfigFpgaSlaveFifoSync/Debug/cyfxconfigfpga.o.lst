@@ -1,0 +1,1971 @@
+   1              		.cpu arm926ej-s
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"cyfxconfigfpga.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.comm	glChHandleUtoCPU,172,4
+  17              		.global	glConfigDone
+  18              		.data
+  19              		.align	2
+  22              	glConfigDone:
+  23 0000 01000000 		.word	1
+  24              		.global	filelen
+  25              		.bss
+  26              		.align	2
+  29              	filelen:
+  30 0000 00000000 		.space	4
+  31              		.comm	glFxConfigFpgaAppEvent,40,4
+  32              		.global	uiPacketSize
+  33              		.align	1
+  36              	uiPacketSize:
+  37 0004 0000     		.space	2
+  38 0006 0000     		.section	.rodata
+  39              		.align	2
+  40              	.LC0:
+  41 0000 50726F67 		.ascii	"Program FPGA version modified by J. Agustin Barrach"
+  41      72616D20 
+  41      46504741 
+  41      20766572 
+  41      73696F6E 
+  42 0033 696E613A 		.ascii	"ina: \015\012\000"
+  42      200D0A00 
+  43 003b 00       		.align	2
+  44              	.LC1:
+  45 003c 66696C65 		.ascii	"file length: %d\012\000"
+  45      206C656E 
+  45      6774683A 
+  45      2025640A 
+  45      00
+  46 004d 000000   		.align	2
+  47              	.LC2:
+  48 0050 50756C6C 		.ascii	"Pulling PROG_B line to reset FPGA\012\000"
+  48      696E6720 
+  48      50524F47 
+  48      5F42206C 
+  48      696E6520 
+  49 0073 00       		.align	2
+  50              	.LC3:
+  51 0074 4552524F 		.ascii	"ERROR: FPGA_Init_B was not reseted. Error code = %d"
+  51      523A2046 
+  51      5047415F 
+  51      496E6974 
+  51      5F422077 
+  52 00a7 0A00     		.ascii	"\012\000"
+  53 00a9 000000   		.align	2
+  54              	.LC4:
+  55 00ac 52656C65 		.ascii	"Releasing PROG_B line\012\000"
+  55      6173696E 
+  55      67205052 
+  55      4F475F42 
+  55      206C696E 
+  56 00c3 00       		.align	2
+  57              	.LC5:
+  58 00c4 43686563 		.ascii	"Checking FPGA_Init_B to know if FPGA is ready.\012\000"
+  58      6B696E67 
+  58      20465047 
+  58      415F496E 
+  58      69745F42 
+  59              		.align	2
+  60              	.LC6:
+  61 00f4 4552524F 		.ascii	"ERROR: FPGA not ready. Error code = %d\012\000"
+  61      523A2046 
+  61      50474120 
+  61      6E6F7420 
+  61      72656164 
+  62              		.align	2
+  63              	.LC7:
+  64 011c 53746172 		.ascii	"Start shifting out of configuration data...\012\000"
+  64      74207368 
+  64      69667469 
+  64      6E67206F 
+  64      7574206F 
+  65 0149 000000   		.align	2
+  66              	.LC8:
+  67 014c 4552524F 		.ascii	"ERROR: Timeout. Error code = %d\012\000"
+  67      523A2054 
+  67      696D656F 
+  67      75742E20 
+  67      4572726F 
+  68 016d 000000   		.align	2
+  69              	.LC9:
+  70 0170 436F6E66 		.ascii	"Configuration Done. Status code = %d\012\000"
+  70      69677572 
+  70      6174696F 
+  70      6E20446F 
+  70      6E652E20 
+  71 0196 0000     		.align	2
+  72              	.LC10:
+  73 0198 4552524F 		.ascii	"ERROR: FPGA_DONE signal. Error code = %d\012\000"
+  73      523A2046 
+  73      5047415F 
+  73      444F4E45 
+  73      20736967 
+  74 01c2 0000     		.align	2
+  75              	.LC11:
+  76 01c4 57726974 		.ascii	"Writing Configuration finished. Status code = %d\012"
+  76      696E6720 
+  76      436F6E66 
+  76      69677572 
+  76      6174696F 
+  77 01f5 00       		.ascii	"\000"
+  78              		.text
+  79              		.align	2
+  80              		.global	CyFxConfigFpga
+  82              	CyFxConfigFpga:
+  83              	.LFB0:
+  84              		.file 1 "../cyfxconfigfpga.c"
+   1:../cyfxconfigfpga.c **** /*
+   2:../cyfxconfigfpga.c ****  * cyfxconfigfpga.c
+   3:../cyfxconfigfpga.c ****  *
+   4:../cyfxconfigfpga.c ****  *  Created on: Nov 26, 2012
+   5:../cyfxconfigfpga.c ****  *      Author: rskv
+   6:../cyfxconfigfpga.c ****  */
+   7:../cyfxconfigfpga.c **** 
+   8:../cyfxconfigfpga.c **** #include "cyu3system.h"
+   9:../cyfxconfigfpga.c **** #include "cyu3os.h"
+  10:../cyfxconfigfpga.c **** #include "cyu3dma.h"
+  11:../cyfxconfigfpga.c **** #include "cyu3error.h"
+  12:../cyfxconfigfpga.c **** #include "cyu3usb.h"
+  13:../cyfxconfigfpga.c **** #include "cyu3gpio.h"
+  14:../cyfxconfigfpga.c **** #include "cyu3spi.h"
+  15:../cyfxconfigfpga.c **** #include "cyu3uart.h"
+  16:../cyfxconfigfpga.c **** #include "cyfxslfifosync.h"
+  17:../cyfxconfigfpga.c **** #include "cyu3gpif.h"
+  18:../cyfxconfigfpga.c **** #include "cyu3pib.h"
+  19:../cyfxconfigfpga.c **** #include "pib_regs.h"
+  20:../cyfxconfigfpga.c **** #include "cyfxconfigfpga.h"
+  21:../cyfxconfigfpga.c **** 
+  22:../cyfxconfigfpga.c **** /* This file illustrates the configure FPGA in Slave Serial mode example */
+  23:../cyfxconfigfpga.c **** 
+  24:../cyfxconfigfpga.c **** 
+  25:../cyfxconfigfpga.c **** CyU3PDmaChannel glChHandleUtoCPU;   /* DMA Channel handle for U2CPU transfer. */
+  26:../cyfxconfigfpga.c **** 
+  27:../cyfxconfigfpga.c **** CyBool_t glConfigDone = CyTrue;			/* Flag to indicate that FPGA configuration is done */
+  28:../cyfxconfigfpga.c **** 
+  29:../cyfxconfigfpga.c **** uint32_t filelen = 0;					/* length of Configuration file (.bin) */
+  30:../cyfxconfigfpga.c **** 
+  31:../cyfxconfigfpga.c **** CyU3PEvent glFxConfigFpgaAppEvent;    /* Configure FPGA event group. */
+  32:../cyfxconfigfpga.c **** 
+  33:../cyfxconfigfpga.c **** uint16_t uiPacketSize = 0;
+  34:../cyfxconfigfpga.c **** 
+  35:../cyfxconfigfpga.c **** 
+  36:../cyfxconfigfpga.c **** 
+  37:../cyfxconfigfpga.c **** 
+  38:../cyfxconfigfpga.c **** /* This function writes configuration data to the xilinx FPGA */
+  39:../cyfxconfigfpga.c **** CyU3PReturnStatus_t CyFxConfigFpga(uint32_t uiLen)
+  40:../cyfxconfigfpga.c **** {
+  85              		.loc 1 40 0
+  86              		.cfi_startproc
+  87              		@ args = 0, pretend = 0, frame = 40
+  88              		@ frame_needed = 1, uses_anonymous_args = 0
+  89 0000 00482DE9 		stmfd	sp!, {fp, lr}
+  90              	.LCFI0:
+  91              		.cfi_def_cfa_offset 8
+  92              		.cfi_offset 11, -8
+  93              		.cfi_offset 14, -4
+  94 0004 04B08DE2 		add	fp, sp, #4
+  95              	.LCFI1:
+  96              		.cfi_def_cfa 11, 4
+  97 0008 28D04DE2 		sub	sp, sp, #40
+  98 000c 28000BE5 		str	r0, [fp, #-40]
+  41:../cyfxconfigfpga.c ****       uint32_t uiIdx;
+  42:../cyfxconfigfpga.c **** 
+  43:../cyfxconfigfpga.c ****       CyU3PReturnStatus_t apiRetStatus;
+  44:../cyfxconfigfpga.c ****       CyU3PDmaBuffer_t inBuf_p;
+  45:../cyfxconfigfpga.c ****       CyBool_t xFpga_Done, xFpga_Init_B;
+  46:../cyfxconfigfpga.c **** 
+  47:../cyfxconfigfpga.c ****       CyU3PDebugPrint (1, "Program FPGA version modified by J. Agustin Barrachina: \r\n");
+  99              		.loc 1 47 0
+ 100 0010 0100A0E3 		mov	r0, #1
+ 101 0014 98129FE5 		ldr	r1, .L14
+ 102 0018 FEFFFFEB 		bl	CyU3PDebugPrint
+  48:../cyfxconfigfpga.c ****       CyU3PDebugPrint (6, "file length: %d\n", uiLen);
+ 103              		.loc 1 48 0
+ 104 001c 0600A0E3 		mov	r0, #6
+ 105 0020 90129FE5 		ldr	r1, .L14+4
+ 106 0024 28201BE5 		ldr	r2, [fp, #-40]
+ 107 0028 FEFFFFEB 		bl	CyU3PDebugPrint
+  49:../cyfxconfigfpga.c **** 
+  50:../cyfxconfigfpga.c ****       /* Pull PROG_B line to reset FPGA */
+  51:../cyfxconfigfpga.c ****       CyU3PDebugPrint (CY_FX_DEBUG_PRIORITY, "Pulling PROG_B line to reset FPGA\n");
+ 108              		.loc 1 51 0
+ 109 002c 0400A0E3 		mov	r0, #4
+ 110 0030 84129FE5 		ldr	r1, .L14+8
+ 111 0034 FEFFFFEB 		bl	CyU3PDebugPrint
+  52:../cyfxconfigfpga.c ****       apiRetStatus = CyU3PSpiSetSsnLine (CyFalse);
+ 112              		.loc 1 52 0
+ 113 0038 0000A0E3 		mov	r0, #0
+ 114 003c FEFFFFEB 		bl	CyU3PSpiSetSsnLine
+ 115 0040 0C000BE5 		str	r0, [fp, #-12]
+  53:../cyfxconfigfpga.c **** 
+  54:../cyfxconfigfpga.c ****       CyU3PGpioSimpleGetValue (FPGA_INIT_B, &xFpga_Init_B);	// TODO: 2 times this line?
+ 116              		.loc 1 54 0
+ 117 0044 20304BE2 		sub	r3, fp, #32
+ 118 0048 3400A0E3 		mov	r0, #52
+ 119 004c 0310A0E1 		mov	r1, r3
+ 120 0050 FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
+  55:../cyfxconfigfpga.c ****       CyU3PGpioSimpleGetValue (FPGA_INIT_B, &xFpga_Init_B);
+ 121              		.loc 1 55 0
+ 122 0054 20304BE2 		sub	r3, fp, #32
+ 123 0058 3400A0E3 		mov	r0, #52
+ 124 005c 0310A0E1 		mov	r1, r3
+ 125 0060 FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
+  56:../cyfxconfigfpga.c ****       if (xFpga_Init_B) {
+ 126              		.loc 1 56 0
+ 127 0064 20301BE5 		ldr	r3, [fp, #-32]
+ 128 0068 000053E3 		cmp	r3, #0
+ 129 006c 0800000A 		beq	.L2
+  57:../cyfxconfigfpga.c ****     	  CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "ERROR: FPGA_Init_B was not reseted. Error code = %d\n
+ 130              		.loc 1 57 0
+ 131 0070 0400A0E3 		mov	r0, #4
+ 132 0074 44129FE5 		ldr	r1, .L14+12
+ 133 0078 0C201BE5 		ldr	r2, [fp, #-12]
+ 134 007c FEFFFFEB 		bl	CyU3PDebugPrint
+  58:../cyfxconfigfpga.c ****     	  glConfigDone = CyFalse;
+ 135              		.loc 1 58 0
+ 136 0080 3C329FE5 		ldr	r3, .L14+16
+ 137 0084 0020A0E3 		mov	r2, #0
+ 138 0088 002083E5 		str	r2, [r3]
+  59:../cyfxconfigfpga.c ****           return apiRetStatus;
+ 139              		.loc 1 59 0
+ 140 008c 0C301BE5 		ldr	r3, [fp, #-12]
+ 141 0090 840000EA 		b	.L13
+ 142              	.L2:
+  60:../cyfxconfigfpga.c ****       }
+  61:../cyfxconfigfpga.c ****       CyU3PThreadSleep(10);
+ 143              		.loc 1 61 0
+ 144 0094 0A00A0E3 		mov	r0, #10
+ 145 0098 FEFFFFEB 		bl	_tx_thread_sleep
+  62:../cyfxconfigfpga.c ****       /* Release PROG_B line */
+  63:../cyfxconfigfpga.c ****       CyU3PDebugPrint (CY_FX_DEBUG_PRIORITY, "Releasing PROG_B line\n");
+ 146              		.loc 1 63 0
+ 147 009c 0400A0E3 		mov	r0, #4
+ 148 00a0 20129FE5 		ldr	r1, .L14+20
+ 149 00a4 FEFFFFEB 		bl	CyU3PDebugPrint
+  64:../cyfxconfigfpga.c ****       apiRetStatus |= CyU3PSpiSetSsnLine (CyTrue);
+ 150              		.loc 1 64 0
+ 151 00a8 0100A0E3 		mov	r0, #1
+ 152 00ac FEFFFFEB 		bl	CyU3PSpiSetSsnLine
+ 153 00b0 0030A0E1 		mov	r3, r0
+ 154 00b4 0C201BE5 		ldr	r2, [fp, #-12]
+ 155 00b8 033082E1 		orr	r3, r2, r3
+ 156 00bc 0C300BE5 		str	r3, [fp, #-12]
+  65:../cyfxconfigfpga.c ****       CyU3PThreadSleep(10);   // Allow FPGA to startup
+ 157              		.loc 1 65 0
+ 158 00c0 0A00A0E3 		mov	r0, #10
+ 159 00c4 FEFFFFEB 		bl	_tx_thread_sleep
+  66:../cyfxconfigfpga.c **** 
+  67:../cyfxconfigfpga.c ****       /* Check if FPGA is now ready by testing the FPGA_Init_B signal */
+  68:../cyfxconfigfpga.c ****       CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "Checking FPGA_Init_B to know if FPGA is ready.\n");
+ 160              		.loc 1 68 0
+ 161 00c8 0400A0E3 		mov	r0, #4
+ 162 00cc F8119FE5 		ldr	r1, .L14+24
+ 163 00d0 FEFFFFEB 		bl	CyU3PDebugPrint
+  69:../cyfxconfigfpga.c ****       apiRetStatus |= CyU3PGpioSimpleGetValue (FPGA_INIT_B, &xFpga_Init_B);
+ 164              		.loc 1 69 0
+ 165 00d4 20304BE2 		sub	r3, fp, #32
+ 166 00d8 3400A0E3 		mov	r0, #52
+ 167 00dc 0310A0E1 		mov	r1, r3
+ 168 00e0 FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
+ 169 00e4 0030A0E1 		mov	r3, r0
+ 170 00e8 0C201BE5 		ldr	r2, [fp, #-12]
+ 171 00ec 033082E1 		orr	r3, r2, r3
+ 172 00f0 0C300BE5 		str	r3, [fp, #-12]
+  70:../cyfxconfigfpga.c ****       if( (xFpga_Init_B != CyTrue) || (apiRetStatus != CY_U3P_SUCCESS) ){
+ 173              		.loc 1 70 0
+ 174 00f4 20301BE5 		ldr	r3, [fp, #-32]
+ 175 00f8 010053E3 		cmp	r3, #1
+ 176 00fc 0200001A 		bne	.L4
+ 177              		.loc 1 70 0 is_stmt 0 discriminator 1
+ 178 0100 0C301BE5 		ldr	r3, [fp, #-12]
+ 179 0104 000053E3 		cmp	r3, #0
+ 180 0108 0500000A 		beq	.L5
+ 181              	.L4:
+  71:../cyfxconfigfpga.c ****     	  CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "ERROR: FPGA not ready. Error code = %d\n", apiRetStat
+ 182              		.loc 1 71 0 is_stmt 1
+ 183 010c 0400A0E3 		mov	r0, #4
+ 184 0110 B8119FE5 		ldr	r1, .L14+28
+ 185 0114 0C201BE5 		ldr	r2, [fp, #-12]
+ 186 0118 FEFFFFEB 		bl	CyU3PDebugPrint
+  72:../cyfxconfigfpga.c ****           return apiRetStatus;
+ 187              		.loc 1 72 0
+ 188 011c 0C301BE5 		ldr	r3, [fp, #-12]
+ 189 0120 600000EA 		b	.L13
+ 190              	.L5:
+  73:../cyfxconfigfpga.c ****       }
+  74:../cyfxconfigfpga.c **** 
+  75:../cyfxconfigfpga.c ****       /* Start shifting out configuration data */
+  76:../cyfxconfigfpga.c ****       CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "Start shifting out of configuration data...\n");
+ 191              		.loc 1 76 0
+ 192 0124 0400A0E3 		mov	r0, #4
+ 193 0128 A4119FE5 		ldr	r1, .L14+32
+ 194 012c FEFFFFEB 		bl	CyU3PDebugPrint
+  77:../cyfxconfigfpga.c ****       for(uiIdx = 0; (uiIdx < uiLen) && glIsApplnActive; uiIdx += uiPacketSize ){
+ 195              		.loc 1 77 0
+ 196 0130 0030A0E3 		mov	r3, #0
+ 197 0134 08300BE5 		str	r3, [fp, #-8]
+ 198 0138 370000EA 		b	.L6
+ 199              	.L11:
+  78:../cyfxconfigfpga.c ****     	  if(CyU3PDmaChannelGetBuffer (&glChHandleUtoCPU, &inBuf_p, 2000) != CY_U3P_SUCCESS){ // Wait 
+ 200              		.loc 1 78 0
+ 201 013c 18304BE2 		sub	r3, fp, #24
+ 202 0140 90019FE5 		ldr	r0, .L14+36
+ 203 0144 0310A0E1 		mov	r1, r3
+ 204 0148 7D2EA0E3 		mov	r2, #2000
+ 205 014c FEFFFFEB 		bl	CyU3PDmaChannelGetBuffer
+ 206 0150 0030A0E1 		mov	r3, r0
+ 207 0154 000053E3 		cmp	r3, #0
+ 208 0158 0900000A 		beq	.L7
+  79:../cyfxconfigfpga.c ****     		  glConfigDone = CyFalse;
+ 209              		.loc 1 79 0
+ 210 015c 60319FE5 		ldr	r3, .L14+16
+ 211 0160 0020A0E3 		mov	r2, #0
+ 212 0164 002083E5 		str	r2, [r3]
+  80:../cyfxconfigfpga.c ****     		  apiRetStatus = CY_U3P_ERROR_TIMEOUT;
+ 213              		.loc 1 80 0
+ 214 0168 4530A0E3 		mov	r3, #69
+ 215 016c 0C300BE5 		str	r3, [fp, #-12]
+  81:../cyfxconfigfpga.c ****     		  CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "ERROR: Timeout. Error code = %d\n", apiRetStatus);
+ 216              		.loc 1 81 0
+ 217 0170 0400A0E3 		mov	r0, #4
+ 218 0174 60119FE5 		ldr	r1, .L14+40
+ 219 0178 0C201BE5 		ldr	r2, [fp, #-12]
+ 220 017c FEFFFFEB 		bl	CyU3PDebugPrint
+  82:../cyfxconfigfpga.c ****     		  break;
+ 221              		.loc 1 82 0
+ 222 0180 2D0000EA 		b	.L8
+ 223              	.L7:
+  83:../cyfxconfigfpga.c ****     	  }
+  84:../cyfxconfigfpga.c **** 
+  85:../cyfxconfigfpga.c ****     	  apiRetStatus = CyU3PSpiTransmitWords(inBuf_p.buffer , uiPacketSize);
+ 224              		.loc 1 85 0
+ 225 0184 18201BE5 		ldr	r2, [fp, #-24]
+ 226 0188 50319FE5 		ldr	r3, .L14+44
+ 227 018c B030D3E1 		ldrh	r3, [r3]
+ 228 0190 0200A0E1 		mov	r0, r2
+ 229 0194 0310A0E1 		mov	r1, r3
+ 230 0198 FEFFFFEB 		bl	CyU3PSpiTransmitWords
+ 231 019c 0C000BE5 		str	r0, [fp, #-12]
+  86:../cyfxconfigfpga.c ****     	  if (apiRetStatus != CY_U3P_SUCCESS){
+ 232              		.loc 1 86 0
+ 233 01a0 0C301BE5 		ldr	r3, [fp, #-12]
+ 234 01a4 000053E3 		cmp	r3, #0
+ 235 01a8 0700000A 		beq	.L9
+  87:../cyfxconfigfpga.c ****     		  glConfigDone = CyFalse;
+ 236              		.loc 1 87 0
+ 237 01ac 10319FE5 		ldr	r3, .L14+16
+ 238 01b0 0020A0E3 		mov	r2, #0
+ 239 01b4 002083E5 		str	r2, [r3]
+  88:../cyfxconfigfpga.c ****     		  CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "Configuration Done. Status code = %d\n", apiRetStatu
+ 240              		.loc 1 88 0
+ 241 01b8 0400A0E3 		mov	r0, #4
+ 242 01bc 20119FE5 		ldr	r1, .L14+48
+ 243 01c0 0C201BE5 		ldr	r2, [fp, #-12]
+ 244 01c4 FEFFFFEB 		bl	CyU3PDebugPrint
+  89:../cyfxconfigfpga.c ****     		  break;
+ 245              		.loc 1 89 0
+ 246 01c8 1B0000EA 		b	.L8
+ 247              	.L9:
+  90:../cyfxconfigfpga.c ****     	  }
+  91:../cyfxconfigfpga.c ****           if(CyU3PDmaChannelDiscardBuffer (&glChHandleUtoCPU) != CY_U3P_SUCCESS){ // Wait 2000 ms(?
+ 248              		.loc 1 91 0
+ 249 01cc 04019FE5 		ldr	r0, .L14+36
+ 250 01d0 FEFFFFEB 		bl	CyU3PDmaChannelDiscardBuffer
+ 251 01d4 0030A0E1 		mov	r3, r0
+ 252 01d8 000053E3 		cmp	r3, #0
+ 253 01dc 0900000A 		beq	.L10
+  92:../cyfxconfigfpga.c ****         	  glConfigDone = CyFalse;
+ 254              		.loc 1 92 0
+ 255 01e0 DC309FE5 		ldr	r3, .L14+16
+ 256 01e4 0020A0E3 		mov	r2, #0
+ 257 01e8 002083E5 		str	r2, [r3]
+  93:../cyfxconfigfpga.c ****         	  apiRetStatus = CY_U3P_ERROR_TIMEOUT;
+ 258              		.loc 1 93 0
+ 259 01ec 4530A0E3 		mov	r3, #69
+ 260 01f0 0C300BE5 		str	r3, [fp, #-12]
+  94:../cyfxconfigfpga.c ****         	  CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "ERROR: Timeout. Error code = %d\n", apiRetStatus)
+ 261              		.loc 1 94 0
+ 262 01f4 0400A0E3 		mov	r0, #4
+ 263 01f8 DC109FE5 		ldr	r1, .L14+40
+ 264 01fc 0C201BE5 		ldr	r2, [fp, #-12]
+ 265 0200 FEFFFFEB 		bl	CyU3PDebugPrint
+  95:../cyfxconfigfpga.c ****         	  break;
+ 266              		.loc 1 95 0
+ 267 0204 0C0000EA 		b	.L8
+ 268              	.L10:
+  77:../cyfxconfigfpga.c ****     	  if(CyU3PDmaChannelGetBuffer (&glChHandleUtoCPU, &inBuf_p, 2000) != CY_U3P_SUCCESS){ // Wait 
+ 269              		.loc 1 77 0
+ 270 0208 D0309FE5 		ldr	r3, .L14+44
+ 271 020c B030D3E1 		ldrh	r3, [r3]
+ 272 0210 08201BE5 		ldr	r2, [fp, #-8]
+ 273 0214 033082E0 		add	r3, r2, r3
+ 274 0218 08300BE5 		str	r3, [fp, #-8]
+ 275              	.L6:
+  77:../cyfxconfigfpga.c ****     	  if(CyU3PDmaChannelGetBuffer (&glChHandleUtoCPU, &inBuf_p, 2000) != CY_U3P_SUCCESS){ // Wait 
+ 276              		.loc 1 77 0 is_stmt 0 discriminator 1
+ 277 021c 08201BE5 		ldr	r2, [fp, #-8]
+ 278 0220 28301BE5 		ldr	r3, [fp, #-40]
+ 279 0224 030052E1 		cmp	r2, r3
+ 280 0228 0300002A 		bcs	.L8
+  77:../cyfxconfigfpga.c ****     	  if(CyU3PDmaChannelGetBuffer (&glChHandleUtoCPU, &inBuf_p, 2000) != CY_U3P_SUCCESS){ // Wait 
+ 281              		.loc 1 77 0 discriminator 2
+ 282 022c B4309FE5 		ldr	r3, .L14+52
+ 283 0230 003093E5 		ldr	r3, [r3]
+ 284 0234 000053E3 		cmp	r3, #0
+ 285 0238 BFFFFF1A 		bne	.L11
+ 286              	.L8:
+  96:../cyfxconfigfpga.c ****           }
+  97:../cyfxconfigfpga.c ****       }
+  98:../cyfxconfigfpga.c ****       CyU3PThreadSleep(1);
+ 287              		.loc 1 98 0 is_stmt 1
+ 288 023c 0100A0E3 		mov	r0, #1
+ 289 0240 FEFFFFEB 		bl	_tx_thread_sleep
+  99:../cyfxconfigfpga.c **** 
+ 100:../cyfxconfigfpga.c ****       apiRetStatus |= CyU3PGpioSimpleGetValue (FPGA_DONE, &xFpga_Done);
+ 290              		.loc 1 100 0
+ 291 0244 1C304BE2 		sub	r3, fp, #28
+ 292 0248 3200A0E3 		mov	r0, #50
+ 293 024c 0310A0E1 		mov	r1, r3
+ 294 0250 FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
+ 295 0254 0030A0E1 		mov	r3, r0
+ 296 0258 0C201BE5 		ldr	r2, [fp, #-12]
+ 297 025c 033082E1 		orr	r3, r2, r3
+ 298 0260 0C300BE5 		str	r3, [fp, #-12]
+ 101:../cyfxconfigfpga.c ****       if( (xFpga_Done != CyTrue) ){
+ 299              		.loc 1 101 0
+ 300 0264 1C301BE5 		ldr	r3, [fp, #-28]
+ 301 0268 010053E3 		cmp	r3, #1
+ 302 026c 0800000A 		beq	.L12
+ 102:../cyfxconfigfpga.c ****     	  glConfigDone = CyFalse;
+ 303              		.loc 1 102 0
+ 304 0270 4C309FE5 		ldr	r3, .L14+16
+ 305 0274 0020A0E3 		mov	r2, #0
+ 306 0278 002083E5 		str	r2, [r3]
+ 103:../cyfxconfigfpga.c ****     	  apiRetStatus = CY_U3P_ERROR_FAILURE;
+ 307              		.loc 1 103 0
+ 308 027c 4A30A0E3 		mov	r3, #74
+ 309 0280 0C300BE5 		str	r3, [fp, #-12]
+ 104:../cyfxconfigfpga.c ****     	  CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "ERROR: FPGA_DONE signal. Error code = %d\n", apiRetSt
+ 310              		.loc 1 104 0
+ 311 0284 0400A0E3 		mov	r0, #4
+ 312 0288 5C109FE5 		ldr	r1, .L14+56
+ 313 028c 0C201BE5 		ldr	r2, [fp, #-12]
+ 314 0290 FEFFFFEB 		bl	CyU3PDebugPrint
+ 315              	.L12:
+ 105:../cyfxconfigfpga.c ****       }
+ 106:../cyfxconfigfpga.c **** 
+ 107:../cyfxconfigfpga.c ****       CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "Writing Configuration finished. Status code = %d\n", a
+ 316              		.loc 1 107 0
+ 317 0294 0400A0E3 		mov	r0, #4
+ 318 0298 50109FE5 		ldr	r1, .L14+60
+ 319 029c 0C201BE5 		ldr	r2, [fp, #-12]
+ 320 02a0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 108:../cyfxconfigfpga.c ****       return apiRetStatus;
+ 321              		.loc 1 108 0
+ 322 02a4 0C301BE5 		ldr	r3, [fp, #-12]
+ 323              	.L13:
+ 109:../cyfxconfigfpga.c **** }
+ 324              		.loc 1 109 0
+ 325 02a8 0300A0E1 		mov	r0, r3
+ 326 02ac 04D04BE2 		sub	sp, fp, #4
+ 327              		@ sp needed
+ 328 02b0 0088BDE8 		ldmfd	sp!, {fp, pc}
+ 329              	.L15:
+ 330              		.align	2
+ 331              	.L14:
+ 332 02b4 00000000 		.word	.LC0
+ 333 02b8 3C000000 		.word	.LC1
+ 334 02bc 50000000 		.word	.LC2
+ 335 02c0 74000000 		.word	.LC3
+ 336 02c4 00000000 		.word	glConfigDone
+ 337 02c8 AC000000 		.word	.LC4
+ 338 02cc C4000000 		.word	.LC5
+ 339 02d0 F4000000 		.word	.LC6
+ 340 02d4 1C010000 		.word	.LC7
+ 341 02d8 00000000 		.word	glChHandleUtoCPU
+ 342 02dc 4C010000 		.word	.LC8
+ 343 02e0 00000000 		.word	uiPacketSize
+ 344 02e4 70010000 		.word	.LC9
+ 345 02e8 00000000 		.word	glIsApplnActive
+ 346 02ec 98010000 		.word	.LC10
+ 347 02f0 C4010000 		.word	.LC11
+ 348              		.cfi_endproc
+ 349              	.LFE0:
+ 351              		.section	.rodata
+ 352 01f6 0000     		.align	2
+ 353              	.LC12:
+ 354 01f8 4572726F 		.ascii	"Error! Invalid USB speed.\012\000"
+ 354      72212049 
+ 354      6E76616C 
+ 354      69642055 
+ 354      53422073 
+ 355 0213 00       		.align	2
+ 356              	.LC13:
+ 357 0214 43795533 		.ascii	"CyU3PSetEpConfig failed, Error code = %d\012\000"
+ 357      50536574 
+ 357      4570436F 
+ 357      6E666967 
+ 357      20666169 
+ 358 023e 0000     		.align	2
+ 359              	.LC14:
+ 360 0240 43795533 		.ascii	"CyU3PDmaChannelCreate failed, Error code = %d\012\000"
+ 360      50446D61 
+ 360      4368616E 
+ 360      6E656C43 
+ 360      72656174 
+ 361 026f 00       		.align	2
+ 362              	.LC15:
+ 363 0270 43795533 		.ascii	"CyU3PDmaChannelSetXfer Failed, Error code = %d\012\000"
+ 363      50446D61 
+ 363      4368616E 
+ 363      6E656C53 
+ 363      65745866 
+ 364              		.text
+ 365              		.align	2
+ 366              		.global	CyFxConfigFpgaApplnStart
+ 368              	CyFxConfigFpgaApplnStart:
+ 369              	.LFB1:
+ 110:../cyfxconfigfpga.c **** 
+ 111:../cyfxconfigfpga.c **** void
+ 112:../cyfxconfigfpga.c **** CyFxConfigFpgaApplnStart (
+ 113:../cyfxconfigfpga.c ****         void)
+ 114:../cyfxconfigfpga.c **** {
+ 370              		.loc 1 114 0
+ 371              		.cfi_startproc
+ 372              		@ args = 0, pretend = 0, frame = 56
+ 373              		@ frame_needed = 1, uses_anonymous_args = 0
+ 374 02f4 00482DE9 		stmfd	sp!, {fp, lr}
+ 375              	.LCFI2:
+ 376              		.cfi_def_cfa_offset 8
+ 377              		.cfi_offset 11, -8
+ 378              		.cfi_offset 14, -4
+ 379 02f8 04B08DE2 		add	fp, sp, #4
+ 380              	.LCFI3:
+ 381              		.cfi_def_cfa 11, 4
+ 382 02fc 38D04DE2 		sub	sp, sp, #56
+ 115:../cyfxconfigfpga.c ****     uint16_t size = 0;
+ 383              		.loc 1 115 0
+ 384 0300 0030A0E3 		mov	r3, #0
+ 385 0304 B6304BE1 		strh	r3, [fp, #-6]	@ movhi
+ 116:../cyfxconfigfpga.c ****     CyU3PEpConfig_t epCfg;
+ 117:../cyfxconfigfpga.c ****     CyU3PDmaChannelConfig_t dmaCfg;
+ 118:../cyfxconfigfpga.c ****     CyU3PReturnStatus_t apiRetStatus = CY_U3P_SUCCESS;
+ 386              		.loc 1 118 0
+ 387 0308 0030A0E3 		mov	r3, #0
+ 388 030c 0C300BE5 		str	r3, [fp, #-12]
+ 119:../cyfxconfigfpga.c ****     CyU3PUSBSpeed_t usbSpeed = CyU3PUsbGetSpeed();
+ 389              		.loc 1 119 0
+ 390 0310 FEFFFFEB 		bl	CyU3PUsbGetSpeed
+ 391 0314 0030A0E1 		mov	r3, r0
+ 392 0318 0D304BE5 		strb	r3, [fp, #-13]
+ 120:../cyfxconfigfpga.c **** 
+ 121:../cyfxconfigfpga.c ****     /* First identify the usb speed. Once that is identified,
+ 122:../cyfxconfigfpga.c ****      * create a DMA channel and start the transfer on this. */
+ 123:../cyfxconfigfpga.c **** 
+ 124:../cyfxconfigfpga.c ****     /* Based on the Bus Speed configure the endpoint packet size */
+ 125:../cyfxconfigfpga.c ****     switch (usbSpeed)
+ 393              		.loc 1 125 0
+ 394 031c 0D305BE5 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 395 0320 020053E3 		cmp	r3, #2
+ 396 0324 0600000A 		beq	.L18
+ 397 0328 030053E3 		cmp	r3, #3
+ 398 032c 0700000A 		beq	.L19
+ 399 0330 010053E3 		cmp	r3, #1
+ 400 0334 0800001A 		bne	.L25
+ 126:../cyfxconfigfpga.c ****     {
+ 127:../cyfxconfigfpga.c ****         case CY_U3P_FULL_SPEED:
+ 128:../cyfxconfigfpga.c ****             size = 64;
+ 401              		.loc 1 128 0
+ 402 0338 4030A0E3 		mov	r3, #64
+ 403 033c B6304BE1 		strh	r3, [fp, #-6]	@ movhi
+ 129:../cyfxconfigfpga.c ****             break;
+ 404              		.loc 1 129 0
+ 405 0340 0B0000EA 		b	.L21
+ 406              	.L18:
+ 130:../cyfxconfigfpga.c **** 
+ 131:../cyfxconfigfpga.c ****         case CY_U3P_HIGH_SPEED:
+ 132:../cyfxconfigfpga.c ****             size = 512;
+ 407              		.loc 1 132 0
+ 408 0344 023CA0E3 		mov	r3, #512
+ 409 0348 B6304BE1 		strh	r3, [fp, #-6]	@ movhi
+ 133:../cyfxconfigfpga.c ****             break;
+ 410              		.loc 1 133 0
+ 411 034c 080000EA 		b	.L21
+ 412              	.L19:
+ 134:../cyfxconfigfpga.c **** 
+ 135:../cyfxconfigfpga.c ****         case  CY_U3P_SUPER_SPEED:
+ 136:../cyfxconfigfpga.c ****             size = 1024;
+ 413              		.loc 1 136 0
+ 414 0350 013BA0E3 		mov	r3, #1024
+ 415 0354 B6304BE1 		strh	r3, [fp, #-6]	@ movhi
+ 137:../cyfxconfigfpga.c ****             break;
+ 416              		.loc 1 137 0
+ 417 0358 050000EA 		b	.L21
+ 418              	.L25:
+ 138:../cyfxconfigfpga.c **** 
+ 139:../cyfxconfigfpga.c ****         default:
+ 140:../cyfxconfigfpga.c ****             CyU3PDebugPrint (4, "Error! Invalid USB speed.\n");
+ 419              		.loc 1 140 0
+ 420 035c 0400A0E3 		mov	r0, #4
+ 421 0360 70119FE5 		ldr	r1, .L26
+ 422 0364 FEFFFFEB 		bl	CyU3PDebugPrint
+ 141:../cyfxconfigfpga.c ****             CyFxAppErrorHandler (CY_U3P_ERROR_FAILURE);
+ 423              		.loc 1 141 0
+ 424 0368 4A00A0E3 		mov	r0, #74
+ 425 036c FEFFFFEB 		bl	CyFxAppErrorHandler
+ 142:../cyfxconfigfpga.c ****             break;
+ 426              		.loc 1 142 0
+ 427 0370 0000A0E1 		mov	r0, r0	@ nop
+ 428              	.L21:
+ 143:../cyfxconfigfpga.c ****     }
+ 144:../cyfxconfigfpga.c **** 
+ 145:../cyfxconfigfpga.c ****     CyU3PMemSet ((uint8_t *)&epCfg, 0, sizeof (epCfg));
+ 429              		.loc 1 145 0
+ 430 0374 1C304BE2 		sub	r3, fp, #28
+ 431 0378 0300A0E1 		mov	r0, r3
+ 432 037c 0010A0E3 		mov	r1, #0
+ 433 0380 0C20A0E3 		mov	r2, #12
+ 434 0384 FEFFFFEB 		bl	CyU3PMemSet
+ 146:../cyfxconfigfpga.c ****     epCfg.enable = CyTrue;
+ 435              		.loc 1 146 0
+ 436 0388 0130A0E3 		mov	r3, #1
+ 437 038c 1C300BE5 		str	r3, [fp, #-28]
+ 147:../cyfxconfigfpga.c ****     epCfg.epType = CY_U3P_USB_EP_BULK;
+ 438              		.loc 1 147 0
+ 439 0390 0230A0E3 		mov	r3, #2
+ 440 0394 18304BE5 		strb	r3, [fp, #-24]
+ 148:../cyfxconfigfpga.c ****     epCfg.burstLen = 1;
+ 441              		.loc 1 148 0
+ 442 0398 0130A0E3 		mov	r3, #1
+ 443 039c 12304BE5 		strb	r3, [fp, #-18]
+ 149:../cyfxconfigfpga.c ****     epCfg.streams = 0;
+ 444              		.loc 1 149 0
+ 445 03a0 0030A0E3 		mov	r3, #0
+ 446 03a4 B6314BE1 		strh	r3, [fp, #-22]	@ movhi
+ 150:../cyfxconfigfpga.c ****     epCfg.pcktSize = size;
+ 447              		.loc 1 150 0
+ 448 03a8 B6305BE1 		ldrh	r3, [fp, #-6]	@ movhi
+ 449 03ac B4314BE1 		strh	r3, [fp, #-20]	@ movhi
+ 151:../cyfxconfigfpga.c **** 
+ 152:../cyfxconfigfpga.c ****     uiPacketSize = size;
+ 450              		.loc 1 152 0
+ 451 03b0 24319FE5 		ldr	r3, .L26+4
+ 452 03b4 B6205BE1 		ldrh	r2, [fp, #-6]	@ movhi
+ 453 03b8 B020C3E1 		strh	r2, [r3]	@ movhi
+ 153:../cyfxconfigfpga.c **** 
+ 154:../cyfxconfigfpga.c ****     /* Producer endpoint configuration */
+ 155:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PSetEpConfig(CY_FX_EP_PRODUCER, &epCfg);
+ 454              		.loc 1 155 0
+ 455 03bc 1C304BE2 		sub	r3, fp, #28
+ 456 03c0 0100A0E3 		mov	r0, #1
+ 457 03c4 0310A0E1 		mov	r1, r3
+ 458 03c8 FEFFFFEB 		bl	CyU3PSetEpConfig
+ 459 03cc 0C000BE5 		str	r0, [fp, #-12]
+ 156:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 460              		.loc 1 156 0
+ 461 03d0 0C301BE5 		ldr	r3, [fp, #-12]
+ 462 03d4 000053E3 		cmp	r3, #0
+ 463 03d8 0500000A 		beq	.L22
+ 157:../cyfxconfigfpga.c ****     {
+ 158:../cyfxconfigfpga.c ****         CyU3PDebugPrint (CY_FX_DEBUG_PRIORITY, "CyU3PSetEpConfig failed, Error code = %d\n", apiRet
+ 464              		.loc 1 158 0
+ 465 03dc 0400A0E3 		mov	r0, #4
+ 466 03e0 F8109FE5 		ldr	r1, .L26+8
+ 467 03e4 0C201BE5 		ldr	r2, [fp, #-12]
+ 468 03e8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 159:../cyfxconfigfpga.c ****         CyFxAppErrorHandler (apiRetStatus);
+ 469              		.loc 1 159 0
+ 470 03ec 0C001BE5 		ldr	r0, [fp, #-12]
+ 471 03f0 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 472              	.L22:
+ 160:../cyfxconfigfpga.c ****     }
+ 161:../cyfxconfigfpga.c **** 
+ 162:../cyfxconfigfpga.c **** 
+ 163:../cyfxconfigfpga.c **** 
+ 164:../cyfxconfigfpga.c ****     /* Create a DMA MANUAL channel for U2CPU transfer.
+ 165:../cyfxconfigfpga.c ****      * DMA size is set based on the USB speed. */
+ 166:../cyfxconfigfpga.c ****     dmaCfg.size  = size;
+ 473              		.loc 1 166 0
+ 474 03f4 B6305BE1 		ldrh	r3, [fp, #-6]	@ movhi
+ 475 03f8 B8334BE1 		strh	r3, [fp, #-56]	@ movhi
+ 167:../cyfxconfigfpga.c ****     dmaCfg.count = CY_FX_SLFIFO_DMA_BUF_COUNT;
+ 476              		.loc 1 167 0
+ 477 03fc 1030A0E3 		mov	r3, #16
+ 478 0400 B6334BE1 		strh	r3, [fp, #-54]	@ movhi
+ 168:../cyfxconfigfpga.c ****     dmaCfg.prodSckId = CY_FX_PRODUCER_USB_SOCKET;
+ 479              		.loc 1 168 0
+ 480 0404 D8309FE5 		ldr	r3, .L26+12
+ 481 0408 B4334BE1 		strh	r3, [fp, #-52]	@ movhi
+ 169:../cyfxconfigfpga.c ****     dmaCfg.consSckId = CY_U3P_CPU_SOCKET_CONS;
+ 482              		.loc 1 169 0
+ 483 040c 3F3CA0E3 		mov	r3, #16128
+ 484 0410 B2334BE1 		strh	r3, [fp, #-50]	@ movhi
+ 170:../cyfxconfigfpga.c ****     dmaCfg.dmaMode = CY_U3P_DMA_MODE_BYTE;
+ 485              		.loc 1 170 0
+ 486 0414 0030A0E3 		mov	r3, #0
+ 487 0418 28304BE5 		strb	r3, [fp, #-40]
+ 171:../cyfxconfigfpga.c ****     /* Enabling the callback for produce event. */
+ 172:../cyfxconfigfpga.c ****     dmaCfg.notification = 0;
+ 488              		.loc 1 172 0
+ 489 041c 0030A0E3 		mov	r3, #0
+ 490 0420 24300BE5 		str	r3, [fp, #-36]
+ 173:../cyfxconfigfpga.c ****     dmaCfg.cb = NULL;
+ 491              		.loc 1 173 0
+ 492 0424 0030A0E3 		mov	r3, #0
+ 493 0428 20300BE5 		str	r3, [fp, #-32]
+ 174:../cyfxconfigfpga.c ****     dmaCfg.prodHeader = 0;
+ 494              		.loc 1 174 0
+ 495 042c 0030A0E3 		mov	r3, #0
+ 496 0430 BE324BE1 		strh	r3, [fp, #-46]	@ movhi
+ 175:../cyfxconfigfpga.c ****     dmaCfg.prodFooter = 0;
+ 497              		.loc 1 175 0
+ 498 0434 0030A0E3 		mov	r3, #0
+ 499 0438 BC324BE1 		strh	r3, [fp, #-44]	@ movhi
+ 176:../cyfxconfigfpga.c ****     dmaCfg.consHeader = 0;
+ 500              		.loc 1 176 0
+ 501 043c 0030A0E3 		mov	r3, #0
+ 502 0440 BA324BE1 		strh	r3, [fp, #-42]	@ movhi
+ 177:../cyfxconfigfpga.c ****     dmaCfg.prodAvailCount = 0;
+ 503              		.loc 1 177 0
+ 504 0444 0030A0E3 		mov	r3, #0
+ 505 0448 B0334BE1 		strh	r3, [fp, #-48]	@ movhi
+ 178:../cyfxconfigfpga.c **** 
+ 179:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PDmaChannelCreate (&glChHandleUtoCPU,
+ 506              		.loc 1 179 0
+ 507 044c 38304BE2 		sub	r3, fp, #56
+ 508 0450 90009FE5 		ldr	r0, .L26+16
+ 509 0454 0310A0E3 		mov	r1, #3
+ 510 0458 0320A0E1 		mov	r2, r3
+ 511 045c FEFFFFEB 		bl	CyU3PDmaChannelCreate
+ 512 0460 0C000BE5 		str	r0, [fp, #-12]
+ 180:../cyfxconfigfpga.c ****     		CY_U3P_DMA_TYPE_MANUAL_IN, &dmaCfg);
+ 181:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 513              		.loc 1 181 0
+ 514 0464 0C301BE5 		ldr	r3, [fp, #-12]
+ 515 0468 000053E3 		cmp	r3, #0
+ 516 046c 0500000A 		beq	.L23
+ 182:../cyfxconfigfpga.c ****     {
+ 183:../cyfxconfigfpga.c ****         CyU3PDebugPrint (CY_FX_DEBUG_PRIORITY, "CyU3PDmaChannelCreate failed, Error code = %d\n", a
+ 517              		.loc 1 183 0
+ 518 0470 0400A0E3 		mov	r0, #4
+ 519 0474 70109FE5 		ldr	r1, .L26+20
+ 520 0478 0C201BE5 		ldr	r2, [fp, #-12]
+ 521 047c FEFFFFEB 		bl	CyU3PDebugPrint
+ 184:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 522              		.loc 1 184 0
+ 523 0480 0C001BE5 		ldr	r0, [fp, #-12]
+ 524 0484 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 525              	.L23:
+ 185:../cyfxconfigfpga.c ****     }
+ 186:../cyfxconfigfpga.c **** 
+ 187:../cyfxconfigfpga.c **** 
+ 188:../cyfxconfigfpga.c **** 
+ 189:../cyfxconfigfpga.c ****     /* Flush the Endpoint memory */
+ 190:../cyfxconfigfpga.c ****     CyU3PUsbFlushEp(CY_FX_EP_PRODUCER);
+ 526              		.loc 1 190 0
+ 527 0488 0100A0E3 		mov	r0, #1
+ 528 048c FEFFFFEB 		bl	CyU3PUsbFlushEp
+ 191:../cyfxconfigfpga.c **** 
+ 192:../cyfxconfigfpga.c **** 
+ 193:../cyfxconfigfpga.c ****     /* Set DMA channel transfer size. */
+ 194:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PDmaChannelSetXfer (&glChHandleUtoCPU, CY_FX_SLFIFO_DMA_TX_SIZE);
+ 529              		.loc 1 194 0
+ 530 0490 50009FE5 		ldr	r0, .L26+16
+ 531 0494 0010A0E3 		mov	r1, #0
+ 532 0498 FEFFFFEB 		bl	CyU3PDmaChannelSetXfer
+ 533 049c 0C000BE5 		str	r0, [fp, #-12]
+ 195:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 534              		.loc 1 195 0
+ 535 04a0 0C301BE5 		ldr	r3, [fp, #-12]
+ 536 04a4 000053E3 		cmp	r3, #0
+ 537 04a8 0500000A 		beq	.L24
+ 196:../cyfxconfigfpga.c ****     {
+ 197:../cyfxconfigfpga.c ****         CyU3PDebugPrint (CY_FX_DEBUG_PRIORITY, "CyU3PDmaChannelSetXfer Failed, Error code = %d\n", 
+ 538              		.loc 1 197 0
+ 539 04ac 0400A0E3 		mov	r0, #4
+ 540 04b0 38109FE5 		ldr	r1, .L26+24
+ 541 04b4 0C201BE5 		ldr	r2, [fp, #-12]
+ 542 04b8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 198:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 543              		.loc 1 198 0
+ 544 04bc 0C001BE5 		ldr	r0, [fp, #-12]
+ 545 04c0 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 546              	.L24:
+ 199:../cyfxconfigfpga.c ****     }
+ 200:../cyfxconfigfpga.c **** 
+ 201:../cyfxconfigfpga.c **** 
+ 202:../cyfxconfigfpga.c ****     /* Update the status flag. */
+ 203:../cyfxconfigfpga.c ****     glIsApplnActive = CyTrue;
+ 547              		.loc 1 203 0
+ 548 04c4 28309FE5 		ldr	r3, .L26+28
+ 549 04c8 0120A0E3 		mov	r2, #1
+ 550 04cc 002083E5 		str	r2, [r3]
+ 204:../cyfxconfigfpga.c **** 
+ 205:../cyfxconfigfpga.c **** 
+ 206:../cyfxconfigfpga.c **** }
+ 551              		.loc 1 206 0
+ 552 04d0 04D04BE2 		sub	sp, fp, #4
+ 553              		@ sp needed
+ 554 04d4 0088BDE8 		ldmfd	sp!, {fp, pc}
+ 555              	.L27:
+ 556              		.align	2
+ 557              	.L26:
+ 558 04d8 F8010000 		.word	.LC12
+ 559 04dc 00000000 		.word	uiPacketSize
+ 560 04e0 14020000 		.word	.LC13
+ 561 04e4 01040000 		.word	1025
+ 562 04e8 00000000 		.word	glChHandleUtoCPU
+ 563 04ec 40020000 		.word	.LC14
+ 564 04f0 70020000 		.word	.LC15
+ 565 04f4 00000000 		.word	glIsApplnActive
+ 566              		.cfi_endproc
+ 567              	.LFE1:
+ 569              		.align	2
+ 570              		.global	CyFxConfigFpgaApplnStop
+ 572              	CyFxConfigFpgaApplnStop:
+ 573              	.LFB2:
+ 207:../cyfxconfigfpga.c **** 
+ 208:../cyfxconfigfpga.c **** 
+ 209:../cyfxconfigfpga.c **** void
+ 210:../cyfxconfigfpga.c **** CyFxConfigFpgaApplnStop (
+ 211:../cyfxconfigfpga.c ****         void)
+ 212:../cyfxconfigfpga.c **** {
+ 574              		.loc 1 212 0
+ 575              		.cfi_startproc
+ 576              		@ args = 0, pretend = 0, frame = 16
+ 577              		@ frame_needed = 1, uses_anonymous_args = 0
+ 578 04f8 00482DE9 		stmfd	sp!, {fp, lr}
+ 579              	.LCFI4:
+ 580              		.cfi_def_cfa_offset 8
+ 581              		.cfi_offset 11, -8
+ 582              		.cfi_offset 14, -4
+ 583 04fc 04B08DE2 		add	fp, sp, #4
+ 584              	.LCFI5:
+ 585              		.cfi_def_cfa 11, 4
+ 586 0500 10D04DE2 		sub	sp, sp, #16
+ 213:../cyfxconfigfpga.c **** 	CyU3PEpConfig_t epCfg;
+ 214:../cyfxconfigfpga.c **** 	CyU3PReturnStatus_t apiRetStatus = CY_U3P_SUCCESS;
+ 587              		.loc 1 214 0
+ 588 0504 0030A0E3 		mov	r3, #0
+ 589 0508 08300BE5 		str	r3, [fp, #-8]
+ 215:../cyfxconfigfpga.c **** 
+ 216:../cyfxconfigfpga.c **** 
+ 217:../cyfxconfigfpga.c **** 	CyU3PGpioDeInit();
+ 590              		.loc 1 217 0
+ 591 050c FEFFFFEB 		bl	CyU3PGpioDeInit
+ 218:../cyfxconfigfpga.c **** 	CyU3PSpiDeInit();
+ 592              		.loc 1 218 0
+ 593 0510 FEFFFFEB 		bl	CyU3PSpiDeInit
+ 219:../cyfxconfigfpga.c **** 
+ 220:../cyfxconfigfpga.c ****     /* Update the flag. */
+ 221:../cyfxconfigfpga.c ****     glIsApplnActive = CyFalse;
+ 594              		.loc 1 221 0
+ 595 0514 28309FE5 		ldr	r3, .L29
+ 596 0518 0020A0E3 		mov	r2, #0
+ 597 051c 002083E5 		str	r2, [r3]
+ 222:../cyfxconfigfpga.c **** 
+ 223:../cyfxconfigfpga.c ****     CyU3PUsbGetEpSeqNum(CY_FX_EP_PRODUCER, &seqnum_p);
+ 598              		.loc 1 223 0
+ 599 0520 0100A0E3 		mov	r0, #1
+ 600 0524 1C109FE5 		ldr	r1, .L29+4
+ 601 0528 FEFFFFEB 		bl	CyU3PUsbGetEpSeqNum
+ 224:../cyfxconfigfpga.c **** 
+ 225:../cyfxconfigfpga.c ****     /* Flush the endpoint memory */
+ 226:../cyfxconfigfpga.c ****     CyU3PUsbFlushEp(CY_FX_EP_PRODUCER);
+ 602              		.loc 1 226 0
+ 603 052c 0100A0E3 		mov	r0, #1
+ 604 0530 FEFFFFEB 		bl	CyU3PUsbFlushEp
+ 227:../cyfxconfigfpga.c **** 
+ 228:../cyfxconfigfpga.c **** 
+ 229:../cyfxconfigfpga.c ****     /* Destroy the channel */
+ 230:../cyfxconfigfpga.c ****     CyU3PDmaChannelDestroy (&glChHandleUtoCPU);
+ 605              		.loc 1 230 0
+ 606 0534 10009FE5 		ldr	r0, .L29+8
+ 607 0538 FEFFFFEB 		bl	CyU3PDmaChannelDestroy
+ 231:../cyfxconfigfpga.c **** #if 0
+ 232:../cyfxconfigfpga.c ****     /* Disable endpoints. */
+ 233:../cyfxconfigfpga.c **** 	CyU3PMemSet ((uint8_t *)&epCfg, 0, sizeof (epCfg));
+ 234:../cyfxconfigfpga.c **** 	epCfg.enable = CyFalse;
+ 235:../cyfxconfigfpga.c **** 
+ 236:../cyfxconfigfpga.c ****         /* Producer endpoint configuration. */
+ 237:../cyfxconfigfpga.c **** 	apiRetStatus = CyU3PSetEpConfig(CY_FX_EP_PRODUCER, &epCfg);
+ 238:../cyfxconfigfpga.c **** 	if (apiRetStatus != CY_U3P_SUCCESS)
+ 239:../cyfxconfigfpga.c **** 	{
+ 240:../cyfxconfigfpga.c **** 		CyU3PDebugPrint (4, "CyU3PSetEpConfig failed, Error code = %d\n", apiRetStatus);
+ 241:../cyfxconfigfpga.c **** 		CyFxAppErrorHandler (apiRetStatus);
+ 242:../cyfxconfigfpga.c **** 	}
+ 243:../cyfxconfigfpga.c **** #endif
+ 244:../cyfxconfigfpga.c **** 
+ 245:../cyfxconfigfpga.c **** }
+ 608              		.loc 1 245 0
+ 609 053c 04D04BE2 		sub	sp, fp, #4
+ 610              		@ sp needed
+ 611 0540 0088BDE8 		ldmfd	sp!, {fp, pc}
+ 612              	.L30:
+ 613              		.align	2
+ 614              	.L29:
+ 615 0544 00000000 		.word	glIsApplnActive
+ 616 0548 00000000 		.word	seqnum_p
+ 617 054c 00000000 		.word	glChHandleUtoCPU
+ 618              		.cfi_endproc
+ 619              	.LFE2:
+ 621              		.section	.rodata
+ 622              		.align	2
+ 623              	.LC16:
+ 624 02a0 6576656E 		.ascii	"event create failed, Error Code = %d\012\000"
+ 624      74206372 
+ 624      65617465 
+ 624      20666169 
+ 624      6C65642C 
+ 625 02c6 0000     		.align	2
+ 626              	.LC17:
+ 627 02c8 53504920 		.ascii	"SPI init failed, Error Code = %d\012\000"
+ 627      696E6974 
+ 627      20666169 
+ 627      6C65642C 
+ 627      20457272 
+ 628 02ea 0000     		.align	2
+ 629              	.LC18:
+ 630 02ec 53504920 		.ascii	"SPI config failed, Error Code = %d\012\000"
+ 630      636F6E66 
+ 630      69672066 
+ 630      61696C65 
+ 630      642C2045 
+ 631              		.align	2
+ 632              	.LC19:
+ 633 0310 4750494F 		.ascii	"GPIO Init failed, Error Code = %d\012\000"
+ 633      20496E69 
+ 633      74206661 
+ 633      696C6564 
+ 633      2C204572 
+ 634 0333 00       		.align	2
+ 635              	.LC20:
+ 636 0334 43795533 		.ascii	"CyU3PGpioSetSimpleConfig failed, error code = %d\012"
+ 636      50477069 
+ 636      6F536574 
+ 636      53696D70 
+ 636      6C65436F 
+ 637 0365 00       		.ascii	"\000"
+ 638 0366 0000     		.align	2
+ 639              	.LC21:
+ 640 0368 43795533 		.ascii	"CyU3PUsbStart failed to Start, Error code = %d\012\000"
+ 640      50557362 
+ 640      53746172 
+ 640      74206661 
+ 640      696C6564 
+ 641              		.align	2
+ 642              	.LC22:
+ 643 0398 55534220 		.ascii	"USB set device descriptor failed, Error code = %d\012"
+ 643      73657420 
+ 643      64657669 
+ 643      63652064 
+ 643      65736372 
+ 644 03ca 00       		.ascii	"\000"
+ 645 03cb 00       		.align	2
+ 646              	.LC23:
+ 647 03cc 55534220 		.ascii	"USB set configuration descriptor failed, Error code"
+ 647      73657420 
+ 647      636F6E66 
+ 647      69677572 
+ 647      6174696F 
+ 648 03ff 203D2025 		.ascii	" = %d\012\000"
+ 648      640A00
+ 649 0406 0000     		.align	2
+ 650              	.LC24:
+ 651 0408 55534220 		.ascii	"USB set device qualifier descriptor failed, Error c"
+ 651      73657420 
+ 651      64657669 
+ 651      63652071 
+ 651      75616C69 
+ 652 043b 6F646520 		.ascii	"ode = %d\012\000"
+ 652      3D202564 
+ 652      0A00
+ 653 0445 000000   		.align	2
+ 654              	.LC25:
+ 655 0448 55534220 		.ascii	"USB Set Other Speed Descriptor failed, Error Code ="
+ 655      53657420 
+ 655      4F746865 
+ 655      72205370 
+ 655      65656420 
+ 656 047b 2025640A 		.ascii	" %d\012\000"
+ 656      00
+ 657              		.align	2
+ 658              	.LC26:
+ 659 0480 55534220 		.ascii	"USB Set Configuration Descriptor failed, Error Code"
+ 659      53657420 
+ 659      436F6E66 
+ 659      69677572 
+ 659      6174696F 
+ 660 04b3 203D2025 		.ascii	" = %d\012\000"
+ 660      640A00
+ 661 04ba 0000     		.align	2
+ 662              	.LC27:
+ 663 04bc 55534220 		.ascii	"USB set string descriptor failed, Error code = %d\012"
+ 663      73657420 
+ 663      73747269 
+ 663      6E672064 
+ 663      65736372 
+ 664 04ee 00       		.ascii	"\000"
+ 665 04ef 00       		.align	2
+ 666              	.LC28:
+ 667 04f0 55534220 		.ascii	"USB Connect failed, Error code = %d\012\000"
+ 667      436F6E6E 
+ 667      65637420 
+ 667      6661696C 
+ 667      65642C20 
+ 668 0515 000000   		.text
+ 669              		.align	2
+ 670              		.global	CyFxConfigFpgaApplnInit
+ 672              	CyFxConfigFpgaApplnInit:
+ 673              	.LFB3:
+ 246:../cyfxconfigfpga.c **** 
+ 247:../cyfxconfigfpga.c **** 
+ 248:../cyfxconfigfpga.c **** void
+ 249:../cyfxconfigfpga.c **** CyFxConfigFpgaApplnInit (void)
+ 250:../cyfxconfigfpga.c **** {
+ 674              		.loc 1 250 0
+ 675              		.cfi_startproc
+ 676              		@ args = 0, pretend = 0, frame = 64
+ 677              		@ frame_needed = 1, uses_anonymous_args = 0
+ 678 0550 00482DE9 		stmfd	sp!, {fp, lr}
+ 679              	.LCFI6:
+ 680              		.cfi_def_cfa_offset 8
+ 681              		.cfi_offset 11, -8
+ 682              		.cfi_offset 14, -4
+ 683 0554 04B08DE2 		add	fp, sp, #4
+ 684              	.LCFI7:
+ 685              		.cfi_def_cfa 11, 4
+ 686 0558 40D04DE2 		sub	sp, sp, #64
+ 251:../cyfxconfigfpga.c **** 
+ 252:../cyfxconfigfpga.c ****     CyU3PGpioClock_t gpioClock;
+ 253:../cyfxconfigfpga.c ****     CyU3PGpioSimpleConfig_t gpioConfig;
+ 254:../cyfxconfigfpga.c ****     CyU3PSpiConfig_t spiConfig;
+ 255:../cyfxconfigfpga.c ****     CyU3PReturnStatus_t apiRetStatus = CY_U3P_SUCCESS;
+ 687              		.loc 1 255 0
+ 688 055c 0030A0E3 		mov	r3, #0
+ 689 0560 08300BE5 		str	r3, [fp, #-8]
+ 256:../cyfxconfigfpga.c **** 
+ 257:../cyfxconfigfpga.c **** 
+ 258:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PEventCreate(&glFxConfigFpgaAppEvent);
+ 690              		.loc 1 258 0
+ 691 0564 84049FE5 		ldr	r0, .L50
+ 692 0568 0010A0E3 		mov	r1, #0
+ 693 056c 2820A0E3 		mov	r2, #40
+ 694 0570 FEFFFFEB 		bl	_txe_event_flags_create
+ 695 0574 08000BE5 		str	r0, [fp, #-8]
+ 259:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 696              		.loc 1 259 0
+ 697 0578 08301BE5 		ldr	r3, [fp, #-8]
+ 698 057c 000053E3 		cmp	r3, #0
+ 699 0580 0300000A 		beq	.L32
+ 260:../cyfxconfigfpga.c **** 		{
+ 261:../cyfxconfigfpga.c **** 			CyU3PDebugPrint (4, "event create failed, Error Code = %d\n",apiRetStatus);
+ 700              		.loc 1 261 0
+ 701 0584 0400A0E3 		mov	r0, #4
+ 702 0588 64149FE5 		ldr	r1, .L50+4
+ 703 058c 08201BE5 		ldr	r2, [fp, #-8]
+ 704 0590 FEFFFFEB 		bl	CyU3PDebugPrint
+ 705              	.L32:
+ 262:../cyfxconfigfpga.c **** 		}
+ 263:../cyfxconfigfpga.c **** 
+ 264:../cyfxconfigfpga.c ****         /* Start the SPI module and configure the master. */
+ 265:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PSpiInit();
+ 706              		.loc 1 265 0
+ 707 0594 FEFFFFEB 		bl	CyU3PSpiInit
+ 708 0598 08000BE5 		str	r0, [fp, #-8]
+ 266:../cyfxconfigfpga.c ****         if (apiRetStatus != CY_U3P_SUCCESS)
+ 709              		.loc 1 266 0
+ 710 059c 08301BE5 		ldr	r3, [fp, #-8]
+ 711 05a0 000053E3 		cmp	r3, #0
+ 712 05a4 0300000A 		beq	.L33
+ 267:../cyfxconfigfpga.c ****         {
+ 268:../cyfxconfigfpga.c ****         	CyU3PDebugPrint (4, "SPI init failed, Error Code = %d\n",apiRetStatus);
+ 713              		.loc 1 268 0
+ 714 05a8 0400A0E3 		mov	r0, #4
+ 715 05ac 44149FE5 		ldr	r1, .L50+8
+ 716 05b0 08201BE5 		ldr	r2, [fp, #-8]
+ 717 05b4 FEFFFFEB 		bl	CyU3PDebugPrint
+ 718              	.L33:
+ 269:../cyfxconfigfpga.c ****         }
+ 270:../cyfxconfigfpga.c **** 
+ 271:../cyfxconfigfpga.c ****         /* Start the SPI master block. Run the SPI clock at 25MHz
+ 272:../cyfxconfigfpga.c ****          * and configure the word length to 8 bits. Also configure
+ 273:../cyfxconfigfpga.c ****          * the slave select using FW. */
+ 274:../cyfxconfigfpga.c ****         CyU3PMemSet ((uint8_t *)&spiConfig, 0, sizeof(spiConfig));
+ 719              		.loc 1 274 0
+ 720 05b8 44304BE2 		sub	r3, fp, #68
+ 721 05bc 0300A0E1 		mov	r0, r3
+ 722 05c0 0010A0E3 		mov	r1, #0
+ 723 05c4 1C20A0E3 		mov	r2, #28
+ 724 05c8 FEFFFFEB 		bl	CyU3PMemSet
+ 275:../cyfxconfigfpga.c ****         spiConfig.isLsbFirst = CyFalse;
+ 725              		.loc 1 275 0
+ 726 05cc 0030A0E3 		mov	r3, #0
+ 727 05d0 44300BE5 		str	r3, [fp, #-68]
+ 276:../cyfxconfigfpga.c ****         spiConfig.cpol       = CyTrue;
+ 728              		.loc 1 276 0
+ 729 05d4 0130A0E3 		mov	r3, #1
+ 730 05d8 40300BE5 		str	r3, [fp, #-64]
+ 277:../cyfxconfigfpga.c ****         spiConfig.ssnPol     = CyFalse;
+ 731              		.loc 1 277 0
+ 732 05dc 0030A0E3 		mov	r3, #0
+ 733 05e0 38300BE5 		str	r3, [fp, #-56]
+ 278:../cyfxconfigfpga.c ****         spiConfig.cpha       = CyTrue;
+ 734              		.loc 1 278 0
+ 735 05e4 0130A0E3 		mov	r3, #1
+ 736 05e8 3C300BE5 		str	r3, [fp, #-60]
+ 279:../cyfxconfigfpga.c ****         spiConfig.leadTime   = CY_U3P_SPI_SSN_LAG_LEAD_HALF_CLK;
+ 737              		.loc 1 279 0
+ 738 05ec 0130A0E3 		mov	r3, #1
+ 739 05f0 33304BE5 		strb	r3, [fp, #-51]
+ 280:../cyfxconfigfpga.c ****         spiConfig.lagTime    = CY_U3P_SPI_SSN_LAG_LEAD_HALF_CLK;
+ 740              		.loc 1 280 0
+ 741 05f4 0130A0E3 		mov	r3, #1
+ 742 05f8 32304BE5 		strb	r3, [fp, #-50]
+ 281:../cyfxconfigfpga.c ****         spiConfig.ssnCtrl    = CY_U3P_SPI_SSN_CTRL_FW;
+ 743              		.loc 1 281 0
+ 744 05fc 0030A0E3 		mov	r3, #0
+ 745 0600 34304BE5 		strb	r3, [fp, #-52]
+ 282:../cyfxconfigfpga.c ****         spiConfig.clock      = 25000000;
+ 746              		.loc 1 282 0
+ 747 0604 F0339FE5 		ldr	r3, .L50+12
+ 748 0608 30300BE5 		str	r3, [fp, #-48]
+ 283:../cyfxconfigfpga.c ****         spiConfig.wordLen    = 8;
+ 749              		.loc 1 283 0
+ 750 060c 0830A0E3 		mov	r3, #8
+ 751 0610 2C304BE5 		strb	r3, [fp, #-44]
+ 284:../cyfxconfigfpga.c **** 
+ 285:../cyfxconfigfpga.c ****         apiRetStatus = CyU3PSpiSetConfig (&spiConfig, NULL);
+ 752              		.loc 1 285 0
+ 753 0614 44304BE2 		sub	r3, fp, #68
+ 754 0618 0300A0E1 		mov	r0, r3
+ 755 061c 0010A0E3 		mov	r1, #0
+ 756 0620 FEFFFFEB 		bl	CyU3PSpiSetConfig
+ 757 0624 08000BE5 		str	r0, [fp, #-8]
+ 286:../cyfxconfigfpga.c ****         if (apiRetStatus != CY_U3P_SUCCESS)
+ 758              		.loc 1 286 0
+ 759 0628 08301BE5 		ldr	r3, [fp, #-8]
+ 760 062c 000053E3 		cmp	r3, #0
+ 761 0630 0300000A 		beq	.L34
+ 287:../cyfxconfigfpga.c ****         {
+ 288:../cyfxconfigfpga.c ****         	CyU3PDebugPrint (4, "SPI config failed, Error Code = %d\n",apiRetStatus);
+ 762              		.loc 1 288 0
+ 763 0634 0400A0E3 		mov	r0, #4
+ 764 0638 C0139FE5 		ldr	r1, .L50+16
+ 765 063c 08201BE5 		ldr	r2, [fp, #-8]
+ 766 0640 FEFFFFEB 		bl	CyU3PDebugPrint
+ 767              	.L34:
+ 289:../cyfxconfigfpga.c ****         }
+ 290:../cyfxconfigfpga.c **** 
+ 291:../cyfxconfigfpga.c ****     /******************/
+ 292:../cyfxconfigfpga.c ****     /* Configure GPIO */
+ 293:../cyfxconfigfpga.c ****     /******************/
+ 294:../cyfxconfigfpga.c **** 
+ 295:../cyfxconfigfpga.c ****     /* Init the GPIO module */
+ 296:../cyfxconfigfpga.c ****         gpioClock.fastClkDiv = 2;
+ 768              		.loc 1 296 0
+ 769 0644 0230A0E3 		mov	r3, #2
+ 770 0648 14304BE5 		strb	r3, [fp, #-20]
+ 297:../cyfxconfigfpga.c ****         gpioClock.slowClkDiv = 0;
+ 771              		.loc 1 297 0
+ 772 064c 0030A0E3 		mov	r3, #0
+ 773 0650 13304BE5 		strb	r3, [fp, #-19]
+ 298:../cyfxconfigfpga.c ****         gpioClock.simpleDiv = CY_U3P_GPIO_SIMPLE_DIV_BY_2;
+ 774              		.loc 1 298 0
+ 775 0654 0030A0E3 		mov	r3, #0
+ 776 0658 0C304BE5 		strb	r3, [fp, #-12]
+ 299:../cyfxconfigfpga.c ****         gpioClock.clkSrc = CY_U3P_SYS_CLK;
+ 777              		.loc 1 299 0
+ 778 065c 0330A0E3 		mov	r3, #3
+ 779 0660 0B304BE5 		strb	r3, [fp, #-11]
+ 300:../cyfxconfigfpga.c ****         gpioClock.halfDiv = 0;
+ 780              		.loc 1 300 0
+ 781 0664 0030A0E3 		mov	r3, #0
+ 782 0668 10300BE5 		str	r3, [fp, #-16]
+ 301:../cyfxconfigfpga.c **** 
+ 302:../cyfxconfigfpga.c ****         /* Initialize Gpio interface */
+ 303:../cyfxconfigfpga.c ****         apiRetStatus = CyU3PGpioInit(&gpioClock, NULL);
+ 783              		.loc 1 303 0
+ 784 066c 14304BE2 		sub	r3, fp, #20
+ 785 0670 0300A0E1 		mov	r0, r3
+ 786 0674 0010A0E3 		mov	r1, #0
+ 787 0678 FEFFFFEB 		bl	CyU3PGpioInit
+ 788 067c 08000BE5 		str	r0, [fp, #-8]
+ 304:../cyfxconfigfpga.c ****         if (apiRetStatus != 0)
+ 789              		.loc 1 304 0
+ 790 0680 08301BE5 		ldr	r3, [fp, #-8]
+ 791 0684 000053E3 		cmp	r3, #0
+ 792 0688 0500000A 		beq	.L35
+ 305:../cyfxconfigfpga.c ****         {
+ 306:../cyfxconfigfpga.c ****             /* Error Handling */
+ 307:../cyfxconfigfpga.c ****             CyU3PDebugPrint (4, "GPIO Init failed, Error Code = %d\n",apiRetStatus);
+ 793              		.loc 1 307 0
+ 794 068c 0400A0E3 		mov	r0, #4
+ 795 0690 6C139FE5 		ldr	r1, .L50+20
+ 796 0694 08201BE5 		ldr	r2, [fp, #-8]
+ 797 0698 FEFFFFEB 		bl	CyU3PDebugPrint
+ 308:../cyfxconfigfpga.c ****             CyFxAppErrorHandler(apiRetStatus);
+ 798              		.loc 1 308 0
+ 799 069c 08001BE5 		ldr	r0, [fp, #-8]
+ 800 06a0 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 801              	.L35:
+ 309:../cyfxconfigfpga.c ****         }
+ 310:../cyfxconfigfpga.c **** 
+ 311:../cyfxconfigfpga.c ****           /* Configure GPIO 52 as input */
+ 312:../cyfxconfigfpga.c ****           gpioConfig.outValue = CyTrue;
+ 802              		.loc 1 312 0
+ 803 06a4 0130A0E3 		mov	r3, #1
+ 804 06a8 28300BE5 		str	r3, [fp, #-40]
+ 313:../cyfxconfigfpga.c **** 		  gpioConfig.inputEn = CyTrue;
+ 805              		.loc 1 313 0
+ 806 06ac 0130A0E3 		mov	r3, #1
+ 807 06b0 1C300BE5 		str	r3, [fp, #-28]
+ 314:../cyfxconfigfpga.c **** 		  gpioConfig.driveLowEn = CyFalse;
+ 808              		.loc 1 314 0
+ 809 06b4 0030A0E3 		mov	r3, #0
+ 810 06b8 24300BE5 		str	r3, [fp, #-36]
+ 315:../cyfxconfigfpga.c **** 		  gpioConfig.driveHighEn = CyFalse;
+ 811              		.loc 1 315 0
+ 812 06bc 0030A0E3 		mov	r3, #0
+ 813 06c0 20300BE5 		str	r3, [fp, #-32]
+ 316:../cyfxconfigfpga.c **** 		  gpioConfig.intrMode = CY_U3P_GPIO_INTR_BOTH_EDGE;
+ 814              		.loc 1 316 0
+ 815 06c4 0330A0E3 		mov	r3, #3
+ 816 06c8 18304BE5 		strb	r3, [fp, #-24]
+ 317:../cyfxconfigfpga.c ****           apiRetStatus = CyU3PGpioSetSimpleConfig(FPGA_INIT_B, &gpioConfig);
+ 817              		.loc 1 317 0
+ 818 06cc 28304BE2 		sub	r3, fp, #40
+ 819 06d0 3400A0E3 		mov	r0, #52
+ 820 06d4 0310A0E1 		mov	r1, r3
+ 821 06d8 FEFFFFEB 		bl	CyU3PGpioSetSimpleConfig
+ 822 06dc 08000BE5 		str	r0, [fp, #-8]
+ 318:../cyfxconfigfpga.c ****           if (apiRetStatus != CY_U3P_SUCCESS)
+ 823              		.loc 1 318 0
+ 824 06e0 08301BE5 		ldr	r3, [fp, #-8]
+ 825 06e4 000053E3 		cmp	r3, #0
+ 826 06e8 0500000A 		beq	.L36
+ 319:../cyfxconfigfpga.c ****           {
+ 320:../cyfxconfigfpga.c ****               /* Error handling */
+ 321:../cyfxconfigfpga.c ****               CyU3PDebugPrint (4, "CyU3PGpioSetSimpleConfig failed, error code = %d\n",
+ 827              		.loc 1 321 0
+ 828 06ec 0400A0E3 		mov	r0, #4
+ 829 06f0 10139FE5 		ldr	r1, .L50+24
+ 830 06f4 08201BE5 		ldr	r2, [fp, #-8]
+ 831 06f8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 322:../cyfxconfigfpga.c ****                       apiRetStatus);
+ 323:../cyfxconfigfpga.c ****               CyFxAppErrorHandler(apiRetStatus);
+ 832              		.loc 1 323 0
+ 833 06fc 08001BE5 		ldr	r0, [fp, #-8]
+ 834 0700 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 835              	.L36:
+ 324:../cyfxconfigfpga.c ****           }
+ 325:../cyfxconfigfpga.c **** 
+ 326:../cyfxconfigfpga.c ****           /* Configure GPIO 50 as input with interrupt enabled for both edges */
+ 327:../cyfxconfigfpga.c ****             apiRetStatus = CyU3PGpioSetSimpleConfig(FPGA_DONE, &gpioConfig);
+ 836              		.loc 1 327 0
+ 837 0704 28304BE2 		sub	r3, fp, #40
+ 838 0708 3200A0E3 		mov	r0, #50
+ 839 070c 0310A0E1 		mov	r1, r3
+ 840 0710 FEFFFFEB 		bl	CyU3PGpioSetSimpleConfig
+ 841 0714 08000BE5 		str	r0, [fp, #-8]
+ 328:../cyfxconfigfpga.c ****             if (apiRetStatus != CY_U3P_SUCCESS)
+ 842              		.loc 1 328 0
+ 843 0718 08301BE5 		ldr	r3, [fp, #-8]
+ 844 071c 000053E3 		cmp	r3, #0
+ 845 0720 0500000A 		beq	.L37
+ 329:../cyfxconfigfpga.c ****             {
+ 330:../cyfxconfigfpga.c ****                 /* Error handling */
+ 331:../cyfxconfigfpga.c ****                 CyU3PDebugPrint (4, "CyU3PGpioSetSimpleConfig failed, error code = %d\n",
+ 846              		.loc 1 331 0
+ 847 0724 0400A0E3 		mov	r0, #4
+ 848 0728 D8129FE5 		ldr	r1, .L50+24
+ 849 072c 08201BE5 		ldr	r2, [fp, #-8]
+ 850 0730 FEFFFFEB 		bl	CyU3PDebugPrint
+ 332:../cyfxconfigfpga.c ****                         apiRetStatus);
+ 333:../cyfxconfigfpga.c ****                 CyFxAppErrorHandler(apiRetStatus);
+ 851              		.loc 1 333 0
+ 852 0734 08001BE5 		ldr	r0, [fp, #-8]
+ 853 0738 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 854              	.L37:
+ 334:../cyfxconfigfpga.c ****             }
+ 335:../cyfxconfigfpga.c **** 
+ 336:../cyfxconfigfpga.c **** 
+ 337:../cyfxconfigfpga.c ****           /******************/
+ 338:../cyfxconfigfpga.c ****           /* Configure GPIO end*/
+ 339:../cyfxconfigfpga.c ****           /******************/
+ 340:../cyfxconfigfpga.c **** 
+ 341:../cyfxconfigfpga.c ****     /* Start the USB functionality. */
+ 342:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbStart();
+ 855              		.loc 1 342 0
+ 856 073c FEFFFFEB 		bl	CyU3PUsbStart
+ 857 0740 08000BE5 		str	r0, [fp, #-8]
+ 343:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 858              		.loc 1 343 0
+ 859 0744 08301BE5 		ldr	r3, [fp, #-8]
+ 860 0748 000053E3 		cmp	r3, #0
+ 861 074c 0500000A 		beq	.L38
+ 344:../cyfxconfigfpga.c ****     {
+ 345:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "CyU3PUsbStart failed to Start, Error code = %d\n", apiRetStatus);
+ 862              		.loc 1 345 0
+ 863 0750 0400A0E3 		mov	r0, #4
+ 864 0754 B0129FE5 		ldr	r1, .L50+28
+ 865 0758 08201BE5 		ldr	r2, [fp, #-8]
+ 866 075c FEFFFFEB 		bl	CyU3PDebugPrint
+ 346:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 867              		.loc 1 346 0
+ 868 0760 08001BE5 		ldr	r0, [fp, #-8]
+ 869 0764 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 870              	.L38:
+ 347:../cyfxconfigfpga.c ****     }
+ 348:../cyfxconfigfpga.c **** 
+ 349:../cyfxconfigfpga.c ****     /* The fast enumeration is the easiest way to setup a USB connection,
+ 350:../cyfxconfigfpga.c ****      * where all enumeration phase is handled by the library. Only the
+ 351:../cyfxconfigfpga.c ****      * class / vendor requests need to be handled by the application. */
+ 352:../cyfxconfigfpga.c ****     CyU3PUsbRegisterSetupCallback(CyFxSlFifoApplnUSBSetupCB, CyTrue);
+ 871              		.loc 1 352 0
+ 872 0768 A0029FE5 		ldr	r0, .L50+32
+ 873 076c 0110A0E3 		mov	r1, #1
+ 874 0770 FEFFFFEB 		bl	CyU3PUsbRegisterSetupCallback
+ 353:../cyfxconfigfpga.c **** 
+ 354:../cyfxconfigfpga.c ****     /* Setup the callback to handle the USB events. */
+ 355:../cyfxconfigfpga.c ****     CyU3PUsbRegisterEventCallback(CyFxSlFifoApplnUSBEventCB);
+ 875              		.loc 1 355 0
+ 876 0774 98029FE5 		ldr	r0, .L50+36
+ 877 0778 FEFFFFEB 		bl	CyU3PUsbRegisterEventCallback
+ 356:../cyfxconfigfpga.c **** 
+ 357:../cyfxconfigfpga.c ****     /* Register a callback to handle LPM requests from the USB 3.0 host. */
+ 358:../cyfxconfigfpga.c ****     CyU3PUsbRegisterLPMRequestCallback(CyFxApplnLPMRqtCB);
+ 878              		.loc 1 358 0
+ 879 077c 94029FE5 		ldr	r0, .L50+40
+ 880 0780 FEFFFFEB 		bl	CyU3PUsbRegisterLPMRequestCallback
+ 359:../cyfxconfigfpga.c **** 
+ 360:../cyfxconfigfpga.c ****     /* Set the USB Enumeration descriptors */
+ 361:../cyfxconfigfpga.c **** 
+ 362:../cyfxconfigfpga.c ****     /* Super speed device descriptor. */
+ 363:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_SS_DEVICE_DESCR, NULL, (uint8_t *)CyFxUSB30Device
+ 881              		.loc 1 363 0
+ 882 0784 0000A0E3 		mov	r0, #0
+ 883 0788 0010A0E3 		mov	r1, #0
+ 884 078c 88229FE5 		ldr	r2, .L50+44
+ 885 0790 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 886 0794 08000BE5 		str	r0, [fp, #-8]
+ 364:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 887              		.loc 1 364 0
+ 888 0798 08301BE5 		ldr	r3, [fp, #-8]
+ 889 079c 000053E3 		cmp	r3, #0
+ 890 07a0 0500000A 		beq	.L39
+ 365:../cyfxconfigfpga.c ****     {
+ 366:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB set device descriptor failed, Error code = %d\n", apiRetStatus);
+ 891              		.loc 1 366 0
+ 892 07a4 0400A0E3 		mov	r0, #4
+ 893 07a8 70129FE5 		ldr	r1, .L50+48
+ 894 07ac 08201BE5 		ldr	r2, [fp, #-8]
+ 895 07b0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 367:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 896              		.loc 1 367 0
+ 897 07b4 08001BE5 		ldr	r0, [fp, #-8]
+ 898 07b8 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 899              	.L39:
+ 368:../cyfxconfigfpga.c ****     }
+ 369:../cyfxconfigfpga.c **** 
+ 370:../cyfxconfigfpga.c ****     /* High speed device descriptor. */
+ 371:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_HS_DEVICE_DESCR, NULL, (uint8_t *)CyFxUSB20Device
+ 900              		.loc 1 371 0
+ 901 07bc 0100A0E3 		mov	r0, #1
+ 902 07c0 0010A0E3 		mov	r1, #0
+ 903 07c4 58229FE5 		ldr	r2, .L50+52
+ 904 07c8 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 905 07cc 08000BE5 		str	r0, [fp, #-8]
+ 372:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 906              		.loc 1 372 0
+ 907 07d0 08301BE5 		ldr	r3, [fp, #-8]
+ 908 07d4 000053E3 		cmp	r3, #0
+ 909 07d8 0500000A 		beq	.L40
+ 373:../cyfxconfigfpga.c ****     {
+ 374:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB set device descriptor failed, Error code = %d\n", apiRetStatus);
+ 910              		.loc 1 374 0
+ 911 07dc 0400A0E3 		mov	r0, #4
+ 912 07e0 38129FE5 		ldr	r1, .L50+48
+ 913 07e4 08201BE5 		ldr	r2, [fp, #-8]
+ 914 07e8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 375:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 915              		.loc 1 375 0
+ 916 07ec 08001BE5 		ldr	r0, [fp, #-8]
+ 917 07f0 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 918              	.L40:
+ 376:../cyfxconfigfpga.c ****     }
+ 377:../cyfxconfigfpga.c **** 
+ 378:../cyfxconfigfpga.c ****     /* BOS descriptor */
+ 379:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_SS_BOS_DESCR, NULL, (uint8_t *)CyFxUSBBOSDscr);
+ 919              		.loc 1 379 0
+ 920 07f4 0700A0E3 		mov	r0, #7
+ 921 07f8 0010A0E3 		mov	r1, #0
+ 922 07fc 24229FE5 		ldr	r2, .L50+56
+ 923 0800 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 924 0804 08000BE5 		str	r0, [fp, #-8]
+ 380:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 925              		.loc 1 380 0
+ 926 0808 08301BE5 		ldr	r3, [fp, #-8]
+ 927 080c 000053E3 		cmp	r3, #0
+ 928 0810 0500000A 		beq	.L41
+ 381:../cyfxconfigfpga.c ****     {
+ 382:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB set configuration descriptor failed, Error code = %d\n", apiRetSta
+ 929              		.loc 1 382 0
+ 930 0814 0400A0E3 		mov	r0, #4
+ 931 0818 0C129FE5 		ldr	r1, .L50+60
+ 932 081c 08201BE5 		ldr	r2, [fp, #-8]
+ 933 0820 FEFFFFEB 		bl	CyU3PDebugPrint
+ 383:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 934              		.loc 1 383 0
+ 935 0824 08001BE5 		ldr	r0, [fp, #-8]
+ 936 0828 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 937              	.L41:
+ 384:../cyfxconfigfpga.c ****     }
+ 385:../cyfxconfigfpga.c **** 
+ 386:../cyfxconfigfpga.c ****     /* Device qualifier descriptor */
+ 387:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_DEVQUAL_DESCR, NULL, (uint8_t *)CyFxUSBDeviceQual
+ 938              		.loc 1 387 0
+ 939 082c 0200A0E3 		mov	r0, #2
+ 940 0830 0010A0E3 		mov	r1, #0
+ 941 0834 F4219FE5 		ldr	r2, .L50+64
+ 942 0838 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 943 083c 08000BE5 		str	r0, [fp, #-8]
+ 388:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 944              		.loc 1 388 0
+ 945 0840 08301BE5 		ldr	r3, [fp, #-8]
+ 946 0844 000053E3 		cmp	r3, #0
+ 947 0848 0500000A 		beq	.L42
+ 389:../cyfxconfigfpga.c ****     {
+ 390:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB set device qualifier descriptor failed, Error code = %d\n", apiRet
+ 948              		.loc 1 390 0
+ 949 084c 0400A0E3 		mov	r0, #4
+ 950 0850 DC119FE5 		ldr	r1, .L50+68
+ 951 0854 08201BE5 		ldr	r2, [fp, #-8]
+ 952 0858 FEFFFFEB 		bl	CyU3PDebugPrint
+ 391:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 953              		.loc 1 391 0
+ 954 085c 08001BE5 		ldr	r0, [fp, #-8]
+ 955 0860 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 956              	.L42:
+ 392:../cyfxconfigfpga.c ****     }
+ 393:../cyfxconfigfpga.c **** 
+ 394:../cyfxconfigfpga.c ****     /* Super speed configuration descriptor */
+ 395:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_SS_CONFIG_DESCR, NULL, (uint8_t *)CyFxUSBSSConfig
+ 957              		.loc 1 395 0
+ 958 0864 0600A0E3 		mov	r0, #6
+ 959 0868 0010A0E3 		mov	r1, #0
+ 960 086c C4219FE5 		ldr	r2, .L50+72
+ 961 0870 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 962 0874 08000BE5 		str	r0, [fp, #-8]
+ 396:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 963              		.loc 1 396 0
+ 964 0878 08301BE5 		ldr	r3, [fp, #-8]
+ 965 087c 000053E3 		cmp	r3, #0
+ 966 0880 0500000A 		beq	.L43
+ 397:../cyfxconfigfpga.c ****     {
+ 398:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB set configuration descriptor failed, Error code = %d\n", apiRetSta
+ 967              		.loc 1 398 0
+ 968 0884 0400A0E3 		mov	r0, #4
+ 969 0888 9C119FE5 		ldr	r1, .L50+60
+ 970 088c 08201BE5 		ldr	r2, [fp, #-8]
+ 971 0890 FEFFFFEB 		bl	CyU3PDebugPrint
+ 399:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 972              		.loc 1 399 0
+ 973 0894 08001BE5 		ldr	r0, [fp, #-8]
+ 974 0898 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 975              	.L43:
+ 400:../cyfxconfigfpga.c ****     }
+ 401:../cyfxconfigfpga.c **** 
+ 402:../cyfxconfigfpga.c ****     /* High speed configuration descriptor */
+ 403:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_HS_CONFIG_DESCR, NULL, (uint8_t *)CyFxUSBHSConfig
+ 976              		.loc 1 403 0
+ 977 089c 0400A0E3 		mov	r0, #4
+ 978 08a0 0010A0E3 		mov	r1, #0
+ 979 08a4 90219FE5 		ldr	r2, .L50+76
+ 980 08a8 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 981 08ac 08000BE5 		str	r0, [fp, #-8]
+ 404:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 982              		.loc 1 404 0
+ 983 08b0 08301BE5 		ldr	r3, [fp, #-8]
+ 984 08b4 000053E3 		cmp	r3, #0
+ 985 08b8 0500000A 		beq	.L44
+ 405:../cyfxconfigfpga.c ****     {
+ 406:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB Set Other Speed Descriptor failed, Error Code = %d\n", apiRetStatu
+ 986              		.loc 1 406 0
+ 987 08bc 0400A0E3 		mov	r0, #4
+ 988 08c0 78119FE5 		ldr	r1, .L50+80
+ 989 08c4 08201BE5 		ldr	r2, [fp, #-8]
+ 990 08c8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 407:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 991              		.loc 1 407 0
+ 992 08cc 08001BE5 		ldr	r0, [fp, #-8]
+ 993 08d0 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 994              	.L44:
+ 408:../cyfxconfigfpga.c ****     }
+ 409:../cyfxconfigfpga.c **** 
+ 410:../cyfxconfigfpga.c ****     /* Full speed configuration descriptor */
+ 411:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_FS_CONFIG_DESCR, NULL, (uint8_t *)CyFxUSBFSConfig
+ 995              		.loc 1 411 0
+ 996 08d4 0300A0E3 		mov	r0, #3
+ 997 08d8 0010A0E3 		mov	r1, #0
+ 998 08dc 60219FE5 		ldr	r2, .L50+84
+ 999 08e0 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 1000 08e4 08000BE5 		str	r0, [fp, #-8]
+ 412:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 1001              		.loc 1 412 0
+ 1002 08e8 08301BE5 		ldr	r3, [fp, #-8]
+ 1003 08ec 000053E3 		cmp	r3, #0
+ 1004 08f0 0500000A 		beq	.L45
+ 413:../cyfxconfigfpga.c ****     {
+ 414:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB Set Configuration Descriptor failed, Error Code = %d\n", apiRetSta
+ 1005              		.loc 1 414 0
+ 1006 08f4 0400A0E3 		mov	r0, #4
+ 1007 08f8 48119FE5 		ldr	r1, .L50+88
+ 1008 08fc 08201BE5 		ldr	r2, [fp, #-8]
+ 1009 0900 FEFFFFEB 		bl	CyU3PDebugPrint
+ 415:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 1010              		.loc 1 415 0
+ 1011 0904 08001BE5 		ldr	r0, [fp, #-8]
+ 1012 0908 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 1013              	.L45:
+ 416:../cyfxconfigfpga.c ****     }
+ 417:../cyfxconfigfpga.c **** 
+ 418:../cyfxconfigfpga.c ****     /* String descriptor 0 */
+ 419:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_STRING_DESCR, 0, (uint8_t *)CyFxUSBStringLangIDDs
+ 1014              		.loc 1 419 0
+ 1015 090c 0500A0E3 		mov	r0, #5
+ 1016 0910 0010A0E3 		mov	r1, #0
+ 1017 0914 30219FE5 		ldr	r2, .L50+92
+ 1018 0918 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 1019 091c 08000BE5 		str	r0, [fp, #-8]
+ 420:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 1020              		.loc 1 420 0
+ 1021 0920 08301BE5 		ldr	r3, [fp, #-8]
+ 1022 0924 000053E3 		cmp	r3, #0
+ 1023 0928 0500000A 		beq	.L46
+ 421:../cyfxconfigfpga.c ****     {
+ 422:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB set string descriptor failed, Error code = %d\n", apiRetStatus);
+ 1024              		.loc 1 422 0
+ 1025 092c 0400A0E3 		mov	r0, #4
+ 1026 0930 18119FE5 		ldr	r1, .L50+96
+ 1027 0934 08201BE5 		ldr	r2, [fp, #-8]
+ 1028 0938 FEFFFFEB 		bl	CyU3PDebugPrint
+ 423:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 1029              		.loc 1 423 0
+ 1030 093c 08001BE5 		ldr	r0, [fp, #-8]
+ 1031 0940 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 1032              	.L46:
+ 424:../cyfxconfigfpga.c ****     }
+ 425:../cyfxconfigfpga.c **** 
+ 426:../cyfxconfigfpga.c ****     /* String descriptor 1 */
+ 427:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_STRING_DESCR, 1, (uint8_t *)CyFxUSBManufactureDsc
+ 1033              		.loc 1 427 0
+ 1034 0944 0500A0E3 		mov	r0, #5
+ 1035 0948 0110A0E3 		mov	r1, #1
+ 1036 094c 00219FE5 		ldr	r2, .L50+100
+ 1037 0950 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 1038 0954 08000BE5 		str	r0, [fp, #-8]
+ 428:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 1039              		.loc 1 428 0
+ 1040 0958 08301BE5 		ldr	r3, [fp, #-8]
+ 1041 095c 000053E3 		cmp	r3, #0
+ 1042 0960 0500000A 		beq	.L47
+ 429:../cyfxconfigfpga.c ****     {
+ 430:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB set string descriptor failed, Error code = %d\n", apiRetStatus);
+ 1043              		.loc 1 430 0
+ 1044 0964 0400A0E3 		mov	r0, #4
+ 1045 0968 E0109FE5 		ldr	r1, .L50+96
+ 1046 096c 08201BE5 		ldr	r2, [fp, #-8]
+ 1047 0970 FEFFFFEB 		bl	CyU3PDebugPrint
+ 431:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 1048              		.loc 1 431 0
+ 1049 0974 08001BE5 		ldr	r0, [fp, #-8]
+ 1050 0978 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 1051              	.L47:
+ 432:../cyfxconfigfpga.c ****     }
+ 433:../cyfxconfigfpga.c **** 
+ 434:../cyfxconfigfpga.c ****     /* String descriptor 2 */
+ 435:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PUsbSetDesc(CY_U3P_USB_SET_STRING_DESCR, 2, (uint8_t *)CyFxUSBProductDscr);
+ 1052              		.loc 1 435 0
+ 1053 097c 0500A0E3 		mov	r0, #5
+ 1054 0980 0210A0E3 		mov	r1, #2
+ 1055 0984 CC209FE5 		ldr	r2, .L50+104
+ 1056 0988 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 1057 098c 08000BE5 		str	r0, [fp, #-8]
+ 436:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 1058              		.loc 1 436 0
+ 1059 0990 08301BE5 		ldr	r3, [fp, #-8]
+ 1060 0994 000053E3 		cmp	r3, #0
+ 1061 0998 0500000A 		beq	.L48
+ 437:../cyfxconfigfpga.c ****     {
+ 438:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB set string descriptor failed, Error code = %d\n", apiRetStatus);
+ 1062              		.loc 1 438 0
+ 1063 099c 0400A0E3 		mov	r0, #4
+ 1064 09a0 A8109FE5 		ldr	r1, .L50+96
+ 1065 09a4 08201BE5 		ldr	r2, [fp, #-8]
+ 1066 09a8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 439:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 1067              		.loc 1 439 0
+ 1068 09ac 08001BE5 		ldr	r0, [fp, #-8]
+ 1069 09b0 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 1070              	.L48:
+ 440:../cyfxconfigfpga.c ****     }
+ 441:../cyfxconfigfpga.c **** 
+ 442:../cyfxconfigfpga.c ****     /* Connect the USB Pins with super speed operation enabled. */
+ 443:../cyfxconfigfpga.c ****     apiRetStatus = CyU3PConnectState(CyTrue, CyTrue);
+ 1071              		.loc 1 443 0
+ 1072 09b4 0100A0E3 		mov	r0, #1
+ 1073 09b8 0110A0E3 		mov	r1, #1
+ 1074 09bc FEFFFFEB 		bl	CyU3PConnectState
+ 1075 09c0 08000BE5 		str	r0, [fp, #-8]
+ 444:../cyfxconfigfpga.c ****     if (apiRetStatus != CY_U3P_SUCCESS)
+ 1076              		.loc 1 444 0
+ 1077 09c4 08301BE5 		ldr	r3, [fp, #-8]
+ 1078 09c8 000053E3 		cmp	r3, #0
+ 1079 09cc 0500000A 		beq	.L31
+ 445:../cyfxconfigfpga.c ****     {
+ 446:../cyfxconfigfpga.c ****         CyU3PDebugPrint (4, "USB Connect failed, Error code = %d\n", apiRetStatus);
+ 1080              		.loc 1 446 0
+ 1081 09d0 0400A0E3 		mov	r0, #4
+ 1082 09d4 80109FE5 		ldr	r1, .L50+108
+ 1083 09d8 08201BE5 		ldr	r2, [fp, #-8]
+ 1084 09dc FEFFFFEB 		bl	CyU3PDebugPrint
+ 447:../cyfxconfigfpga.c ****         CyFxAppErrorHandler(apiRetStatus);
+ 1085              		.loc 1 447 0
+ 1086 09e0 08001BE5 		ldr	r0, [fp, #-8]
+ 1087 09e4 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 1088              	.L31:
+ 448:../cyfxconfigfpga.c ****     }
+ 449:../cyfxconfigfpga.c **** }
+ 1089              		.loc 1 449 0
+ 1090 09e8 04D04BE2 		sub	sp, fp, #4
+ 1091              		@ sp needed
+ 1092 09ec 0088BDE8 		ldmfd	sp!, {fp, pc}
+ 1093              	.L51:
+ 1094              		.align	2
+ 1095              	.L50:
+ 1096 09f0 00000000 		.word	glFxConfigFpgaAppEvent
+ 1097 09f4 A0020000 		.word	.LC16
+ 1098 09f8 C8020000 		.word	.LC17
+ 1099 09fc 40787D01 		.word	25000000
+ 1100 0a00 EC020000 		.word	.LC18
+ 1101 0a04 10030000 		.word	.LC19
+ 1102 0a08 34030000 		.word	.LC20
+ 1103 0a0c 68030000 		.word	.LC21
+ 1104 0a10 00000000 		.word	CyFxSlFifoApplnUSBSetupCB
+ 1105 0a14 00000000 		.word	CyFxSlFifoApplnUSBEventCB
+ 1106 0a18 00000000 		.word	CyFxApplnLPMRqtCB
+ 1107 0a1c 00000000 		.word	CyFxUSB30DeviceDscr
+ 1108 0a20 98030000 		.word	.LC22
+ 1109 0a24 00000000 		.word	CyFxUSB20DeviceDscr
+ 1110 0a28 00000000 		.word	CyFxUSBBOSDscr
+ 1111 0a2c CC030000 		.word	.LC23
+ 1112 0a30 00000000 		.word	CyFxUSBDeviceQualDscr
+ 1113 0a34 08040000 		.word	.LC24
+ 1114 0a38 00000000 		.word	CyFxUSBSSConfigDscr
+ 1115 0a3c 00000000 		.word	CyFxUSBHSConfigDscr
+ 1116 0a40 48040000 		.word	.LC25
+ 1117 0a44 00000000 		.word	CyFxUSBFSConfigDscr
+ 1118 0a48 80040000 		.word	.LC26
+ 1119 0a4c 00000000 		.word	CyFxUSBStringLangIDDscr
+ 1120 0a50 BC040000 		.word	.LC27
+ 1121 0a54 00000000 		.word	CyFxUSBManufactureDscr
+ 1122 0a58 00000000 		.word	CyFxUSBProductDscr
+ 1123 0a5c F0040000 		.word	.LC28
+ 1124              		.cfi_endproc
+ 1125              	.LFE3:
+ 1127              		.align	2
+ 1128              		.global	main
+ 1130              	main:
+ 1131              	.LFB4:
+ 450:../cyfxconfigfpga.c **** 
+ 451:../cyfxconfigfpga.c **** 
+ 452:../cyfxconfigfpga.c **** 
+ 453:../cyfxconfigfpga.c **** /*
+ 454:../cyfxconfigfpga.c ****  * Main function
+ 455:../cyfxconfigfpga.c ****  */
+ 456:../cyfxconfigfpga.c **** int
+ 457:../cyfxconfigfpga.c **** main (void)
+ 458:../cyfxconfigfpga.c **** {
+ 1132              		.loc 1 458 0
+ 1133              		.cfi_startproc
+ 1134              		@ args = 0, pretend = 0, frame = 64
+ 1135              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1136 0a60 00482DE9 		stmfd	sp!, {fp, lr}
+ 1137              	.LCFI8:
+ 1138              		.cfi_def_cfa_offset 8
+ 1139              		.cfi_offset 11, -8
+ 1140              		.cfi_offset 14, -4
+ 1141 0a64 04B08DE2 		add	fp, sp, #4
+ 1142              	.LCFI9:
+ 1143              		.cfi_def_cfa 11, 4
+ 1144 0a68 40D04DE2 		sub	sp, sp, #64
+ 459:../cyfxconfigfpga.c ****     CyU3PIoMatrixConfig_t io_cfg;
+ 460:../cyfxconfigfpga.c ****     CyU3PReturnStatus_t status = CY_U3P_SUCCESS;
+ 1145              		.loc 1 460 0
+ 1146 0a6c 0030A0E3 		mov	r3, #0
+ 1147 0a70 08300BE5 		str	r3, [fp, #-8]
+ 461:../cyfxconfigfpga.c ****     CyU3PSysClockConfig_t clkCfg;
+ 462:../cyfxconfigfpga.c **** 
+ 463:../cyfxconfigfpga.c ****         /* setSysClk400 clock configurations */
+ 464:../cyfxconfigfpga.c ****         clkCfg.setSysClk400 = CyTrue;   /* FX3 device's master clock is set to a frequency > 400 MH
+ 1148              		.loc 1 464 0
+ 1149 0a74 0130A0E3 		mov	r3, #1
+ 1150 0a78 40300BE5 		str	r3, [fp, #-64]
+ 465:../cyfxconfigfpga.c ****         clkCfg.cpuClkDiv = 2;           /* CPU clock divider */
+ 1151              		.loc 1 465 0
+ 1152 0a7c 0230A0E3 		mov	r3, #2
+ 1153 0a80 3C304BE5 		strb	r3, [fp, #-60]
+ 466:../cyfxconfigfpga.c ****         clkCfg.dmaClkDiv = 2;           /* DMA clock divider */
+ 1154              		.loc 1 466 0
+ 1155 0a84 0230A0E3 		mov	r3, #2
+ 1156 0a88 3B304BE5 		strb	r3, [fp, #-59]
+ 467:../cyfxconfigfpga.c ****         clkCfg.mmioClkDiv = 2;          /* MMIO clock divider */
+ 1157              		.loc 1 467 0
+ 1158 0a8c 0230A0E3 		mov	r3, #2
+ 1159 0a90 3A304BE5 		strb	r3, [fp, #-58]
+ 468:../cyfxconfigfpga.c ****         clkCfg.useStandbyClk = CyFalse; /* device has no 32KHz clock supplied */
+ 1160              		.loc 1 468 0
+ 1161 0a94 0030A0E3 		mov	r3, #0
+ 1162 0a98 38300BE5 		str	r3, [fp, #-56]
+ 469:../cyfxconfigfpga.c ****         clkCfg.clkSrc = CY_U3P_SYS_CLK; /* Clock source for a peripheral block  */
+ 1163              		.loc 1 469 0
+ 1164 0a9c 0330A0E3 		mov	r3, #3
+ 1165 0aa0 34304BE5 		strb	r3, [fp, #-52]
+ 470:../cyfxconfigfpga.c **** 
+ 471:../cyfxconfigfpga.c ****     /* Initialize the device */
+ 472:../cyfxconfigfpga.c ****     status = CyU3PDeviceInit (&clkCfg);
+ 1166              		.loc 1 472 0
+ 1167 0aa4 40304BE2 		sub	r3, fp, #64
+ 1168 0aa8 0300A0E1 		mov	r0, r3
+ 1169 0aac FEFFFFEB 		bl	CyU3PDeviceInit
+ 1170 0ab0 08000BE5 		str	r0, [fp, #-8]
+ 473:../cyfxconfigfpga.c ****     if (status != CY_U3P_SUCCESS)
+ 1171              		.loc 1 473 0
+ 1172 0ab4 08301BE5 		ldr	r3, [fp, #-8]
+ 1173 0ab8 000053E3 		cmp	r3, #0
+ 1174 0abc 0000000A 		beq	.L53
+ 474:../cyfxconfigfpga.c ****     {
+ 475:../cyfxconfigfpga.c ****         goto handle_fatal_error;
+ 1175              		.loc 1 475 0
+ 1176 0ac0 270000EA 		b	.L54
+ 1177              	.L53:
+ 476:../cyfxconfigfpga.c ****     }
+ 477:../cyfxconfigfpga.c **** 
+ 478:../cyfxconfigfpga.c ****     /* Initialize the caches. Enable instruction cache and keep data cache disabled.
+ 479:../cyfxconfigfpga.c ****      * The data cache is useful only when there is a large amount of CPU based memory
+ 480:../cyfxconfigfpga.c ****      * accesses. When used in simple cases, it can decrease performance due to large
+ 481:../cyfxconfigfpga.c ****      * number of cache flushes and cleans and also it adds to the complexity of the
+ 482:../cyfxconfigfpga.c ****      * code. */
+ 483:../cyfxconfigfpga.c ****     status = CyU3PDeviceCacheControl (CyTrue, CyFalse, CyFalse);
+ 1178              		.loc 1 483 0
+ 1179 0ac4 0100A0E3 		mov	r0, #1
+ 1180 0ac8 0010A0E3 		mov	r1, #0
+ 1181 0acc 0020A0E3 		mov	r2, #0
+ 1182 0ad0 FEFFFFEB 		bl	CyU3PDeviceCacheControl
+ 1183 0ad4 08000BE5 		str	r0, [fp, #-8]
+ 484:../cyfxconfigfpga.c ****     if (status != CY_U3P_SUCCESS)
+ 1184              		.loc 1 484 0
+ 1185 0ad8 08301BE5 		ldr	r3, [fp, #-8]
+ 1186 0adc 000053E3 		cmp	r3, #0
+ 1187 0ae0 0000000A 		beq	.L55
+ 485:../cyfxconfigfpga.c ****     {
+ 486:../cyfxconfigfpga.c ****         goto handle_fatal_error;
+ 1188              		.loc 1 486 0
+ 1189 0ae4 1E0000EA 		b	.L54
+ 1190              	.L55:
+ 487:../cyfxconfigfpga.c ****     }
+ 488:../cyfxconfigfpga.c **** 
+ 489:../cyfxconfigfpga.c ****     /* Configure the IO matrix for the device. On the FX3 DVK board, the COM port
+ 490:../cyfxconfigfpga.c ****      * is connected to the IO(53:56). This means that either DQ32 mode should be
+ 491:../cyfxconfigfpga.c ****      * selected or lppMode should be set to UART_ONLY. Here we are choosing
+ 492:../cyfxconfigfpga.c ****      * UART_ONLY configuration for 16 bit slave FIFO configuration and setting
+ 493:../cyfxconfigfpga.c ****      * isDQ32Bit for 32-bit slave FIFO configuration. */
+ 494:../cyfxconfigfpga.c ****     io_cfg.useUart   = CyTrue;
+ 1191              		.loc 1 494 0
+ 1192 0ae8 0130A0E3 		mov	r3, #1
+ 1193 0aec 2C300BE5 		str	r3, [fp, #-44]
+ 495:../cyfxconfigfpga.c ****     io_cfg.useI2C    = CyFalse;
+ 1194              		.loc 1 495 0
+ 1195 0af0 0030A0E3 		mov	r3, #0
+ 1196 0af4 28300BE5 		str	r3, [fp, #-40]
+ 496:../cyfxconfigfpga.c ****     io_cfg.useI2S    = CyFalse;
+ 1197              		.loc 1 496 0
+ 1198 0af8 0030A0E3 		mov	r3, #0
+ 1199 0afc 24300BE5 		str	r3, [fp, #-36]
+ 497:../cyfxconfigfpga.c ****     io_cfg.useSpi    = CyTrue;
+ 1200              		.loc 1 497 0
+ 1201 0b00 0130A0E3 		mov	r3, #1
+ 1202 0b04 20300BE5 		str	r3, [fp, #-32]
+ 498:../cyfxconfigfpga.c ****     io_cfg.isDQ32Bit = CyFalse;
+ 1203              		.loc 1 498 0
+ 1204 0b08 0030A0E3 		mov	r3, #0
+ 1205 0b0c 30300BE5 		str	r3, [fp, #-48]
+ 499:../cyfxconfigfpga.c ****     io_cfg.lppMode   = CY_U3P_IO_MATRIX_LPP_DEFAULT;
+ 1206              		.loc 1 499 0
+ 1207 0b10 0030A0E3 		mov	r3, #0
+ 1208 0b14 1A304BE5 		strb	r3, [fp, #-26]
+ 500:../cyfxconfigfpga.c ****     /* GPIOs 50 and 52 are enabled. */
+ 501:../cyfxconfigfpga.c ****     io_cfg.gpioSimpleEn[0]  = 0x00000000;
+ 1209              		.loc 1 501 0
+ 1210 0b18 0030A0E3 		mov	r3, #0
+ 1211 0b1c 18300BE5 		str	r3, [fp, #-24]
+ 502:../cyfxconfigfpga.c ****     io_cfg.gpioSimpleEn[1]  = 0x00140000;
+ 1212              		.loc 1 502 0
+ 1213 0b20 0537A0E3 		mov	r3, #1310720
+ 1214 0b24 14300BE5 		str	r3, [fp, #-20]
+ 503:../cyfxconfigfpga.c ****     io_cfg.gpioComplexEn[0] = 0;
+ 1215              		.loc 1 503 0
+ 1216 0b28 0030A0E3 		mov	r3, #0
+ 1217 0b2c 10300BE5 		str	r3, [fp, #-16]
+ 504:../cyfxconfigfpga.c ****     io_cfg.gpioComplexEn[1] = 0;
+ 1218              		.loc 1 504 0
+ 1219 0b30 0030A0E3 		mov	r3, #0
+ 1220 0b34 0C300BE5 		str	r3, [fp, #-12]
+ 505:../cyfxconfigfpga.c ****     status = CyU3PDeviceConfigureIOMatrix (&io_cfg);
+ 1221              		.loc 1 505 0
+ 1222 0b38 30304BE2 		sub	r3, fp, #48
+ 1223 0b3c 0300A0E1 		mov	r0, r3
+ 1224 0b40 FEFFFFEB 		bl	CyU3PDeviceConfigureIOMatrix
+ 1225 0b44 08000BE5 		str	r0, [fp, #-8]
+ 506:../cyfxconfigfpga.c ****     if (status != CY_U3P_SUCCESS)
+ 1226              		.loc 1 506 0
+ 1227 0b48 08301BE5 		ldr	r3, [fp, #-8]
+ 1228 0b4c 000053E3 		cmp	r3, #0
+ 1229 0b50 0000000A 		beq	.L56
+ 507:../cyfxconfigfpga.c ****     {
+ 508:../cyfxconfigfpga.c ****         goto handle_fatal_error;
+ 1230              		.loc 1 508 0
+ 1231 0b54 020000EA 		b	.L54
+ 1232              	.L56:
+ 509:../cyfxconfigfpga.c ****     }
+ 510:../cyfxconfigfpga.c **** 
+ 511:../cyfxconfigfpga.c ****     /* This is a non returnable call for initializing the RTOS kernel */
+ 512:../cyfxconfigfpga.c ****     CyU3PKernelEntry ();
+ 1233              		.loc 1 512 0
+ 1234 0b58 FEFFFFEB 		bl	_tx_initialize_kernel_enter
+ 513:../cyfxconfigfpga.c **** 
+ 514:../cyfxconfigfpga.c ****     /* Dummy return to make the compiler happy */
+ 515:../cyfxconfigfpga.c ****     return 0;
+ 1235              		.loc 1 515 0
+ 1236 0b5c 0030A0E3 		mov	r3, #0
+ 1237 0b60 000000EA 		b	.L58
+ 1238              	.L54:
+ 516:../cyfxconfigfpga.c **** 
+ 517:../cyfxconfigfpga.c ****     handle_fatal_error:
+ 518:../cyfxconfigfpga.c **** 
+ 519:../cyfxconfigfpga.c ****     //CyU3PDebugPrint (CY_FX_DEBUG_PRIORITY, "Debugging message done by NEGU\r\n");
+ 520:../cyfxconfigfpga.c ****     /* Cannot recover from this error. */
+ 521:../cyfxconfigfpga.c ****     while (1);
+ 1239              		.loc 1 521 0 discriminator 1
+ 1240 0b64 FEFFFFEA 		b	.L54
+ 1241              	.L58:
+ 522:../cyfxconfigfpga.c **** }
+ 1242              		.loc 1 522 0
+ 1243 0b68 0300A0E1 		mov	r0, r3
+ 1244 0b6c 04D04BE2 		sub	sp, fp, #4
+ 1245              		@ sp needed
+ 1246 0b70 0088BDE8 		ldmfd	sp!, {fp, pc}
+ 1247              		.cfi_endproc
+ 1248              	.LFE4:
+ 1250              	.Letext0:
+ 1251              		.file 2 "c:\\program files (x86)\\cypress\\ez-usb fx3 sdk\\1.3\\arm gcc\\arm-none-eabi\\include\\s
+ 1252              		.file 3 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3ty
+ 1253              		.file 4 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyfx3_
+ 1254              		.file 5 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/tx_por
+ 1255              		.file 6 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/tx_api
+ 1256              		.file 7 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3dm
+ 1257              		.file 8 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3sy
+ 1258              		.file 9 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3er
+ 1259              		.file 10 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3u
+ 1260              		.file 11 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3u
+ 1261              		.file 12 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3l
+ 1262              		.file 13 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3g
+ 1263              		.file 14 "C:\\Program Files (x86)\\Cypress\\EZ-USB FX3 SDK\\1.3\\firmware\\u3p_firmware\\inc/cyu3s
+ 1264              		.file 15 "../cyfxslfifosync.h"
+ 1265              		.file 16 "../cyfxconfigfpga.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 cyfxconfigfpga.c
+                            *COM*:000000ac glChHandleUtoCPU
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:22     .data:00000000 glConfigDone
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:19     .data:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:29     .bss:00000000 filelen
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:26     .bss:00000000 $d
+                            *COM*:00000028 glFxConfigFpgaAppEvent
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:36     .bss:00000004 uiPacketSize
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:39     .rodata:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:79     .text:00000000 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:82     .text:00000000 CyFxConfigFpga
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:332    .text:000002b4 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:365    .text:000002f4 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:368    .text:000002f4 CyFxConfigFpgaApplnStart
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:558    .text:000004d8 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:569    .text:000004f8 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:572    .text:000004f8 CyFxConfigFpgaApplnStop
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:615    .text:00000544 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:669    .text:00000550 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:672    .text:00000550 CyFxConfigFpgaApplnInit
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:1096   .text:000009f0 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:1127   .text:00000a60 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccwUQeOZ.s:1130   .text:00000a60 main
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+CyU3PDebugPrint
+CyU3PSpiSetSsnLine
+CyU3PGpioSimpleGetValue
+_tx_thread_sleep
+CyU3PDmaChannelGetBuffer
+CyU3PSpiTransmitWords
+CyU3PDmaChannelDiscardBuffer
+glIsApplnActive
+CyU3PUsbGetSpeed
+CyFxAppErrorHandler
+CyU3PMemSet
+CyU3PSetEpConfig
+CyU3PDmaChannelCreate
+CyU3PUsbFlushEp
+CyU3PDmaChannelSetXfer
+CyU3PGpioDeInit
+CyU3PSpiDeInit
+CyU3PUsbGetEpSeqNum
+CyU3PDmaChannelDestroy
+seqnum_p
+_txe_event_flags_create
+CyU3PSpiInit
+CyU3PSpiSetConfig
+CyU3PGpioInit
+CyU3PGpioSetSimpleConfig
+CyU3PUsbStart
+CyU3PUsbRegisterSetupCallback
+CyU3PUsbRegisterEventCallback
+CyU3PUsbRegisterLPMRequestCallback
+CyU3PUsbSetDesc
+CyU3PConnectState
+CyFxSlFifoApplnUSBSetupCB
+CyFxSlFifoApplnUSBEventCB
+CyFxApplnLPMRqtCB
+CyFxUSB30DeviceDscr
+CyFxUSB20DeviceDscr
+CyFxUSBBOSDscr
+CyFxUSBDeviceQualDscr
+CyFxUSBSSConfigDscr
+CyFxUSBHSConfigDscr
+CyFxUSBFSConfigDscr
+CyFxUSBStringLangIDDscr
+CyFxUSBManufactureDscr
+CyFxUSBProductDscr
+CyU3PDeviceInit
+CyU3PDeviceCacheControl
+CyU3PDeviceConfigureIOMatrix
+_tx_initialize_kernel_enter
