@@ -72,7 +72,6 @@
 //#include "cyfxgpif_syncsf.h"
 #include "cyfxgpif2config.h"
 
-
 CyU3PThread slFifoAppThread;	        /* Slave FIFO application thread structure */
 CyU3PDmaChannel glChHandleSlFifoUtoP;   /* DMA Channel handle for U2P transfer. */
 CyU3PDmaChannel glChHandleSlFifoPtoU;   /* DMA Channel handle for P2U transfer. */
@@ -84,18 +83,11 @@ uint8_t glEp0Buffer[32];                /* Buffer used for sending EP0 data.    
 
 uint8_t *seqnum_p;
 /* Application Error Handler */
-void
-CyFxAppErrorHandler (
-        CyU3PReturnStatus_t apiRetStatus    /* API return status */
-        )
-{
+void CyFxAppErrorHandler (CyU3PReturnStatus_t apiRetStatus    /* API return status */) {
     /* Application failed with the error code apiRetStatus */
-
     /* Add custom debug or recovery actions here */
-
     /* Loop Indefinitely */
-    for (;;)
-    {
+    for (;;) {
         /* Thread sleep : 100 ms */
         CyU3PThreadSleep (100);
     }
@@ -104,15 +96,12 @@ CyFxAppErrorHandler (
 /* This function initializes the debug module. The debug prints
  * are routed to the UART and can be seen using a UART console
  * running at 115200 baud rate. */
-void
-CyFxSlFifoApplnDebugInit (void)
-{
+void CyFxSlFifoApplnDebugInit (void) {
     CyU3PUartConfig_t uartConfig;
     CyU3PReturnStatus_t apiRetStatus = CY_U3P_SUCCESS;
     /* Initialize the UART for printing debug messages */
     apiRetStatus = CyU3PUartInit();
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         /* Error handling */
         CyFxAppErrorHandler(apiRetStatus);
     }
@@ -128,46 +117,35 @@ CyFxSlFifoApplnDebugInit (void)
     uartConfig.isDma = CyTrue;
 
     apiRetStatus = CyU3PUartSetConfig (&uartConfig, NULL);
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         CyFxAppErrorHandler(apiRetStatus);
     }
 
     /* Set the UART transfer to a really large value. */
     apiRetStatus = CyU3PUartTxSetBlockXfer (0xFFFFFFFF);
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         CyFxAppErrorHandler(apiRetStatus);
     }
 
     /* Initialize the debug module. */
     apiRetStatus = CyU3PDebugInit (CY_U3P_LPP_SOCKET_UART_CONS, 8);
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         CyFxAppErrorHandler(apiRetStatus);
     }
 }
 
-
 /* DMA callback function to handle the produce events for U to P transfers. */
-void
-CyFxSlFifoUtoPDmaCallback (
-        CyU3PDmaChannel   *chHandle,
-        CyU3PDmaCbType_t  type,
-        CyU3PDmaCBInput_t *input
-        )
-{
+void CyFxSlFifoUtoPDmaCallback (CyU3PDmaChannel *chHandle, CyU3PDmaCbType_t  type, CyU3PDmaCBInput_t *input) {
     CyU3PReturnStatus_t status = CY_U3P_SUCCESS;
+    CyU3PDebugPrint (4, "\rU to P DMA Callback called\r\n");
 
-    if (type == CY_U3P_DMA_CB_PROD_EVENT)
-    {
+    if (type == CY_U3P_DMA_CB_PROD_EVENT) {
         /* This is a produce event notification to the CPU. This notification is 
          * received upon reception of every buffer. The buffer will not be sent
          * out unless it is explicitly committed. The call shall fail if there
          * is a bus reset / usb disconnect or if there is any application error. */
         status = CyU3PDmaChannelCommitBuffer (chHandle, input->buffer_p.count, 0);
-        if (status != CY_U3P_SUCCESS)
-        {
+        if (status != CY_U3P_SUCCESS) {
             CyU3PDebugPrint (4, "CyU3PDmaChannelCommitBuffer failed, Error code = %d\n", status);
         }
 
@@ -177,24 +155,17 @@ CyFxSlFifoUtoPDmaCallback (
 }
 
 /* DMA callback function to handle the produce events for P to U transfers. */
-void
-CyFxSlFifoPtoUDmaCallback (
-        CyU3PDmaChannel   *chHandle,
-        CyU3PDmaCbType_t  type,
-        CyU3PDmaCBInput_t *input
-        )
-{
+void CyFxSlFifoPtoUDmaCallback (CyU3PDmaChannel *chHandle, CyU3PDmaCbType_t type, CyU3PDmaCBInput_t *input) {
     CyU3PReturnStatus_t status = CY_U3P_SUCCESS;
+    CyU3PDebugPrint (4, "\rP to U DMA Callback called\r\n");
 
-    if (type == CY_U3P_DMA_CB_PROD_EVENT)
-    {
+    if (type == CY_U3P_DMA_CB_PROD_EVENT) {
         /* This is a produce event notification to the CPU. This notification is 
          * received upon reception of every buffer. The buffer will not be sent
          * out unless it is explicitly committed. The call shall fail if there
          * is a bus reset / usb disconnect or if there is any application error. */
         status = CyU3PDmaChannelCommitBuffer (chHandle, input->buffer_p.count, 0);
-        if (status != CY_U3P_SUCCESS)
-        {
+        if (status != CY_U3P_SUCCESS) {
             CyU3PDebugPrint (4, "CyU3PDmaChannelCommitBuffer failed, Error code = %d\n", status);
         }
 
@@ -203,14 +174,12 @@ CyFxSlFifoPtoUDmaCallback (
     }
 }
 
-
 /* This function starts the slave FIFO loop application. This is called
  * when a SET_CONF event is received from the USB host. The endpoints
  * are configured and the DMA pipe is setup in this function. */
-void
-CyFxSlFifoApplnStart (
-        void)
-{
+/* Endpoint configuration for USB transfers and DMA channel configuration
+ * for data transfers between the USB block and the GPIF II block of FX3.*/
+void CyFxSlFifoApplnStart(void) {
     uint16_t size = 0;
     CyU3PEpConfig_t epCfg;
     CyU3PDmaChannelConfig_t dmaCfg;
@@ -369,10 +338,7 @@ CyFxSlFifoApplnStart (
 /* This function stops the slave FIFO loop application. This shall be called
  * whenever a RESET or DISCONNECT event is received from the USB host. The
  * endpoints are disabled and the DMA pipe is destroyed by this function. */
-void
-CyFxSlFifoApplnStop (
-        void)
-{
+void CyFxSlFifoApplnStop (void) {
     CyU3PEpConfig_t epCfg;
     CyU3PReturnStatus_t apiRetStatus = CY_U3P_SUCCESS;
 
@@ -393,28 +359,21 @@ CyFxSlFifoApplnStop (
 
     /* Producer endpoint configuration. */
     apiRetStatus = CyU3PSetEpConfig(CY_FX_EP_PRODUCER, &epCfg);
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         CyU3PDebugPrint (4, "CyU3PSetEpConfig failed, Error code = %d\n", apiRetStatus);
         CyFxAppErrorHandler (apiRetStatus);
     }
 
     /* Consumer endpoint configuration. */
     apiRetStatus = CyU3PSetEpConfig(CY_FX_EP_CONSUMER, &epCfg);
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         CyU3PDebugPrint (4, "CyU3PSetEpConfig failed, Error code = %d\n", apiRetStatus);
         CyFxAppErrorHandler (apiRetStatus);
     }
 }
 
 /* Callback to handle the USB setup requests. */
-CyBool_t
-CyFxSlFifoApplnUSBSetupCB (
-        uint32_t setupdat0,
-        uint32_t setupdat1
-    )
-{
+CyBool_t CyFxSlFifoApplnUSBSetupCB (uint32_t setupdat0, uint32_t setupdat1) {
     /* Fast enumeration is used. Only requests addressed to the interface, class,
      * vendor and unknown control requests are received by this function.
      * This application does not support any class or vendor requests. */
@@ -433,19 +392,25 @@ CyFxSlFifoApplnUSBSetupCB (
     wIndex   = ((setupdat1 & CY_U3P_USB_INDEX_MASK)   >> CY_U3P_USB_INDEX_POS);
     wLength  = ((setupdat1 & CY_U3P_USB_LENGTH_MASK)  >> CY_U3P_USB_LENGTH_POS);
 
-    if (bType == CY_U3P_USB_STANDARD_RQT)
-    {
+    CyU3PDebugPrint (4,
+    		"\r\t bReqType: %X\r\n"
+    		"\t bType: %X\r\n"
+    		"\t bTarget: %X\r\n"
+    		"\t bRequest: %X\r\n"
+    		"\t Value: %d\r\n"
+    		"\t Index: %d\r\n"
+    		"\t Length: %d\r\n",
+    		bReqType, bType, bTarget, bRequest, wValue, wIndex, wLength);
+
+    if (bType == CY_U3P_USB_STANDARD_RQT) {
+    	CyU3PDebugPrint (4, "\rStandard Request received: %X\r\n", bRequest);
         /* Handle SET_FEATURE(FUNCTION_SUSPEND) and CLEAR_FEATURE(FUNCTION_SUSPEND)
          * requests here. It should be allowed to pass if the device is in configured
          * state and failed otherwise. */
         if ((bTarget == CY_U3P_USB_TARGET_INTF) && ((bRequest == CY_U3P_USB_SC_SET_FEATURE)
-                    || (bRequest == CY_U3P_USB_SC_CLEAR_FEATURE)) && (wValue == 0))
-        {
-            if (glIsApplnActive)
-                CyU3PUsbAckSetup ();
-            else
-                CyU3PUsbStall (0, CyTrue, CyFalse);
-
+                    || (bRequest == CY_U3P_USB_SC_CLEAR_FEATURE)) && (wValue == 0)) {
+            if (glIsApplnActive) { CyU3PUsbAckSetup (); }
+            else {CyU3PUsbStall (0, CyTrue, CyFalse); }
             isHandled = CyTrue;
         }
 
@@ -459,21 +424,17 @@ CyFxSlFifoApplnUSBSetupCB (
          * reset. Return CyFalse to make the library clear the stall and reset the endpoint
          * toggle. Or invoke the CyU3PUsbStall (ep, CyFalse, CyTrue) and return CyTrue.
          * Here we are clearing the stall. */
-        if ((bTarget == CY_U3P_USB_TARGET_ENDPT) && (bRequest == CY_U3P_USB_SC_CLEAR_FEATURE)
-                && (wValue == CY_U3P_USBX_FS_EP_HALT))
-        {
-            if (glIsApplnActive)
-            {
-                if (wIndex == CY_FX_EP_PRODUCER)
-                {
+        if ((bTarget == CY_U3P_USB_TARGET_ENDPT) && (bRequest == CY_U3P_USB_SC_CLEAR_FEATURE) && (wValue == CY_U3P_USBX_FS_EP_HALT)) {
+        	CyU3PDebugPrint (4, "\r\tCLEAR_FEATURE\r\n", bRequest);
+            if (glIsApplnActive) {
+                if (wIndex == CY_FX_EP_PRODUCER) {
                     CyU3PDmaChannelReset (&glChHandleSlFifoUtoP);
                     CyU3PUsbFlushEp(CY_FX_EP_PRODUCER);
                     CyU3PUsbResetEp (CY_FX_EP_PRODUCER);
                     CyU3PDmaChannelSetXfer (&glChHandleSlFifoUtoP, CY_FX_SLFIFO_DMA_TX_SIZE);
                 }
 
-                if (wIndex == CY_FX_EP_CONSUMER)
-                {
+                if (wIndex == CY_FX_EP_CONSUMER) {
                     CyU3PDmaChannelReset (&glChHandleSlFifoPtoU);
                     CyU3PUsbFlushEp(CY_FX_EP_CONSUMER);
                     CyU3PUsbResetEp (CY_FX_EP_CONSUMER);
@@ -485,55 +446,43 @@ CyFxSlFifoApplnUSBSetupCB (
             }
         }
     }
-    else if (bType == CY_U3P_USB_VENDOR_RQT)
-           {
-           	if (bRequest == VND_CMD_SLAVESER_CFGLOAD)
-           	{
-           	    if ((bReqType & 0x80) == 0)
-           	    {
-
-           	    	CyU3PUsbGetEP0Data (wLength, glEp0Buffer, NULL);
-           	    	filelen = (uint32_t)(glEp0Buffer[3]<<24)|(glEp0Buffer[2]<<16)|(glEp0Buffer[1]<<8)|glEp0Buffer[0];
-           	    	glConfigDone = CyTrue;
-           	      	/* Set CONFIGFPGAAPP_START_EVENT to start configuring FPGA */
-					CyU3PEventSet(&glFxConfigFpgaAppEvent, CY_FX_CONFIGFPGAAPP_START_EVENT,
-							CYU3P_EVENT_OR);
-           	    	isHandled = CyTrue;
-           	    }
-
-           	}
-           	if (bRequest == VND_CMD_SLAVESER_CFGSTAT)
-   				{
-   					if ((bReqType & 0x80) == 0x80)
-   					{
-   						glEp0Buffer [0]= glConfigDone;
-   						CyU3PUsbSendEP0Data (wLength, glEp0Buffer);
-   						/* Switch to slaveFIFO interface when FPGA is configured successfully*/
-   						if (glConfigDone)
-						CyU3PEventSet(&glFxConfigFpgaAppEvent, CY_FX_CONFIGFPGAAPP_SW_TO_SLFIFO_EVENT,
-													CYU3P_EVENT_OR);
-   						isHandled = CyTrue;
-   					}
-
-   				}
-           }
-
-           return isHandled;
+    else if (bType == CY_U3P_USB_VENDOR_RQT) {
+    	CyU3PDebugPrint (4, "\rVendor Request received: %X\r\n", bRequest);
+    	if (bRequest == VND_CMD_SLAVESER_CFGLOAD) {
+    		CyU3PDebugPrint (4, "\r\tVND_CMD_SLAVESER_CFGLOAD\r\n");
+    		if ((bReqType & 0x80) == 0) {
+    			CyU3PUsbGetEP0Data(wLength, glEp0Buffer, NULL);
+    			filelen = (uint32_t)(glEp0Buffer[3]<<24)|(glEp0Buffer[2]<<16)|(glEp0Buffer[1]<<8)|glEp0Buffer[0];
+    			CyU3PDebugPrint (4, "\r\tfilelen = %d\r\n", filelen);
+    			glConfigDone = CyTrue;
+    			/* Set CONFIGFPGAAPP_START_EVENT to start configuring FPGA */
+    			CyU3PEventSet(&glFxConfigFpgaAppEvent, CY_FX_CONFIGFPGAAPP_START_EVENT, CYU3P_EVENT_OR);
+    			isHandled = CyTrue;
+    		}
+    	}
+    	if (bRequest == VND_CMD_SLAVESER_CFGSTAT) {
+    		CyU3PDebugPrint (4, "\r\tVND_CMD_SLAVESER_CFGSTAT\r\n", bRequest);
+    		if ((bReqType & 0x80) == 0x80) {
+    			glEp0Buffer [0]= glConfigDone;
+    			CyU3PUsbSendEP0Data (wLength, glEp0Buffer);
+    			/* Switch to slaveFIFO interface when FPGA is configured successfully*/
+    			if (glConfigDone) {
+    				CyU3PEventSet(&glFxConfigFpgaAppEvent, CY_FX_CONFIGFPGAAPP_SW_TO_SLFIFO_EVENT, CYU3P_EVENT_OR);
+    			}
+    			isHandled = CyTrue;
+    		}
+    	}
+    }
+    return isHandled;
  }
 
 /* This is the callback function to handle the USB events. */
-void
-CyFxSlFifoApplnUSBEventCB (
-    CyU3PUsbEventType_t evtype,
-    uint16_t            evdata
-    )
-{
-    switch (evtype)
-    {
+/* Handles USB events such as suspend, cable disconnect, reset, and resume. */
+void CyFxSlFifoApplnUSBEventCB (CyU3PUsbEventType_t evtype, uint16_t  evdata) {
+    switch (evtype) {
         case CY_U3P_USB_EVENT_SETCONF:
             /* Stop the application before re-starting. */
-            if (glIsApplnActive)
-            {
+            if (glIsApplnActive) {
                 CyFxSlFifoApplnStop ();
 
             }
@@ -541,16 +490,13 @@ CyFxSlFifoApplnUSBEventCB (
             CyU3PUsbLPMDisable();
             CyFxConfigFpgaApplnStart();
             break;
-
         case CY_U3P_USB_EVENT_RESET:
         case CY_U3P_USB_EVENT_DISCONNECT:
             /* Stop the loop back function. */
-            if (glIsApplnActive)
-            {
+            if (glIsApplnActive) {
                 CyFxSlFifoApplnStop ();
             }
             break;
-
         default:
             break;
     }
@@ -564,19 +510,16 @@ CyFxSlFifoApplnUSBEventCB (
    This application does not have any state in which we should not allow U1/U2 transitions; and therefore
    the function always return CyTrue.
  */
-CyBool_t
-CyFxApplnLPMRqtCB (
-        CyU3PUsbLinkPowerMode link_mode)
-{
+CyBool_t CyFxApplnLPMRqtCB (CyU3PUsbLinkPowerMode link_mode) {
     return CyTrue;
 }
 
-
 /* This function initializes the GPIF interface and initializes
  * the USB interface. */
-void
-CyFxSlFifoApplnInit (void)
-{
+/*Initializes the processor interface block,
+ * loads the GPIF configuration for the Slave FIFO interface,
+ *  and starts the GPIF state machine.*/
+void CyFxSlFifoApplnInit (void) {
     CyU3PPibClock_t pibClock;
     CyU3PReturnStatus_t apiRetStatus = CY_U3P_SUCCESS;
 
@@ -587,16 +530,14 @@ CyFxSlFifoApplnInit (void)
     /* Disable DLL for sync GPIF */
     pibClock.isDllEnable = CyFalse;
     apiRetStatus = CyU3PPibInit(CyTrue, &pibClock);
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         CyU3PDebugPrint (4, "P-port Initialization failed, Error Code = %d\n",apiRetStatus);
         CyFxAppErrorHandler(apiRetStatus);
     }
 
     /* Load the GPIF configuration for Slave FIFO sync mode. */
     apiRetStatus = CyU3PGpifLoad (&CyFxGpifConfig);
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         CyU3PDebugPrint (4, "CyU3PGpifLoad failed, Error Code = %d\n",apiRetStatus);
         CyFxAppErrorHandler(apiRetStatus);
     }
@@ -607,8 +548,7 @@ CyFxSlFifoApplnInit (void)
 
     /* Start the state machine. */
     apiRetStatus = CyU3PGpifSMStart (RESET,ALPHA_RESET);
-    if (apiRetStatus != CY_U3P_SUCCESS)
-    {
+    if (apiRetStatus != CY_U3P_SUCCESS) {
         CyU3PDebugPrint (4, "CyU3PGpifSMStart failed, Error Code = %d\n",apiRetStatus);
         CyFxAppErrorHandler(apiRetStatus);
     }
@@ -724,10 +664,9 @@ CyFxSlFifoApplnInit (void)
     }
 #endif
 }
-void
-CyFxSwitchtoslFifo (
-		void)
-{
+
+/*Reconfigures the FX3 I/O matrix per the Slave FIFO interface requirement*/
+void CyFxSwitchtoslFifo(void) {
 	CyU3PIoMatrixConfig_t io_cfg;
 	CyU3PReturnStatus_t status = CY_U3P_SUCCESS;
 	io_cfg.useUart   = CyTrue;
@@ -748,18 +687,18 @@ CyFxSwitchtoslFifo (
     io_cfg.gpioComplexEn[0] = 0;
     io_cfg.gpioComplexEn[1] = 0;
     status = CyU3PDeviceConfigureIOMatrix (&io_cfg);
-    if (status != CY_U3P_SUCCESS)
-    {
+    if (status != CY_U3P_SUCCESS) {
     	while (1);		/* Cannot recover from this error. */
     }
-
 }
 
 /* Entry function for the slFifoAppThread. */
-void
-SlFifoAppThread_Entry (
-        uint32_t input)
-{
+/* Application thread function that calls initialization
+ * functions for internal blocks of FX3. Waits for the
+ * events to configure FPGA and switches to the Slave FIFO
+ * interface once the FPGA configuration is successful.
+ * */
+void SlFifoAppThread_Entry (uint32_t input) {
 	uint32_t eventFlag;
 	CyU3PReturnStatus_t txApiRetStatus = CY_U3P_SUCCESS;
 	/* Initialize the debug module */
@@ -768,55 +707,44 @@ SlFifoAppThread_Entry (
     /* Initialize the FPGA configuration application */
     CyFxConfigFpgaApplnInit();
 
-    for (;;)
-    {
+    for (;;) {
         /*CyU3PThreadSleep (1000);*/
-        if (glIsApplnActive)
-        {
-
+        if (glIsApplnActive) {
         	/* Wait for events to configure FPGA */
-        	        txApiRetStatus = CyU3PEventGet (&glFxConfigFpgaAppEvent,
+        	txApiRetStatus = CyU3PEventGet (&glFxConfigFpgaAppEvent,
         	                (CY_FX_CONFIGFPGAAPP_START_EVENT | CY_FX_CONFIGFPGAAPP_SW_TO_SLFIFO_EVENT),
         	                CYU3P_EVENT_OR_CLEAR, &eventFlag, CYU3P_WAIT_FOREVER);
-        	        if (txApiRetStatus == CY_U3P_SUCCESS)
-        	        {
-        	            if (eventFlag & CY_FX_CONFIGFPGAAPP_START_EVENT)
-        	            {
-        	                /* Start configuring FPGA */
-        	            	 CyFxConfigFpga(filelen);
-
-        	            }
-        	            else if ((eventFlag & CY_FX_CONFIGFPGAAPP_SW_TO_SLFIFO_EVENT))
-        	            {
-        	                /* Switch to SlaveFIFO interface */
-        	            	CyFxConfigFpgaApplnStop();
-							CyFxSwitchtoslFifo();
-							CyFxSlFifoApplnInit();
-							CyFxSlFifoApplnStart();
-
-        	            }
-        	        }
-
+        	if (txApiRetStatus == CY_U3P_SUCCESS) {
+        		if (eventFlag & CY_FX_CONFIGFPGAAPP_START_EVENT) {
+        			/* Start configuring FPGA */
+        			CyU3PDebugPrint (4, "\rStart Configuration of FPGA\r\n");
+        			CyFxConfigFpga(filelen);
+        		}
+        		else if ((eventFlag & CY_FX_CONFIGFPGAAPP_SW_TO_SLFIFO_EVENT)) {
+        			/* Switch to SlaveFIFO interface */
+        			CyU3PDebugPrint (4, "\rSwitch to SlaveFIFO interface\r\n");
+        			CyFxConfigFpgaApplnStop();
+        			CyFxSwitchtoslFifo();
+        			CyFxSlFifoApplnInit();
+        			CyFxSlFifoApplnStart();
+        		}
+        	}
             /* Print the number of buffers received so far from the USB host. */
-            CyU3PDebugPrint (6, "Data tracker: buffers received: %d, buffers sent: %d.\r\n",
-                    glDMARxCount, glDMATxCount);
+            CyU3PDebugPrint (6, "Data tracker: buffers received: %d, buffers sent: %d.\r\n", glDMARxCount, glDMATxCount);
         }
     }
 }
 
 /* Application define function which creates the threads. */
-void
-CyFxApplicationDefine (
-        void)
-{
+void CyFxApplicationDefine(void) {
     void *ptr = NULL;
     uint32_t retThrdCreate = CY_U3P_SUCCESS;
 
     /* Allocate the memory for the thread */
-    ptr = CyU3PMemAlloc (CY_FX_SLFIFO_THREAD_STACK);
+    ptr = CyU3PMemAlloc(CY_FX_SLFIFO_THREAD_STACK);
 
     /* Create the thread for the application */
-    retThrdCreate = CyU3PThreadCreate (&slFifoAppThread,           /* Slave FIFO app thread structure */
+    retThrdCreate = CyU3PThreadCreate(&slFifoAppThread,           /* Slave FIFO app thread structure */
                           "21:Slave_FIFO_sync",                    /* Thread ID and thread name */
                           SlFifoAppThread_Entry,                   /* Slave FIFO app thread entry function */
                           0,                                       /* No input parameter to thread */
@@ -829,8 +757,7 @@ CyFxApplicationDefine (
                           );
 
     /* Check the return code */
-    if (retThrdCreate != 0)
-    {
+    if (retThrdCreate != 0) {
         /* Thread Creation failed with the error code retThrdCreate */
 
         /* Add custom recovery or debug actions here */

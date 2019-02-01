@@ -289,16 +289,43 @@ The cables will be connected as follow:
 ### 4.3 debugging via UART
 
 The programming firmware was modified to print debugging messages over a UART interface using GPIO[46..49] of the FX3 device.
+To see those messages you must connect those pins to a UART device and use a program like *putty* or *Tera Term* to display the messages in question.
 
-To see those messages you must connect those pins to a UART device like the picture shows and use a program like *putty* or *Tera Term* to display the messages in question.
+Example of *Tera Term* screen:
+```
+Firmware version modified by J. Agustin Barrachina:
+Warning: USB 2.0 HIGH SPEED detected.
+        Consider connecting the board to a USB3 interface for better performance
+Vendor Request received: B2
+        bReqType: 40
+        bType: 40
+        bTarget: 0
+        bRequest: B2
+        wValue: 0
+        wIndex: 1
+        wLength: 16
+    VND_CMD_SLAVESER_CFGLOAD
+    filelen = 1484404
+Start Configuration of FPGA
+Standard Request received: B
+         bReqType: 1
+         bType: 0
+         bTarget: 1
+         bRequest: B
+         wValue: 0
+         wIndex: 0
+         wLength: 0
 
-TODO: add capture of messages and image of the current setup.
+ 1. Pulling PROG_B line to reset FPGA
+ 2. Releasing PROG_B line
+ 3. Checking FPGA_Init_B to know if FPGA is ready.
+ 4. Start shifting configuration data...
+ 5. Checking DONE signal
+FPGA was programmed successfully. Status code = 0
+  Data tracker: buffers received: 0, buffers sent: 0.
+```
 
-## 5. cpp Class for communicating with FX3
-
-Inside [testing_cpp_code](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/testing_cpp_code) there's a project that enables communication with the PC with the FX3. It performs download of firmware, prints descriptions and run performance tests between other things
-
-## 6. Program and communicate with the FPGA
+## 5. Program and communicate with the FPGA
 
 To do both program and communicate with the FPGA, just follow the steps of section [4.2. Programming Steps](#4.2.-programming-steps) but when selecting the Bitstream one must choose the following `CYUSB3KIT-003_with_SP605_xilinx\com_fpga\FPGA_firmware\slaveFIFO2b_fpga_top.bin`. After successfully programming the FPGA, open *Control Center* program and follow the images that follows.
 
@@ -321,6 +348,13 @@ To do both program and communicate with the FPGA, just follow the steps of secti
 <p align="center">
 <img src="/img/prog_com/Image9.png" width="400"/>
 </p>
+
+## 6. cpp Class for communicating with FX3
+
+Inside [testing_cpp_code](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/testing_cpp_code) there's a project that enables communication with the PC with the FX3. It performs download of firmware, programs the FPGA, prints descriptions and run performance tests between other things.
+
+If you run the code it automatically programs the FX3 devices. It waits for the user to turn on the FPGA and press enter.
+Then it programs the FPGA.
 
 ## 7. Citations
 

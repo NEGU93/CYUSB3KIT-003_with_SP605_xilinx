@@ -7,762 +7,1036 @@
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
    9              		.eabi_attribute 30, 4
-  10              		.eabi_attribute 18, 4
-  11              		.file	"cyfxconfigfpga.c"
-  12              		.text
-  13              		.align	2
-  14              		.global	CyFxConfigFpga
-  16              	CyFxConfigFpga:
-  17              		@ args = 0, pretend = 0, frame = 24
-  18              		@ frame_needed = 0, uses_anonymous_args = 0
-  19 0000 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
-  20 0004 64119FE5 		ldr	r1, .L12
-  21 0008 0050A0E1 		mov	r5, r0
-  22 000c 18D04DE2 		sub	sp, sp, #24
-  23 0010 0520A0E1 		mov	r2, r5
-  24 0014 0600A0E3 		mov	r0, #6
-  25 0018 FEFFFFEB 		bl	CyU3PDebugPrint
-  26 001c 0000A0E3 		mov	r0, #0
-  27 0020 FEFFFFEB 		bl	CyU3PSpiSetSsnLine
-  28 0024 10108DE2 		add	r1, sp, #16
-  29 0028 0040A0E1 		mov	r4, r0
-  30 002c 3400A0E3 		mov	r0, #52
-  31 0030 FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
-  32 0034 3400A0E3 		mov	r0, #52
-  33 0038 10108DE2 		add	r1, sp, #16
-  34 003c FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
-  35 0040 10309DE5 		ldr	r3, [sp, #16]
-  36 0044 000053E3 		cmp	r3, #0
-  37 0048 24319F15 		ldrne	r3, .L12+4
-  38 004c 0020A013 		movne	r2, #0
-  39 0050 00208315 		strne	r2, [r3, #0]
-  40 0054 4200001A 		bne	.L3
-  41              	.L2:
-  42 0058 0A00A0E3 		mov	r0, #10
-  43 005c FEFFFFEB 		bl	_tx_thread_sleep
-  44 0060 0100A0E3 		mov	r0, #1
-  45 0064 FEFFFFEB 		bl	CyU3PSpiSetSsnLine
-  46 0068 0060A0E1 		mov	r6, r0
-  47 006c 0A00A0E3 		mov	r0, #10
-  48 0070 FEFFFFEB 		bl	_tx_thread_sleep
-  49 0074 3400A0E3 		mov	r0, #52
-  50 0078 10108DE2 		add	r1, sp, #16
-  51 007c FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
-  52 0080 000086E1 		orr	r0, r6, r0
-  53 0084 10609DE5 		ldr	r6, [sp, #16]
-  54 0088 004094E1 		orrs	r4, r4, r0
-  55 008c 0030A003 		moveq	r3, #0
-  56 0090 0130A013 		movne	r3, #1
-  57 0094 010056E3 		cmp	r6, #1
-  58 0098 0360A001 		moveq	r6, r3
-  59 009c 01608313 		orrne	r6, r3, #1
-  60 00a0 000056E3 		cmp	r6, #0
-  61 00a4 0640A001 		moveq	r4, r6
-  62 00a8 1B00000A 		beq	.L4
-  63 00ac 2C0000EA 		b	.L3
-  64              	.L9:
-  65 00b0 C0009FE5 		ldr	r0, .L12+8
-  66 00b4 04108DE2 		add	r1, sp, #4
-  67 00b8 7D2EA0E3 		mov	r2, #2000
-  68 00bc FEFFFFEB 		bl	CyU3PDmaChannelGetBuffer
-  69 00c0 008050E2 		subs	r8, r0, #0
-  70 00c4 A8309F15 		ldrne	r3, .L12+4
-  71 00c8 0020A013 		movne	r2, #0
-  72 00cc 00208315 		strne	r2, [r3, #0]
-  73 00d0 0D00001A 		bne	.L11
-  74              	.L5:
-  75 00d4 A0709FE5 		ldr	r7, .L12+12
-  76 00d8 04009DE5 		ldr	r0, [sp, #4]
-  77 00dc B010D7E1 		ldrh	r1, [r7, #0]
-  78 00e0 FEFFFFEB 		bl	CyU3PSpiTransmitWords
-  79 00e4 006050E2 		subs	r6, r0, #0
-  80 00e8 84309F15 		ldrne	r3, .L12+4
-  81 00ec 00808315 		strne	r8, [r3, #0]
-  82 00f0 0F00001A 		bne	.L6
-  83              	.L7:
-  84 00f4 7C009FE5 		ldr	r0, .L12+8
-  85 00f8 FEFFFFEB 		bl	CyU3PDmaChannelDiscardBuffer
-  86 00fc 000050E3 		cmp	r0, #0
-  87 0100 0300000A 		beq	.L8
-  88 0104 68309FE5 		ldr	r3, .L12+4
-  89 0108 006083E5 		str	r6, [r3, #0]
-  90              	.L11:
-  91 010c 4560A0E3 		mov	r6, #69
-  92 0110 070000EA 		b	.L6
-  93              	.L8:
-  94 0114 B030D7E1 		ldrh	r3, [r7, #0]
-  95 0118 034084E0 		add	r4, r4, r3
-  96              	.L4:
-  97 011c 050054E1 		cmp	r4, r5
-  98 0120 0300002A 		bcs	.L6
-  99 0124 54309FE5 		ldr	r3, .L12+16
- 100 0128 003093E5 		ldr	r3, [r3, #0]
- 101 012c 000053E3 		cmp	r3, #0
- 102 0130 DEFFFF1A 		bne	.L9
- 103              	.L6:
- 104 0134 0100A0E3 		mov	r0, #1
- 105 0138 FEFFFFEB 		bl	_tx_thread_sleep
- 106 013c 3200A0E3 		mov	r0, #50
- 107 0140 14108DE2 		add	r1, sp, #20
- 108 0144 FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
- 109 0148 14309DE5 		ldr	r3, [sp, #20]
- 110 014c 010053E3 		cmp	r3, #1
- 111 0150 1C309F15 		ldrne	r3, .L12+4
- 112 0154 0020A013 		movne	r2, #0
- 113 0158 4A40A013 		movne	r4, #74
- 114 015c 06408001 		orreq	r4, r0, r6
- 115 0160 00208315 		strne	r2, [r3, #0]
- 116              	.L3:
- 117 0164 0400A0E1 		mov	r0, r4
- 118 0168 18D08DE2 		add	sp, sp, #24
- 119 016c F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
- 120              	.L13:
- 121              		.align	2
- 122              	.L12:
- 123 0170 00000000 		.word	.LC0
- 124 0174 00000000 		.word	.LANCHOR0
- 125 0178 00000000 		.word	glChHandleUtoCPU
- 126 017c 00000000 		.word	.LANCHOR1
- 127 0180 00000000 		.word	glIsApplnActive
- 129              		.align	2
- 130              		.global	CyFxConfigFpgaApplnStart
- 132              	CyFxConfigFpgaApplnStart:
- 133              		@ args = 0, pretend = 0, frame = 40
- 134              		@ frame_needed = 0, uses_anonymous_args = 0
- 135 0184 30402DE9 		stmfd	sp!, {r4, r5, lr}
- 136 0188 2CD04DE2 		sub	sp, sp, #44
- 137 018c FEFFFFEB 		bl	CyU3PUsbGetSpeed
- 138 0190 020050E3 		cmp	r0, #2
- 139 0194 024CA003 		moveq	r4, #512
- 140 0198 0B00000A 		beq	.L17
- 141 019c 030050E3 		cmp	r0, #3
- 142 01a0 014BA003 		moveq	r4, #1024
- 143 01a4 0800000A 		beq	.L17
- 144 01a8 010050E3 		cmp	r0, #1
- 145 01ac 4040A003 		moveq	r4, #64
- 146 01b0 0500000A 		beq	.L17
- 147 01b4 24119FE5 		ldr	r1, .L24
- 148 01b8 0400A0E3 		mov	r0, #4
- 149 01bc FEFFFFEB 		bl	CyU3PDebugPrint
- 150 01c0 4A00A0E3 		mov	r0, #74
- 151 01c4 FEFFFFEB 		bl	CyFxAppErrorHandler
- 152 01c8 0040A0E3 		mov	r4, #0
- 153              	.L17:
- 154 01cc 1C008DE2 		add	r0, sp, #28
- 155 01d0 0010A0E3 		mov	r1, #0
- 156 01d4 0C20A0E3 		mov	r2, #12
- 157 01d8 FEFFFFEB 		bl	CyU3PMemSet
- 158 01dc 0230A0E3 		mov	r3, #2
- 159 01e0 2030CDE5 		strb	r3, [sp, #32]
- 160 01e4 0030A0E3 		mov	r3, #0	@ movhi
- 161 01e8 B232CDE1 		strh	r3, [sp, #34]	@ movhi
- 162 01ec F0309FE5 		ldr	r3, .L24+4
- 163 01f0 0100A0E3 		mov	r0, #1
- 164 01f4 B040C3E1 		strh	r4, [r3, #0]	@ movhi
- 165 01f8 1C108DE2 		add	r1, sp, #28
- 166 01fc 1C008DE5 		str	r0, [sp, #28]
- 167 0200 2600CDE5 		strb	r0, [sp, #38]
- 168 0204 B442CDE1 		strh	r4, [sp, #36]	@ movhi
- 169 0208 FEFFFFEB 		bl	CyU3PSetEpConfig
- 170 020c 005050E2 		subs	r5, r0, #0
- 171 0210 0500000A 		beq	.L19
- 172 0214 0400A0E3 		mov	r0, #4
- 173 0218 C8109FE5 		ldr	r1, .L24+8
- 174 021c 0520A0E1 		mov	r2, r5
- 175 0220 FEFFFFEB 		bl	CyU3PDebugPrint
- 176 0224 0500A0E1 		mov	r0, r5
- 177 0228 FEFFFFEB 		bl	CyFxAppErrorHandler
- 178              	.L19:
- 179 022c 1030A0E3 		mov	r3, #16	@ movhi
- 180 0230 B230CDE1 		strh	r3, [sp, #2]	@ movhi
- 181 0234 B0309FE5 		ldr	r3, .L24+12
- 182 0238 B0009FE5 		ldr	r0, .L24+16
- 183 023c B430CDE1 		strh	r3, [sp, #4]	@ movhi
- 184 0240 3F3CA0E3 		mov	r3, #16128	@ movhi
- 185 0244 B630CDE1 		strh	r3, [sp, #6]	@ movhi
- 186 0248 0310A0E3 		mov	r1, #3
- 187 024c 0030A0E3 		mov	r3, #0
- 188 0250 0D20A0E1 		mov	r2, sp
- 189 0254 B040CDE1 		strh	r4, [sp, #0]	@ movhi
- 190 0258 1030CDE5 		strb	r3, [sp, #16]
- 191 025c 14308DE5 		str	r3, [sp, #20]
- 192 0260 18308DE5 		str	r3, [sp, #24]
- 193 0264 BA30CDE1 		strh	r3, [sp, #10]	@ movhi
- 194 0268 BC30CDE1 		strh	r3, [sp, #12]	@ movhi
- 195 026c BE30CDE1 		strh	r3, [sp, #14]	@ movhi
- 196 0270 B830CDE1 		strh	r3, [sp, #8]	@ movhi
- 197 0274 FEFFFFEB 		bl	CyU3PDmaChannelCreate
- 198 0278 004050E2 		subs	r4, r0, #0
- 199 027c 0500000A 		beq	.L20
- 200 0280 0400A0E3 		mov	r0, #4
- 201 0284 68109FE5 		ldr	r1, .L24+20
- 202 0288 0420A0E1 		mov	r2, r4
- 203 028c FEFFFFEB 		bl	CyU3PDebugPrint
- 204 0290 0400A0E1 		mov	r0, r4
- 205 0294 FEFFFFEB 		bl	CyFxAppErrorHandler
- 206              	.L20:
- 207 0298 0100A0E3 		mov	r0, #1
- 208 029c FEFFFFEB 		bl	CyU3PUsbFlushEp
- 209 02a0 48009FE5 		ldr	r0, .L24+16
- 210 02a4 0010A0E3 		mov	r1, #0
- 211 02a8 FEFFFFEB 		bl	CyU3PDmaChannelSetXfer
- 212 02ac 004050E2 		subs	r4, r0, #0
- 213 02b0 0500000A 		beq	.L21
- 214 02b4 0400A0E3 		mov	r0, #4
- 215 02b8 38109FE5 		ldr	r1, .L24+24
- 216 02bc 0420A0E1 		mov	r2, r4
- 217 02c0 FEFFFFEB 		bl	CyU3PDebugPrint
- 218 02c4 0400A0E1 		mov	r0, r4
- 219 02c8 FEFFFFEB 		bl	CyFxAppErrorHandler
- 220              	.L21:
- 221 02cc 28309FE5 		ldr	r3, .L24+28
- 222 02d0 0120A0E3 		mov	r2, #1
- 223 02d4 002083E5 		str	r2, [r3, #0]
- 224 02d8 2CD08DE2 		add	sp, sp, #44
- 225 02dc 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
- 226              	.L25:
- 227              		.align	2
- 228              	.L24:
- 229 02e0 11000000 		.word	.LC1
- 230 02e4 00000000 		.word	.LANCHOR1
- 231 02e8 2C000000 		.word	.LC2
- 232 02ec 01040000 		.word	1025
- 233 02f0 00000000 		.word	glChHandleUtoCPU
- 234 02f4 56000000 		.word	.LC3
- 235 02f8 85000000 		.word	.LC4
- 236 02fc 00000000 		.word	glIsApplnActive
- 238              		.align	2
- 239              		.global	CyFxConfigFpgaApplnStop
- 241              	CyFxConfigFpgaApplnStop:
- 242              		@ args = 0, pretend = 0, frame = 0
- 243              		@ frame_needed = 0, uses_anonymous_args = 0
- 244 0300 10402DE9 		stmfd	sp!, {r4, lr}
- 245 0304 FEFFFFEB 		bl	CyU3PGpioDeInit
- 246 0308 FEFFFFEB 		bl	CyU3PSpiDeInit
- 247 030c 24309FE5 		ldr	r3, .L27
- 248 0310 0020A0E3 		mov	r2, #0
- 249 0314 002083E5 		str	r2, [r3, #0]
- 250 0318 1C109FE5 		ldr	r1, .L27+4
- 251 031c 0100A0E3 		mov	r0, #1
- 252 0320 FEFFFFEB 		bl	CyU3PUsbGetEpSeqNum
- 253 0324 0100A0E3 		mov	r0, #1
- 254 0328 FEFFFFEB 		bl	CyU3PUsbFlushEp
- 255 032c 0C009FE5 		ldr	r0, .L27+8
- 256 0330 1040BDE8 		ldmfd	sp!, {r4, lr}
- 257 0334 FEFFFFEA 		b	CyU3PDmaChannelDestroy
- 258              	.L28:
- 259              		.align	2
- 260              	.L27:
- 261 0338 00000000 		.word	glIsApplnActive
- 262 033c 00000000 		.word	seqnum_p
- 263 0340 00000000 		.word	glChHandleUtoCPU
- 265              		.align	2
- 266              		.global	CyFxConfigFpgaApplnInit
- 268              	CyFxConfigFpgaApplnInit:
- 269              		@ args = 0, pretend = 0, frame = 64
- 270              		@ frame_needed = 0, uses_anonymous_args = 0
- 271 0344 10402DE9 		stmfd	sp!, {r4, lr}
- 272 0348 AC039FE5 		ldr	r0, .L48
- 273 034c 2820A0E3 		mov	r2, #40
- 274 0350 40D04DE2 		sub	sp, sp, #64
- 275 0354 0010A0E3 		mov	r1, #0
- 276 0358 FEFFFFEB 		bl	_txe_event_flags_create
- 277 035c 002050E2 		subs	r2, r0, #0
- 278 0360 0200000A 		beq	.L30
- 279 0364 0400A0E3 		mov	r0, #4
- 280 0368 90139FE5 		ldr	r1, .L48+4
- 281 036c FEFFFFEB 		bl	CyU3PDebugPrint
- 282              	.L30:
- 283 0370 FEFFFFEB 		bl	CyU3PSpiInit
- 284 0374 002050E2 		subs	r2, r0, #0
- 285 0378 0200000A 		beq	.L31
- 286 037c 0400A0E3 		mov	r0, #4
- 287 0380 7C139FE5 		ldr	r1, .L48+8
- 288 0384 FEFFFFEB 		bl	CyU3PDebugPrint
- 289              	.L31:
- 290 0388 1C20A0E3 		mov	r2, #28
- 291 038c 04008DE2 		add	r0, sp, #4
- 292 0390 0010A0E3 		mov	r1, #0
- 293 0394 FEFFFFEB 		bl	CyU3PMemSet
- 294 0398 0130A0E3 		mov	r3, #1
- 295 039c 08308DE5 		str	r3, [sp, #8]
- 296 03a0 0C308DE5 		str	r3, [sp, #12]
- 297 03a4 1530CDE5 		strb	r3, [sp, #21]
- 298 03a8 1630CDE5 		strb	r3, [sp, #22]
- 299 03ac 54339FE5 		ldr	r3, .L48+12
- 300 03b0 0010A0E3 		mov	r1, #0
- 301 03b4 18308DE5 		str	r3, [sp, #24]
- 302 03b8 04008DE2 		add	r0, sp, #4
- 303 03bc 0830A0E3 		mov	r3, #8
- 304 03c0 04108DE5 		str	r1, [sp, #4]
- 305 03c4 10108DE5 		str	r1, [sp, #16]
- 306 03c8 1410CDE5 		strb	r1, [sp, #20]
- 307 03cc 1C30CDE5 		strb	r3, [sp, #28]
- 308 03d0 FEFFFFEB 		bl	CyU3PSpiSetConfig
- 309 03d4 002050E2 		subs	r2, r0, #0
- 310 03d8 0200000A 		beq	.L32
- 311 03dc 0400A0E3 		mov	r0, #4
- 312 03e0 24139FE5 		ldr	r1, .L48+16
- 313 03e4 FEFFFFEB 		bl	CyU3PDebugPrint
- 314              	.L32:
- 315 03e8 0230A0E3 		mov	r3, #2
- 316 03ec 0010A0E3 		mov	r1, #0
- 317 03f0 3430CDE5 		strb	r3, [sp, #52]
- 318 03f4 34008DE2 		add	r0, sp, #52
- 319 03f8 013083E2 		add	r3, r3, #1
- 320 03fc 3510CDE5 		strb	r1, [sp, #53]
- 321 0400 3C10CDE5 		strb	r1, [sp, #60]
- 322 0404 3D30CDE5 		strb	r3, [sp, #61]
- 323 0408 38108DE5 		str	r1, [sp, #56]
- 324 040c FEFFFFEB 		bl	CyU3PGpioInit
- 325 0410 004050E2 		subs	r4, r0, #0
- 326 0414 0500000A 		beq	.L33
- 327 0418 0400A0E3 		mov	r0, #4
- 328 041c EC129FE5 		ldr	r1, .L48+20
- 329 0420 0420A0E1 		mov	r2, r4
- 330 0424 FEFFFFEB 		bl	CyU3PDebugPrint
- 331 0428 0400A0E1 		mov	r0, r4
- 332 042c FEFFFFEB 		bl	CyFxAppErrorHandler
- 333              	.L33:
- 334 0430 0130A0E3 		mov	r3, #1
- 335 0434 20308DE5 		str	r3, [sp, #32]
- 336 0438 2C308DE5 		str	r3, [sp, #44]
- 337 043c 0030A0E3 		mov	r3, #0
- 338 0440 24308DE5 		str	r3, [sp, #36]
- 339 0444 28308DE5 		str	r3, [sp, #40]
- 340 0448 3400A0E3 		mov	r0, #52
- 341 044c 033083E2 		add	r3, r3, #3
- 342 0450 20108DE2 		add	r1, sp, #32
- 343 0454 3030CDE5 		strb	r3, [sp, #48]
- 344 0458 FEFFFFEB 		bl	CyU3PGpioSetSimpleConfig
- 345 045c 004050E2 		subs	r4, r0, #0
- 346 0460 0500000A 		beq	.L34
- 347 0464 0400A0E3 		mov	r0, #4
- 348 0468 A4129FE5 		ldr	r1, .L48+24
- 349 046c 0420A0E1 		mov	r2, r4
- 350 0470 FEFFFFEB 		bl	CyU3PDebugPrint
- 351 0474 0400A0E1 		mov	r0, r4
- 352 0478 FEFFFFEB 		bl	CyFxAppErrorHandler
- 353              	.L34:
- 354 047c 3200A0E3 		mov	r0, #50
- 355 0480 20108DE2 		add	r1, sp, #32
- 356 0484 FEFFFFEB 		bl	CyU3PGpioSetSimpleConfig
- 357 0488 004050E2 		subs	r4, r0, #0
- 358 048c 0500000A 		beq	.L35
- 359 0490 0400A0E3 		mov	r0, #4
- 360 0494 78129FE5 		ldr	r1, .L48+24
- 361 0498 0420A0E1 		mov	r2, r4
- 362 049c FEFFFFEB 		bl	CyU3PDebugPrint
- 363 04a0 0400A0E1 		mov	r0, r4
- 364 04a4 FEFFFFEB 		bl	CyFxAppErrorHandler
- 365              	.L35:
- 366 04a8 FEFFFFEB 		bl	CyU3PUsbStart
- 367 04ac 004050E2 		subs	r4, r0, #0
- 368 04b0 0500000A 		beq	.L36
- 369 04b4 0400A0E3 		mov	r0, #4
- 370 04b8 58129FE5 		ldr	r1, .L48+28
- 371 04bc 0420A0E1 		mov	r2, r4
- 372 04c0 FEFFFFEB 		bl	CyU3PDebugPrint
- 373 04c4 0400A0E1 		mov	r0, r4
- 374 04c8 FEFFFFEB 		bl	CyFxAppErrorHandler
- 375              	.L36:
- 376 04cc 0110A0E3 		mov	r1, #1
- 377 04d0 44029FE5 		ldr	r0, .L48+32
- 378 04d4 FEFFFFEB 		bl	CyU3PUsbRegisterSetupCallback
- 379 04d8 40029FE5 		ldr	r0, .L48+36
- 380 04dc FEFFFFEB 		bl	CyU3PUsbRegisterEventCallback
- 381 04e0 3C029FE5 		ldr	r0, .L48+40
- 382 04e4 FEFFFFEB 		bl	CyU3PUsbRegisterLPMRequestCallback
- 383 04e8 0000A0E3 		mov	r0, #0
- 384 04ec 0010A0E1 		mov	r1, r0
- 385 04f0 30229FE5 		ldr	r2, .L48+44
- 386 04f4 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 387 04f8 004050E2 		subs	r4, r0, #0
- 388 04fc 0500000A 		beq	.L37
- 389 0500 0400A0E3 		mov	r0, #4
- 390 0504 20129FE5 		ldr	r1, .L48+48
- 391 0508 0420A0E1 		mov	r2, r4
- 392 050c FEFFFFEB 		bl	CyU3PDebugPrint
- 393 0510 0400A0E1 		mov	r0, r4
- 394 0514 FEFFFFEB 		bl	CyFxAppErrorHandler
- 395              	.L37:
- 396 0518 0100A0E3 		mov	r0, #1
- 397 051c 0010A0E3 		mov	r1, #0
- 398 0520 08229FE5 		ldr	r2, .L48+52
- 399 0524 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 400 0528 004050E2 		subs	r4, r0, #0
- 401 052c 0500000A 		beq	.L38
- 402 0530 0400A0E3 		mov	r0, #4
- 403 0534 F0119FE5 		ldr	r1, .L48+48
- 404 0538 0420A0E1 		mov	r2, r4
- 405 053c FEFFFFEB 		bl	CyU3PDebugPrint
- 406 0540 0400A0E1 		mov	r0, r4
- 407 0544 FEFFFFEB 		bl	CyFxAppErrorHandler
- 408              	.L38:
- 409 0548 0700A0E3 		mov	r0, #7
- 410 054c 0010A0E3 		mov	r1, #0
- 411 0550 DC219FE5 		ldr	r2, .L48+56
- 412 0554 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 413 0558 004050E2 		subs	r4, r0, #0
- 414 055c 0500000A 		beq	.L39
- 415 0560 0400A0E3 		mov	r0, #4
- 416 0564 CC119FE5 		ldr	r1, .L48+60
- 417 0568 0420A0E1 		mov	r2, r4
- 418 056c FEFFFFEB 		bl	CyU3PDebugPrint
- 419 0570 0400A0E1 		mov	r0, r4
- 420 0574 FEFFFFEB 		bl	CyFxAppErrorHandler
- 421              	.L39:
- 422 0578 0200A0E3 		mov	r0, #2
- 423 057c 0010A0E3 		mov	r1, #0
- 424 0580 B4219FE5 		ldr	r2, .L48+64
- 425 0584 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 426 0588 004050E2 		subs	r4, r0, #0
- 427 058c 0500000A 		beq	.L40
- 428 0590 0400A0E3 		mov	r0, #4
- 429 0594 A4119FE5 		ldr	r1, .L48+68
- 430 0598 0420A0E1 		mov	r2, r4
- 431 059c FEFFFFEB 		bl	CyU3PDebugPrint
- 432 05a0 0400A0E1 		mov	r0, r4
- 433 05a4 FEFFFFEB 		bl	CyFxAppErrorHandler
- 434              	.L40:
- 435 05a8 0600A0E3 		mov	r0, #6
- 436 05ac 0010A0E3 		mov	r1, #0
- 437 05b0 8C219FE5 		ldr	r2, .L48+72
- 438 05b4 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 439 05b8 004050E2 		subs	r4, r0, #0
- 440 05bc 0500000A 		beq	.L41
- 441 05c0 0400A0E3 		mov	r0, #4
- 442 05c4 6C119FE5 		ldr	r1, .L48+60
- 443 05c8 0420A0E1 		mov	r2, r4
- 444 05cc FEFFFFEB 		bl	CyU3PDebugPrint
- 445 05d0 0400A0E1 		mov	r0, r4
- 446 05d4 FEFFFFEB 		bl	CyFxAppErrorHandler
- 447              	.L41:
- 448 05d8 0400A0E3 		mov	r0, #4
- 449 05dc 0010A0E3 		mov	r1, #0
- 450 05e0 60219FE5 		ldr	r2, .L48+76
- 451 05e4 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 452 05e8 004050E2 		subs	r4, r0, #0
- 453 05ec 0500000A 		beq	.L42
- 454 05f0 0400A0E3 		mov	r0, #4
- 455 05f4 50119FE5 		ldr	r1, .L48+80
- 456 05f8 0420A0E1 		mov	r2, r4
- 457 05fc FEFFFFEB 		bl	CyU3PDebugPrint
- 458 0600 0400A0E1 		mov	r0, r4
- 459 0604 FEFFFFEB 		bl	CyFxAppErrorHandler
- 460              	.L42:
- 461 0608 0300A0E3 		mov	r0, #3
- 462 060c 0010A0E3 		mov	r1, #0
- 463 0610 38219FE5 		ldr	r2, .L48+84
- 464 0614 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 465 0618 004050E2 		subs	r4, r0, #0
- 466 061c 0500000A 		beq	.L43
- 467 0620 0400A0E3 		mov	r0, #4
- 468 0624 28119FE5 		ldr	r1, .L48+88
- 469 0628 0420A0E1 		mov	r2, r4
- 470 062c FEFFFFEB 		bl	CyU3PDebugPrint
- 471 0630 0400A0E1 		mov	r0, r4
- 472 0634 FEFFFFEB 		bl	CyFxAppErrorHandler
- 473              	.L43:
- 474 0638 0500A0E3 		mov	r0, #5
- 475 063c 0010A0E3 		mov	r1, #0
- 476 0640 10219FE5 		ldr	r2, .L48+92
- 477 0644 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 478 0648 004050E2 		subs	r4, r0, #0
- 479 064c 0500000A 		beq	.L44
- 480 0650 0400A0E3 		mov	r0, #4
- 481 0654 00119FE5 		ldr	r1, .L48+96
- 482 0658 0420A0E1 		mov	r2, r4
- 483 065c FEFFFFEB 		bl	CyU3PDebugPrint
- 484 0660 0400A0E1 		mov	r0, r4
- 485 0664 FEFFFFEB 		bl	CyFxAppErrorHandler
- 486              	.L44:
- 487 0668 0500A0E3 		mov	r0, #5
- 488 066c 0110A0E3 		mov	r1, #1
- 489 0670 E8209FE5 		ldr	r2, .L48+100
- 490 0674 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 491 0678 004050E2 		subs	r4, r0, #0
- 492 067c 0500000A 		beq	.L45
- 493 0680 0400A0E3 		mov	r0, #4
- 494 0684 D0109FE5 		ldr	r1, .L48+96
- 495 0688 0420A0E1 		mov	r2, r4
- 496 068c FEFFFFEB 		bl	CyU3PDebugPrint
- 497 0690 0400A0E1 		mov	r0, r4
- 498 0694 FEFFFFEB 		bl	CyFxAppErrorHandler
- 499              	.L45:
- 500 0698 0500A0E3 		mov	r0, #5
- 501 069c 0210A0E3 		mov	r1, #2
- 502 06a0 BC209FE5 		ldr	r2, .L48+104
- 503 06a4 FEFFFFEB 		bl	CyU3PUsbSetDesc
- 504 06a8 004050E2 		subs	r4, r0, #0
- 505 06ac 0500000A 		beq	.L46
- 506 06b0 0400A0E3 		mov	r0, #4
- 507 06b4 A0109FE5 		ldr	r1, .L48+96
- 508 06b8 0420A0E1 		mov	r2, r4
- 509 06bc FEFFFFEB 		bl	CyU3PDebugPrint
- 510 06c0 0400A0E1 		mov	r0, r4
- 511 06c4 FEFFFFEB 		bl	CyFxAppErrorHandler
- 512              	.L46:
- 513 06c8 0100A0E3 		mov	r0, #1
- 514 06cc 0010A0E1 		mov	r1, r0
- 515 06d0 FEFFFFEB 		bl	CyU3PConnectState
- 516 06d4 004050E2 		subs	r4, r0, #0
- 517 06d8 0500000A 		beq	.L29
- 518 06dc 0400A0E3 		mov	r0, #4
- 519 06e0 80109FE5 		ldr	r1, .L48+108
- 520 06e4 0420A0E1 		mov	r2, r4
- 521 06e8 FEFFFFEB 		bl	CyU3PDebugPrint
- 522 06ec 0400A0E1 		mov	r0, r4
- 523 06f0 FEFFFFEB 		bl	CyFxAppErrorHandler
- 524              	.L29:
- 525 06f4 40D08DE2 		add	sp, sp, #64
- 526 06f8 1080BDE8 		ldmfd	sp!, {r4, pc}
- 527              	.L49:
- 528              		.align	2
- 529              	.L48:
- 530 06fc 00000000 		.word	glFxConfigFpgaAppEvent
- 531 0700 B5000000 		.word	.LC5
- 532 0704 DB000000 		.word	.LC6
- 533 0708 40787D01 		.word	25000000
- 534 070c FD000000 		.word	.LC7
- 535 0710 21010000 		.word	.LC8
- 536 0714 44010000 		.word	.LC9
- 537 0718 76010000 		.word	.LC10
- 538 071c 00000000 		.word	CyFxSlFifoApplnUSBSetupCB
- 539 0720 00000000 		.word	CyFxSlFifoApplnUSBEventCB
- 540 0724 00000000 		.word	CyFxApplnLPMRqtCB
- 541 0728 00000000 		.word	CyFxUSB30DeviceDscr
- 542 072c A6010000 		.word	.LC11
- 543 0730 00000000 		.word	CyFxUSB20DeviceDscr
- 544 0734 00000000 		.word	CyFxUSBBOSDscr
- 545 0738 D9010000 		.word	.LC12
- 546 073c 00000000 		.word	CyFxUSBDeviceQualDscr
- 547 0740 13020000 		.word	.LC13
- 548 0744 00000000 		.word	CyFxUSBSSConfigDscr
- 549 0748 00000000 		.word	CyFxUSBHSConfigDscr
- 550 074c 50020000 		.word	.LC14
- 551 0750 00000000 		.word	CyFxUSBFSConfigDscr
- 552 0754 88020000 		.word	.LC15
- 553 0758 00000000 		.word	CyFxUSBStringLangIDDscr
- 554 075c C2020000 		.word	.LC16
- 555 0760 00000000 		.word	CyFxUSBManufactureDscr
- 556 0764 00000000 		.word	CyFxUSBProductDscr
- 557 0768 F5020000 		.word	.LC17
- 559              		.align	2
- 560              		.global	main
- 562              	main:
- 563              		@ args = 0, pretend = 0, frame = 56
- 564              		@ frame_needed = 0, uses_anonymous_args = 0
- 565 076c 10402DE9 		stmfd	sp!, {r4, lr}
- 566 0770 0230A0E3 		mov	r3, #2
- 567 0774 38D04DE2 		sub	sp, sp, #56
- 568 0778 2C30CDE5 		strb	r3, [sp, #44]
- 569 077c 2D30CDE5 		strb	r3, [sp, #45]
- 570 0780 2E30CDE5 		strb	r3, [sp, #46]
- 571 0784 0030A0E3 		mov	r3, #0
- 572 0788 30308DE5 		str	r3, [sp, #48]
- 573 078c 0140A0E3 		mov	r4, #1
- 574 0790 033083E2 		add	r3, r3, #3
- 575 0794 28008DE2 		add	r0, sp, #40
- 576 0798 28408DE5 		str	r4, [sp, #40]
- 577 079c 3430CDE5 		strb	r3, [sp, #52]
- 578 07a0 FEFFFFEB 		bl	CyU3PDeviceInit
- 579 07a4 001050E2 		subs	r1, r0, #0
- 580 07a8 1700001A 		bne	.L51
- 581 07ac 0400A0E1 		mov	r0, r4
- 582 07b0 0120A0E1 		mov	r2, r1
- 583 07b4 FEFFFFEB 		bl	CyU3PDeviceCacheControl
- 584 07b8 000050E3 		cmp	r0, #0
- 585 07bc 1200001A 		bne	.L51
- 586 07c0 08008DE5 		str	r0, [sp, #8]
- 587 07c4 0C008DE5 		str	r0, [sp, #12]
- 588 07c8 00008DE5 		str	r0, [sp, #0]
- 589 07cc 1600CDE5 		strb	r0, [sp, #22]
- 590 07d0 18008DE5 		str	r0, [sp, #24]
- 591 07d4 0537A0E3 		mov	r3, #1310720
- 592 07d8 20008DE5 		str	r0, [sp, #32]
- 593 07dc 24008DE5 		str	r0, [sp, #36]
- 594 07e0 0D00A0E1 		mov	r0, sp
- 595 07e4 04408DE5 		str	r4, [sp, #4]
- 596 07e8 10408DE5 		str	r4, [sp, #16]
- 597 07ec 1C308DE5 		str	r3, [sp, #28]
- 598 07f0 FEFFFFEB 		bl	CyU3PDeviceConfigureIOMatrix
- 599 07f4 004050E2 		subs	r4, r0, #0
- 600 07f8 0300001A 		bne	.L51
- 601 07fc FEFFFFEB 		bl	_tx_initialize_kernel_enter
- 602 0800 0400A0E1 		mov	r0, r4
- 603 0804 38D08DE2 		add	sp, sp, #56
- 604 0808 1080BDE8 		ldmfd	sp!, {r4, pc}
- 605              	.L51:
- 606 080c FEFFFFEA 		b	.L51
- 608              		.global	glConfigDone
- 609              		.global	filelen
- 610              		.global	uiPacketSize
- 611              		.comm	glChHandleUtoCPU,160,4
- 612              		.comm	glFxConfigFpgaAppEvent,40,4
- 613              		.section	.rodata.str1.1,"aMS",%progbits,1
- 614              	.LC0:
- 615 0000 66696C65 		.ascii	"file length: %d\012\000"
- 615      206C656E 
- 615      6774683A 
- 615      2025640A 
- 615      00
- 616              	.LC1:
- 617 0011 4572726F 		.ascii	"Error! Invalid USB speed.\012\000"
- 617      72212049 
- 617      6E76616C 
- 617      69642055 
- 617      53422073 
- 618              	.LC2:
- 619 002c 43795533 		.ascii	"CyU3PSetEpConfig failed, Error code = %d\012\000"
- 619      50536574 
- 619      4570436F 
- 619      6E666967 
- 619      20666169 
- 620              	.LC3:
- 621 0056 43795533 		.ascii	"CyU3PDmaChannelCreate failed, Error code = %d\012\000"
- 621      50446D61 
- 621      4368616E 
- 621      6E656C43 
- 621      72656174 
- 622              	.LC4:
- 623 0085 43795533 		.ascii	"CyU3PDmaChannelSetXfer Failed, Error code = %d\012\000"
- 623      50446D61 
- 623      4368616E 
- 623      6E656C53 
- 623      65745866 
- 624              	.LC5:
- 625 00b5 6576656E 		.ascii	"event create failed, Error Code = %d\012\000"
- 625      74206372 
- 625      65617465 
- 625      20666169 
- 625      6C65642C 
- 626              	.LC6:
- 627 00db 53504920 		.ascii	"SPI init failed, Error Code = %d\012\000"
- 627      696E6974 
- 627      20666169 
- 627      6C65642C 
- 627      20457272 
- 628              	.LC7:
- 629 00fd 53504920 		.ascii	"SPI config failed, Error Code = %d\012\000"
- 629      636F6E66 
- 629      69672066 
- 629      61696C65 
- 629      642C2045 
- 630              	.LC8:
- 631 0121 4750494F 		.ascii	"GPIO Init failed, Error Code = %d\012\000"
- 631      20496E69 
- 631      74206661 
- 631      696C6564 
- 631      2C204572 
- 632              	.LC9:
- 633 0144 43795533 		.ascii	"CyU3PGpioSetSimpleConfig failed, error code = %d\012"
- 633      50477069 
- 633      6F536574 
- 633      53696D70 
- 633      6C65436F 
- 634 0175 00       		.ascii	"\000"
- 635              	.LC10:
- 636 0176 43795533 		.ascii	"CyU3PUsbStart failed to Start, Error code = %d\012\000"
- 636      50557362 
- 636      53746172 
- 636      74206661 
- 636      696C6564 
- 637              	.LC11:
- 638 01a6 55534220 		.ascii	"USB set device descriptor failed, Error code = %d\012"
- 638      73657420 
- 638      64657669 
- 638      63652064 
- 638      65736372 
- 639 01d8 00       		.ascii	"\000"
- 640              	.LC12:
- 641 01d9 55534220 		.ascii	"USB set configuration descriptor failed, Error code"
- 641      73657420 
- 641      636F6E66 
- 641      69677572 
- 641      6174696F 
- 642 020c 203D2025 		.ascii	" = %d\012\000"
- 642      640A00
- 643              	.LC13:
- 644 0213 55534220 		.ascii	"USB set device qualifier descriptor failed, Error c"
- 644      73657420 
- 644      64657669 
- 644      63652071 
- 644      75616C69 
- 645 0246 6F646520 		.ascii	"ode = %d\012\000"
- 645      3D202564 
- 645      0A00
- 646              	.LC14:
- 647 0250 55534220 		.ascii	"USB Set Other Speed Descriptor failed, Error Code ="
- 647      53657420 
- 647      4F746865 
- 647      72205370 
- 647      65656420 
- 648 0283 2025640A 		.ascii	" %d\012\000"
- 648      00
- 649              	.LC15:
- 650 0288 55534220 		.ascii	"USB Set Configuration Descriptor failed, Error Code"
- 650      53657420 
- 650      436F6E66 
- 650      69677572 
- 650      6174696F 
- 651 02bb 203D2025 		.ascii	" = %d\012\000"
- 651      640A00
- 652              	.LC16:
- 653 02c2 55534220 		.ascii	"USB set string descriptor failed, Error code = %d\012"
- 653      73657420 
- 653      73747269 
- 653      6E672064 
- 653      65736372 
- 654 02f4 00       		.ascii	"\000"
- 655              	.LC17:
- 656 02f5 55534220 		.ascii	"USB Connect failed, Error code = %d\012\000"
- 656      436F6E6E 
- 656      65637420 
- 656      6661696C 
- 656      65642C20 
- 657              		.data
- 658              		.align	2
- 659              		.set	.LANCHOR0,. + 0
- 662              	glConfigDone:
- 663 0000 01000000 		.word	1
- 664              		.bss
- 665              		.align	2
- 666              		.set	.LANCHOR1,. + 0
- 669              	uiPacketSize:
- 670 0000 0000     		.space	2
- 671 0002 0000     		.space	2
- 674              	filelen:
- 675 0004 00000000 		.space	4
- 676              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"cyfxconfigfpga.c"
+  13              		.text
+  14              		.align	2
+  15              		.global	CyFxConfigFpga
+  17              	CyFxConfigFpga:
+  18              		@ args = 0, pretend = 0, frame = 24
+  19              		@ frame_needed = 0, uses_anonymous_args = 0
+  20 0000 F0432DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, lr}
+  21 0004 4C129FE5 		ldr	r1, .L18
+  22 0008 0070A0E1 		mov	r7, r0
+  23 000c 1CD04DE2 		sub	sp, sp, #28
+  24 0010 0720A0E1 		mov	r2, r7
+  25 0014 0600A0E3 		mov	r0, #6
+  26 0018 FEFFFFEB 		bl	CyU3PDebugPrint
+  27 001c 3400A0E3 		mov	r0, #52
+  28 0020 08108DE2 		add	r1, sp, #8
+  29 0024 FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
+  30 0028 08409DE5 		ldr	r4, [sp, #8]
+  31 002c 0400A0E3 		mov	r0, #4
+  32 0030 000054E3 		cmp	r4, #0
+  33 0034 0500001A 		bne	.L2
+  34 0038 1C129FE5 		ldr	r1, .L18+4
+  35 003c FEFFFFEB 		bl	CyU3PDebugPrint
+  36 0040 18329FE5 		ldr	r3, .L18+8
+  37 0044 0000A0E3 		mov	r0, #0
+  38 0048 004083E5 		str	r4, [r3]
+  39 004c 7F0000EA 		b	.L3
+  40              	.L2:
+  41 0050 0C129FE5 		ldr	r1, .L18+12
+  42 0054 FEFFFFEB 		bl	CyU3PDebugPrint
+  43 0058 0000A0E3 		mov	r0, #0
+  44 005c FEFFFFEB 		bl	CyU3PSpiSetSsnLine
+  45 0060 08108DE2 		add	r1, sp, #8
+  46 0064 0050A0E1 		mov	r5, r0
+  47 0068 3400A0E3 		mov	r0, #52
+  48 006c FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
+  49 0070 08309DE5 		ldr	r3, [sp, #8]
+  50 0074 000053E3 		cmp	r3, #0
+  51 0078 0800000A 		beq	.L4
+  52 007c 0520A0E1 		mov	r2, r5
+  53 0080 0400A0E3 		mov	r0, #4
+  54 0084 DC119FE5 		ldr	r1, .L18+16
+  55 0088 FEFFFFEB 		bl	CyU3PDebugPrint
+  56 008c CC319FE5 		ldr	r3, .L18+8
+  57 0090 0020A0E3 		mov	r2, #0
+  58 0094 002083E5 		str	r2, [r3]
+  59 0098 0500A0E1 		mov	r0, r5
+  60 009c 6B0000EA 		b	.L3
+  61              	.L4:
+  62 00a0 0A00A0E3 		mov	r0, #10
+  63 00a4 FEFFFFEB 		bl	_tx_thread_sleep
+  64 00a8 BC119FE5 		ldr	r1, .L18+20
+  65 00ac 0400A0E3 		mov	r0, #4
+  66 00b0 FEFFFFEB 		bl	CyU3PDebugPrint
+  67 00b4 0100A0E3 		mov	r0, #1
+  68 00b8 FEFFFFEB 		bl	CyU3PSpiSetSsnLine
+  69 00bc 0040A0E1 		mov	r4, r0
+  70 00c0 0A00A0E3 		mov	r0, #10
+  71 00c4 FEFFFFEB 		bl	_tx_thread_sleep
+  72 00c8 A0119FE5 		ldr	r1, .L18+24
+  73 00cc 0400A0E3 		mov	r0, #4
+  74 00d0 FEFFFFEB 		bl	CyU3PDebugPrint
+  75 00d4 3400A0E3 		mov	r0, #52
+  76 00d8 08108DE2 		add	r1, sp, #8
+  77 00dc FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
+  78 00e0 08309DE5 		ldr	r3, [sp, #8]
+  79 00e4 010053E3 		cmp	r3, #1
+  80 00e8 000084E1 		orr	r0, r4, r0
+  81 00ec 054080E1 		orr	r4, r0, r5
+  82 00f0 0400A0E3 		mov	r0, #4
+  83 00f4 0100001A 		bne	.L5
+  84 00f8 000054E3 		cmp	r4, #0
+  85 00fc 0100000A 		beq	.L6
+  86              	.L5:
+  87 0100 6C119FE5 		ldr	r1, .L18+28
+  88 0104 4E0000EA 		b	.L16
+  89              	.L6:
+  90 0108 68119FE5 		ldr	r1, .L18+32
+  91 010c FEFFFFEB 		bl	CyU3PDebugPrint
+  92 0110 64919FE5 		ldr	r9, .L18+36
+  93 0114 64819FE5 		ldr	r8, .L18+40
+  94 0118 0450A0E1 		mov	r5, r4
+  95              	.L7:
+  96 011c 070055E1 		cmp	r5, r7
+  97 0120 2C00002A 		bcs	.L12
+  98 0124 003099E5 		ldr	r3, [r9]
+  99 0128 000053E3 		cmp	r3, #0
+ 100 012c 2900000A 		beq	.L12
+ 101 0130 4C019FE5 		ldr	r0, .L18+44
+ 102 0134 0C108DE2 		add	r1, sp, #12
+ 103 0138 7D2EA0E3 		mov	r2, #2000
+ 104 013c FEFFFFEB 		bl	CyU3PDmaChannelGetBuffer
+ 105 0140 004050E2 		subs	r4, r0, #0
+ 106 0144 0700000A 		beq	.L8
+ 107 0148 10319FE5 		ldr	r3, .L18+8
+ 108 014c 450054E3 		cmp	r4, #69
+ 109 0150 0020A0E3 		mov	r2, #0
+ 110 0154 002083E5 		str	r2, [r3]
+ 111 0158 0400A0E3 		mov	r0, #4
+ 112 015c 24119F05 		ldreq	r1, .L18+48
+ 113 0160 24119F15 		ldrne	r1, .L18+52
+ 114 0164 360000EA 		b	.L16
+ 115              	.L8:
+ 116 0168 0C009DE5 		ldr	r0, [sp, #12]
+ 117 016c B010D8E1 		ldrh	r1, [r8]
+ 118 0170 FEFFFFEB 		bl	CyU3PSpiTransmitWords
+ 119 0174 006050E2 		subs	r6, r0, #0
+ 120 0178 0700000A 		beq	.L10
+ 121 017c DC309FE5 		ldr	r3, .L18+8
+ 122 0180 0400A0E3 		mov	r0, #4
+ 123 0184 04119FE5 		ldr	r1, .L18+56
+ 124 0188 0620A0E1 		mov	r2, r6
+ 125 018c 004083E5 		str	r4, [r3]
+ 126 0190 FEFFFFEB 		bl	CyU3PDebugPrint
+ 127 0194 0600A0E1 		mov	r0, r6
+ 128 0198 2C0000EA 		b	.L3
+ 129              	.L10:
+ 130 019c E0009FE5 		ldr	r0, .L18+44
+ 131 01a0 FEFFFFEB 		bl	CyU3PDmaChannelDiscardBuffer
+ 132 01a4 000050E3 		cmp	r0, #0
+ 133 01a8 0700000A 		beq	.L11
+ 134 01ac AC309FE5 		ldr	r3, .L18+8
+ 135 01b0 0400A0E3 		mov	r0, #4
+ 136 01b4 D8109FE5 		ldr	r1, .L18+60
+ 137 01b8 4520A0E3 		mov	r2, #69
+ 138 01bc 006083E5 		str	r6, [r3]
+ 139 01c0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 140 01c4 4500A0E3 		mov	r0, #69
+ 141 01c8 200000EA 		b	.L3
+ 142              	.L11:
+ 143 01cc B030D8E1 		ldrh	r3, [r8]
+ 144 01d0 035085E0 		add	r5, r5, r3
+ 145 01d4 D0FFFFEA 		b	.L7
+ 146              	.L12:
+ 147 01d8 0100A0E3 		mov	r0, #1
+ 148 01dc FEFFFFEB 		bl	_tx_thread_sleep
+ 149 01e0 B0109FE5 		ldr	r1, .L18+64
+ 150 01e4 0400A0E3 		mov	r0, #4
+ 151 01e8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 152 01ec 3200A0E3 		mov	r0, #50
+ 153 01f0 04108DE2 		add	r1, sp, #4
+ 154 01f4 FEFFFFEB 		bl	CyU3PGpioSimpleGetValue
+ 155 01f8 04309DE5 		ldr	r3, [sp, #4]
+ 156 01fc 010053E3 		cmp	r3, #1
+ 157 0200 0040A0E1 		mov	r4, r0
+ 158 0204 0800000A 		beq	.L14
+ 159 0208 50309FE5 		ldr	r3, .L18+8
+ 160 020c 0020A0E3 		mov	r2, #0
+ 161 0210 002083E5 		str	r2, [r3]
+ 162 0214 0400A0E3 		mov	r0, #4
+ 163 0218 7C109FE5 		ldr	r1, .L18+68
+ 164 021c 4A20A0E3 		mov	r2, #74
+ 165 0220 FEFFFFEB 		bl	CyU3PDebugPrint
+ 166 0224 4A40A0E3 		mov	r4, #74
+ 167 0228 030000EA 		b	.L15
+ 168              	.L14:
+ 169 022c 000050E3 		cmp	r0, #0
+ 170 0230 0400A003 		moveq	r0, #4
+ 171 0234 64109F05 		ldreq	r1, .L18+72
+ 172 0238 0100000A 		beq	.L16
+ 173              	.L15:
+ 174 023c 60109FE5 		ldr	r1, .L18+76
+ 175 0240 0400A0E3 		mov	r0, #4
+ 176              	.L16:
+ 177 0244 0420A0E1 		mov	r2, r4
+ 178 0248 FEFFFFEB 		bl	CyU3PDebugPrint
+ 179 024c 0400A0E1 		mov	r0, r4
+ 180              	.L3:
+ 181 0250 1CD08DE2 		add	sp, sp, #28
+ 182              		@ sp needed
+ 183 0254 F083BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, pc}
+ 184              	.L19:
+ 185              		.align	2
+ 186              	.L18:
+ 187 0258 00000000 		.word	.LC0
+ 188 025c 14000000 		.word	.LC1
+ 189 0260 00000000 		.word	.LANCHOR0
+ 190 0264 40000000 		.word	.LC2
+ 191 0268 69000000 		.word	.LC3
+ 192 026c A0000000 		.word	.LC4
+ 193 0270 BD000000 		.word	.LC5
+ 194 0274 F3000000 		.word	.LC6
+ 195 0278 1D010000 		.word	.LC7
+ 196 027c 00000000 		.word	glIsApplnActive
+ 197 0280 00000000 		.word	.LANCHOR1
+ 198 0284 00000000 		.word	glChHandleUtoCPU
+ 199 0288 49010000 		.word	.LC8
+ 200 028c 91010000 		.word	.LC9
+ 201 0290 C7010000 		.word	.LC10
+ 202 0294 F8010000 		.word	.LC11
+ 203 0298 2D020000 		.word	.LC12
+ 204 029c 49020000 		.word	.LC13
+ 205 02a0 75020000 		.word	.LC14
+ 206 02a4 AB020000 		.word	.LC15
+ 208              		.align	2
+ 209              		.global	CyFxConfigFpgaApplnStart
+ 211              	CyFxConfigFpgaApplnStart:
+ 212              		@ args = 0, pretend = 0, frame = 40
+ 213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 214 02a8 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 215 02ac 2CD04DE2 		sub	sp, sp, #44
+ 216 02b0 FEFFFFEB 		bl	CyU3PUsbGetSpeed
+ 217 02b4 88119FE5 		ldr	r1, .L39
+ 218 02b8 0040A0E1 		mov	r4, r0
+ 219 02bc 0100A0E3 		mov	r0, #1
+ 220 02c0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 221 02c4 020054E3 		cmp	r4, #2
+ 222 02c8 0800000A 		beq	.L22
+ 223 02cc 030054E3 		cmp	r4, #3
+ 224 02d0 0B00000A 		beq	.L23
+ 225 02d4 010054E3 		cmp	r4, #1
+ 226 02d8 0E00001A 		bne	.L38
+ 227 02dc 0600A0E3 		mov	r0, #6
+ 228 02e0 60119FE5 		ldr	r1, .L39+4
+ 229 02e4 FEFFFFEB 		bl	CyU3PDebugPrint
+ 230 02e8 4040A0E3 		mov	r4, #64
+ 231 02ec 0F0000EA 		b	.L25
+ 232              	.L22:
+ 233 02f0 0600A0E3 		mov	r0, #6
+ 234 02f4 50119FE5 		ldr	r1, .L39+8
+ 235 02f8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 236 02fc 024CA0E3 		mov	r4, #512
+ 237 0300 0A0000EA 		b	.L25
+ 238              	.L23:
+ 239 0304 0600A0E3 		mov	r0, #6
+ 240 0308 40119FE5 		ldr	r1, .L39+12
+ 241 030c FEFFFFEB 		bl	CyU3PDebugPrint
+ 242 0310 014BA0E3 		mov	r4, #1024
+ 243 0314 050000EA 		b	.L25
+ 244              	.L38:
+ 245 0318 34119FE5 		ldr	r1, .L39+16
+ 246 031c 0400A0E3 		mov	r0, #4
+ 247 0320 FEFFFFEB 		bl	CyU3PDebugPrint
+ 248 0324 4A00A0E3 		mov	r0, #74
+ 249 0328 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 250 032c 0040A0E3 		mov	r4, #0
+ 251              	.L25:
+ 252 0330 0D00A0E1 		mov	r0, sp
+ 253 0334 0010A0E3 		mov	r1, #0
+ 254 0338 0C20A0E3 		mov	r2, #12
+ 255 033c FEFFFFEB 		bl	CyU3PMemSet
+ 256 0340 0230A0E3 		mov	r3, #2
+ 257 0344 0430CDE5 		strb	r3, [sp, #4]
+ 258 0348 0030A0E3 		mov	r3, #0
+ 259 034c B630CDE1 		strh	r3, [sp, #6]	@ movhi
+ 260 0350 00319FE5 		ldr	r3, .L39+20
+ 261 0354 0100A0E3 		mov	r0, #1
+ 262 0358 0D10A0E1 		mov	r1, sp
+ 263 035c 00008DE5 		str	r0, [sp]
+ 264 0360 0A00CDE5 		strb	r0, [sp, #10]
+ 265 0364 B840CDE1 		strh	r4, [sp, #8]	@ movhi
+ 266 0368 B040C3E1 		strh	r4, [r3]	@ movhi
+ 267 036c FEFFFFEB 		bl	CyU3PSetEpConfig
+ 268 0370 005050E2 		subs	r5, r0, #0
+ 269 0374 0500000A 		beq	.L26
+ 270 0378 0400A0E3 		mov	r0, #4
+ 271 037c D8109FE5 		ldr	r1, .L39+24
+ 272 0380 0520A0E1 		mov	r2, r5
+ 273 0384 FEFFFFEB 		bl	CyU3PDebugPrint
+ 274 0388 0500A0E1 		mov	r0, r5
+ 275 038c FEFFFFEB 		bl	CyFxAppErrorHandler
+ 276              	.L26:
+ 277 0390 1030A0E3 		mov	r3, #16
+ 278 0394 BE30CDE1 		strh	r3, [sp, #14]	@ movhi
+ 279 0398 C0309FE5 		ldr	r3, .L39+28
+ 280 039c C0009FE5 		ldr	r0, .L39+32
+ 281 03a0 B031CDE1 		strh	r3, [sp, #16]	@ movhi
+ 282 03a4 3F3CA0E3 		mov	r3, #16128
+ 283 03a8 B231CDE1 		strh	r3, [sp, #18]	@ movhi
+ 284 03ac 0310A0E3 		mov	r1, #3
+ 285 03b0 0030A0E3 		mov	r3, #0
+ 286 03b4 0C208DE2 		add	r2, sp, #12
+ 287 03b8 BC40CDE1 		strh	r4, [sp, #12]	@ movhi
+ 288 03bc 1C30CDE5 		strb	r3, [sp, #28]
+ 289 03c0 20308DE5 		str	r3, [sp, #32]
+ 290 03c4 24308DE5 		str	r3, [sp, #36]
+ 291 03c8 B631CDE1 		strh	r3, [sp, #22]	@ movhi
+ 292 03cc B831CDE1 		strh	r3, [sp, #24]	@ movhi
+ 293 03d0 BA31CDE1 		strh	r3, [sp, #26]	@ movhi
+ 294 03d4 B431CDE1 		strh	r3, [sp, #20]	@ movhi
+ 295 03d8 FEFFFFEB 		bl	CyU3PDmaChannelCreate
+ 296 03dc 004050E2 		subs	r4, r0, #0
+ 297 03e0 0500000A 		beq	.L27
+ 298 03e4 0400A0E3 		mov	r0, #4
+ 299 03e8 78109FE5 		ldr	r1, .L39+36
+ 300 03ec 0420A0E1 		mov	r2, r4
+ 301 03f0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 302 03f4 0400A0E1 		mov	r0, r4
+ 303 03f8 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 304              	.L27:
+ 305 03fc 0100A0E3 		mov	r0, #1
+ 306 0400 FEFFFFEB 		bl	CyU3PUsbFlushEp
+ 307 0404 58009FE5 		ldr	r0, .L39+32
+ 308 0408 0010A0E3 		mov	r1, #0
+ 309 040c FEFFFFEB 		bl	CyU3PDmaChannelSetXfer
+ 310 0410 004050E2 		subs	r4, r0, #0
+ 311 0414 0500000A 		beq	.L28
+ 312 0418 0400A0E3 		mov	r0, #4
+ 313 041c 48109FE5 		ldr	r1, .L39+40
+ 314 0420 0420A0E1 		mov	r2, r4
+ 315 0424 FEFFFFEB 		bl	CyU3PDebugPrint
+ 316 0428 0400A0E1 		mov	r0, r4
+ 317 042c FEFFFFEB 		bl	CyFxAppErrorHandler
+ 318              	.L28:
+ 319 0430 38309FE5 		ldr	r3, .L39+44
+ 320 0434 0120A0E3 		mov	r2, #1
+ 321 0438 002083E5 		str	r2, [r3]
+ 322 043c 2CD08DE2 		add	sp, sp, #44
+ 323              		@ sp needed
+ 324 0440 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 325              	.L40:
+ 326              		.align	2
+ 327              	.L39:
+ 328 0444 DA020000 		.word	.LC16
+ 329 0448 12030000 		.word	.LC17
+ 330 044c 86030000 		.word	.LC18
+ 331 0450 FA030000 		.word	.LC19
+ 332 0454 1A040000 		.word	.LC20
+ 333 0458 00000000 		.word	.LANCHOR1
+ 334 045c 37040000 		.word	.LC21
+ 335 0460 01040000 		.word	1025
+ 336 0464 00000000 		.word	glChHandleUtoCPU
+ 337 0468 63040000 		.word	.LC22
+ 338 046c 94040000 		.word	.LC23
+ 339 0470 00000000 		.word	glIsApplnActive
+ 341              		.align	2
+ 342              		.global	CyFxConfigFpgaApplnStop
+ 344              	CyFxConfigFpgaApplnStop:
+ 345              		@ args = 0, pretend = 0, frame = 0
+ 346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 347 0474 08402DE9 		stmfd	sp!, {r3, lr}
+ 348 0478 FEFFFFEB 		bl	CyU3PGpioDeInit
+ 349 047c FEFFFFEB 		bl	CyU3PSpiDeInit
+ 350 0480 24309FE5 		ldr	r3, .L42
+ 351 0484 0020A0E3 		mov	r2, #0
+ 352 0488 20109FE5 		ldr	r1, .L42+4
+ 353 048c 0100A0E3 		mov	r0, #1
+ 354 0490 002083E5 		str	r2, [r3]
+ 355 0494 FEFFFFEB 		bl	CyU3PUsbGetEpSeqNum
+ 356 0498 0100A0E3 		mov	r0, #1
+ 357 049c FEFFFFEB 		bl	CyU3PUsbFlushEp
+ 358 04a0 0C009FE5 		ldr	r0, .L42+8
+ 359 04a4 0840BDE8 		ldmfd	sp!, {r3, lr}
+ 360 04a8 FEFFFFEA 		b	CyU3PDmaChannelDestroy
+ 361              	.L43:
+ 362              		.align	2
+ 363              	.L42:
+ 364 04ac 00000000 		.word	glIsApplnActive
+ 365 04b0 00000000 		.word	seqnum_p
+ 366 04b4 00000000 		.word	glChHandleUtoCPU
+ 368              		.align	2
+ 369              		.global	CyFxConfigFpgaApplnInit
+ 371              	CyFxConfigFpgaApplnInit:
+ 372              		@ args = 0, pretend = 0, frame = 64
+ 373              		@ frame_needed = 0, uses_anonymous_args = 0
+ 374 04b8 10402DE9 		stmfd	sp!, {r4, lr}
+ 375 04bc AC039FE5 		ldr	r0, .L117
+ 376 04c0 2820A0E3 		mov	r2, #40
+ 377 04c4 40D04DE2 		sub	sp, sp, #64
+ 378 04c8 0010A0E3 		mov	r1, #0
+ 379 04cc FEFFFFEB 		bl	_txe_event_flags_create
+ 380 04d0 002050E2 		subs	r2, r0, #0
+ 381 04d4 0200000A 		beq	.L45
+ 382 04d8 0400A0E3 		mov	r0, #4
+ 383 04dc 90139FE5 		ldr	r1, .L117+4
+ 384 04e0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 385              	.L45:
+ 386 04e4 FEFFFFEB 		bl	CyU3PSpiInit
+ 387 04e8 002050E2 		subs	r2, r0, #0
+ 388 04ec 0200000A 		beq	.L46
+ 389 04f0 0400A0E3 		mov	r0, #4
+ 390 04f4 7C139FE5 		ldr	r1, .L117+8
+ 391 04f8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 392              	.L46:
+ 393 04fc 1C20A0E3 		mov	r2, #28
+ 394 0500 24008DE2 		add	r0, sp, #36
+ 395 0504 0010A0E3 		mov	r1, #0
+ 396 0508 FEFFFFEB 		bl	CyU3PMemSet
+ 397 050c 0130A0E3 		mov	r3, #1
+ 398 0510 28308DE5 		str	r3, [sp, #40]
+ 399 0514 2C308DE5 		str	r3, [sp, #44]
+ 400 0518 3530CDE5 		strb	r3, [sp, #53]
+ 401 051c 3630CDE5 		strb	r3, [sp, #54]
+ 402 0520 54339FE5 		ldr	r3, .L117+12
+ 403 0524 0010A0E3 		mov	r1, #0
+ 404 0528 38308DE5 		str	r3, [sp, #56]
+ 405 052c 24008DE2 		add	r0, sp, #36
+ 406 0530 0830A0E3 		mov	r3, #8
+ 407 0534 24108DE5 		str	r1, [sp, #36]
+ 408 0538 30108DE5 		str	r1, [sp, #48]
+ 409 053c 3410CDE5 		strb	r1, [sp, #52]
+ 410 0540 3C30CDE5 		strb	r3, [sp, #60]
+ 411 0544 FEFFFFEB 		bl	CyU3PSpiSetConfig
+ 412 0548 002050E2 		subs	r2, r0, #0
+ 413 054c 0200000A 		beq	.L47
+ 414 0550 0400A0E3 		mov	r0, #4
+ 415 0554 24139FE5 		ldr	r1, .L117+16
+ 416 0558 FEFFFFEB 		bl	CyU3PDebugPrint
+ 417              	.L47:
+ 418 055c 0230A0E3 		mov	r3, #2
+ 419 0560 0010A0E3 		mov	r1, #0
+ 420 0564 0430CDE5 		strb	r3, [sp, #4]
+ 421 0568 04008DE2 		add	r0, sp, #4
+ 422 056c 0330A0E3 		mov	r3, #3
+ 423 0570 0510CDE5 		strb	r1, [sp, #5]
+ 424 0574 0C10CDE5 		strb	r1, [sp, #12]
+ 425 0578 0D30CDE5 		strb	r3, [sp, #13]
+ 426 057c 08108DE5 		str	r1, [sp, #8]
+ 427 0580 FEFFFFEB 		bl	CyU3PGpioInit
+ 428 0584 004050E2 		subs	r4, r0, #0
+ 429 0588 0500000A 		beq	.L48
+ 430 058c 0400A0E3 		mov	r0, #4
+ 431 0590 EC129FE5 		ldr	r1, .L117+20
+ 432 0594 0420A0E1 		mov	r2, r4
+ 433 0598 FEFFFFEB 		bl	CyU3PDebugPrint
+ 434 059c 0400A0E1 		mov	r0, r4
+ 435 05a0 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 436              	.L48:
+ 437 05a4 0130A0E3 		mov	r3, #1
+ 438 05a8 10308DE5 		str	r3, [sp, #16]
+ 439 05ac 1C308DE5 		str	r3, [sp, #28]
+ 440 05b0 0030A0E3 		mov	r3, #0
+ 441 05b4 14308DE5 		str	r3, [sp, #20]
+ 442 05b8 18308DE5 		str	r3, [sp, #24]
+ 443 05bc 3400A0E3 		mov	r0, #52
+ 444 05c0 0330A0E3 		mov	r3, #3
+ 445 05c4 10108DE2 		add	r1, sp, #16
+ 446 05c8 2030CDE5 		strb	r3, [sp, #32]
+ 447 05cc FEFFFFEB 		bl	CyU3PGpioSetSimpleConfig
+ 448 05d0 004050E2 		subs	r4, r0, #0
+ 449 05d4 0500000A 		beq	.L49
+ 450 05d8 0400A0E3 		mov	r0, #4
+ 451 05dc A4129FE5 		ldr	r1, .L117+24
+ 452 05e0 0420A0E1 		mov	r2, r4
+ 453 05e4 FEFFFFEB 		bl	CyU3PDebugPrint
+ 454 05e8 0400A0E1 		mov	r0, r4
+ 455 05ec FEFFFFEB 		bl	CyFxAppErrorHandler
+ 456              	.L49:
+ 457 05f0 3200A0E3 		mov	r0, #50
+ 458 05f4 10108DE2 		add	r1, sp, #16
+ 459 05f8 FEFFFFEB 		bl	CyU3PGpioSetSimpleConfig
+ 460 05fc 004050E2 		subs	r4, r0, #0
+ 461 0600 0500000A 		beq	.L50
+ 462 0604 0400A0E3 		mov	r0, #4
+ 463 0608 78129FE5 		ldr	r1, .L117+24
+ 464 060c 0420A0E1 		mov	r2, r4
+ 465 0610 FEFFFFEB 		bl	CyU3PDebugPrint
+ 466 0614 0400A0E1 		mov	r0, r4
+ 467 0618 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 468              	.L50:
+ 469 061c FEFFFFEB 		bl	CyU3PUsbStart
+ 470 0620 004050E2 		subs	r4, r0, #0
+ 471 0624 0500000A 		beq	.L51
+ 472 0628 0400A0E3 		mov	r0, #4
+ 473 062c 58129FE5 		ldr	r1, .L117+28
+ 474 0630 0420A0E1 		mov	r2, r4
+ 475 0634 FEFFFFEB 		bl	CyU3PDebugPrint
+ 476 0638 0400A0E1 		mov	r0, r4
+ 477 063c FEFFFFEB 		bl	CyFxAppErrorHandler
+ 478              	.L51:
+ 479 0640 0110A0E3 		mov	r1, #1
+ 480 0644 44029FE5 		ldr	r0, .L117+32
+ 481 0648 FEFFFFEB 		bl	CyU3PUsbRegisterSetupCallback
+ 482 064c 40029FE5 		ldr	r0, .L117+36
+ 483 0650 FEFFFFEB 		bl	CyU3PUsbRegisterEventCallback
+ 484 0654 3C029FE5 		ldr	r0, .L117+40
+ 485 0658 FEFFFFEB 		bl	CyU3PUsbRegisterLPMRequestCallback
+ 486 065c 0000A0E3 		mov	r0, #0
+ 487 0660 0010A0E1 		mov	r1, r0
+ 488 0664 30229FE5 		ldr	r2, .L117+44
+ 489 0668 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 490 066c 004050E2 		subs	r4, r0, #0
+ 491 0670 0500000A 		beq	.L52
+ 492 0674 0400A0E3 		mov	r0, #4
+ 493 0678 20129FE5 		ldr	r1, .L117+48
+ 494 067c 0420A0E1 		mov	r2, r4
+ 495 0680 FEFFFFEB 		bl	CyU3PDebugPrint
+ 496 0684 0400A0E1 		mov	r0, r4
+ 497 0688 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 498              	.L52:
+ 499 068c 0100A0E3 		mov	r0, #1
+ 500 0690 0010A0E3 		mov	r1, #0
+ 501 0694 08229FE5 		ldr	r2, .L117+52
+ 502 0698 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 503 069c 004050E2 		subs	r4, r0, #0
+ 504 06a0 0500000A 		beq	.L53
+ 505 06a4 0400A0E3 		mov	r0, #4
+ 506 06a8 F0119FE5 		ldr	r1, .L117+48
+ 507 06ac 0420A0E1 		mov	r2, r4
+ 508 06b0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 509 06b4 0400A0E1 		mov	r0, r4
+ 510 06b8 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 511              	.L53:
+ 512 06bc 0700A0E3 		mov	r0, #7
+ 513 06c0 0010A0E3 		mov	r1, #0
+ 514 06c4 DC219FE5 		ldr	r2, .L117+56
+ 515 06c8 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 516 06cc 004050E2 		subs	r4, r0, #0
+ 517 06d0 0500000A 		beq	.L54
+ 518 06d4 0400A0E3 		mov	r0, #4
+ 519 06d8 CC119FE5 		ldr	r1, .L117+60
+ 520 06dc 0420A0E1 		mov	r2, r4
+ 521 06e0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 522 06e4 0400A0E1 		mov	r0, r4
+ 523 06e8 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 524              	.L54:
+ 525 06ec 0200A0E3 		mov	r0, #2
+ 526 06f0 0010A0E3 		mov	r1, #0
+ 527 06f4 B4219FE5 		ldr	r2, .L117+64
+ 528 06f8 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 529 06fc 004050E2 		subs	r4, r0, #0
+ 530 0700 0500000A 		beq	.L55
+ 531 0704 0400A0E3 		mov	r0, #4
+ 532 0708 A4119FE5 		ldr	r1, .L117+68
+ 533 070c 0420A0E1 		mov	r2, r4
+ 534 0710 FEFFFFEB 		bl	CyU3PDebugPrint
+ 535 0714 0400A0E1 		mov	r0, r4
+ 536 0718 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 537              	.L55:
+ 538 071c 0600A0E3 		mov	r0, #6
+ 539 0720 0010A0E3 		mov	r1, #0
+ 540 0724 8C219FE5 		ldr	r2, .L117+72
+ 541 0728 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 542 072c 004050E2 		subs	r4, r0, #0
+ 543 0730 0500000A 		beq	.L56
+ 544 0734 0400A0E3 		mov	r0, #4
+ 545 0738 6C119FE5 		ldr	r1, .L117+60
+ 546 073c 0420A0E1 		mov	r2, r4
+ 547 0740 FEFFFFEB 		bl	CyU3PDebugPrint
+ 548 0744 0400A0E1 		mov	r0, r4
+ 549 0748 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 550              	.L56:
+ 551 074c 0400A0E3 		mov	r0, #4
+ 552 0750 0010A0E3 		mov	r1, #0
+ 553 0754 60219FE5 		ldr	r2, .L117+76
+ 554 0758 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 555 075c 004050E2 		subs	r4, r0, #0
+ 556 0760 0500000A 		beq	.L57
+ 557 0764 0400A0E3 		mov	r0, #4
+ 558 0768 50119FE5 		ldr	r1, .L117+80
+ 559 076c 0420A0E1 		mov	r2, r4
+ 560 0770 FEFFFFEB 		bl	CyU3PDebugPrint
+ 561 0774 0400A0E1 		mov	r0, r4
+ 562 0778 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 563              	.L57:
+ 564 077c 0300A0E3 		mov	r0, #3
+ 565 0780 0010A0E3 		mov	r1, #0
+ 566 0784 38219FE5 		ldr	r2, .L117+84
+ 567 0788 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 568 078c 004050E2 		subs	r4, r0, #0
+ 569 0790 0500000A 		beq	.L58
+ 570 0794 0400A0E3 		mov	r0, #4
+ 571 0798 28119FE5 		ldr	r1, .L117+88
+ 572 079c 0420A0E1 		mov	r2, r4
+ 573 07a0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 574 07a4 0400A0E1 		mov	r0, r4
+ 575 07a8 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 576              	.L58:
+ 577 07ac 0500A0E3 		mov	r0, #5
+ 578 07b0 0010A0E3 		mov	r1, #0
+ 579 07b4 10219FE5 		ldr	r2, .L117+92
+ 580 07b8 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 581 07bc 004050E2 		subs	r4, r0, #0
+ 582 07c0 0500000A 		beq	.L59
+ 583 07c4 0400A0E3 		mov	r0, #4
+ 584 07c8 00119FE5 		ldr	r1, .L117+96
+ 585 07cc 0420A0E1 		mov	r2, r4
+ 586 07d0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 587 07d4 0400A0E1 		mov	r0, r4
+ 588 07d8 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 589              	.L59:
+ 590 07dc 0500A0E3 		mov	r0, #5
+ 591 07e0 0110A0E3 		mov	r1, #1
+ 592 07e4 E8209FE5 		ldr	r2, .L117+100
+ 593 07e8 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 594 07ec 004050E2 		subs	r4, r0, #0
+ 595 07f0 0500000A 		beq	.L60
+ 596 07f4 0400A0E3 		mov	r0, #4
+ 597 07f8 D0109FE5 		ldr	r1, .L117+96
+ 598 07fc 0420A0E1 		mov	r2, r4
+ 599 0800 FEFFFFEB 		bl	CyU3PDebugPrint
+ 600 0804 0400A0E1 		mov	r0, r4
+ 601 0808 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 602              	.L60:
+ 603 080c 0500A0E3 		mov	r0, #5
+ 604 0810 0210A0E3 		mov	r1, #2
+ 605 0814 BC209FE5 		ldr	r2, .L117+104
+ 606 0818 FEFFFFEB 		bl	CyU3PUsbSetDesc
+ 607 081c 004050E2 		subs	r4, r0, #0
+ 608 0820 0500000A 		beq	.L61
+ 609 0824 0400A0E3 		mov	r0, #4
+ 610 0828 A0109FE5 		ldr	r1, .L117+96
+ 611 082c 0420A0E1 		mov	r2, r4
+ 612 0830 FEFFFFEB 		bl	CyU3PDebugPrint
+ 613 0834 0400A0E1 		mov	r0, r4
+ 614 0838 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 615              	.L61:
+ 616 083c 0100A0E3 		mov	r0, #1
+ 617 0840 0010A0E1 		mov	r1, r0
+ 618 0844 FEFFFFEB 		bl	CyU3PConnectState
+ 619 0848 004050E2 		subs	r4, r0, #0
+ 620 084c 0500000A 		beq	.L44
+ 621 0850 0400A0E3 		mov	r0, #4
+ 622 0854 80109FE5 		ldr	r1, .L117+108
+ 623 0858 0420A0E1 		mov	r2, r4
+ 624 085c FEFFFFEB 		bl	CyU3PDebugPrint
+ 625 0860 0400A0E1 		mov	r0, r4
+ 626 0864 FEFFFFEB 		bl	CyFxAppErrorHandler
+ 627              	.L44:
+ 628 0868 40D08DE2 		add	sp, sp, #64
+ 629              		@ sp needed
+ 630 086c 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 631              	.L118:
+ 632              		.align	2
+ 633              	.L117:
+ 634 0870 00000000 		.word	glFxConfigFpgaAppEvent
+ 635 0874 C6040000 		.word	.LC24
+ 636 0878 EE040000 		.word	.LC25
+ 637 087c 40787D01 		.word	25000000
+ 638 0880 12050000 		.word	.LC26
+ 639 0884 38050000 		.word	.LC27
+ 640 0888 5D050000 		.word	.LC28
+ 641 088c 91050000 		.word	.LC29
+ 642 0890 00000000 		.word	CyFxSlFifoApplnUSBSetupCB
+ 643 0894 00000000 		.word	CyFxSlFifoApplnUSBEventCB
+ 644 0898 00000000 		.word	CyFxApplnLPMRqtCB
+ 645 089c 00000000 		.word	CyFxUSB30DeviceDscr
+ 646 08a0 C3050000 		.word	.LC30
+ 647 08a4 00000000 		.word	CyFxUSB20DeviceDscr
+ 648 08a8 00000000 		.word	CyFxUSBBOSDscr
+ 649 08ac F8050000 		.word	.LC31
+ 650 08b0 00000000 		.word	CyFxUSBDeviceQualDscr
+ 651 08b4 34060000 		.word	.LC32
+ 652 08b8 00000000 		.word	CyFxUSBSSConfigDscr
+ 653 08bc 00000000 		.word	CyFxUSBHSConfigDscr
+ 654 08c0 73060000 		.word	.LC33
+ 655 08c4 00000000 		.word	CyFxUSBFSConfigDscr
+ 656 08c8 AD060000 		.word	.LC34
+ 657 08cc 00000000 		.word	CyFxUSBStringLangIDDscr
+ 658 08d0 E9060000 		.word	.LC35
+ 659 08d4 00000000 		.word	CyFxUSBManufactureDscr
+ 660 08d8 00000000 		.word	CyFxUSBProductDscr
+ 661 08dc 1E070000 		.word	.LC36
+ 663              		.section	.text.startup,"ax",%progbits
+ 664              		.align	2
+ 665              		.global	main
+ 667              	main:
+ 668              		@ args = 0, pretend = 0, frame = 56
+ 669              		@ frame_needed = 0, uses_anonymous_args = 0
+ 670 0000 10402DE9 		stmfd	sp!, {r4, lr}
+ 671 0004 0230A0E3 		mov	r3, #2
+ 672 0008 38D04DE2 		sub	sp, sp, #56
+ 673 000c 0430CDE5 		strb	r3, [sp, #4]
+ 674 0010 0530CDE5 		strb	r3, [sp, #5]
+ 675 0014 0630CDE5 		strb	r3, [sp, #6]
+ 676 0018 0030A0E3 		mov	r3, #0
+ 677 001c 08308DE5 		str	r3, [sp, #8]
+ 678 0020 0140A0E3 		mov	r4, #1
+ 679 0024 0330A0E3 		mov	r3, #3
+ 680 0028 0D00A0E1 		mov	r0, sp
+ 681 002c 00408DE5 		str	r4, [sp]
+ 682 0030 0C30CDE5 		strb	r3, [sp, #12]
+ 683 0034 FEFFFFEB 		bl	CyU3PDeviceInit
+ 684 0038 001050E2 		subs	r1, r0, #0
+ 685 003c 1300001A 		bne	.L120
+ 686 0040 0400A0E1 		mov	r0, r4
+ 687 0044 0120A0E1 		mov	r2, r1
+ 688 0048 FEFFFFEB 		bl	CyU3PDeviceCacheControl
+ 689 004c 000050E3 		cmp	r0, #0
+ 690 0050 0E00001A 		bne	.L120
+ 691 0054 18008DE5 		str	r0, [sp, #24]
+ 692 0058 1C008DE5 		str	r0, [sp, #28]
+ 693 005c 10008DE5 		str	r0, [sp, #16]
+ 694 0060 2600CDE5 		strb	r0, [sp, #38]
+ 695 0064 28008DE5 		str	r0, [sp, #40]
+ 696 0068 0527A0E3 		mov	r2, #1310720
+ 697 006c 30008DE5 		str	r0, [sp, #48]
+ 698 0070 34008DE5 		str	r0, [sp, #52]
+ 699 0074 10008DE2 		add	r0, sp, #16
+ 700 0078 14408DE5 		str	r4, [sp, #20]
+ 701 007c 20408DE5 		str	r4, [sp, #32]
+ 702 0080 2C208DE5 		str	r2, [sp, #44]
+ 703 0084 FEFFFFEB 		bl	CyU3PDeviceConfigureIOMatrix
+ 704 0088 004050E2 		subs	r4, r0, #0
+ 705 008c 0000000A 		beq	.L121
+ 706              	.L120:
+ 707              	.L122:
+ 708 0090 FEFFFFEA 		b	.L122
+ 709              	.L121:
+ 710 0094 FEFFFFEB 		bl	_tx_initialize_kernel_enter
+ 711 0098 0400A0E1 		mov	r0, r4
+ 712 009c 38D08DE2 		add	sp, sp, #56
+ 713              		@ sp needed
+ 714 00a0 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 716              		.global	uiPacketSize
+ 717              		.comm	glFxConfigFpgaAppEvent,40,4
+ 718              		.global	filelen
+ 719              		.global	glConfigDone
+ 720              		.comm	glChHandleUtoCPU,172,4
+ 721              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 722              	.LC0:
+ 723 0000 0D096669 		.ascii	"\015\011file length: %d\015\012\000"
+ 723      6C65206C 
+ 723      656E6774 
+ 723      683A2025 
+ 723      640D0A00 
+ 724              	.LC1:
+ 725 0014 0D455252 		.ascii	"\015ERROR: FPGA_Init_B down. Is the FPGA on?\015\012"
+ 725      4F523A20 
+ 725      46504741 
+ 725      5F496E69 
+ 725      745F4220 
+ 726 003f 00       		.ascii	"\000"
+ 727              	.LC2:
+ 728 0040 0D20312E 		.ascii	"\015 1. Pulling PROG_B line to reset FPGA\015\012\000"
+ 728      2050756C 
+ 728      6C696E67 
+ 728      2050524F 
+ 728      475F4220 
+ 729              	.LC3:
+ 730 0069 0D455252 		.ascii	"\015ERROR: FPGA_Init_B was not reseted. Error code "
+ 730      4F523A20 
+ 730      46504741 
+ 730      5F496E69 
+ 730      745F4220 
+ 731 0099 3D202564 		.ascii	"= %d\015\012\000"
+ 731      0D0A00
+ 732              	.LC4:
+ 733 00a0 0D20322E 		.ascii	"\015 2. Releasing PROG_B line\015\012\000"
+ 733      2052656C 
+ 733      65617369 
+ 733      6E672050 
+ 733      524F475F 
+ 734              	.LC5:
+ 735 00bd 0D20332E 		.ascii	"\015 3. Checking FPGA_Init_B to know if FPGA is rea"
+ 735      20436865 
+ 735      636B696E 
+ 735      67204650 
+ 735      47415F49 
+ 736 00ed 64792E0D 		.ascii	"dy.\015\012\000"
+ 736      0A00
+ 737              	.LC6:
+ 738 00f3 0D455252 		.ascii	"\015ERROR: FPGA not ready. Error code = %d\015\012\000"
+ 738      4F523A20 
+ 738      46504741 
+ 738      206E6F74 
+ 738      20726561 
+ 739              	.LC7:
+ 740 011d 0D20342E 		.ascii	"\015 4. Start shifting configuration data...\015\012"
+ 740      20537461 
+ 740      72742073 
+ 740      68696674 
+ 740      696E6720 
+ 741 0148 00       		.ascii	"\000"
+ 742              	.LC8:
+ 743 0149 0D455252 		.ascii	"\015ERROR: Timeout waiting for FPGA's firmware from"
+ 743      4F523A20 
+ 743      54696D65 
+ 743      6F757420 
+ 743      77616974 
+ 744 0179 20435055 		.ascii	" CPU. Error code = %d\015\012\000"
+ 744      2E204572 
+ 744      726F7220 
+ 744      636F6465 
+ 744      203D2025 
+ 745              	.LC9:
+ 746 0191 0D457272 		.ascii	"\015Error getting the FPGA's firmware. Error code ="
+ 746      6F722067 
+ 746      65747469 
+ 746      6E672074 
+ 746      68652046 
+ 747 01c1 2025640D 		.ascii	" %d\015\012\000"
+ 747      0A00
+ 748              	.LC10:
+ 749 01c7 0D094661 		.ascii	"\015\011Failed to send data to FPGA. Error code = %"
+ 749      696C6564 
+ 749      20746F20 
+ 749      73656E64 
+ 749      20646174 
+ 750 01f4 640D0A00 		.ascii	"d\015\012\000"
+ 751              	.LC11:
+ 752 01f8 0D455252 		.ascii	"\015ERROR: Timeout discarding buffer. Error code = "
+ 752      4F523A20 
+ 752      54696D65 
+ 752      6F757420 
+ 752      64697363 
+ 753 0228 25640D0A 		.ascii	"%d\015\012\000"
+ 753      00
+ 754              	.LC12:
+ 755 022d 0D20352E 		.ascii	"\015 5. Checking DONE signal\015\012\000"
+ 755      20436865 
+ 755      636B696E 
+ 755      6720444F 
+ 755      4E452073 
+ 756              	.LC13:
+ 757 0249 0D455252 		.ascii	"\015ERROR: FPGA_DONE signal. Error code = %d\015\012"
+ 757      4F523A20 
+ 757      46504741 
+ 757      5F444F4E 
+ 757      45207369 
+ 758 0274 00       		.ascii	"\000"
+ 759              	.LC14:
+ 760 0275 0D465047 		.ascii	"\015FPGA was programmed successfully. Status code ="
+ 760      41207761 
+ 760      73207072 
+ 760      6F677261 
+ 760      6D6D6564 
+ 761 02a5 2025640D 		.ascii	" %d\015\012\000"
+ 761      0A00
+ 762              	.LC15:
+ 763 02ab 0D465047 		.ascii	"\015FPGA configuration failed. Status code = %d\015"
+ 763      4120636F 
+ 763      6E666967 
+ 763      75726174 
+ 763      696F6E20 
+ 764 02d8 0A00     		.ascii	"\012\000"
+ 765              	.LC16:
+ 766 02da 0D466972 		.ascii	"\015Firmware version modified by J. Agustin Barrach"
+ 766      6D776172 
+ 766      65207665 
+ 766      7273696F 
+ 766      6E206D6F 
+ 767 030a 696E613A 		.ascii	"ina: \015\012\000"
+ 767      200D0A00 
+ 768              	.LC17:
+ 769 0312 0D576172 		.ascii	"\015Warning: USB 2.0 FULL SPEED detected.\012\015\011"
+ 769      6E696E67 
+ 769      3A205553 
+ 769      4220322E 
+ 769      30204655 
+ 770 033b 436F6E73 		.ascii	"Consider connecting the board to a USB3 interface f"
+ 770      69646572 
+ 770      20636F6E 
+ 770      6E656374 
+ 770      696E6720 
+ 771 036e 6F722062 		.ascii	"or better performance\015\012\000"
+ 771      65747465 
+ 771      72207065 
+ 771      72666F72 
+ 771      6D616E63 
+ 772              	.LC18:
+ 773 0386 0D576172 		.ascii	"\015Warning: USB 2.0 HIGH SPEED detected.\012\015\011"
+ 773      6E696E67 
+ 773      3A205553 
+ 773      4220322E 
+ 773      30204849 
+ 774 03af 436F6E73 		.ascii	"Consider connecting the board to a USB3 interface f"
+ 774      69646572 
+ 774      20636F6E 
+ 774      6E656374 
+ 774      696E6720 
+ 775 03e2 6F722062 		.ascii	"or better performance\015\012\000"
+ 775      65747465 
+ 775      72207065 
+ 775      72666F72 
+ 775      6D616E63 
+ 776              	.LC19:
+ 777 03fa 0D555342 		.ascii	"\015USB 3.0 SUPER SPEED detected\015\012\000"
+ 777      20332E30 
+ 777      20535550 
+ 777      45522053 
+ 777      50454544 
+ 778              	.LC20:
+ 779 041a 0D457272 		.ascii	"\015Error! Invalid USB speed.\015\012\000"
+ 779      6F722120 
+ 779      496E7661 
+ 779      6C696420 
+ 779      55534220 
+ 780              	.LC21:
+ 781 0437 0D437955 		.ascii	"\015CyU3PSetEpConfig failed, Error code = %d\015\012"
+ 781      33505365 
+ 781      74457043 
+ 781      6F6E6669 
+ 781      67206661 
+ 782 0462 00       		.ascii	"\000"
+ 783              	.LC22:
+ 784 0463 0D437955 		.ascii	"\015CyU3PDmaChannelCreate failed, Error code = %d\015"
+ 784      3350446D 
+ 784      61436861 
+ 784      6E6E656C 
+ 784      43726561 
+ 785 0492 0A00     		.ascii	"\012\000"
+ 786              	.LC23:
+ 787 0494 0D437955 		.ascii	"\015CyU3PDmaChannelSetXfer Failed, Error code = %d\015"
+ 787      3350446D 
+ 787      61436861 
+ 787      6E6E656C 
+ 787      53657458 
+ 788 04c4 0A00     		.ascii	"\012\000"
+ 789              	.LC24:
+ 790 04c6 0D457665 		.ascii	"\015Event create failed, Error Code = %d\015\012\000"
+ 790      6E742063 
+ 790      72656174 
+ 790      65206661 
+ 790      696C6564 
+ 791              	.LC25:
+ 792 04ee 0D535049 		.ascii	"\015SPI init failed, Error Code = %d\015\012\000"
+ 792      20696E69 
+ 792      74206661 
+ 792      696C6564 
+ 792      2C204572 
+ 793              	.LC26:
+ 794 0512 0D535049 		.ascii	"\015SPI config failed, Error Code = %d\015\012\000"
+ 794      20636F6E 
+ 794      66696720 
+ 794      6661696C 
+ 794      65642C20 
+ 795              	.LC27:
+ 796 0538 0D475049 		.ascii	"\015GPIO Init failed, Error Code = %d\015\012\000"
+ 796      4F20496E 
+ 796      69742066 
+ 796      61696C65 
+ 796      642C2045 
+ 797              	.LC28:
+ 798 055d 0D437955 		.ascii	"\015CyU3PGpioSetSimpleConfig failed, error code = %"
+ 798      33504770 
+ 798      696F5365 
+ 798      7453696D 
+ 798      706C6543 
+ 799 058d 640D0A00 		.ascii	"d\015\012\000"
+ 800              	.LC29:
+ 801 0591 0D437955 		.ascii	"\015CyU3PUsbStart failed to Start, Error code = %d\015"
+ 801      33505573 
+ 801      62537461 
+ 801      72742066 
+ 801      61696C65 
+ 802 05c1 0A00     		.ascii	"\012\000"
+ 803              	.LC30:
+ 804 05c3 0D555342 		.ascii	"\015USB set device descriptor failed, Error code = "
+ 804      20736574 
+ 804      20646576 
+ 804      69636520 
+ 804      64657363 
+ 805 05f3 25640D0A 		.ascii	"%d\015\012\000"
+ 805      00
+ 806              	.LC31:
+ 807 05f8 0D555342 		.ascii	"\015USB set configuration descriptor failed, Error "
+ 807      20736574 
+ 807      20636F6E 
+ 807      66696775 
+ 807      72617469 
+ 808 0628 636F6465 		.ascii	"code = %d\015\012\000"
+ 808      203D2025 
+ 808      640D0A00 
+ 809              	.LC32:
+ 810 0634 0D555342 		.ascii	"\015USB set device qualifier descriptor failed, Err"
+ 810      20736574 
+ 810      20646576 
+ 810      69636520 
+ 810      7175616C 
+ 811 0664 6F722063 		.ascii	"or code = %d\015\012\000"
+ 811      6F646520 
+ 811      3D202564 
+ 811      0D0A00
+ 812              	.LC33:
+ 813 0673 0D555342 		.ascii	"\015USB Set Other Speed Descriptor failed, Error Co"
+ 813      20536574 
+ 813      204F7468 
+ 813      65722053 
+ 813      70656564 
+ 814 06a3 6465203D 		.ascii	"de = %d\015\012\000"
+ 814      2025640D 
+ 814      0A00
+ 815              	.LC34:
+ 816 06ad 0D555342 		.ascii	"\015USB Set Configuration Descriptor failed, Error "
+ 816      20536574 
+ 816      20436F6E 
+ 816      66696775 
+ 816      72617469 
+ 817 06dd 436F6465 		.ascii	"Code = %d\015\012\000"
+ 817      203D2025 
+ 817      640D0A00 
+ 818              	.LC35:
+ 819 06e9 0D555342 		.ascii	"\015USB set string descriptor failed, Error code = "
+ 819      20736574 
+ 819      20737472 
+ 819      696E6720 
+ 819      64657363 
+ 820 0719 25640D0A 		.ascii	"%d\015\012\000"
+ 820      00
+ 821              	.LC36:
+ 822 071e 0D555342 		.ascii	"\015USB Connect failed, Error code = %d\015\012\000"
+ 822      20436F6E 
+ 822      6E656374 
+ 822      20666169 
+ 822      6C65642C 
+ 823              		.data
+ 824              		.align	2
+ 825              		.set	.LANCHOR0,. + 0
+ 828              	glConfigDone:
+ 829 0000 01000000 		.word	1
+ 830              		.bss
+ 831              		.align	2
+ 832              		.set	.LANCHOR1,. + 0
+ 835              	uiPacketSize:
+ 836 0000 0000     		.space	2
+ 837 0002 0000     		.space	2
+ 840              	filelen:
+ 841 0004 00000000 		.space	4
+ 842              		.ident	"GCC: (Sourcery CodeBench Lite 2013.11-24) 4.8.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 cyfxconfigfpga.c
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:13     .text:00000000 $a
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:16     .text:00000000 CyFxConfigFpga
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:123    .text:00000170 $d
-                            *COM*:000000a0 glChHandleUtoCPU
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:129    .text:00000184 $a
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:132    .text:00000184 CyFxConfigFpgaApplnStart
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:229    .text:000002e0 $d
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:238    .text:00000300 $a
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:241    .text:00000300 CyFxConfigFpgaApplnStop
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:261    .text:00000338 $d
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:265    .text:00000344 $a
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:268    .text:00000344 CyFxConfigFpgaApplnInit
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:530    .text:000006fc $d
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:14     .text:00000000 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:17     .text:00000000 CyFxConfigFpga
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:187    .text:00000258 $d
+                            *COM*:000000ac glChHandleUtoCPU
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:208    .text:000002a8 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:211    .text:000002a8 CyFxConfigFpgaApplnStart
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:328    .text:00000444 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:341    .text:00000474 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:344    .text:00000474 CyFxConfigFpgaApplnStop
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:364    .text:000004ac $d
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:368    .text:000004b8 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:371    .text:000004b8 CyFxConfigFpgaApplnInit
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:634    .text:00000870 $d
                             *COM*:00000028 glFxConfigFpgaAppEvent
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:559    .text:0000076c $a
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:562    .text:0000076c main
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:662    .data:00000000 glConfigDone
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:674    .bss:00000004 filelen
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:669    .bss:00000000 uiPacketSize
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:658    .data:00000000 $d
-C:\Users\keaj\AppData\Local\Temp\ccZvFXve.s:665    .bss:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:664    .text.startup:00000000 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:667    .text.startup:00000000 main
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:835    .bss:00000000 uiPacketSize
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:840    .bss:00000004 filelen
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:828    .data:00000000 glConfigDone
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:824    .data:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:831    .bss:00000000 $d
 
 UNDEFINED SYMBOLS
 CyU3PDebugPrint
-CyU3PSpiSetSsnLine
 CyU3PGpioSimpleGetValue
+CyU3PSpiSetSsnLine
 _tx_thread_sleep
 CyU3PDmaChannelGetBuffer
 CyU3PSpiTransmitWords
