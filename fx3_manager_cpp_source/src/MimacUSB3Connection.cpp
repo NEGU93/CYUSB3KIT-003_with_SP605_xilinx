@@ -45,13 +45,14 @@ MimacUSB3Connection::MimacUSB3Connection() {
     rStatus = cyusb_open();
     if ( rStatus < 0 ) { throw ErrorOpeningLib(); }
     else if ( rStatus == 0 ) { throw NoDeviceFound(); }
+    cyusb_reset_device(cyusb_gethandle(0));
 }
 
 MimacUSB3Connection::MimacUSB3Connection(unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
     fp = stdout;
     rStatus = cyusb_open(vid, pid);
     if ( rStatus < 0 ) { throw ErrorOpeningLib(); }
-    else if ( rStatus == 0 ) { throw NoDeviceFound(); }
+    else if (rStatus == 0) { throw NoDeviceFound(); }
 }
 
 MimacUSB3Connection::~MimacUSB3Connection() {
@@ -539,8 +540,8 @@ void MimacUSB3Connection::send_text_file() {
 
     buf = (unsigned char *)malloc(maxps);
     while ( (nbr = read(fd_outfile, buf, maxps)) ) {
-        send_buffer(buf, static_cast<int>(nbr));
-        transferred = recive_buffer(buf, static_cast<unsigned int>(nbr));
+        send_buffer(buf, static_cast<int>(nbr));        // Send data to FPGA
+        transferred = recive_buffer(buf, static_cast<unsigned int>(nbr));   // Get data from FPGA
         if(transferred < 0) {
             printf("Error: Couldn't read the data back (error: %d)\n", rStatus);
             return;
@@ -628,7 +629,7 @@ void MimacUSB3Connection::send_buffer(unsigned char *buf, int sz) {
     rStatus = cyusb_bulk_transfer(cyusb_gethandle(0), static_cast<unsigned char>(end_ptr), buf, sz, &transferred, 1000);
     printf("Bytes sent to device = %d\n", transferred);
     if (rStatus) {
-        printf("Error in bulk write!");
+        printf("Error in send buffer: ");
         cyusb_error(rStatus);
         cyusb_close();
         return ;

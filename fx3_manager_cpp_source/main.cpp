@@ -42,15 +42,15 @@ static FILE *fp = stdout;
 
 
 void wait_for_enter() {
-    cout << "Please turn on the FPGA" << endl;
-    cout<<"Press enter to continue..."<<endl;
+    cout << "Please turn on the FPGA and then ";
+    cout << "press enter to continue..." << endl;
     cin.get();
     //system("read");
 }
 
 
 void program() {
-	MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection(VID, PID_FX3);
+	MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection();
 	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
 	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulklpautoenum.img");
 	char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync.img");
@@ -94,11 +94,10 @@ int main(int argc, char **argv) {
         //mimacUSB3Connection.print_device_descriptor();
         //mimacUSB3Connection.print_config_descriptor();
         //mimacUSB3Connection.claim_interface(0);
-        //mimacUSB3Connection.claim_interface(0);
         //mimacUSB3Connection.test_performance();
         //mimacUSB3Connection.loopback_test();
         wait_for_enter();
-        char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/counter_for_testing.bin");
+        char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/bin/slaveFIFO2b_fpga_top.bin");
 		//char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/slaveFIFO2b_fpga_top.bin");
         //char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin");
         mimacUSB3Connection.program_device(fpga_filename);
