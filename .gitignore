@@ -1,3 +1,12 @@
 .goutputstream-*
 /fpga_source_code/fx3_slavefifo2b_vhdl_proj/xst/work/.goutputstream-*
 /fpga_source_code/fx3_slavefifo2b_vhdl_proj/planAhead_run_*/
+
+CMakeCache.txt
+CMakeFiles/
+cmake-build-debug/
+Makefile
+cmake_install.cmake
+ForbiddenDesert.v11.suo.doc
+.~lock.ForbiddenDesert.v11.suo.doc#
+*.cbp
