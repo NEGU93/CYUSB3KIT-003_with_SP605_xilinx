@@ -98,7 +98,8 @@ int main(int argc, char **argv) {
         //mimacUSB3Connection.test_performance();
         //mimacUSB3Connection.loopback_test();
         wait_for_enter();
-		char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/slaveFIFO2b_fpga_top.bin");
+        char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/counter_for_testing.bin");
+		//char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/slaveFIFO2b_fpga_top.bin");
         //char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin");
         mimacUSB3Connection.program_device(fpga_filename);
         //wait_for_enter();

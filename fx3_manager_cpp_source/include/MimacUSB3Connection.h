@@ -96,7 +96,7 @@ private:
     libusb_endpoint_descriptor *endpointDesc;
     libusb_ss_endpoint_companion_descriptor *companionDesc;
 
-    static cyusb_handle *device_handle;
+    cyusb_handle *device_handle;
 
     // Transfer Performance
     static unsigned int endpoint;           // Endpoint to be tested

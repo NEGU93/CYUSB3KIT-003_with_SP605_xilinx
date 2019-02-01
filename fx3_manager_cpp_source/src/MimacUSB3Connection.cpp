@@ -18,7 +18,7 @@
 //#define DEBUG
 
 // static variables
-cyusb_handle *MimacUSB3Connection::device_handle;
+//cyusb_handle *MimacUSB3Connection::device_handle;
 
 unsigned int MimacUSB3Connection::endpoint;         // Endpoint to be tested
 unsigned int MimacUSB3Connection::reqsize;          // Request size in number of packets
@@ -369,6 +369,7 @@ int MimacUSB3Connection::fx3_ram_write(unsigned char *buf, unsigned int ramAddre
 int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
     int  if_numsettings;
     bool found_ep = false;
+    cyusb_handle *device_handle;
 
     // Step 1: Get a handle to the first CyUSB device.
     device_handle = cyusb_gethandle(0);
@@ -431,6 +432,7 @@ int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
 *   and Isochronous are supported.
 */
 int MimacUSB3Connection::test_performance() {
+    cyusb_handle *device_handle;
     int  if_numsettings;
     bool found_ep = false;
     struct timeval t1{}, t2{};		// Timestamps used for test duration control
@@ -755,7 +757,7 @@ void MimacUSB3Connection::send_buffer(unsigned char *buf, int sz) {
         return;
     }
 
-    rStatus = cyusb_bulk_transfer(MimacUSB3Connection::device_handle, static_cast<unsigned char>(end_ptr), buf, sz, &transferred, 1000);
+    rStatus = cyusb_bulk_transfer(cyusb_gethandle(0), static_cast<unsigned char>(end_ptr), buf, sz, &transferred, 1000);
     printf("Bytes sent to device = %d\n", transferred);
     if (rStatus) {
         printf("Error in bulk write!");
@@ -779,7 +781,7 @@ int MimacUSB3Connection::recive_buffer(unsigned char *buf, unsigned int data_cou
         return -1;
     }
     buf = (unsigned char *)malloc(data_count);
-    rStatus = cyusb_bulk_transfer(MimacUSB3Connection::device_handle, static_cast<unsigned char>(end_ptr), buf, data_count, &transferred, 1000);
+    rStatus = cyusb_bulk_transfer(cyusb_gethandle(0), static_cast<unsigned char>(end_ptr), buf, data_count, &transferred, 1000);
     printf("Bytes read from device = %d\n",transferred);
     if ( rStatus ) {
         printf("Error in bulk write!");
@@ -889,54 +891,67 @@ void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
 }
 
 /**
- *
+ *  Program FPGA with the file passed as input.
+ *  Returns:
+ *   0 on success
+ *   LIBUSB_ERROR_TIMEOUT if the transfer timed out
+ *   LIBUSB_ERROR_PIPE if the control request was not supported by the device
+ *   LIBUSB_ERROR_NO_DEVICE if the device has been disconnected
+ *   another LIBUSB_ERROR code on other failures
  * */
 int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
-    size_t maxps = 0;
-    unsigned char *data;
+    FILE * fpga_file;
+    unsigned int fpga_firmware_size;
+    char * buffer;
+    size_t fread_result;
     unsigned short wLength = 16;
     unsigned int timeout = 1000;
     unsigned short wValue = 0, wIndex = 1;
-    unsigned int bin_len;
-    unsigned int *p;
 
-    int fpga_file = open(fpga_firmware_filename, O_RDONLY);
-    if ( fpga_file < 0 ) {
-        printf("FPGA firmware %s not found", fpga_firmware_filename);
-        return -1;
+    fpga_file = fopen(fpga_firmware_filename, "rb");
+    if (fpga_file == nullptr) {
+        printf("Error Couldn't open firmware %s\n", fpga_firmware_filename);
+        exit (1);
     }
 
-    maxps = static_cast<size_t>(pow(2, wLength*8)); //4096;	// If sending a file, then data is sent in 4096 byte packets
-    //data = (unsigned char *)malloc(maxps);
-    //bin_len = static_cast<unsigned short>(read(fpga_file, data, maxps));
-    std::ifstream in(fpga_firmware_filename, std::ifstream::ate | std::ifstream::binary);
-    if (in.is_open()) {
-        bin_len = static_cast<unsigned int>(in.tellg());
-        p = &bin_len;
-        //data = (unsigned char *)p;
-        printf("filelen = %d\n", bin_len);
-        printf("Programming FPGA\n");
-        rStatus = libusb_control_transfer(
-                MimacUSB3Connection::device_handle,
-                WRITE_REQUEST_TYPE,        /* bmRequestType */
-                VND_CMD_SLAVESER_CFGLOAD,  /* bRequest */
-                wValue,                    /* wValue */
-                wIndex,                    /* wIndex */
-                (unsigned char *) p,       /* *data */
-                wLength,                   /* wLength */
-                timeout);
-        if (rStatus < 0) {         /* LIB_USB_ERROR */
-            cyusb_error(rStatus);
-            cyusb_close();
-            return rStatus;
-        }
-        printf("rStatus = %d\n", rStatus);
+    fseek (fpga_file , 0 , SEEK_END);
+    fpga_firmware_size = static_cast<unsigned int>(ftell (fpga_file));   // obtain file size:
+    rewind (fpga_file);
+
+    buffer = (char*) malloc (sizeof(char)*fpga_firmware_size);   // Allocate memory to contain the whole file:
+    if (buffer == nullptr) {
+        printf("Memory error allocating buffer");
+        exit (2);
+    }
+
+    fread_result = fread(buffer, 1, static_cast<size_t>(fpga_firmware_size), fpga_file);   // Copy the file into the buffer
+    if (fread_result != fpga_firmware_size) {
+        printf("Error copying file to buffer");
+        exit (3);
+    }
+
+    printf("filelen = %u\n", fpga_firmware_size);
+    printf("Programming FPGA\n");
+    // Start programming command
+    rStatus = cyusb_control_write(
+            cyusb_gethandle(0),  /* a handle for the device to communicate with */
+            WRITE_REQUEST_TYPE,        /* bmRequestType: the request type field for the setup packet */
+            VND_CMD_SLAVESER_CFGLOAD,  /* bRequest: the request field for the setup packet */
+            wValue,                    /* wValue: the value field for the setup packet */
+            wIndex,                    /* wIndex: the index field for the setup packet */
+            (unsigned char *) &fpga_firmware_size,  /* *data: a suitably-sized data buffer */
+            wLength,                   /* wLength: the length field for the setup packet. The data buffer should be at least this size. */
+            timeout);                  /* timeout (in millseconds) that this function should wait before giving up due to no response being received. For an unlimited timeout, use value 0. */
+    printf("rStatus = %d\n", rStatus);
+    if (rStatus < 0) {         /* LIB_USB_ERROR */
+        cyusb_error(rStatus);
+        cyusb_close();
         return rStatus;
     }
-    else {
-        printf("Error in MimacUSB3Connection::program_device():\n\t Couldn't open firmware %s\n", fpga_firmware_filename);
-    }
-    return -1;
+    send_buffer(reinterpret_cast<unsigned char *>(buffer), fpga_firmware_size);  // Send the FPGA firmware
+    fclose (fpga_file);
+    free (buffer);
+    return 0;
 }
 /*int MimacUSB3Connection::download_fx3_firmware_to_ram(char *filename) {
     cyusb_handle *h = MimacUSB3Connection::device_handle;
