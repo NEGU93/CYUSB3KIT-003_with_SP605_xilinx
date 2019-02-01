@@ -1,1 +1,0 @@
--intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -o "C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/testbench_isim_beh.exe" -prj "C:/Documents and Settings/shya/Desktop/cy project/new hrid fx3 fpga project/fpga_write/fpga_write/testbench_beh.prj" "work.testbench" "work.glbl" 
