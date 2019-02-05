@@ -1,9 +1,14 @@
 # CYUSB3KIT-003 with SP605 xilinx
 
 This project aim was to use the Cypress [CYUSB3KIT-003 EZ-USB FX3 SuperSpeed Explorer Kit](http://www.cypress.com/documentation/development-kitsboards/cyusb3kit-003-ez-usb-fx3-superspeed-explorer-kit)
-to both **program** (upload the firmware of the FPGA using the kit) and **communicate** (make the FPGA send info and receive it with the PC and vice versa) with a Xilinx Spartan 6 FPGA embedded on the [SP605 Evaluation Kit](https://www.xilinx.com/products/boards-and-kits/ek-s6-sp605-g.html).
+to both **program** (upload the firmware of the FPGA using the kit) and **communicate** (make the FPGA send info and receive it with the PC and vice versa) with a Xilinx Spartan 6 FPGA embedded on the [SP605 Evaluation Kit](https://www.xilinx.com/products/boards-and-kits/ek-s6-sp605-g.html). 
+
+The implementation had to be addapted to a C++ code in linux so every CPU tool was then simulated on an own C++ code. 
 
 In order to connect both boards, the [CYUSB3ACC-005 FMC Interconnect Board](http://www.cypress.com/documentation/development-kitsboards/cyusb3acc-005-fmc-interconnect-board-ez-usb-fx3-superspeed) was used.
+
+**Note:**
+For confidentiality issues the integration of the whole project could not be uploaded but I uploaded what may be usefull for other people that does not conflict with confidiental agreenment. The FPGA code was also merged into an existing code but I couldn't upload anything of it.
 
 ## 1. Project Structure
  - **fx3_manager_cpp_source**: Cpp project to communicate with FX3 device.
@@ -351,15 +356,15 @@ To do both program and communicate with the FPGA, just follow the steps of secti
 
 ## 6. cpp Class for communicating with FX3
 
-Inside [testing_cpp_code](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/testing_cpp_code) there's a project that enables communication with the PC with the FX3. It performs download of firmware, programs the FPGA, prints descriptions and run performance tests between other things.
+Inside [fx3_manager_cpp_source](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/fx3_manager_cpp_source) there's a project that enables communication with the PC with the FX3. It performs download of firmware, programs the FPGA, prints descriptions and run performance tests between other things.
 
-If you run the code it automatically programs the FX3 devices. It waits for the user to turn on the FPGA and press enter.
+If you run the code (main function) it automatically programs the FX3 devices. It waits for the user to turn on the FPGA and press enter.
 Then it programs the FPGA.
+
+The communication to the FX3 device is done through a Cpp class that manages all the FX3 connection using cyusb library, who uses libusb-1.0. If the user whant's to do it's own function he can just change the main.cpp and use the class created.
+
 
 ## 7. Citations
 
 I would like to know if this explanations or code was useful to somebody so if it's the case let me know (star the project for ex.)
 Just use this as you need!
-
-## Note:
-This project is still under development. It started on Nov 2018.
