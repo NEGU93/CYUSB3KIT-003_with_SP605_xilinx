@@ -356,10 +356,9 @@ To do both program and communicate with the FPGA, just follow the steps of secti
 
 ## 6. cpp Class for communicating with FX3
 
-Inside [fx3_manager_cpp_source](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/fx3_manager_cpp_source) there's a project that enables communication with the PC with the FX3. It performs download of firmware, programs the FPGA, prints descriptions and run performance tests between other things.
+Inside [fx3_manager_cpp_source](https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx/tree/master/fx3_manager_cpp_source) there's a project that enables communication with the PC with the FX3. It performs download of firmware, programs the FPGA, prints descriptions, run performance tests, sends and receives bulk data between other things.
 
-If you run the code (main function) it automatically programs the FX3 devices. It waits for the user to turn on the FPGA and press enter.
-Then it programs the FPGA.
+If you run the code (main function) it automatically programs the FX3 devices. It waits for the user to turn on the FPGA and press enter. Then it programs the FPGA and finally tries some loopback communication asserting the data sent is the same that the data received.
 
 The communication to the FX3 device is done through a Cpp class that manages all the FX3 connection using cyusb library, who uses libusb-1.0. If the user whant's to do it's own function he can just change the main.cpp and use the class created.
 
