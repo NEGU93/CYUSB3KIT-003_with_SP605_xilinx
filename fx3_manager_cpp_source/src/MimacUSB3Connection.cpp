@@ -45,7 +45,7 @@ MimacUSB3Connection::MimacUSB3Connection() {
     rStatus = cyusb_open();
     if ( rStatus < 0 ) { throw ErrorOpeningLib(); }
     else if ( rStatus == 0 ) { throw NoDeviceFound(); }
-    cyusb_reset_device(cyusb_gethandle(0));
+    //cyusb_reset_device(cyusb_gethandle(0));
 }
 
 MimacUSB3Connection::MimacUSB3Connection(unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
@@ -541,14 +541,21 @@ void MimacUSB3Connection::send_text_file() {
     buf = (unsigned char *)malloc(maxps);
     while ( (nbr = read(fd_outfile, buf, maxps)) ) {
         send_buffer(buf, static_cast<int>(nbr));        // Send data to FPGA
+        sleep(1);
         transferred = recive_buffer(buf, static_cast<unsigned int>(nbr));   // Get data from FPGA
         if(transferred < 0) {
             printf("Error: Couldn't read the data back (error: %d)\n", rStatus);
+            free(buf);
+            ::close(fd_outfile);
+            ::close(fd_infile);
             return;
         }
         rStatus = static_cast<int>(write(fd_infile, buf, static_cast<size_t>(transferred)));
         if (rStatus < 0) {
             printf("Error: write returned %d\n", rStatus);
+            free(buf);
+            ::close(fd_outfile);
+            ::close(fd_infile);
             return;
         }
     }
@@ -641,7 +648,7 @@ void MimacUSB3Connection::send_buffer(unsigned char *buf, int sz) {
  * (should be same as data_count)
  * */
 int MimacUSB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count){
-    int rStatus;
+    //int rStatus;
     int transferred = 0;
     unsigned int end_ptr = 0x81;
 
@@ -651,9 +658,9 @@ int MimacUSB3Connection::recive_buffer(unsigned char *buf, unsigned int data_cou
     }
     buf = (unsigned char *)malloc(data_count);
     rStatus = cyusb_bulk_transfer(cyusb_gethandle(0), static_cast<unsigned char>(end_ptr), buf, data_count, &transferred, 1000);
-    printf("Bytes read from device = %d\n",transferred);
-    if ( rStatus ) {
-        printf("Error in bulk write!");
+    printf("Bytes read from device = %d\n", transferred);
+    if ( rStatus < 0 ) {
+        printf("Error in recive buffer: ");
         cyusb_error(rStatus);
         cyusb_close();
         return -1;
@@ -803,7 +810,7 @@ int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
     printf("Programming FPGA\n");
     // Start programming command
     rStatus = cyusb_control_write(
-            cyusb_gethandle(0),  /* a handle for the device to communicate with */
+            cyusb_gethandle(0),        /* a handle for the device to communicate with */
             WRITE_REQUEST_TYPE,        /* bmRequestType: the request type field for the setup packet */
             VND_CMD_SLAVESER_CFGLOAD,  /* bRequest: the request field for the setup packet */
             wValue,                    /* wValue: the value field for the setup packet */
@@ -811,13 +818,29 @@ int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
             (unsigned char *) &fpga_firmware_size,  /* *data: a suitably-sized data buffer */
             wLength,                   /* wLength: the length field for the setup packet. The data buffer should be at least this size. */
             timeout);                  /* timeout (in millseconds) that this function should wait before giving up due to no response being received. For an unlimited timeout, use value 0. */
-    printf("rStatus = %d\n", rStatus);
     if (rStatus < 0) {         /* LIB_USB_ERROR */
+        printf("rStatus = %d\n", rStatus);
         cyusb_error(rStatus);
         cyusb_close();
         return rStatus;
     }
     send_buffer(reinterpret_cast<unsigned char *>(buffer), fpga_firmware_size);  // Send the FPGA firmware
+    sleep(5);
+    rStatus = cyusb_control_read(
+            cyusb_gethandle(0),        /* a handle for the device to communicate with */
+            0xC0,        /* bmRequestType: the request type field for the setup packet */
+            VND_CMD_SLAVESER_CFGSTAT,  /* bRequest: the request field for the setup packet */
+            wValue,                    /* wValue: the value field for the setup packet */
+            wIndex,                    /* wIndex: the index field for the setup packet */
+            (unsigned char *) &fpga_firmware_size,  /* *data: a suitably-sized data buffer */
+            wLength,                   /* wLength: the length field for the setup packet. The data buffer should be at least this size. */
+            timeout);                  /* timeout (in millseconds) that this function should wait before giving up due to no response being received. For an unlimited timeout, use value 0. */
+    if (rStatus < 0) {         /* LIB_USB_ERROR */
+        printf("rStatus = %d\n", rStatus);
+        cyusb_error(rStatus);
+        cyusb_close();
+        return rStatus;
+    }
     fclose (fpga_file);
     free (buffer);
     return 0;

@@ -41,8 +41,8 @@ static void print_usage(FILE *stream, int exit_code) {
 static FILE *fp = stdout;
 
 
-void wait_for_enter() {
-    cout << "Please turn on the FPGA and then ";
+void wait_for_enter(const string &msg = "") {
+    cout << msg;
     cout << "press enter to continue..." << endl;
     cin.get();
     //system("read");
@@ -96,13 +96,13 @@ int main(int argc, char **argv) {
         //mimacUSB3Connection.claim_interface(0);
         //mimacUSB3Connection.test_performance();
         //mimacUSB3Connection.loopback_test();
-        wait_for_enter();
+        wait_for_enter("Please turn on the FPGA and then ");
         char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/bin/slaveFIFO2b_fpga_top.bin");
-		//char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/slaveFIFO2b_fpga_top.bin");
+		//char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/counter_for_testing.bin");
         //char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin");
         mimacUSB3Connection.program_device(fpga_filename);
-        //wait_for_enter();
-		//mimacUSB3Connection.send_text_file();
+        wait_for_enter();
+		mimacUSB3Connection.send_text_file();
     }
 	catch (ErrorOpeningLib& e) {
 		printf("Error opening library\n");
