@@ -351,7 +351,7 @@ To do both program and communicate with the FPGA, just follow the steps of secti
 </p>
 
 <p align="center">
-<img src="/img/prog_com/Image9.png" width="400"/>
+<img src="/img/prog_com/image9.png" width="400"/>
 </p>
 
 ## 6. cpp Class for communicating with FX3
