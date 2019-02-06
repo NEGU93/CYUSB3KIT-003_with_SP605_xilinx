@@ -239,8 +239,7 @@ renumerate (
 /* cyusb_open:
    Opens handles to all USB devices of interest, and returns their count.
  */
-int cyusb_open (
-		void)
+int cyusb_open (void)
 {
 	int fd1;
 	int r;
@@ -274,15 +273,15 @@ int cyusb_open (
 		unsigned short pid)
 {
 	int r;
-	cyusb_handle *h = NULL;
+	cyusb_handle *h = nullptr;
 
-	r = libusb_init(NULL);
+	r = libusb_init(nullptr);
 	if (r) {
 		printf("Error in initializing libusb library...\n");
 		return -EACCES;
 	}
 
-	h = libusb_open_device_with_vid_pid(NULL, vid, pid);
+	h = libusb_open_device_with_vid_pid(nullptr, vid, pid);
 	if ( !h ) {
 		printf("Device not found\n");
 		return -ENODEV;
@@ -293,8 +292,8 @@ int cyusb_open (
 	cydev[0].vid     = cyusb_getvendor(h);
 	cydev[0].pid     = cyusb_getproduct(h);
 	cydev[0].is_open = 1;
-	cydev[0].busnum  = cyusb_get_busnumber(h);
-	cydev[0].devaddr = cyusb_get_devaddr(h);
+	cydev[0].busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
+	cydev[0].devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
 	nid = 1;
 
 	return 1;
@@ -841,7 +840,7 @@ control_transfer (
 int
 cyusb_download_fx3 (
 		cyusb_handle *h,
-	       	const char *filename)
+	       	char *filename)
 {
 	int fd;
 	unsigned char buf[FX3_MAX_FW_SIZE];
@@ -908,6 +907,7 @@ cyusb_download_fx3 (
 	r = cyusb_control_transfer(h, 0x40, 0xA0, (program_entry & 0x0000ffff ) , program_entry >> 16, NULL, 0, 1000);
 	if ( r ) {
 		printf("Ignored error in control_transfer: %d\n", r);
+		return 1;
 	}
 
 	close(fd);

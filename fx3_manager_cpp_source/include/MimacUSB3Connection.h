@@ -28,6 +28,8 @@ using namespace std;
 #define VND_CMD_SLAVESER_CFGLOAD 0xB2       /* Command to program the FPGA */
 #define VND_CMD_SLAVESER_CFGSTAT 0xB1       /* Switch to the Slave FIFO interface */
 
+#define RESET_BOARD			0x0A
+
 class ErrorOpeningLib : public exception {
 public:
     char * what () {
@@ -75,13 +77,13 @@ public:
     int print_config_descriptor();
     int claim_interface(int interface);
     int download_fx3_firmware(char *filename, char *tgt_str);
-    //int download_fx3_firmware_to_ram(char* filename);
 
     int test_performance();
 
     void send_text_file();  // Loopback to test bulk comm
-
     int program_device(char *fpga_firmware_filename);
+
+    int reset_board();
 
 private:
     //! Variables
@@ -96,7 +98,7 @@ private:
     libusb_endpoint_descriptor *endpointDesc;
     libusb_ss_endpoint_companion_descriptor *companionDesc;
 
-    cyusb_handle *device_handle;
+    struct cydev cyusb_device;
 
     // Transfer Performance
     static unsigned int endpoint;           // Endpoint to be tested
@@ -121,7 +123,6 @@ private:
     //! Methods
     int get_device_descriptor();
     int get_device_config();
-
     int find_endpoint(unsigned int end_pt);
 
     // Bulk Transmision
