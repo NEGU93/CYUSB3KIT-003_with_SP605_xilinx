@@ -11,7 +11,6 @@
 #include <fcntl.h>
 #include <tgmath.h>
 #include "../include/FX3USB3Connection.h"
-#include "../include/download_fx3.h"
 
 #include <fstream>
 
