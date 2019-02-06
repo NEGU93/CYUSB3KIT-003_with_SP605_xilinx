@@ -56,11 +56,7 @@ static unsigned int 	checksum = 0;			/* Checksum calculated on the Cypress firmw
 /* isempty:
    Check if the first L characters of the string buf are white-space characters.
  */
-static bool
-isempty (
-		char *buf,
-		int L)
-{
+static bool isempty(char *buf, int L) {
 	bool flag = true;
 	int i;
 
@@ -78,9 +74,7 @@ isempty (
    Parse the /etc/cyusb.conf file and get the list of USB devices of interest.
  */
 static void
-parse_configfile (
-		void)
-{
+parse_configfile (){
 	FILE *inp;
 	char buf[MAX_CFG_LINE_LENGTH];
 	char *cp1, *cp2, *cp3;
@@ -144,10 +138,7 @@ parse_configfile (
 /* device_is_of_interest:
    Check whether the current USB device is among the devices of interest.
  */
-static int
-device_is_of_interest (
-		cyusb_device *d)
-{
+static int device_is_of_interest (cyusb_device *d){
 	int i;
 	int found = 0;
 	struct libusb_device_descriptor desc;
@@ -170,10 +161,7 @@ device_is_of_interest (
 /* cyusb_getvendor:
    Get the Vendor ID for the current USB device.
  */
-unsigned short
-cyusb_getvendor (
-		cyusb_handle *h)
-{
+unsigned short cyusb_getvendor (cyusb_handle *h){
 	struct libusb_device_descriptor d;
 	cyusb_get_device_descriptor(h, &d);
 	return d.idVendor;
@@ -182,9 +170,7 @@ cyusb_getvendor (
 /* cyusb_getproduct:
    Get the Product ID for the current USB device.
 */
-unsigned short
-cyusb_getproduct (
-		cyusb_handle *h)
+unsigned short cyusb_getproduct (cyusb_handle *h)
 {
 	struct libusb_device_descriptor d;
 	cyusb_get_device_descriptor(h, &d);
@@ -194,10 +180,7 @@ cyusb_getproduct (
 /* renumerate:
    Get handles to and store information about all USB devices of interest.
  */
-static int
-renumerate (
-		void)
-{
+static int renumerate() {
 	cyusb_device *dev = NULL;
 	cyusb_handle *handle = NULL;
 	int           numdev;

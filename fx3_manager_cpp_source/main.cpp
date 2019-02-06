@@ -8,12 +8,13 @@
 #include <iostream>
 
 #include "include/cyusb.h"
-#include "include/MimacUSB3Connection.h"
+#include "include/FX3USB3Connection.h"
 
 using namespace std;
 
 #define VID         0x04B4     /**<USB Vendor ID.*/
-#define PID_FX3     0x00f3      /**FX3 Cyusb device */
+#define PID_FX3     0x00f3     /**FX3 Cyusb device */
+#define PIX_FX1     0x00f1
 
 /********** Cut and paste the following & modify as required  **********/
 static const char *program_name;
@@ -50,13 +51,16 @@ void wait_for_enter(const string &msg = "") {
 
 
 void program() {
-	MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection();
-	//mimacUSB3Connection.reset_board();
+	MimacUSB3Connection fx3USB3Connection = MimacUSB3Connection(VID, PID_FX3);
+	/*if (mimacUSB3Connection.reset_board() != 0) {
+		printf("Failed to reset FX3 device");
+		exit(-1);
+	}*/
 	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
 	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulklpautoenum.img");
 	char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync.img");
 	char *tgt_str = const_cast<char *>("ram");
-	if (mimacUSB3Connection.download_fx3_firmware(filename, tgt_str) != 0) {
+	if (fx3USB3Connection.download_fx3_firmware(filename, tgt_str) != 0) {
 		printf("Failed to program FX3 device");
 		exit(-1);
 	}
@@ -92,7 +96,7 @@ int main(int argc, char **argv) {
 	    program();
 	    sleep(1);
 
-		MimacUSB3Connection mimacUSB3Connection = MimacUSB3Connection();
+		MimacUSB3Connection fx3USB3Connection = MimacUSB3Connection(VID, PIX_FX1);
 		//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
 		//char *tgt_str = const_cast<char *>("ram");
 		//mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
@@ -105,9 +109,9 @@ int main(int argc, char **argv) {
         char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/bin/slaveFIFO2b_fpga_top.bin");
 		//char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/counter_for_testing.bin");
         //char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin");
-        mimacUSB3Connection.program_device(fpga_filename);
+		fx3USB3Connection.program_device(fpga_filename);
         wait_for_enter();
-		mimacUSB3Connection.send_text_file();
+		fx3USB3Connection.send_text_file();
     }
 	catch (ErrorOpeningLib& e) {
 		printf("Error opening library\n");

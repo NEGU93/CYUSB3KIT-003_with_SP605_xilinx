@@ -73,10 +73,11 @@ public:
     ~MimacUSB3Connection();
 
 
+    int print_devices();
     int print_device_descriptor();
     int print_config_descriptor();
     int claim_interface(int interface);
-    int download_fx3_firmware(char *filename, char *tgt_str);
+    int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"));
 
     int test_performance();
 
