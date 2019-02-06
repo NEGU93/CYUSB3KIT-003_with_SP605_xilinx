@@ -348,9 +348,7 @@ cyusb_gethandle (
    Close all device handles and de-initialize the libusb library.
  */
 void
-cyusb_close (
-		void)
-{
+cyusb_close() {
 	int i;
 
 	for ( i = 0; i < nid; ++i ) {

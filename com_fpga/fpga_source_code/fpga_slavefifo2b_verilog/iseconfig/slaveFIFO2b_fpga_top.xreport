@@ -207,7 +207,7 @@
     <toc-item title="Top of Report" target="top.lpc" searchDir="Forward" />
     <toc-item title="Newly Added Constraints" target="The following constraints were newly added" />
    </view>
-   <view inputState="Translated" program="netgen" contextTags="CPLD_ONLY,EDK_OFF" hidden="if_missing" type="Secondary_Report" file="netgen/fit/slaveFIFO2b_fpga_top_timesim.nlf" label="Post-Fit Simulation Model Report" />
+   <view inputState="Translated" program_fx3_device="netgen" contextTags="CPLD_ONLY,EDK_OFF" hidden="if_missing" type="Secondary_Report" file="netgen/fit/slaveFIFO2b_fpga_top_timesim.nlf" label="Post-Fit Simulation Model Report" />
    <view inputState="Routed" program="bitgen" contextTags="FPGA_ONLY" hidden="if_missing" type="HTML" file="usage_statistics_webtalk.html" label="WebTalk Report" />
    <view inputState="Routed" program="bitgen" contextTags="FPGA_ONLY" hidden="if_missing" type="Secondary_Report" file="webtalk.log" label="WebTalk Log File" />
   </viewgroup>

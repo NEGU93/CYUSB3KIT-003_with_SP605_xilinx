@@ -17,30 +17,30 @@
 //#define DEBUG
 
 // static variables
-unsigned int MimacUSB3Connection::endpoint;         // Endpoint to be tested
-unsigned int MimacUSB3Connection::reqsize;          // Request size in number of packets
-unsigned int MimacUSB3Connection::queuedepth;       // Number of requests to queue
-unsigned int MimacUSB3Connection::duration;         // Duration of the test in seconds
+unsigned int FX3USB3Connection::endpoint;         // Endpoint to be tested
+unsigned int FX3USB3Connection::reqsize;          // Request size in number of packets
+unsigned int FX3USB3Connection::queuedepth;       // Number of requests to queue
+unsigned int FX3USB3Connection::duration;         // Duration of the test in seconds
 
-unsigned char MimacUSB3Connection::eptype;		    // Type of endpoint (transfer type)
-unsigned int MimacUSB3Connection::pktsize;		    // Maximum packet size for the endpoint
+unsigned char FX3USB3Connection::eptype;		    // Type of endpoint (transfer type)
+unsigned int FX3USB3Connection::pktsize;		    // Maximum packet size for the endpoint
 
-bool	MimacUSB3Connection::stop_transfers;	    // Request to stop data transfers
-int		MimacUSB3Connection::rqts_in_flight;	    // Number of transfers that are in progress
+bool	FX3USB3Connection::stop_transfers;	    // Request to stop data transfers
+int		FX3USB3Connection::rqts_in_flight;	    // Number of transfers that are in progress
 
-unsigned int MimacUSB3Connection::success_count;	// Number of successful transfers
-unsigned int MimacUSB3Connection::failure_count;	// Number of failed transfers
-unsigned int MimacUSB3Connection::transfer_size;	// Size of data transfers performed so far
-unsigned int MimacUSB3Connection::transfer_index;	// Write index into the transfer_size array
+unsigned int FX3USB3Connection::success_count;	// Number of successful transfers
+unsigned int FX3USB3Connection::failure_count;	// Number of failed transfers
+unsigned int FX3USB3Connection::transfer_size;	// Size of data transfers performed so far
+unsigned int FX3USB3Connection::transfer_index;	// Write index into the transfer_size array
 
-struct timeval	MimacUSB3Connection::start_ts;	    // Data transfer start time stamp.
-struct timeval	MimacUSB3Connection::end_ts;		// Data transfer stop time stamp.
+struct timeval	FX3USB3Connection::start_ts;	    // Data transfer start time stamp.
+struct timeval	FX3USB3Connection::end_ts;		// Data transfer stop time stamp.
 
 // Methods
 /**
  * Opens if there's only one USB3 device
  * */
-MimacUSB3Connection::MimacUSB3Connection() {
+FX3USB3Connection::FX3USB3Connection() {
     fp = stdout;
     cyusb_handle *h = nullptr;
     rStatus = cyusb_open();
@@ -64,7 +64,7 @@ MimacUSB3Connection::MimacUSB3Connection() {
 /**
  * Opens cyusb device given the pid and vid value.
  * */
-MimacUSB3Connection::MimacUSB3Connection(unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
+FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
     fp = stdout;
     cyusb_handle *h = nullptr;
     rStatus = cyusb_open(vid, pid);
@@ -91,7 +91,7 @@ MimacUSB3Connection::MimacUSB3Connection(unsigned short vid, unsigned short pid)
     }
 }
 
-MimacUSB3Connection::~MimacUSB3Connection() {
+FX3USB3Connection::~FX3USB3Connection() {
     cyusb_close();
 }
 
@@ -100,15 +100,15 @@ MimacUSB3Connection::~MimacUSB3Connection() {
  * VID/PID. The program itself accepts options : Either vid/pid on the command line OR first
  * VID/PID of interest in cyusb.conf
  * */
-int MimacUSB3Connection::get_device_descriptor() {
+int FX3USB3Connection::get_device_descriptor() {
     rStatus = cyusb_get_device_descriptor(cyusb_device.handle, &deviceDesc);
     if ( rStatus ) {
-        fprintf(stderr, "MimacUSB3Connection::get_device_descriptor(): Error getting device descriptor\n");
+        fprintf(stderr, "FX3USB3Connection::get_device_descriptor(): Error getting device descriptor\n");
         return -2;
     }
     return rStatus;
 }
-int MimacUSB3Connection::print_device_descriptor(){
+int FX3USB3Connection::print_device_descriptor(){
     rStatus = get_device_descriptor();
     if(!rStatus) {
         fprintf(fp, "bLength             = %d\n", deviceDesc.bLength);
@@ -131,7 +131,7 @@ int MimacUSB3Connection::print_device_descriptor(){
 }
 
 /**This program is a CLI program to extract the current configuration of a device.*/
-int MimacUSB3Connection::get_device_config() {
+int FX3USB3Connection::get_device_config() {
     int config = 0;
 
     rStatus = cyusb_get_configuration(cyusb_device.handle,&config);
@@ -150,7 +150,7 @@ int MimacUSB3Connection::get_device_config() {
 
     rStatus = cyusb_get_active_config_descriptor(cyusb_device.handle, &configDesc);
     if ( rStatus ) {
-        fprintf(stderr, "MimacUSB3Connection::get_device_config(): Error retrieving config descriptor\n");
+        fprintf(stderr, "FX3USB3Connection::get_device_config(): Error retrieving config descriptor\n");
         cyusb_error(rStatus);
         cyusb_close();
         return rStatus;
@@ -159,7 +159,7 @@ int MimacUSB3Connection::get_device_config() {
     return 0;
 }
 
-int MimacUSB3Connection::print_config_descriptor() {
+int FX3USB3Connection::print_config_descriptor() {
     char tbuf[64];
 
     rStatus = get_device_config();
@@ -189,7 +189,7 @@ int MimacUSB3Connection::print_config_descriptor() {
  * This program is a CLI program to claim an interface for a device which has an unclaimed
  * interface
  * */
-int MimacUSB3Connection::claim_interface(int interface) {
+int FX3USB3Connection::claim_interface(int interface) {
     int kernel_attached = 0;
 
     rStatus = cyusb_kernel_driver_active(cyusb_device.handle, interface);
@@ -229,7 +229,7 @@ int MimacUSB3Connection::claim_interface(int interface) {
 /**
  * Next bunch of functions are done to upload a .img firmware to the FX3 device
  * */
-int MimacUSB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
+int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
     fx3_fw_target tgt = FW_TARGET_NONE;
 
     if (strcasecmp (tgt_str, "ram") == 0) { tgt = FW_TARGET_RAM; }
@@ -275,7 +275,7 @@ int MimacUSB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
 /**
  * Search for a specific endpoint to see if it exists
  * */
-int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
+int FX3USB3Connection::find_endpoint(unsigned int end_pt) {
     int  if_numsettings;
     bool found_ep = false;
     cyusb_handle *device_handle;
@@ -283,7 +283,7 @@ int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
     // Step 1: Get a handle to the first CyUSB device.
     device_handle = cyusb_device.handle;
     if (device_handle == nullptr) {
-        fprintf (stderr, "MimacUSB3Connection::find_endpoint(): Failed to get CyUSB device handle\n");
+        fprintf (stderr, "FX3USB3Connection::find_endpoint(): Failed to get CyUSB device handle\n");
         cyusb_error(rStatus);
         cyusb_close();
         return -EACCES;
@@ -325,7 +325,7 @@ int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
     }
 
     if (!found_ep) {
-        fprintf (stderr, "MimacUSB3Connection::find_endpoint(): Failed to find endpoint 0x%x on device\n", end_pt);
+        fprintf (stderr, "FX3USB3Connection::find_endpoint(): Failed to find endpoint 0x%x on device\n", end_pt);
         cyusb_free_config_descriptor(configDesc);
         cyusb_close ();
         return (-ENOENT);
@@ -340,7 +340,7 @@ int MimacUSB3Connection::find_endpoint(unsigned int end_pt) {
 *   from a Cypress USB device. Endpoints of type Bulk, Interrupt
 *   and Isochronous are supported.
 */
-int MimacUSB3Connection::test_performance() {
+int FX3USB3Connection::test_performance() {
     cyusb_handle *device_handle;
     int  if_numsettings;
     bool found_ep = false;
@@ -555,7 +555,7 @@ int MimacUSB3Connection::test_performance() {
  * Uses send and receive buffer to send a text file expecting a loopback.
  * It stores the data on some files and assest the received file is equal to se sent file.
  * */
-void MimacUSB3Connection::send_text_file() {
+void FX3USB3Connection::send_text_file() {
     ssize_t nbr;
     unsigned char *buf;
     size_t maxps = 0;
@@ -567,12 +567,12 @@ void MimacUSB3Connection::send_text_file() {
 
     fd_outfile = open(out_text_filename, O_RDONLY);
     if ( fd_outfile < 0 ) {
-        fprintf(stderr, "MimacUSB3Connection::send_text_file(): Output file not found!");
+        fprintf(stderr, "FX3USB3Connection::send_text_file(): Output file not found!");
         return;
     }
     fd_infile = open(in_text_filename, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
     if ( fd_infile < 0 ) {
-        fprintf(stderr, "MimacUSB3Connection::send_text_file(): Input file creation error");
+        fprintf(stderr, "FX3USB3Connection::send_text_file(): Input file creation error");
         return;
     }
 
@@ -584,7 +584,7 @@ void MimacUSB3Connection::send_text_file() {
         sleep(1);
         transferred = recive_buffer(buf, static_cast<unsigned int>(nbr));   // Get data from FPGA
         if(transferred < 0) {
-            fprintf(stderr, "MimacUSB3Connection::send_text_file(): Error Couldn't read the data back (error: %d)\n", rStatus);
+            fprintf(stderr, "FX3USB3Connection::send_text_file(): Error Couldn't read the data back (error: %d)\n", rStatus);
             free(buf);
             ::close(fd_outfile);
             ::close(fd_infile);
@@ -592,7 +592,7 @@ void MimacUSB3Connection::send_text_file() {
         }
         rStatus = static_cast<int>(write(fd_infile, buf, static_cast<size_t>(transferred)));
         if (rStatus < 0) {
-            fprintf(stderr, "MimacUSB3Connection::send_text_file(): Error write returned %d\n", rStatus);
+            fprintf(stderr, "FX3USB3Connection::send_text_file(): Error write returned %d\n", rStatus);
             free(buf);
             ::close(fd_outfile);
             ::close(fd_infile);
@@ -609,13 +609,13 @@ void MimacUSB3Connection::send_text_file() {
  * Compares to files and asserts they are the same.
  * Prints the number of missmatches and returns it's value
  * */
-int MimacUSB3Connection::compare_files(char *fp1_string, char *fp2_string) {
+int FX3USB3Connection::compare_files(char *fp1_string, char *fp2_string) {
     printf("Comparing both files ...\n");
     // opening both file in read only mode
     FILE *fp1 = fopen(fp1_string, "r");
     FILE *fp2 = fopen(fp2_string, "r");
     if (fp1 == nullptr || fp2 == nullptr) {
-        fprintf(stderr, "MimacUSB3Connection::compare_files(): Error: Files not open");
+        fprintf(stderr, "FX3USB3Connection::compare_files(): Error: Files not open");
         exit(0);
     }
 
@@ -663,13 +663,13 @@ int MimacUSB3Connection::compare_files(char *fp1_string, char *fp2_string) {
 /**
  * Sends the data stored on buf of size sz to the endpoint 0x01
  * */
-void MimacUSB3Connection::send_buffer(unsigned char *buf, int sz) {
+void FX3USB3Connection::send_buffer(unsigned char *buf, int sz) {
     int rStatus;
     int transferred = 0;
     unsigned int end_ptr = 0x01;
 
     if(find_endpoint(end_ptr) != 0) {
-        fprintf(stderr, "MimacUSB3Connection::send_buffer(): Error: endpoint (%d) not found\n", end_ptr);
+        fprintf(stderr, "FX3USB3Connection::send_buffer(): Error: endpoint (%d) not found\n", end_ptr);
         return;
     }
 
@@ -687,13 +687,13 @@ void MimacUSB3Connection::send_buffer(unsigned char *buf, int sz) {
  * Reads data from endpoint 0x81 to buf and returns the size of data read
  * (should be same as data_count)
  * */
-int MimacUSB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count){
+int FX3USB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count){
     //int rStatus;
     int transferred = 0;
     unsigned int end_ptr = 0x81;
 
     if(find_endpoint(end_ptr) != 0) {
-        fprintf(stderr, "MimacUSB3Connection::recive_buffer(): Error: endpoint (%d) not found\n", end_ptr);
+        fprintf(stderr, "FX3USB3Connection::recive_buffer(): Error: endpoint (%d) not found\n", end_ptr);
         return -1;
     }
     buf = (unsigned char *)malloc(data_count);
@@ -709,7 +709,7 @@ int MimacUSB3Connection::recive_buffer(unsigned char *buf, unsigned int data_cou
 }
 
 //! Function to free data buffers and transfer structures
-void MimacUSB3Connection::free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth) {
+void FX3USB3Connection::free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth) {
     // Free up any allocated data buffers
     if (databuffers != nullptr) {
         for (unsigned int i = 0; i < queuedepth; i++) {
@@ -735,7 +735,7 @@ void MimacUSB3Connection::free_transfer_buffers(unsigned char **databuffers, str
 
 //! Function: xfer_callback
 //! This is the call back function called by libusb upon completion of a queued data transfer.
-void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
+void FX3USB3Connection::xfer_callback(struct libusb_transfer *transfer) {
     unsigned int elapsed_time;
     int size = 0;
 
@@ -815,7 +815,7 @@ void MimacUSB3Connection::xfer_callback(struct libusb_transfer *transfer) {
  *   LIBUSB_ERROR_NO_DEVICE if the device has been disconnected
  *   another LIBUSB_ERROR code on other failures
  * */
-int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
+int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
     FILE * fpga_file;
     unsigned int fpga_firmware_size;
     char * buffer;
@@ -889,7 +889,7 @@ int MimacUSB3Connection::program_device(char *fpga_firmware_filename) {
 /**
  *  Not yet debuged nor working
  * */
-int MimacUSB3Connection::reset_board() {
+int FX3USB3Connection::reset_board() {
     return cyusb_reset_device(cyusb_device.handle);
     /*unsigned char instruction[32];
     int transferred = 0;
@@ -922,12 +922,12 @@ int MimacUSB3Connection::reset_board() {
  * Returns number of USB devices on success
  * libusb error upon error.
  * */
-int MimacUSB3Connection::print_devices() {
+int FX3USB3Connection::print_devices() {
     struct  libusb_device_descriptor desc{};
     libusb_device	**list;
     int numdev;
 
-    numdev = libusb_get_device_list(nullptr, &list);    // Get all usb devices
+    numdev = static_cast<int>(libusb_get_device_list(nullptr, &list));    // Get all usb devices
     if (numdev < 0) {
         printf("Fail, no device to list: %s", libusb_error_name(numdev));
         return numdev;
@@ -944,6 +944,6 @@ int MimacUSB3Connection::print_devices() {
     return numdev;
 }
 
-/*int MimacUSB3Connection::download_fx3_firmware_ram(char *filename, char *tgt_str) {
+/*int FX3USB3Connection::download_fx3_firmware_ram(char *filename, char *tgt_str) {
     return cyusb_download_fx3(cyusb_device.handle, filename);
 }*/

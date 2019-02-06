@@ -203,7 +203,7 @@
     <toc-item title="Top of Report" target="pin2ucf Report File" searchDir="Forward" />
     <toc-item title="Constraint Conflicts Information" target="Constraint Conflicts Information" />
    </view>
-   <view inputState="Routed" program="pin2ucf" contextTags="FPGA_ONLY" hidden="if_missing" type="Secondary_Report" file="slaveFIFO2b_fpga_top.lpc" label="Locked Pin Constraints" >
+   <view inputState="Routed" program_fx3_device="pin2ucf" contextTags="FPGA_ONLY" hidden="if_missing" type="Secondary_Report" file="slaveFIFO2b_fpga_top.lpc" label="Locked Pin Constraints" >
     <toc-item title="Top of Report" target="top.lpc" searchDir="Forward" />
     <toc-item title="Newly Added Constraints" target="The following constraints were newly added" />
    </view>

@@ -45,7 +45,7 @@
    <view program="xst" WrapMessages="true" contextTags="XST_ONLY,EDK_OFF" hidden="false" type="MessageList" hideColumns="Filtered" file="_xmsgs/xst.xmsgs" label="Synthesis Messages" />
    <view inputState="Synthesized" program="ngdbuild" WrapMessages="true" type="MessageList" hideColumns="Filtered" file="_xmsgs/ngdbuild.xmsgs" label="Translation Messages" />
    <view inputState="Translated" program="map" WrapMessages="true" contextTags="FPGA_ONLY" type="MessageList" hideColumns="Filtered" file="_xmsgs/map.xmsgs" label="Map Messages" />
-   <view inputState="Mapped" program="par" WrapMessages="true" contextTags="FPGA_ONLY" type="MessageList" hideColumns="Filtered" file="_xmsgs/par.xmsgs" label="Place and Route Messages" />
+   <view inputState="Mapped" program_fx3_device="par" WrapMessages="true" contextTags="FPGA_ONLY" type="MessageList" hideColumns="Filtered" file="_xmsgs/par.xmsgs" label="Place and Route Messages" />
    <view inputState="Routed" program="trce" WrapMessages="true" contextTags="FPGA_ONLY" type="MessageList" hideColumns="Filtered" file="_xmsgs/trce.xmsgs" label="Timing Messages" />
    <view inputState="Routed" program="xpwr" WrapMessages="true" contextTags="EDK_OFF" hidden="true" type="MessageList" hideColumns="Filtered" file="_xmsgs/xpwr.xmsgs" label="Power Messages" />
    <view inputState="Routed" program="bitgen" WrapMessages="true" contextTags="FPGA_ONLY" type="MessageList" hideColumns="Filtered" file="_xmsgs/bitgen.xmsgs" label="Bitgen Messages" />

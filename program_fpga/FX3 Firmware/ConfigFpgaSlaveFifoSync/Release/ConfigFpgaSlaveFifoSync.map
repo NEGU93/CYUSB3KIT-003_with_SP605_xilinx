@@ -10225,7 +10225,7 @@ LOAD C:\Program Files (x86)\Cypress\EZ-USB FX3 SDK\1.3\ARM GCC\\arm-none-eabi\li
 LOAD C:\Program Files (x86)\Cypress\EZ-USB FX3 SDK\1.3\ARM GCC\\lib\gcc\arm-none-eabi\4.8.1\libgcc.a
 START GROUP
 LOAD c:/program files (x86)/cypress/ez-usb fx3 sdk/1.3/arm gcc/bin/../lib/gcc/arm-none-eabi/4.8.1\libgcc.a
-LOAD c:/program files (x86)/cypress/ez-usb fx3 sdk/1.3/arm gcc/bin/../lib/gcc/arm-none-eabi/4.8.1/../../../../arm-none-eabi/lib\libc.a
+LOAD c:/program_fx3_device files (x86)/cypress/ez-usb fx3 sdk/1.3/arm gcc/bin/../lib/gcc/arm-none-eabi/4.8.1/../../../../arm-none-eabi/lib\libc.a
 END GROUP
 
 .vectors        0x00000100     0x2380

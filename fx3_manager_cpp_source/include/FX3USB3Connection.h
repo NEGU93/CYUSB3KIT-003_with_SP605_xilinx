@@ -2,8 +2,8 @@
 // Created by barrachina on 12/13/18.
 //
 
-#ifndef TESTING_CPP_CODE_MIMACUSB3CONNECTION_H
-#define TESTING_CPP_CODE_MIMACUSB3CONNECTION_H
+#ifndef TESTING_CPP_CODE_FX3USB3CONNECTION_H
+#define TESTING_CPP_CODE_FX3USB3CONNECTION_H
 
 #include <cstdio>
 #include <stdlib.h> // strol, calloc, free
@@ -25,7 +25,7 @@ using namespace std;
 #define WRITE_REQUEST_TYPE  0x40
 #define READ_REQUEST_TYPE   0x80
 
-#define VND_CMD_SLAVESER_CFGLOAD 0xB2       /* Command to program the FPGA */
+#define VND_CMD_SLAVESER_CFGLOAD 0xB2       /* Command to program_fx3_device the FPGA */
 #define VND_CMD_SLAVESER_CFGSTAT 0xB1       /* Switch to the Slave FIFO interface */
 
 #define RESET_BOARD			0x0A
@@ -65,12 +65,12 @@ const int i2c_eeprom_size[] =
                 131072		// bImageCtl[2:0] = 'b111
         };
 
-class MimacUSB3Connection {
+class FX3USB3Connection {
 public:
 
-    MimacUSB3Connection();
-    MimacUSB3Connection(unsigned short vid, unsigned short pid);
-    ~MimacUSB3Connection();
+    FX3USB3Connection();
+    FX3USB3Connection(unsigned short vid, unsigned short pid);
+    ~FX3USB3Connection();
 
 
     int print_devices();
@@ -136,4 +136,4 @@ private:
 };
 
 
-#endif //TESTING_CPP_CODE_MIMACUSB3CONNECTION_H
+#endif //TESTING_CPP_CODE_FX3USB3CONNECTION_H

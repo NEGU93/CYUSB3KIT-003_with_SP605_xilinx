@@ -25,7 +25,7 @@
    <view inputState="Mapped" program="par" locator="CONSTRAINT_TABLE" contextTags="FPGA_ONLY" type="ConstraintsData" file="counter.ptwx" label="Timing Constraints" translator="ptwxToTableXML.xslt" />
    <view inputState="Mapped" program="par" locator="PAR_PINOUT_BY_PIN_NUMBER" contextTags="FPGA_ONLY" type="PinoutData" file="counter_par.xrpt" showConstraints="0" label="Pinout Report" />
    <view inputState="Mapped" program="par" locator="PAR_CLOCK_TABLE" contextTags="FPGA_ONLY" type="ClocksData" file="counter_par.xrpt" label="Clock Report" />
-   <view inputState="Mapped" program="par" contextTags="FPGA_ONLY,EDK_OFF" type="Timing_Analyzer" file="counter.twx" label="Static Timing" />
+   <view inputState="Mapped" program_fx3_device="par" contextTags="FPGA_ONLY,EDK_OFF" type="Timing_Analyzer" file="counter.twx" label="Static Timing" />
    <view inputState="Translated" program="cpldfit" contextTags="CPLD_ONLY,EDK_OFF" hidden="true" type="EXTERNAL_HTML" file="counter_html/fit/report.htm" label="CPLD Fitter Report" />
    <view inputState="Fitted" program="taengine" contextTags="CPLD_ONLY,EDK_OFF" hidden="true" type="EXTERNAL_HTML" file="counter_html/tim/report.htm" label="CPLD Timing Report" />
   </viewgroup>

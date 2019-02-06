@@ -5,7 +5,7 @@
   (status
     (written
       (timestamp 2014 8 1 14 41 15)
-      (program "Xilinx ngc2edif" (version "P.28xd"))
+      (program_fx3_device "Xilinx ngc2edif" (version "P.28xd"))
       (author "Xilinx. Inc ")
       (comment "This EDIF netlist is to be used within supported synthesis tools")
       (comment "for determining resource/timing estimates of the design component")

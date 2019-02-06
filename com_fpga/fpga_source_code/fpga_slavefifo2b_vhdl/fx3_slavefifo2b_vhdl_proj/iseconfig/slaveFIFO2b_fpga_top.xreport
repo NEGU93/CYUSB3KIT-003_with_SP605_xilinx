@@ -191,7 +191,7 @@
     <toc-item title="Top of Report" target="Copyright (c)" searchDir="Forward" />
    </view>
    <view inputState="Routed" program="netgen" hidden="if_missing" type="Secondary_Report" file="slaveFIFO2b_fpga_top_par_fecn.nlf" label="Post-Place and Route Formality Netlist Report" />
-   <view inputState="Routed" program="netgen" contextTags="FPGA_ONLY" hidden="if_missing" type="Secondary_Report" file="netgen/par/slaveFIFO2b_fpga_top_timesim.nlf" label="Post-Place and Route Simulation Model Report" />
+   <view inputState="Routed" program_fx3_device="netgen" contextTags="FPGA_ONLY" hidden="if_missing" type="Secondary_Report" file="netgen/par/slaveFIFO2b_fpga_top_timesim.nlf" label="Post-Place and Route Simulation Model Report" />
    <view inputState="Routed" program="netgen" hidden="if_missing" type="Secondary_Report" file="slaveFIFO2b_fpga_top_sta.nlf" label="Primetime Netlist Report" >
     <toc-item title="Top of Report" target="Release" searchDir="Forward" />
    </view>

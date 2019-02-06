@@ -51,21 +51,21 @@ void wait_for_enter(const string &msg = "") {
 
 
 void program() {
-	MimacUSB3Connection fx3USB3Connection = MimacUSB3Connection(VID, PID_FX3);
-	/*if (mimacUSB3Connection.reset_board() != 0) {
+	FX3USB3Connection fx3USB3Connection = FX3USB3Connection(VID, PID_FX3);
+	/*if (fx3USB3Connection.reset_board() != 0) {
 		printf("Failed to reset FX3 device");
 		exit(-1);
 	}*/
-	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
-	//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulklpautoenum.img");
-	char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync.img");
+	//char *filename = const_cast<char *>("fx3_images/cyfxbulksrcsink.img");
+	//char *filename = const_cast<char *>("fx3_images/cyfxbulklpautoenum.img");
+	char *filename = const_cast<char *>("../program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync.img");
 	char *tgt_str = const_cast<char *>("ram");
 	if (fx3USB3Connection.download_fx3_firmware(filename, tgt_str) != 0) {
 		printf("Failed to program FX3 device");
 		exit(-1);
 	}
-	//mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
-    //mimacUSB3Connection.download_fx3_firmware_to_ram(filename);
+	//fx3USB3Connection.download_fx3_firmware(filename, tgt_str);
+    //fx3USB3Connection.download_fx3_firmware_to_ram(filename);
 }
 
 int main(int argc, char **argv) {
@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
 				  print_usage(stdout, 0);
 			case 'v': /* -v or --version */
 				  printf("%s (Ver 2.0)\n", program_name);
-				  printf("MIMAC group LPSC IN2P3 CNRS (2018)\n");
+				  printf("Jose Agustin Barrachina GitHub: NEGU93 (2018)\n");
 				  exit(0);
 			case 'o': /* -o or --output */
 				  out_filename = optarg;
@@ -96,19 +96,15 @@ int main(int argc, char **argv) {
 	    program();
 	    sleep(1);
 
-		MimacUSB3Connection fx3USB3Connection = MimacUSB3Connection(VID, PIX_FX1);
-		//char *filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/fx3_images/cyfxbulksrcsink.img");
-		//char *tgt_str = const_cast<char *>("ram");
-		//mimacUSB3Connection.download_fx3_firmware(filename, tgt_str);
-        //mimacUSB3Connection.print_device_descriptor();
-        //mimacUSB3Connection.print_config_descriptor();
-        //mimacUSB3Connection.claim_interface(0);
-        //mimacUSB3Connection.test_performance();
-        //mimacUSB3Connection.loopback_test();
+		FX3USB3Connection fx3USB3Connection = FX3USB3Connection(VID, PIX_FX1);
+        //fx3USB3Connection.print_device_descriptor();
+        //fx3USB3Connection.print_config_descriptor();
+        //fx3USB3Connection.claim_interface(0);
+        //fx3USB3Connection.test_performance();
+        //fx3USB3Connection.loopback_test();
         wait_for_enter("Please turn on the FPGA and then ");
-        char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/bin/slaveFIFO2b_fpga_top.bin");
-		//char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/counter_for_testing.bin");
-        //char * fpga_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/fpga_master.bin");
+        char * fpga_filename = const_cast<char *>("../program_fpga/bin/slaveFIFO2b_fpga_top.bin");
+		//char * fpga_filename = const_cast<char *>("../counter_for_testing.bin");
 		fx3USB3Connection.program_device(fpga_filename);
         wait_for_enter();
 		fx3USB3Connection.send_text_file();

@@ -4,7 +4,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 Thu Dec 20 10:02:10 2018
 
 
-# NOTE: This file is designed to be imported into a spreadsheet program
+# NOTE: This file is designed to be imported into a spreadsheet program_fx3_device
 # such as Microsoft Excel for viewing, printing and sorting. The |
 # character is used as the data field separator. This file is also designed
 # to support parsing.

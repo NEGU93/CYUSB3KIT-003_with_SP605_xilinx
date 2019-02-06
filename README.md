@@ -294,7 +294,7 @@ The cables will be connected as follow:
 ### 4.3 debugging via UART
 
 The programming firmware was modified to print debugging messages over a UART interface using GPIO[46..49] of the FX3 device.
-To see those messages you must connect those pins to a UART device and use a program like *putty* or *Tera Term* to display the messages in question.
+To see those messages you must connect those pins to a UART device and use a program_fx3_device like *putty* or *Tera Term* to display the messages in question.
 
 Example of *Tera Term* screen:
 ```

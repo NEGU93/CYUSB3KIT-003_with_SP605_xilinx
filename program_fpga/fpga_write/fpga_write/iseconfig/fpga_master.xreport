@@ -80,7 +80,7 @@
     <toc-item title="Timing Details" target="Timing Details" subItemLevel="2" />
     <toc-item title="Cross Clock Domains Report" target="Cross Clock Domains Report:" subItemLevel="2" />
    </view>
-   <view program="synplify" contextTags="SYNPLIFY_ONLY,EDK_OFF" hidden="true" type="Report" file="fpga_master.srr" label="Synplify Report" />
+   <view program_fx3_device="synplify" contextTags="SYNPLIFY_ONLY,EDK_OFF" hidden="true" type="Report" file="fpga_master.srr" label="Synplify Report" />
    <view program="precision" contextTags="PRECISION_ONLY,EDK_OFF" hidden="true" type="Report" file="fpga_master.prec_log" label="Precision Report" />
    <view inputState="Synthesized" program="ngdbuild" type="Report" file="fpga_master.bld" label="Translation Report" >
     <toc-item title="Top of Report" target="Copyright (c)" searchDir="Forward" />
