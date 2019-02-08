@@ -73,7 +73,7 @@ FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) : v
         throw ErrorOpeningLib();
     }
     else if (rStatus == 0) { throw NoDeviceFound(); }
-    if(rStatus == 1) {
+    else if(rStatus == 1) {
         h = libusb_open_device_with_vid_pid(nullptr, vid, pid);
         if ( !h ) {
             fprintf(stderr, "Device not found\n");
@@ -144,9 +144,11 @@ int FX3USB3Connection::get_device_config() {
     if ( config == 0 ) {
         fprintf(stderr, "The device is currently unconfigured\n");
     }
+#ifdef DEBUG
     else {
         printf("Device configured. Current configuration = %d\n", config);
     }
+#endif
 
     rStatus = cyusb_get_active_config_descriptor(cyusb_device.handle, &configDesc);
     if ( rStatus ) {
@@ -215,7 +217,9 @@ int FX3USB3Connection::claim_interface(int interface) {
     }
     rStatus = cyusb_claim_interface(cyusb_device.handle, interface);
     if ( rStatus == 0 ) {
+#ifdef DEBUG
         printf("\tInterface %d claimed successfully\n",interface);
+#endif
     }
     else {
         cyusb_error(rStatus);
@@ -308,8 +312,9 @@ int FX3USB3Connection::find_endpoint(unsigned int end_pt) {
             for (int k = 0; k < interfaceDesc->bNumEndpoints; k++) {
                 endpointDesc = (libusb_endpoint_descriptor *)&(interfaceDesc->endpoint[k]);
                 if (endpointDesc->bEndpointAddress == end_pt) {
+#ifdef DEBUG
                     printf ("\tFound endpoint 0x%x in interface %d, setting %d\n", end_pt, i, j);
-
+#endif
                     // If the alt setting is not 0, select it
                     cyusb_set_interface_alt_setting (device_handle, i, j);
                     found_ep = true;
@@ -663,34 +668,36 @@ int FX3USB3Connection::compare_files(char *fp1_string, char *fp2_string) {
 /**
  * Sends the data stored on buf of size sz to the endpoint 0x01
  * */
-void FX3USB3Connection::send_buffer(unsigned char *buf, int sz) {
+int FX3USB3Connection::send_buffer(unsigned char *buf, int sz, unsigned int end_ptr) {
     int rStatus;
     int transferred = 0;
-    unsigned int end_ptr = 0x01;
 
     if(find_endpoint(end_ptr) != 0) {
         fprintf(stderr, "FX3USB3Connection::send_buffer(): Error: endpoint (%d) not found\n", end_ptr);
-        return;
+        return -1;
     }
 
     rStatus = cyusb_bulk_transfer(cyusb_device.handle, static_cast<unsigned char>(end_ptr), buf, sz, &transferred, 1000);
+#ifdef DEBUG
     printf("Bytes sent to device = %d\n", transferred);
+#endif
     if (rStatus) {
         fprintf(stderr, "Error in send buffer: ");
         cyusb_error(rStatus);
         cyusb_close();
-        return ;
+        return rStatus;
     }
 }
 
 /**
  * Reads data from endpoint 0x81 to buf and returns the size of data read
  * (should be same as data_count)
+ *
+ * Returns lenght of data readed.
  * */
-int FX3USB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count){
+int FX3USB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count, unsigned int end_ptr){
     //int rStatus;
     int transferred = 0;
-    unsigned int end_ptr = 0x81;
 
     if(find_endpoint(end_ptr) != 0) {
         fprintf(stderr, "FX3USB3Connection::recive_buffer(): Error: endpoint (%d) not found\n", end_ptr);
@@ -698,12 +705,14 @@ int FX3USB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count
     }
     buf = (unsigned char *)malloc(data_count);
     rStatus = cyusb_bulk_transfer(cyusb_device.handle, static_cast<unsigned char>(end_ptr), buf, data_count, &transferred, 1000);
+#ifdef DEBUG
     printf("Bytes read from device = %d\n", transferred);
+#endif
     if ( rStatus < 0 ) {
         fprintf(stderr, "Error in recive buffer: ");
         cyusb_error(rStatus);
         cyusb_close();
-        return -1;
+        return rStatus;
     }
     return transferred;
 }
@@ -821,7 +830,7 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
     char * buffer;
     size_t fread_result;
     unsigned short wLength = 16;
-    unsigned int timeout = 1000;
+    unsigned int timeout = 10*1000;
     unsigned short wValue = 0, wIndex = 1;
 
     fpga_file = fopen(fpga_firmware_filename, "rb");
@@ -846,7 +855,7 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
         exit (3);
     }
 
-    printf("filelen = %u\n", fpga_firmware_size);
+    //printf("filelen = %u\n", fpga_firmware_size);
     printf("Programming FPGA\n");
     // Start programming command
     rStatus = cyusb_control_write(
@@ -881,6 +890,7 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
         cyusb_close();
         return rStatus;
     }
+    printf("FPGA configured with %s\n", fpga_firmware_filename);
     fclose (fpga_file);
     free (buffer);
     return 0;
@@ -942,6 +952,13 @@ int FX3USB3Connection::print_devices() {
     }
 
     return numdev;
+}
+int FX3USB3Connection::clear_halt(unsigned char endpoint) {
+    rStatus = libusb_clear_halt(cyusb_device.handle, endpoint);
+    if(rStatus) {
+        fprintf(stderr, "FX3USB3Connection::clear_halt(): Error %s for endpoint %u\n", libusb_error_name(rStatus), endpoint);
+    }
+    return rStatus;
 }
 
 /*int FX3USB3Connection::download_fx3_firmware_ram(char *filename, char *tgt_str) {

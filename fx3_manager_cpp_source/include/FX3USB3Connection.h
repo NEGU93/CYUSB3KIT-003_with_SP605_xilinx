@@ -81,9 +81,14 @@ public:
 
     int test_performance();
 
+    // Bulk methods
     void send_text_file();  // Loopback to test bulk comm
+    int send_buffer(unsigned char *buf, int sz, unsigned int end_ptr = 0x01);
+    int recive_buffer(unsigned char *buf, unsigned int data_count, unsigned int end_ptr = 0x81);
+
     int program_device(char *fpga_firmware_filename);
 
+    int clear_halt(unsigned char endpoint);
     int reset_board();
 
 private:
@@ -128,8 +133,7 @@ private:
 
     // Bulk Transmision
     int compare_files(char *fp1_string, char *fp2_string);
-    void send_buffer(unsigned char *buf, int sz);
-    int recive_buffer(unsigned char *buf, unsigned int data_count);
+
     // Test performance
     void free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth);
     static void xfer_callback (struct libusb_transfer *transfer);

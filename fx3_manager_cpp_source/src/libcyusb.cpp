@@ -286,10 +286,7 @@ int cyusb_open (
    Print verbose information about the error returned by the cyusb API. These are essentially descriptions of
    status values defined as part of the libusb library.
  */
-void
-cyusb_error (
-		int err)
-{
+void cyusb_error (int err) {
 	switch (err)
 	{
 		case -1:
