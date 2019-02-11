@@ -362,6 +362,13 @@ If you run the code (main function) it automatically programs the FX3 devices. I
 
 The communication to the FX3 device is done through a Cpp class that manages all the FX3 connection using cyusb library, who uses libusb-1.0. If the user whant's to do it's own function he can just change the main.cpp and use the class created.
 
+### 6.1 Code Notes
+
+After programming, FX3 changes product ID from 0xF3 to 0xF1. For that reason, after programming the FX3 device it is necesarry to destroy the object used for programming and re-create a new one with the new product ID. (It is necesarry to destroy the last one to release the handle).
+
+**FX3 firmware**
+1. After programming, FX3 changes product ID from 0xF3 to 0xF1. To the definition of product ID is done on: `cyfxslfifousbdscr`
+2. Endpoint defined on `cyfxslfifosync::CyFxSlFifoApplnStart()`
 
 ## 7. Citations
 
