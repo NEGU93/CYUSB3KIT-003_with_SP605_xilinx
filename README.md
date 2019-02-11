@@ -370,7 +370,18 @@ After programming, FX3 changes product ID from 0xF3 to 0xF1. For that reason, af
 1. After programming, FX3 changes product ID from 0xF3 to 0xF1. To the definition of product ID is done on: `cyfxslfifousbdscr`
 2. Endpoint defined on `cyfxslfifosync::CyFxSlFifoApplnStart()`
 
-## 7. Citations
+## 7. Final implementation design notes:
+
+1. In the final design it is important to add the following pullup resistors:
+<p align="center">
+<img src="/img/final_board/pullups.png" width="400"/>
+</p>
+
+2. (Optional) It may be a good idea to add a UART usb connection for debugging with TeraTerm or any other software as explained on [4.3 debugging via UART](4.3-debugging-via-uart)
+
+
+
+## 8. Citations
 
 I would like to know if this explanations or code was useful to somebody so if it's the case let me know (star the project for ex.)
 Just use this as you need!
