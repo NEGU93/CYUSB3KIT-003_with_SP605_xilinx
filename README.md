@@ -282,6 +282,7 @@ The cables will be connected as follow:
 4. Click on "Select Bitstream" and search for your bin file you want to upload to the board.
   - To generate a bin file with ISE instead of the bit file refer to: [Convert bit to bin](https://electronics.stackexchange.com/questions/407801/convert-bit-to-bin-xilinx-file).
 5. Power up the FPGA.
+   **Note**: It is possible to have the FPGA powered up before this point, but it will be necesarry to *cut* the PMODE\[2..0\] signals from the **FMC Interconnect Board** (This is actually what I did so for this application it is perfectly safe to do it if your application is the same as this one).
 6. Select the "Configure" button.
 <p align="center">
 <img src="/img/fpga_prog/Config_Program_Steps/Image5.png" width="400"/>
