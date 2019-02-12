@@ -1,9 +1,9 @@
 # CYUSB3KIT-003 with SP605 xilinx
 
 This project aim was to use the Cypress [CYUSB3KIT-003 EZ-USB FX3 SuperSpeed Explorer Kit](http://www.cypress.com/documentation/development-kitsboards/cyusb3kit-003-ez-usb-fx3-superspeed-explorer-kit)
-to both **program** (upload the firmware of the FPGA using the kit) and **communicate** (make the FPGA send info and receive it with the PC and vice versa) with a Xilinx Spartan 6 FPGA embedded on the [SP605 Evaluation Kit](https://www.xilinx.com/products/boards-and-kits/ek-s6-sp605-g.html). 
+to both **program** (upload the firmware of the FPGA using the kit) and **communicate** (make the FPGA send info and receive it with the PC and vice versa) with a Xilinx Spartan 6 FPGA embedded on the [SP605 Evaluation Kit](https://www.xilinx.com/products/boards-and-kits/ek-s6-sp605-g.html).
 
-The implementation had to be addapted to a C++ code in linux so every CPU tool was then simulated on an own C++ code. 
+The implementation had to be addapted to a C++ code in linux so every CPU tool was then simulated on an own C++ code.
 
 In order to connect both boards, the [CYUSB3ACC-005 FMC Interconnect Board](http://www.cypress.com/documentation/development-kitsboards/cyusb3acc-005-fmc-interconnect-board-ez-usb-fx3-superspeed) was used.
 
@@ -385,3 +385,9 @@ After programming, FX3 changes product ID from 0xF3 to 0xF1. For that reason, af
 
 I would like to know if this explanations or code was useful to somebody so if it's the case let me know (star the project for ex.)
 Just use this as you need!
+
+## 9. TODO:
+
+1. Power up FPGA at same time that FX3 devices.
+2. Reset FX3 device from computer of rollback to programming mode.
+3. Check if after error I can still program FPGA without resetting anything.
