@@ -5,7 +5,7 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="ConstraintSystem" num="0" >The Offset constraint &lt;TIMEGRP &quot;FDATA_IN&quot; OFFSET = IN 2.5 ns BEFORE COMP &quot;clk&quot; &quot;RISING&quot;;&gt; [slaveFIFO2b_fpga_top.pcf(724)], is specified without a duration.  This will result in a lack of hold time checks in timing reports.  If hold time checks are desired a duration value should be specified following the &apos;VALID&apos; keyword.
+<msg type="warning" file="ConstraintSystem" num="0" >The Offset constraint &lt;TIMEGRP &quot;FDATA_IN&quot; OFFSET = IN 2.5 ns BEFORE COMP &quot;clk&quot; &quot;RISING&quot;;&gt; [slaveFIFO2b_fpga_top.pcf(722)], is specified without a duration.  This will result in a lack of hold time checks in timing reports.  If hold time checks are desired a duration value should be specified following the &apos;VALID&apos; keyword.
 </msg>
 
 <msg type="warning" file="Timing" num="3391" delta="old" >Timing constraint <arg fmt="%s" index="1">TIMEGRP &quot;FDATA_IN&quot; OFFSET = IN 2.5 ns BEFORE COMP &quot;clk&quot; &quot;RISING&quot;;</arg> does not specify a data valid duration and will not be hold checked. To enable hold checking on this offset constraint please specify a data valid duration using the VALID &lt;duration&gt; option.</msg>

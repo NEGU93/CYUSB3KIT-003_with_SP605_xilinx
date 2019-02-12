@@ -1,10 +1,10 @@
 Release 14.7 - par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Thu Dec 20 10:02:10 2018
+Tue Feb 12 16:48:38 2019
 
 
-# NOTE: This file is designed to be imported into a spreadsheet program_fx3_device
+# NOTE: This file is designed to be imported into a spreadsheet program
 # such as Microsoft Excel for viewing, printing and sorting. The |
 # character is used as the data field separator. This file is also designed
 # to support parsing.
@@ -22,7 +22,7 @@ Pin Number|Signal Name|Pin Usage|Pin Name|Direction|IO Standard|IO Bank Number|D
 A1|||GND||||||||||||
 A2|fdata<6>|IOB|IO_L3N_0|BIDIR|LVCMOS25*|0|12|SLOW||NONE||LOCATED|NO|NONE|
 A3||IOBS|IO_L5N_0|UNUSED||0|||||||||
-A4|PMODE<1>|IOB|IO_L6N_0|OUTPUT|LVCMOS25*|0|12|SLOW||||LOCATED|NO|NONE|
+A4||IOBS|IO_L6N_0|UNUSED||0|||||||||
 A5|slcs|IOB|IO_L8N_VREF_0|OUTPUT|LVCMOS25*|0|12|SLOW||||LOCATED|NO|NONE|
 A6||OPAD|MGTTXN0_101|UNUSED|||||||||||
 A7|||MGTAVTTTX_101||||||||||||
@@ -61,7 +61,7 @@ AA17|||GND||||||||||||
 AA18||IOBM|IO_L14P_D11_2|UNUSED||2|||||||||
 AA19|||VCCO_2|||2|||||2.50||||
 AA20||IOBM|IO_L3P_D0_DIN_MISO_MISO1_2|UNUSED||2|||||||||
-AA21||IOBS|IO_L1N_M0_CMPMISO_2|UNUSED||2|||||||||
+AA21|PMODE<1>|IOB|IO_L1N_M0_CMPMISO_2|OUTPUT|LVCMOS25*|2|12|SLOW||||UNLOCATED|NO|NONE|
 AA22|||SUSPEND||||||||||||
 AB1|||GND||||||||||||
 AB2|||PROGRAM_B_2||||||||||||
@@ -110,7 +110,7 @@ B22||IOBS|IO_L10N_1|UNUSED||1|||||||||
 C1||IOBM|IO_L83P_3|UNUSED||3|||||||||
 C2|||VCCO_3|||3|||||any******||||
 C3||IOBM|IO_L1P_HSWAPEN_0|UNUSED||0|||||||||
-C4|PMODE<0>|IOB|IO_L6P_0|OUTPUT|LVCMOS25*|0|12|SLOW||||LOCATED|NO|NONE|
+C4||IOBM|IO_L6P_0|UNUSED||0|||||||||
 C5|fdata<31>|IOB|IO_L8P_0|BIDIR|LVCMOS25*|0|12|SLOW||NONE||LOCATED|NO|NONE|
 C6|||GND||||||||||||
 C7||IPAD|MGTRXN0_101|UNUSED|||||||||||
@@ -500,7 +500,7 @@ Y16||IOBM|IO_L17P_2|UNUSED||2|||||||||
 Y17|faddr<0>|IOB|IO_L15P_2|OUTPUT|LVCMOS25*|2|12|SLOW||||LOCATED|NO|NONE|
 Y18|fdata<22>|IOB|IO_L5N_2|BIDIR|LVCMOS25*|2|12|SLOW||NONE||LOCATED|NO|NONE|
 Y19||IOBM|IO_L13P_M1_2|UNUSED||2|||||||||
-Y20||IOBM|IO_L1P_CCLK_2|UNUSED||2|||||||||
+Y20|PMODE<0>|IOB|IO_L1P_CCLK_2|OUTPUT|LVCMOS25*|2|12|SLOW||||UNLOCATED|NO|NONE|
 Y21||IOBM|IO_L52P_M1DQ14_1|UNUSED||1|||||||||
 Y22||IOBS|IO_L52N_M1DQ15_1|UNUSED||1|||||||||
 

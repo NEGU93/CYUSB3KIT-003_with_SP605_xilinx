@@ -73,8 +73,8 @@ NET "mode_p[1]" LOC = Y6;	// E12;
 NET "mode_p[2]" LOC = W6;	// F12;  
 
 //NET "PMODE_2" LOC = G11;
-NET "PMODE[1]" LOC = A4;	// A14;	-> // J63 FMC LPC: D12
-NET "PMODE[0]" LOC = C4;	// B14;	-> // J63 FMC LPC: D11
+//NET "PMODE[1]" LOC = A4;	// A14;	-> // J63 FMC LPC: D12
+//NET "PMODE[0]" LOC = C4;	// B14;	-> // J63 FMC LPC: D11
 
 NET "RESET" LOC = G16;		// B11;	-> // J63 FMC LPC: D17
 //NET "int_n" LOC = F10;

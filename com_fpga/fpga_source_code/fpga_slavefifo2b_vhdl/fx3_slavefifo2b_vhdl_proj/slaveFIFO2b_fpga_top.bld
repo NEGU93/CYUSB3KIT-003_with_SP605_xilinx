@@ -3,19 +3,20 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 Command Line: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/ngdbuild -intstyle
 ise -dd _ngo -nt timestamp -uc
-/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_cod
-e/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf -p xc6slx45t-fgg484-3
+/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_s
+ource_code/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf -p xc6slx45t-fgg484-3
 slaveFIFO2b_fpga_top.ngc slaveFIFO2b_fpga_top.ngd
 
 Reading NGO file
-"/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_co
-de/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.ngc" ...
+"/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_
+source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top
+.ngc" ...
 Gathering constraint information from source properties...
 Done.
 
 Annotating constraints to design from ucf file
-"/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_co
-de/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf" ...
+"/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_
+source_code/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf" ...
 Resolving constraint associations...
 Checking Constraint Associations...
 INFO:ConstraintSystem:178 - TNM 'clk', used in period specification 'TS_clk',
@@ -26,11 +27,11 @@ INFO:ConstraintSystem:178 - TNM 'clk', used in period specification 'TS_clk',
 
 WARNING:ConstraintSystem - The Offset constraint <TIMEGRP "FDATA_IN" OFFSET = IN
    2.5ns BEFORE "clk" RISING;>
-   [/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source
-   _code/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf(113)], is specified
-   without a duration.  This will result in a lack of hold time checks in timing
-   reports.  If hold time checks are desired a duration value should be
-   specified following the 'VALID' keyword.
+   [/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fp
+   ga_source_code/fpga_slavefifo2b_vhdl/slaveFIFO2b_fpga_top.ucf(113)], is
+   specified without a duration.  This will result in a lack of hold time checks
+   in timing reports.  If hold time checks are desired a duration value should
+   be specified following the 'VALID' keyword.
 
 Done...
 
@@ -47,10 +48,10 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings:   1
 
-Total memory usage is 404212 kilobytes
+Total memory usage is 404268 kilobytes
 
 Writing NGD file "slaveFIFO2b_fpga_top.ngd" ...
-Total REAL time to NGDBUILD completion:  10 sec
+Total REAL time to NGDBUILD completion:  4 sec
 Total CPU time to NGDBUILD completion:   3 sec
 
 Writing NGDBUILD log file "slaveFIFO2b_fpga_top.bld"...

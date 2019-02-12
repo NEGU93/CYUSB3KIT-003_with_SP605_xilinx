@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2019-01-25T17:24:39</DateModified>
+  <DateModified>2019-02-12T16:05:06</DateModified>
   <ModuleName>fpga_master</ModuleName>
   <SummaryTimeStamp>2012-09-08T12:30:47</SummaryTimeStamp>
   <SavedFilePath>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/program_fpga/fpga_write/fpga_write/iseconfig/fpga_master.xreport</SavedFilePath>
@@ -80,7 +80,7 @@
     <toc-item title="Timing Details" target="Timing Details" subItemLevel="2" />
     <toc-item title="Cross Clock Domains Report" target="Cross Clock Domains Report:" subItemLevel="2" />
    </view>
-   <view program_fx3_device="synplify" contextTags="SYNPLIFY_ONLY,EDK_OFF" hidden="true" type="Report" file="fpga_master.srr" label="Synplify Report" />
+   <view contextTags="SYNPLIFY_ONLY,EDK_OFF" hidden="true" type="Report" file="fpga_master.srr" label="Synplify Report" program_fx3_device="synplify" />
    <view program="precision" contextTags="PRECISION_ONLY,EDK_OFF" hidden="true" type="Report" file="fpga_master.prec_log" label="Precision Report" />
    <view inputState="Synthesized" program="ngdbuild" type="Report" file="fpga_master.bld" label="Translation Report" >
     <toc-item title="Top of Report" target="Copyright (c)" searchDir="Forward" />

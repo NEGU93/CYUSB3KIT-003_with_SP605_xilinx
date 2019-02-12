@@ -11,7 +11,7 @@ Target Device  : xc6slx45t
 Target Package : fgg484
 Target Speed   : -3
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Thu Dec 20 09:56:52 2018
+Mapped Date    : Tue Feb 12 16:46:04 2019
 
 Design Summary
 --------------
@@ -36,12 +36,12 @@ Slice Logic Utilization:
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   156 out of   6,822    2%
+  Number of occupied Slices:                   155 out of   6,822    2%
   Number of MUXCYs used:                       120 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:          378
-    Number with an unused Flip Flop:           105 out of     378   27%
-    Number with an unused LUT:                  65 out of     378   17%
-    Number of fully used LUT-FF pairs:         208 out of     378   55%
+  Number of LUT Flip Flop pairs used:          377
+    Number with an unused Flip Flop:           104 out of     377   27%
+    Number with an unused LUT:                  64 out of     377   16%
+    Number of fully used LUT-FF pairs:         209 out of     377   55%
     Number of unique control sets:               8
     Number of slice register sites lost
       to control set restrictions:              25 out of  54,576    1%
@@ -54,7 +54,7 @@ Slice Logic Distribution:
 
 IO Utilization:
   Number of bonded IOBs:                        52 out of     296   17%
-    Number of LOCed IOBs:                       52 out of      52  100%
+    Number of LOCed IOBs:                       50 out of      52   96%
     IOB Flip Flops:                              1
 
 Specific Feature Utilization:
@@ -92,8 +92,8 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                4.27
 
-Peak Memory Usage:  798 MB
-Total REAL time to MAP completion:  1 mins 43 secs 
+Peak Memory Usage:  801 MB
+Total REAL time to MAP completion:  24 secs 
 Total CPU time to MAP completion:   20 secs 
 
 Table of Contents
@@ -136,6 +136,9 @@ INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more inform
    Command Line Tools User Guide for information on generating a TSI report.
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
+INFO:Place:834 - Only a subset of IOs are locked. Out of 52 IOs, 50 are locked
+   and 2 are not locked. If you would like to print the names of these IOs,
+   please set the environment variable XIL_PAR_DESIGN_CHECK_VERBOSE to 1. 
 INFO:Pack:1650 - Map created a placed design.
 
 Section 4 - Removed Logic Summary

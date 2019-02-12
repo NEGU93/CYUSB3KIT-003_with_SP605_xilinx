@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2019-01-25T17:24:19</DateModified>
+  <DateModified>2019-02-12T16:44:29</DateModified>
   <ModuleName>slaveFIFO2b_fpga_top</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/iseconfig/slaveFIFO2b_fpga_top.xreport</SavedFilePath>
@@ -191,7 +191,7 @@
     <toc-item title="Top of Report" target="Copyright (c)" searchDir="Forward" />
    </view>
    <view inputState="Routed" program="netgen" hidden="if_missing" type="Secondary_Report" file="slaveFIFO2b_fpga_top_par_fecn.nlf" label="Post-Place and Route Formality Netlist Report" />
-   <view inputState="Routed" program_fx3_device="netgen" contextTags="FPGA_ONLY" hidden="if_missing" type="Secondary_Report" file="netgen/par/slaveFIFO2b_fpga_top_timesim.nlf" label="Post-Place and Route Simulation Model Report" />
+   <view inputState="Routed" contextTags="FPGA_ONLY" hidden="if_missing" type="Secondary_Report" file="netgen/par/slaveFIFO2b_fpga_top_timesim.nlf" label="Post-Place and Route Simulation Model Report" program_fx3_device="netgen" />
    <view inputState="Routed" program="netgen" hidden="if_missing" type="Secondary_Report" file="slaveFIFO2b_fpga_top_sta.nlf" label="Primetime Netlist Report" >
     <toc-item title="Top of Report" target="Release" searchDir="Forward" />
    </view>

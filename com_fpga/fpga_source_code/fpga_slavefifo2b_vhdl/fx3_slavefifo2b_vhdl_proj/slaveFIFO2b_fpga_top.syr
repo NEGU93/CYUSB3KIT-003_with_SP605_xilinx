@@ -108,31 +108,31 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" into library work
 Parsing entity <fifo>.
 Parsing architecture <fifo_arch> of entity <fifo>.
-Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" into library work
 Parsing entity <slaveFIFO2b_ZLP>.
 Parsing architecture <slaveFIFO2b_ZLP_arch> of entity <slavefifo2b_zlp>.
-Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" into library work
 Parsing entity <slaveFIFO2b_streamOUT>.
 Parsing architecture <slaveFIFO2b_streamOUT_arch> of entity <slavefifo2b_streamout>.
-Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" into library work
 Parsing entity <slaveFIFO2b_streamIN>.
 Parsing architecture <slaveFIFO2b_streamIN_arch> of entity <slavefifo2b_streamin>.
-Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" into library work
 Parsing entity <slaveFIFO2b_partial>.
 Parsing architecture <slaveFIFO2b_partial_arch> of entity <slavefifo2b_partial>.
-Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" into library work
 Parsing entity <slaveFIFO2b_loopback>.
 Parsing architecture <slaveFIFO2b_loopback_arch> of entity <slavefifo2b_loopback>.
-Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd" into library work
 Parsing entity <clk_wiz_v3_6_2>.
 Parsing architecture <xilinx> of entity <clk_wiz_v3_6_2>.
-Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" into library work
+Parsing VHDL file "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" into library work
 Parsing entity <slaveFIFO2b_fpga_top>.
 Parsing architecture <slaveFIFO2b_fpga_top_arch> of entity <slavefifo2b_fpga_top>.
-WARNING:HDLCompiler:946 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 238: Actual for formal port c1 is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 238: Actual for formal port c1 is neither a static name nor a globally static expression
 
 =========================================================================
 *                            HDL Elaboration                            *
@@ -141,34 +141,34 @@ WARNING:HDLCompiler:946 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_S
 Elaborating entity <slaveFIFO2b_fpga_top> (architecture <slaveFIFO2b_fpga_top_arch>) from library <work>.
 
 Elaborating entity <clk_wiz_v3_6_2> (architecture <xilinx>) from library <work>.
-WARNING:HDLCompiler:89 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 45: <oddr2> remains a black-box since it has no binding entity.
+WARNING:HDLCompiler:89 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 45: <oddr2> remains a black-box since it has no binding entity.
 
 Elaborating entity <slaveFIFO2b_partial> (architecture <slaveFIFO2b_partial_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" Line 144. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd" Line 144. Case statement is complete. others clause is never selected
 
 Elaborating entity <slaveFIFO2b_ZLP> (architecture <slaveFIFO2b_ZLP_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" Line 127. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd" Line 127. Case statement is complete. others clause is never selected
 
 Elaborating entity <slaveFIFO2b_streamIN> (architecture <slaveFIFO2b_streamIN_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" Line 75. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd" Line 75. Case statement is complete. others clause is never selected
 
 Elaborating entity <slaveFIFO2b_streamOUT> (architecture <slaveFIFO2b_streamOUT_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" Line 131. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd" Line 131. Case statement is complete. others clause is never selected
 
 Elaborating entity <slaveFIFO2b_loopback> (architecture <slaveFIFO2b_loopback_arch>) from library <work>.
 
 Elaborating entity <fifo> (architecture <fifo_arch>) from library <work>.
-INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 147. Case statement is complete. others clause is never selected
-INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 161. Case statement is complete. others clause is never selected
-INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" Line 283. Case statement is complete. others clause is never selected
-INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 578. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 146. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd" Line 160. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" Line 283. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd" Line 578. Case statement is complete. others clause is never selected
 
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
 
 Synthesizing Unit <slaveFIFO2b_fpga_top>.
-    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_fpga_top.vhd".
     Found 1-bit register for signal <pktend>.
     Found 1-bit register for signal <slwr>.
     Found 3-bit register for signal <mode>.
@@ -236,13 +236,13 @@ Synthesizing Unit <slaveFIFO2b_fpga_top>.
 Unit <slaveFIFO2b_fpga_top> synthesized.
 
 Synthesizing Unit <clk_wiz_v3_6_2>.
-    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/fpga_slavefifo2b_vhdl/clk_wiz_v3_6_2.vhd".
     Summary:
 	no macro.
 Unit <clk_wiz_v3_6_2> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_partial>.
-    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_partial.vhd".
     Found 4-bit register for signal <strob_cnt>.
     Found 4-bit register for signal <short_pkt_cnt>.
     Found 3-bit register for signal <current_partial_state>.
@@ -273,7 +273,7 @@ Synthesizing Unit <slaveFIFO2b_partial>.
 Unit <slaveFIFO2b_partial> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_ZLP>.
-    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_ZLP.vhd".
     Found 3-bit register for signal <current_zlp_state>.
     Found 32-bit register for signal <data_gen_zlp>.
     Found 4-bit register for signal <strob_cnt>.
@@ -302,7 +302,7 @@ Synthesizing Unit <slaveFIFO2b_ZLP>.
 Unit <slaveFIFO2b_ZLP> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_streamIN>.
-    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamIN.vhd".
     Found 32-bit register for signal <data_gen_stream_in>.
     Found 2-bit register for signal <current_stream_in_state>.
     Found finite state machine <FSM_3> for signal <current_stream_in_state>.
@@ -328,7 +328,7 @@ Synthesizing Unit <slaveFIFO2b_streamIN>.
 Unit <slaveFIFO2b_streamIN> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_streamOUT>.
-    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_streamOUT.vhd".
 WARNING:Xst:647 - Input <stream_out_data_from_fx3> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 2-bit register for signal <oe_delay_cnt>.
     Found 2-bit register for signal <rd_oe_delay_cnt>.
@@ -360,9 +360,9 @@ WARNING:Xst:647 - Input <stream_out_data_from_fx3> is never used. This port will
 Unit <slaveFIFO2b_streamOUT> synthesized.
 
 Synthesizing Unit <slaveFIFO2b_loopback>.
-    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd".
-INFO:Xst:3210 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_full> of the instance <fifo_inst> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_empty> of the instance <fifo_inst> is unconnected or connected to loadless signal.
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd".
+INFO:Xst:3210 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_full> of the instance <fifo_inst> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/slaveFIFO2b_loopback.vhd" line 73: Output port <fifo_empty> of the instance <fifo_inst> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <slrd_looback_d2_n>.
     Found 1-bit register for signal <slrd_looback_d3_n>.
     Found 1-bit register for signal <slrd_looback_d4_n>.
@@ -397,7 +397,7 @@ INFO:Xst:3210 - "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilin
 Unit <slaveFIFO2b_loopback> synthesized.
 
 Synthesizing Unit <fifo>.
-    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd".
+    Related source file is "/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/com_fpga/fpga_source_code/rtl_vhdl/SlaveFIFO2b/fifo.vhd".
     Found 256x32-bit dual-port RAM <Mram_data_array> for signal <data_array>.
     Found 1-bit register for signal <fifo_empty_s>.
     Found 8-bit register for signal <read_ptr>.
@@ -408,13 +408,13 @@ Synthesizing Unit <fifo>.
     Found 1-bit register for signal <fifo_full_s>.
     Found 32-bit register for signal <dout>.
     Found 8-bit adder for signal <write_ptr[7]_GND_17_o_add_1_OUT> created at line 59.
-    Found 8-bit adder for signal <read_ptr[7]_GND_17_o_add_4_OUT> created at line 78.
-    Found 9-bit adder for signal <read_occupancy[8]_GND_17_o_add_15_OUT> created at line 145.
-    Found 9-bit adder for signal <write_occupancy[8]_GND_17_o_add_19_OUT> created at line 159.
-    Found 9-bit subtractor for signal <GND_17_o_GND_17_o_sub_15_OUT<8:0>> created at line 144.
-    Found 9-bit subtractor for signal <GND_17_o_GND_17_o_sub_19_OUT<8:0>> created at line 158.
-    Found 9-bit 4-to-1 multiplexer for signal <read_occ_case_sel[1]_read_occupancy[8]_wide_mux_16_OUT> created at line 142.
-    Found 9-bit 4-to-1 multiplexer for signal <write_occ_case_sel[1]_write_occupancy[8]_wide_mux_20_OUT> created at line 156.
+    Found 8-bit adder for signal <read_ptr[7]_GND_17_o_add_4_OUT> created at line 77.
+    Found 9-bit adder for signal <read_occupancy[8]_GND_17_o_add_15_OUT> created at line 144.
+    Found 9-bit adder for signal <write_occupancy[8]_GND_17_o_add_19_OUT> created at line 158.
+    Found 9-bit subtractor for signal <GND_17_o_GND_17_o_sub_15_OUT<8:0>> created at line 143.
+    Found 9-bit subtractor for signal <GND_17_o_GND_17_o_sub_19_OUT<8:0>> created at line 157.
+    Found 9-bit 4-to-1 multiplexer for signal <read_occ_case_sel[1]_read_occupancy[8]_wide_mux_16_OUT> created at line 141.
+    Found 9-bit 4-to-1 multiplexer for signal <write_occ_case_sel[1]_write_occupancy[8]_wide_mux_20_OUT> created at line 155.
     Summary:
 	inferred   1 RAM(s).
 	inferred   4 Adder/Subtractor(s).
@@ -872,12 +872,12 @@ inst_clk/pll_base_inst/CLKOUT0|    3.581|         |         |         |
 
 
 Total REAL time to Xst completion: 10.00 secs
-Total CPU time to Xst completion: 8.33 secs
+Total CPU time to Xst completion: 8.26 secs
  
 --> 
 
 
-Total memory usage is 408016 kilobytes
+Total memory usage is 407996 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    6 (   0 filtered)

@@ -69,6 +69,8 @@ FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) : v
     cyusb_handle *h = nullptr;
     rStatus = cyusb_open(vid, pid);
     if ( rStatus < 0 ) {
+        fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
+        fflush(nullptr);
         print_devices();
         throw ErrorOpeningLib();
     }
@@ -76,7 +78,8 @@ FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) : v
     else if(rStatus == 1) {
         h = libusb_open_device_with_vid_pid(nullptr, vid, pid);
         if ( !h ) {
-            fprintf(stderr, "Device not found\n");
+            //fprintf(stderr, "Device not found.\n");
+            fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
         }
         cyusb_device.dev     = libusb_get_device(h);
         cyusb_device.handle  = h;
@@ -585,11 +588,17 @@ void FX3USB3Connection::send_text_file() {
 
     buf = (unsigned char *)malloc(maxps);
     while ( (nbr = read(fd_outfile, buf, maxps)) ) {
-        send_buffer(buf, static_cast<int>(nbr));        // Send data to FPGA
+        if(send_buffer(buf, static_cast<int>(nbr))) {        // Send data to FPGA
+            fprintf(stderr, "FX3USB3Connection::send_text_file(): Error couldn't write the data back (error: %d)\n", rStatus);
+            free(buf);
+            ::close(fd_outfile);
+            ::close(fd_infile);
+            return;
+        }
         sleep(1);
         transferred = recive_buffer(buf, static_cast<unsigned int>(nbr));   // Get data from FPGA
         if(transferred < 0) {
-            fprintf(stderr, "FX3USB3Connection::send_text_file(): Error Couldn't read the data back (error: %d)\n", rStatus);
+            fprintf(stderr, "FX3USB3Connection::send_text_file(): Error couldn't read the data back (error: %d)\n", rStatus);
             free(buf);
             ::close(fd_outfile);
             ::close(fd_infile);
@@ -597,7 +606,7 @@ void FX3USB3Connection::send_text_file() {
         }
         rStatus = static_cast<int>(write(fd_infile, buf, static_cast<size_t>(transferred)));
         if (rStatus < 0) {
-            fprintf(stderr, "FX3USB3Connection::send_text_file(): Error write returned %d\n", rStatus);
+            fprintf(stderr, "FX3USB3Connection::send_text_file(): Error creating file from data (rStatus = %d)\n", rStatus);
             free(buf);
             ::close(fd_outfile);
             ::close(fd_infile);
@@ -607,6 +616,7 @@ void FX3USB3Connection::send_text_file() {
     free(buf);
     ::close(fd_outfile);
     ::close(fd_infile);
+    printf("Loopback recieved, checking if I received the same that I sended\n");
     compare_files(out_text_filename, in_text_filename);
 }
 
@@ -615,10 +625,13 @@ void FX3USB3Connection::send_text_file() {
  * Prints the number of missmatches and returns it's value
  * */
 int FX3USB3Connection::compare_files(char *fp1_string, char *fp2_string) {
+#ifdef DEBUG
     printf("Comparing both files ...\n");
+#endif
     // opening both file in read only mode
     FILE *fp1 = fopen(fp1_string, "r");
     FILE *fp2 = fopen(fp2_string, "r");
+
     if (fp1 == nullptr || fp2 == nullptr) {
         fprintf(stderr, "FX3USB3Connection::compare_files(): Error: Files not open");
         exit(0);
@@ -626,8 +639,8 @@ int FX3USB3Connection::compare_files(char *fp1_string, char *fp2_string) {
 
     // fetching character of two file
     // in two variable ch1 and ch2
-    char ch1 = getc(fp1);
-    char ch2 = getc(fp2);
+    int ch1 = getc(fp1);
+    int ch2 = getc(fp2);
 
     // error keeps track of number of errors
     // pos keeps track of position of errors
@@ -658,10 +671,11 @@ int FX3USB3Connection::compare_files(char *fp1_string, char *fp2_string) {
         ch1 = getc(fp1);
         ch2 = getc(fp2);
     }
+
     // closing both file
     fclose(fp1);
     fclose(fp2);
-    printf("Total missmatches between files : %d\t", error);
+    printf("Total missmatches between files : %d\n", error);
     return error;
 }
 
@@ -854,8 +868,9 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
         fprintf(stderr, "Error copying file to buffer");
         exit (3);
     }
-
-    //printf("filelen = %u\n", fpga_firmware_size);
+#ifdef DEBUG
+    printf("filelen = %u\n", fpga_firmware_size);
+#endif
     printf("Programming FPGA\n");
     // Start programming command
     rStatus = cyusb_control_write(
@@ -874,17 +889,17 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
         return rStatus;
     }
     send_buffer(reinterpret_cast<unsigned char *>(buffer), fpga_firmware_size);  // Send the FPGA firmware
-    //sleep(5);
+    sleep(1);
     rStatus = cyusb_control_read(
-            cyusb_device.handle,        /* a handle for the device to communicate with */
-            0xC0,        /* bmRequestType: the request type field for the setup packet */
+            cyusb_device.handle,       /* a handle for the device to communicate with */
+            0xC0,                      /* bmRequestType: the request type field for the setup packet */
             VND_CMD_SLAVESER_CFGSTAT,  /* bRequest: the request field for the setup packet */
             wValue,                    /* wValue: the value field for the setup packet */
             wIndex,                    /* wIndex: the index field for the setup packet */
             (unsigned char *) &fpga_firmware_size,  /* *data: a suitably-sized data buffer */
             wLength,                   /* wLength: the length field for the setup packet. The data buffer should be at least this size. */
             timeout);                  /* timeout (in millseconds) that this function should wait before giving up due to no response being received. For an unlimited timeout, use value 0. */
-    if (rStatus < 0) {         /* LIB_USB_ERROR */
+    if (rStatus < 0) {         // LIB_USB_ERROR
         fprintf(stderr, "rStatus = %d\n", rStatus);
         cyusb_error(rStatus);
         cyusb_close();

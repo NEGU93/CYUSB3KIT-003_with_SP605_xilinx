@@ -5,7 +5,7 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="ConstraintSystem" num="0" >The Offset constraint &lt;TIMEGRP &quot;FDATA_IN&quot; OFFSET = IN 2.5 ns BEFORE COMP &quot;clk&quot; &quot;RISING&quot;;&gt; [slaveFIFO2b_fpga_top.pcf(724)], is specified without a duration.  This will result in a lack of hold time checks in timing reports.  If hold time checks are desired a duration value should be specified following the &apos;VALID&apos; keyword.
+<msg type="warning" file="ConstraintSystem" num="0" >The Offset constraint &lt;TIMEGRP &quot;FDATA_IN&quot; OFFSET = IN 2.5 ns BEFORE COMP &quot;clk&quot; &quot;RISING&quot;;&gt; [slaveFIFO2b_fpga_top.pcf(722)], is specified without a duration.  This will result in a lack of hold time checks in timing reports.  If hold time checks are desired a duration value should be specified following the &apos;VALID&apos; keyword.
 </msg>
 
 <msg type="info" file="Timing" num="3386" delta="old" >Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx Command Line Tools User Guide for information on generating a TSI report.</msg>

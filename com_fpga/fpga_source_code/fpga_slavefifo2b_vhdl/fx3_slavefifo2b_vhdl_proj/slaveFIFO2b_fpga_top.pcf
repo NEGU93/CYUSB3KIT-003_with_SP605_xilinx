@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Thu Dec 20 09:57:21 2018
+// Written by: Map P.20131013 on Tue Feb 12 16:46:27 2019
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -53,8 +53,6 @@ COMP "fdata<7>" LOCATE = SITE "H14" LEVEL 1;
 COMP "fdata<8>" LOCATE = SITE "G15" LEVEL 1;
 COMP "fdata<9>" LOCATE = SITE "D18" LEVEL 1;
 COMP "pktend" LOCATE = SITE "T15" LEVEL 1;
-COMP "PMODE<0>" LOCATE = SITE "C4" LEVEL 1;
-COMP "PMODE<1>" LOCATE = SITE "A4" LEVEL 1;
 PIN loopback_inst/fifo_inst/Mram_data_array_pins<16> = BEL
         "loopback_inst/fifo_inst/Mram_data_array" PINNAME CLKAWRCLK;
 PIN loopback_inst/fifo_inst/Mram_data_array_pins<17> = BEL

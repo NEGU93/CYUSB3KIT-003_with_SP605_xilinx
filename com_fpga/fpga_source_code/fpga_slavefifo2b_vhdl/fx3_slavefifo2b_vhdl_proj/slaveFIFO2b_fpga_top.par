@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-barrachina-lpsc3229x::  Thu Dec 20 09:59:24 2018
+barrachina-lpsc3229x::  Tue Feb 12 16:46:32 2019
 
 par -w -intstyle ise -ol high -mt off slaveFIFO2b_fpga_top_map.ncd
 slaveFIFO2b_fpga_top.ncd slaveFIFO2b_fpga_top.pcf 
@@ -11,7 +11,7 @@ Constraints file: slaveFIFO2b_fpga_top.pcf.
 Loading device for application Rf_Device from file '6slx45t.nph' in environment /opt/Xilinx/14.7/ISE_DS/ISE/.
    "slaveFIFO2b_fpga_top" is an NCD, version 3.2, device xc6slx45t, package fgg484, speed -3
 WARNING:ConstraintSystem - The Offset constraint <TIMEGRP "FDATA_IN" OFFSET = IN 2.5 ns BEFORE COMP "clk" "RISING";>
-   [slaveFIFO2b_fpga_top.pcf(724)], is specified without a duration.  This will result in a lack of hold time checks in
+   [slaveFIFO2b_fpga_top.pcf(722)], is specified without a duration.  This will result in a lack of hold time checks in
    timing reports.  If hold time checks are desired a duration value should be specified following the 'VALID' keyword.
 
 
@@ -44,12 +44,12 @@ Slice Logic Utilization:
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   156 out of   6,822    2%
+  Number of occupied Slices:                   155 out of   6,822    2%
   Number of MUXCYs used:                       120 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:          378
-    Number with an unused Flip Flop:           105 out of     378   27%
-    Number with an unused LUT:                  65 out of     378   17%
-    Number of fully used LUT-FF pairs:         208 out of     378   55%
+  Number of LUT Flip Flop pairs used:          377
+    Number with an unused Flip Flop:           104 out of     377   27%
+    Number with an unused LUT:                  64 out of     377   16%
+    Number of fully used LUT-FF pairs:         209 out of     377   55%
     Number of slice register sites lost
       to control set restrictions:               0 out of  54,576    0%
 
@@ -61,7 +61,7 @@ Slice Logic Distribution:
 
 IO Utilization:
   Number of bonded IOBs:                        52 out of     296   17%
-    Number of LOCed IOBs:                       52 out of      52  100%
+    Number of LOCed IOBs:                       50 out of      52   96%
     IOB Flip Flops:                              1
 
 Specific Feature Utilization:
@@ -103,37 +103,37 @@ Router effort level (-rl):    High
 
 INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx
    Command Line Tools User Guide for information on generating a TSI report.
-Starting initial Timing Analysis.  REAL time: 15 secs 
-Finished initial Timing Analysis.  REAL time: 15 secs 
+Starting initial Timing Analysis.  REAL time: 6 secs 
+Finished initial Timing Analysis.  REAL time: 6 secs 
 
 Starting Router
 
 
-Phase  1  : 2279 unrouted;      REAL time: 17 secs 
+Phase  1  : 2281 unrouted;      REAL time: 7 secs 
 
-Phase  2  : 2009 unrouted;      REAL time: 18 secs 
+Phase  2  : 2010 unrouted;      REAL time: 9 secs 
 
-Phase  3  : 990 unrouted;      REAL time: 21 secs 
+Phase  3  : 972 unrouted;      REAL time: 12 secs 
 
-Phase  4  : 998 unrouted; (Setup:20564, Hold:0, Component Switching Limit:0)     REAL time: 40 secs 
-
-Updating file: slaveFIFO2b_fpga_top.ncd with current fully routed design.
-
-Phase  5  : 0 unrouted; (Setup:20760, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 4 secs 
-
-Phase  6  : 0 unrouted; (Setup:20266, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 39 secs 
+Phase  4  : 980 unrouted; (Setup:20564, Hold:0, Component Switching Limit:0)     REAL time: 30 secs 
 
 Updating file: slaveFIFO2b_fpga_top.ncd with current fully routed design.
 
-Phase  7  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 43 secs 
+Phase  5  : 0 unrouted; (Setup:20760, Hold:0, Component Switching Limit:0)     REAL time: 32 secs 
 
-Phase  8  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 43 secs 
+Phase  6  : 0 unrouted; (Setup:20266, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 6 secs 
 
-Phase  9  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 43 secs 
+Updating file: slaveFIFO2b_fpga_top.ncd with current fully routed design.
 
-Phase 10  : 0 unrouted; (Setup:10262, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 43 secs 
-Total REAL time to Router completion: 2 mins 44 secs 
-Total CPU time to Router completion: 2 mins 9 secs 
+Phase  7  : 0 unrouted; (Setup:10230, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 4 secs 
+
+Phase  8  : 0 unrouted; (Setup:10230, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 4 secs 
+
+Phase  9  : 0 unrouted; (Setup:10230, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 4 secs 
+
+Phase 10  : 0 unrouted; (Setup:10230, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 5 secs 
+Total REAL time to Router completion: 2 mins 5 secs 
+Total CPU time to Router completion: 2 mins 4 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -151,7 +151,7 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|             clk_100 | BUFGMUX_X3Y13| No   |  120 |  0.519     |  1.739      |
+|             clk_100 | BUFGMUX_X3Y13| No   |  121 |  0.519     |  1.739      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -162,7 +162,7 @@ the minimum and maximum path delays which includes logic delays.
 * The fanout is the number of component pins not the individual BEL loads,
 for example SLICE loads not FF loads.
 
-Timing Score: 10262 (Setup: 10262, Hold: 0, Component Switching Limit: 0)
+Timing Score: 10230 (Setup: 10230, Hold: 0, Component Switching Limit: 0)
 
 WARNING:Par:468 - Your design did not meet timing.  The following are some suggestions to assist you to meet timing in your design.
 
@@ -189,11 +189,11 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-* TIMEGRP "tnm_slwr" OFFSET = OUT 9 ns AFTE | MAXDELAY    |    -1.397ns|    10.397ns|       1|        1397
+* TIMEGRP "tnm_slwr" OFFSET = OUT 9 ns AFTE | MAXDELAY    |    -1.408ns|    10.408ns|       1|        1408
   R COMP "clk" REFERENCE_PIN BEL         "c |             |            |            |        |            
   lk_out" "RISING"                          |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-* TIMEGRP "tnm_fdata" OFFSET = OUT 9 ns AFT | MAXDELAY    |    -0.891ns|     9.891ns|      22|        7956
+* TIMEGRP "tnm_fdata" OFFSET = OUT 9 ns AFT | MAXDELAY    |    -0.843ns|     9.843ns|      22|        7913
   ER COMP "clk" REFERENCE_PIN BEL         " |             |            |            |        |            
   clk_out" "RISING"                         |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
@@ -207,8 +207,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   TS_inst_clk_clkout0 = PERIOD TIMEGRP "ins | SETUP       |     0.789ns|     9.220ns|       0|           0
   t_clk_clkout0" TS_clk / 3.7 HIGH 50%      | HOLD        |     0.401ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
-  TS_clk_100_to_clk_100 = MAXDELAY FROM TIM | SETUP       |     4.818ns|     5.182ns|       0|           0
-  EGRP "clk_100_ff_posedge" TO TIMEGRP      | HOLD        |     0.415ns|            |       0|           0
+  TS_clk_100_to_clk_100 = MAXDELAY FROM TIM | SETUP       |     4.830ns|     5.170ns|       0|           0
+  EGRP "clk_100_ff_posedge" TO TIMEGRP      | HOLD        |     0.409ns|            |       0|           0
       "clk_100_ff_posedge" 10 ns            |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   TS_clk_100 = PERIOD TIMEGRP "clk_100" 10  | MINPERIOD   |     6.876ns|     3.124ns|       0|           0
@@ -248,8 +248,8 @@ Generating Pad Report.
 
 All signals are completely routed.
 
-Total REAL time to PAR completion: 2 mins 46 secs 
-Total CPU time to PAR completion: 2 mins 10 secs 
+Total REAL time to PAR completion: 2 mins 6 secs 
+Total CPU time to PAR completion: 2 mins 5 secs 
 
 Peak Memory Usage:  830 MB
 
