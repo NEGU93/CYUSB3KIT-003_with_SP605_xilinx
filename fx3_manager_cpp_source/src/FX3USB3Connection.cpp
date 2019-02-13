@@ -16,27 +16,6 @@
 
 //#define DEBUG
 
-// static variables
-unsigned int FX3USB3Connection::endpoint;         // Endpoint to be tested
-unsigned int FX3USB3Connection::reqsize;          // Request size in number of packets
-unsigned int FX3USB3Connection::queuedepth;       // Number of requests to queue
-unsigned int FX3USB3Connection::duration;         // Duration of the test in seconds
-
-unsigned char FX3USB3Connection::eptype;		    // Type of endpoint (transfer type)
-unsigned int FX3USB3Connection::pktsize;		    // Maximum packet size for the endpoint
-
-bool	FX3USB3Connection::stop_transfers;	    // Request to stop data transfers
-int		FX3USB3Connection::rqts_in_flight;	    // Number of transfers that are in progress
-
-unsigned int FX3USB3Connection::success_count;	// Number of successful transfers
-unsigned int FX3USB3Connection::failure_count;	// Number of failed transfers
-unsigned int FX3USB3Connection::transfer_size;	// Size of data transfers performed so far
-unsigned int FX3USB3Connection::transfer_index;	// Write index into the transfer_size array
-
-struct timeval	FX3USB3Connection::start_ts;	    // Data transfer start time stamp.
-struct timeval	FX3USB3Connection::end_ts;		// Data transfer stop time stamp.
-
-// Methods
 /**
  * Opens if there's only one USB3 device
  * */
@@ -64,7 +43,7 @@ FX3USB3Connection::FX3USB3Connection() {
 /**
  * Opens cyusb device given the pid and vid value.
  * */
-FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
+FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) {
     fp = stdout;
     cyusb_handle *h = nullptr;
     rStatus = cyusb_open(vid, pid);
@@ -345,227 +324,10 @@ int FX3USB3Connection::find_endpoint(unsigned int end_pt) {
 }
 
 /**
-* This is a CLI program which can be used to measure the
-*   data transfer rate for data (IN or OUT endpoint) transfers
-*   from a Cypress USB device. Endpoints of type Bulk, Interrupt
-*   and Isochronous are supported.
-*/
-int FX3USB3Connection::test_performance() {
-    cyusb_handle *device_handle;
-    int  if_numsettings;
-    bool found_ep = false;
-    struct timeval t1{}, t2{};		// Timestamps used for test duration control
-
-    struct libusb_transfer **transfers = nullptr;		// List of transfer structures.
-    unsigned char **databuffers = nullptr;			    // List of data buffers.
-
-    endpoint   = 129;	    // Endpoint to be tested
-    reqsize    = 64;        //16;	// Request size in number of packets
-    queuedepth = 16;        //16;	// Number of requests to queue
-    duration   = 60;	    // Duration of the test in seconds
-
-    success_count = 0;	    // Number of successful transfers
-    failure_count = 0;	    // Number of failed transfers
-    transfer_size = 0;	    // Size of data transfers performed so far
-    transfer_index = 0;     // Write index into the transfer_size array
-
-    stop_transfers = false;	// Request to stop data transfers
-    rqts_in_flight = 0;	    // Number of transfers that are in progress
-
-    // Step 1: Get a handle to the first CyUSB device.
-    device_handle = cyusb_device.handle;
-    if (device_handle == nullptr) {
-        fprintf (stderr, "test_performance: Failed to get CyUSB device handle\n");
-        cyusb_error(rStatus);
-        cyusb_close();
-        return -EACCES;
-    }
-
-    // Step 2: Read the configuration descriptor.
-    rStatus = get_device_config();
-
-    // Step 3: Check each of the interfaces one by one and check if we can find the desired endpoint there.
-    for (int i = 0; i < configDesc->bNumInterfaces; i++) {
-        // Step 3.a: Claim the interface
-        rStatus = cyusb_claim_interface(device_handle, i);
-        claim_interface(i);
-
-        // Step 3.b: Get each of the interface descriptors and check if the endpoint is present.
-        if_numsettings = configDesc->interface[i].num_altsetting;
-        for (int j = 0; j < if_numsettings; j++) {
-
-            interfaceDesc = (libusb_interface_descriptor *)&(configDesc->interface[i].altsetting[j]);
-
-            // Step 3.b.1: Check if the desired endpoint is present.
-            for (int k = 0; k < interfaceDesc->bNumEndpoints; k++) {
-                endpointDesc = (libusb_endpoint_descriptor *)&(interfaceDesc->endpoint[k]);
-                if (endpointDesc->bEndpointAddress == endpoint) {
-                    printf ("test_performance: Found endpoint 0x%x in interface %d, setting %d\n", endpoint, i, j);
-
-                    // If the alt setting is not 0, select it
-                    cyusb_set_interface_alt_setting (device_handle, i, j);
-                    found_ep = true;
-                    break;
-                }
-            }
-            if (found_ep) { break; }
-        }
-        if (found_ep) { break; }
-
-        // Step 3.c: Release the interface as the endpoint was not found.
-        cyusb_release_interface (device_handle, i);
-    }
-
-    if (!found_ep) {
-        fprintf (stderr, "test_performance: Failed to find endpoint 0x%x on device\n", endpoint);
-        cyusb_free_config_descriptor(configDesc);
-        cyusb_close ();
-        return (-ENOENT);
-    }
-
-    // Store the endpoint type and maximum packet size
-    eptype  = endpointDesc->bmAttributes;
-
-    cyusb_get_device_descriptor (device_handle, &deviceDesc);
-    if (deviceDesc.bcdUSB >= 0x0300) {
-        // If this is a USB 3.0 connection, get the endpoint companion descriptor
-        // The packet size for the endpoint is calculated as the product of the max
-        // packet size and the burst size. For Isochronous endpoints, this value is
-        // multiplied by the mult value as well.
-
-        libusb_get_ss_endpoint_companion_descriptor (nullptr, endpointDesc, &companionDesc);
-
-        if (eptype == LIBUSB_TRANSFER_TYPE_ISOCHRONOUS) {
-            pktsize = static_cast<unsigned int>(endpointDesc->wMaxPacketSize * (companionDesc->bMaxBurst + 1) *
-                                                (companionDesc->bmAttributes + 1));
-        }
-        else {
-            pktsize = static_cast<unsigned int>(endpointDesc->wMaxPacketSize * (companionDesc->bMaxBurst + 1));
-        }
-
-        libusb_free_ss_endpoint_companion_descriptor (companionDesc);
-
-    } else {
-        // Not USB 3.0. For Isochronous endpoints, get the packet size as computed by
-        // the library. For other endpoints, use the max packet size as it is.
-        if (eptype == LIBUSB_TRANSFER_TYPE_ISOCHRONOUS) {
-            pktsize = static_cast<unsigned int>(cyusb_get_max_iso_packet_size(device_handle, static_cast<unsigned char>(endpoint)));
-        }
-        else {
-            pktsize = endpointDesc->wMaxPacketSize;
-        }
-
-    }
-
-    // Print the test parameters.
-    printf ("test_performance: Starting test with the following parameters\n");
-    printf ("\tRequest size     : 0x%x\n", reqsize);
-    printf ("\tQueue depth      : 0x%x\n", queuedepth);
-    printf ("\tTest duration    : 0x%x\n", duration);
-    printf ("\tEndpoint to test : 0x%x\n", endpoint);
-    printf ("\n");
-    printf ("\tEndpoint type    : 0x%x\n", eptype);
-    printf ("\tMax packet size  : 0x%x\n", pktsize);
-
-    // Allocate buffers and transfer structures
-    bool allocfail = false;
-
-    databuffers = (unsigned char **)calloc (queuedepth, sizeof (unsigned char *));
-    transfers   = (struct libusb_transfer **)calloc (queuedepth, sizeof (struct libusb_transfer *));
-
-    if ((databuffers != nullptr) && (transfers != nullptr)) {
-
-        for (unsigned int i = 0; i < queuedepth; i++) {
-
-            databuffers[i] = (unsigned char *)malloc (reqsize * pktsize);
-            transfers[i]   = libusb_alloc_transfer (
-                    (eptype == LIBUSB_TRANSFER_TYPE_ISOCHRONOUS) ? reqsize : 0);
-
-            if ((databuffers[i] == nullptr) || (transfers[i] == nullptr)) {
-                allocfail = true;
-                break;
-            }
-        }
-
-    } else {
-        allocfail = true;
-    }
-
-    // Check if all memory allocations have succeeded
-    if (allocfail) {
-        fprintf(stderr, "test_performance: Failed to allocate buffers and transfer structures\n");
-        free_transfer_buffers (databuffers, transfers, queuedepth);
-
-        cyusb_free_config_descriptor (configDesc);
-        cyusb_close ();
-        return (-ENOMEM);
-    }
-
-    // Take the transfer start timestamp
-    gettimeofday (&start_ts, nullptr);
-
-    // Launch all the transfers till queue depth is complete
-    for (unsigned int i = 0; i < queuedepth; i++) {
-        switch (eptype) {
-            case LIBUSB_TRANSFER_TYPE_BULK:
-                libusb_fill_bulk_transfer(transfers[i], device_handle, static_cast<unsigned char>(endpoint),
-                                           databuffers[i], reqsize * pktsize, xfer_callback, nullptr, 5000);
-                rStatus = libusb_submit_transfer (transfers[i]);
-                if (rStatus == 0) { rqts_in_flight++; }
-                break;
-
-            case LIBUSB_TRANSFER_TYPE_INTERRUPT:
-                libusb_fill_interrupt_transfer(transfers[i], device_handle, static_cast<unsigned char>(endpoint),
-                                                databuffers[i], reqsize * pktsize, xfer_callback, nullptr, 5000);
-                rStatus = libusb_submit_transfer (transfers[i]);
-                if (rStatus == 0) { rqts_in_flight++; }
-                break;
-
-            case LIBUSB_TRANSFER_TYPE_ISOCHRONOUS:
-                libusb_fill_iso_transfer(transfers[i], device_handle, static_cast<unsigned char>(endpoint), databuffers[i],
-                                          reqsize * pktsize, reqsize, xfer_callback, nullptr, 5000);
-                libusb_set_iso_packet_lengths (transfers[i], pktsize);
-                rStatus = libusb_submit_transfer (transfers[i]);
-                if (rStatus == 0) { rqts_in_flight++; }
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    gettimeofday (&t1, nullptr);
-    do {    // Wait the desired amount of seconds
-        libusb_handle_events (nullptr);
-        gettimeofday (&t2, nullptr);
-    } while (t2.tv_sec < (t1.tv_sec + duration));
-
-    // Test duration elapsed. Set the stop_transfers flag and wait until all transfers are complete.
-    printf ("test_performance: Test duration is complete. Stopping transfers\n");
-    stop_transfers = true;
-    while (rqts_in_flight != 0) {
-        printf ("%d requests are pending\n", rqts_in_flight);
-        libusb_handle_events (nullptr);
-        sleep (1);
-    }
-
-    // All transfers are complete. We can now free up all structures.
-    printf ("test_performance: Transfers completed\n");
-
-    free_transfer_buffers (databuffers, transfers, queuedepth);
-    cyusb_free_config_descriptor (configDesc);
-    //cyusb_close();
-
-    printf ("test_performance: Test completed\n");
-    fflush(stdout);
-    return 0;
-}
-
-/**
  * Uses send and receive buffer to send a text file expecting a loopback.
  * It stores the data on some files and assest the received file is equal to se sent file.
  * */
-void FX3USB3Connection::send_text_file() {
+void FX3USB3Connection::send_text_file(bool verbose) {
     ssize_t nbr;
     unsigned char *buf;
     size_t maxps = 0;
@@ -574,7 +336,7 @@ void FX3USB3Connection::send_text_file() {
     char *out_text_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/TEST_OUT.txt");
     char *in_text_filename = const_cast<char *>("/home/barrachina/Documents/MIMAC/CYUSB3KIT-003_with_SP605_xilinx/fx3_manager_cpp_source/TEST_IN.txt");
 
-
+    if (verbose) { printf("Testing Loopback\n"); }
     fd_outfile = open(out_text_filename, O_RDONLY);
     if ( fd_outfile < 0 ) {
         fprintf(stderr, "FX3USB3Connection::send_text_file(): Output file not found!");
@@ -619,7 +381,8 @@ void FX3USB3Connection::send_text_file() {
     ::close(fd_outfile);
     ::close(fd_infile);
     //compare_files(out_text_filename, in_text_filename);
-    files_match(out_text_filename, in_text_filename);
+    if (files_match(out_text_filename, in_text_filename) && verbose) { printf("Loopback Ok\n"); }
+    else { printf("Loopback failed\n"); }
 }
 
 /**
@@ -707,9 +470,10 @@ bool FX3USB3Connection::files_match(const std::string &p1, const std::string &p2
                              std::istreambuf_iterator<char>(f2.rdbuf()));
     f1.close();
     f2.close();
+#ifdef DEBUG
     if (files_match) { printf("Files match\n"); fflush(stdout); }
     else { printf("Files not equal\n"); fflush(stdout); }
-    fflush(stdout);
+#endif
     return files_match;
 }
 
@@ -763,104 +527,6 @@ int FX3USB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count
         return rStatus;
     }
     return transferred;
-}
-
-//! Function to free data buffers and transfer structures
-void FX3USB3Connection::free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth) {
-    // Free up any allocated data buffers
-    if (databuffers != nullptr) {
-        for (unsigned int i = 0; i < queuedepth; i++) {
-            if (databuffers[i] != nullptr) {
-                free (databuffers[i]);
-            }
-            databuffers[i] = nullptr;
-        }
-        free (databuffers);
-    }
-
-    // Free up any allocated transfer structures
-    if (transfers != nullptr) {
-        for (unsigned int i = 0; i < queuedepth; i++) {
-            if (transfers[i] != nullptr) {
-                libusb_free_transfer (transfers[i]);
-            }
-            transfers[i] = nullptr;
-        }
-        free (transfers);
-    }
-}
-
-//! Function: xfer_callback
-//! This is the call back function called by libusb upon completion of a queued data transfer.
-void FX3USB3Connection::xfer_callback(struct libusb_transfer *transfer) {
-    unsigned int elapsed_time;
-    int size = 0;
-
-    // Reduce the number of requests in flight.
-    rqts_in_flight--;
-
-    // Check if the transfer has succeeded.
-    if (transfer->status != LIBUSB_TRANSFER_COMPLETED) {
-        failure_count++;
-    } else {
-
-        if (eptype == LIBUSB_TRANSFER_TYPE_ISOCHRONOUS) {
-
-            // Loop through all the packets and check the status of each packet transfer
-            for (int i = 0; i < reqsize; ++i) {
-
-                // Calculate the actual size of data transferred in each micro-frame.
-                if (transfer->iso_packet_desc[i].status == LIBUSB_TRANSFER_COMPLETED) {
-                    size += transfer->iso_packet_desc[i].actual_length;
-                }
-            }
-        } else {
-            size = reqsize * pktsize;
-        }
-        success_count++;
-    }
-    // Update the actual transfer size for this request.
-    transfer_size += size;
-
-    // Print the transfer statistics when queuedepth transfers are completed.
-    transfer_index++;
-    if (transfer_index == queuedepth) {
-
-        gettimeofday (&end_ts, nullptr);
-        elapsed_time = static_cast<unsigned int>((end_ts.tv_sec - start_ts.tv_sec) * 1000000 + (end_ts.tv_usec - start_ts.tv_usec));
-//#ifdef DEBUG
-        printf ("Transfer Counts: %d pass %d fail\n", success_count, failure_count);
-        printf ("Data rate: %f KBps\n\n", (((double)transfer_size / 1024) / ((double)elapsed_time / 1000000)));
-//#endif
-        transfer_index = 0;
-        transfer_size  = 0;
-        start_ts = end_ts;
-    }
-
-    // Prepare and re-submit the read request.
-    if (!stop_transfers) {
-
-        switch (eptype) {
-            case LIBUSB_TRANSFER_TYPE_BULK:
-                if (libusb_submit_transfer (transfer) == 0)
-                    rqts_in_flight++;
-                break;
-
-            case LIBUSB_TRANSFER_TYPE_INTERRUPT:
-                if (libusb_submit_transfer (transfer) == 0)
-                    rqts_in_flight++;
-                break;
-
-            case LIBUSB_TRANSFER_TYPE_ISOCHRONOUS:
-                libusb_set_iso_packet_lengths (transfer, pktsize);
-                if (libusb_submit_transfer (transfer) == 0)
-                    rqts_in_flight++;
-                break;
-
-            default:
-                break;
-        }
-    }
 }
 
 /**
@@ -923,7 +589,6 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
         return rStatus;
     }
     send_buffer(reinterpret_cast<unsigned char *>(buffer), fpga_firmware_size);  // Send the FPGA firmware
-    sleep(1);
     rStatus = cyusb_control_read(
             cyusb_device.handle,       /* a handle for the device to communicate with */
             0xC0,                      /* bmRequestType: the request type field for the setup packet */
@@ -1013,7 +678,3 @@ int FX3USB3Connection::clear_halt(unsigned char endpoint) {
     }
     return rStatus;
 }
-
-/*int FX3USB3Connection::download_fx3_firmware_ram(char *filename, char *tgt_str) {
-    return cyusb_download_fx3(cyusb_device.handle, filename);
-}*/

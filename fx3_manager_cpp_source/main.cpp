@@ -47,26 +47,18 @@ void wait_for_enter(const string &msg = "") {
     cout << msg;
     cout << "press enter to continue..." << endl;
     cin.get();
-    //system("read");
 }
 
 
 void program() {
+    char *filename = const_cast<char *>("../program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync_32.img");
+    char *tgt_str = const_cast<char *>("ram");
+
 	FX3USB3Connection fx3USB3Connection = FX3USB3Connection();
-	/*if (fx3USB3Connection.reset_board() != 0) {
-		printf("Failed to reset FX3 device");
-		exit(-1);
-	}*/
-	//char *filename = const_cast<char *>("fx3_images/cyfxbulksrcsink.img");
-	//char *filename = const_cast<char *>("fx3_images/cyfxbulklpautoenum.img");
-	char *filename = const_cast<char *>("../program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync_32.img");
-	char *tgt_str = const_cast<char *>("ram");
 	if (fx3USB3Connection.download_fx3_firmware(filename, tgt_str) != 0) {
 		printf("Failed to program FX3 device");
 		exit(-1);
 	}
-	//fx3USB3Connection.download_fx3_firmware(filename, tgt_str);
-    //fx3USB3Connection.download_fx3_firmware_to_ram(filename);
 }
 
 int main(int argc, char **argv) {
@@ -98,21 +90,11 @@ int main(int argc, char **argv) {
 	    sleep(1);
 
 		FX3USB3Connection fx3USB3Connection = FX3USB3Connection(VID, PID_FX1);
-        //fx3USB3Connection.print_device_descriptor();
-        //fx3USB3Connection.print_config_descriptor();
-        //fx3USB3Connection.claim_interface(0);
-        //fx3USB3Connection.test_performance();
-        //fx3USB3Connection.loopback_test();
-        //wait_for_enter("Please turn on the FPGA and then ");
         char * fpga_filename = const_cast<char *>("../program_fpga/bin/slaveFIFO2b_fpga_top.bin");
-        //char * fpga_filename = const_cast<char *>("../com_fpga//fpga_source_code/fpga_slavefifo2b_vhdl/fx3_slavefifo2b_vhdl_proj/slaveFIFO2b_fpga_top.bin");
-		//char * fpga_filename = const_cast<char *>("../counter_for_testing.bin");
 		fx3USB3Connection.program_device(fpga_filename);
-        //wait_for_enter();
-		//sleep(5);
-        //fx3USB3Connection.send_text_file();
-		//printf("\nReseting Device");
-		//fx3USB3Connection.reset_board();
+
+		sleep(1);
+        fx3USB3Connection.send_text_file(true);
     }
 	catch (ErrorOpeningLib& e) {
 		printf("Error opening library\n");

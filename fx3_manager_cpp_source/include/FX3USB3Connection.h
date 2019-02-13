@@ -79,23 +79,21 @@ public:
     int claim_interface(int interface);
     int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"));
 
-    int test_performance();
-
     // Bulk methods
-    void send_text_file();  // Loopback to test bulk comm
+    void send_text_file(bool verbose);  // Loopback to test bulk comm
     int send_buffer(unsigned char *buf, int sz, unsigned int end_ptr = 0x01);
     int recive_buffer(unsigned char *buf, unsigned int data_count, unsigned int end_ptr = 0x81);
 
     int program_device(char *fpga_firmware_filename);
 
+    // Not tested
     int clear_halt(unsigned char endpoint);
     int reset_board();
 
 private:
     //! Variables
-    int rStatus;
-    unsigned short vid;
-    unsigned short pid;
+    struct cydev cyusb_device;      // Device information
+    int rStatus;                    // Return status variable
     FILE *fp;
 
     struct libusb_device_descriptor deviceDesc{};
@@ -103,28 +101,6 @@ private:
     libusb_interface_descriptor *interfaceDesc;
     libusb_endpoint_descriptor *endpointDesc;
     libusb_ss_endpoint_companion_descriptor *companionDesc;
-
-    struct cydev cyusb_device;
-
-    // Transfer Performance
-    static unsigned int endpoint;           // Endpoint to be tested
-    static unsigned int reqsize;            // Request size in number of packets
-    static unsigned int queuedepth;         // Number of requests to queue
-    static unsigned int duration;           // Duration of the test in seconds
-
-    static unsigned char eptype;		    // Type of endpoint (transfer type)
-    static unsigned int pktsize;		    // Maximum packet size for the endpoint
-
-    static bool	        stop_transfers;	    // Request to stop data transfers
-    static int	        rqts_in_flight;	    // Number of transfers that are in progress
-
-    static unsigned int success_count;	    // Number of successful transfers
-    static unsigned int failure_count;	    // Number of failed transfers
-    static unsigned int transfer_size;	    // Size of data transfers performed so far
-    static unsigned int transfer_index;	    // Write index into the transfer_size array
-
-    static struct timeval	start_ts;	    // Data transfer start time stamp.
-    static struct timeval	end_ts;		    // Data transfer stop time stamp.
 
     //! Methods
     int get_device_descriptor();
@@ -134,10 +110,6 @@ private:
     // Bulk Transmision
     int compare_files(char *fp1_string, char *fp2_string);
     bool files_match(const std::string& p1, const std::string& p2);
-
-    // Test performance
-    void free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth);
-    static void xfer_callback (struct libusb_transfer *transfer);
 };
 
 
