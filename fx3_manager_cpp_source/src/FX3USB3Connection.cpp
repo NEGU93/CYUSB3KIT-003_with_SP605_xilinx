@@ -610,36 +610,7 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
     return 0;
 }
 
-/**
- *  Not yet debuged nor working
- * */
-int FX3USB3Connection::reset_board() {
-    return cyusb_reset_device(cyusb_device.handle);
-    /*unsigned char instruction[32];
-    int transferred = 0;
 
-    instruction[0] = RESET_BOARD;
-    instruction[1] = 1;
-
-    rStatus = libusb_bulk_transfer(cyusb_device.handle, 1, instruction, 2, &transferred, 1000);
-    if (rStatus || transferred != 2) {
-        fprintf(stderr, "Reset set failed \n");
-        cyusb_error(rStatus);
-        cyusb_close();
-        return rStatus;
-    }
-
-    instruction[1] = 0;
-    rStatus = libusb_bulk_transfer(cyusb_device.handle, 1, instruction, 2, &transferred, 1000);
-    if (rStatus || transferred != 2) {
-        fprintf(stderr, "Reset relese failed \n");
-        cyusb_error(rStatus);
-        cyusb_close();
-        return rStatus;
-    }
-
-    return 0;*/
-}
 
 /**
  * Prints all USB devices BUS, VID, PID and bcd.
@@ -668,6 +639,39 @@ int FX3USB3Connection::print_devices() {
     return numdev;
 }
 
+/**--------------------------------------------------------------------
+ *              DANGER ZONE
+ *------------------------------------------------------------------ */
+/**
+ *  Not yet tested
+ * */
+int FX3USB3Connection::reset_board() {
+    return cyusb_reset_device(cyusb_device.handle);
+    /*unsigned char instruction[32];
+    int transferred = 0;
+
+    instruction[0] = RESET_BOARD;
+    instruction[1] = 1;
+
+    rStatus = libusb_bulk_transfer(cyusb_device.handle, 1, instruction, 2, &transferred, 1000);
+    if (rStatus || transferred != 2) {
+        fprintf(stderr, "Reset set failed \n");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return rStatus;
+    }
+
+    instruction[1] = 0;
+    rStatus = libusb_bulk_transfer(cyusb_device.handle, 1, instruction, 2, &transferred, 1000);
+    if (rStatus || transferred != 2) {
+        fprintf(stderr, "Reset relese failed \n");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return rStatus;
+    }
+
+    return 0;*/
+}
 /**
  * Not yet tested
  * */
