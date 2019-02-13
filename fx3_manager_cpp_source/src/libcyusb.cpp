@@ -344,8 +344,7 @@ cyusb_gethandle (
 /* cyusb_close:
    Close all device handles and de-initialize the libusb library.
  */
-void
-cyusb_close() {
+void cyusb_close() {
 	int i;
 
 	for ( i = 0; i < nid; ++i ) {
@@ -353,7 +352,7 @@ cyusb_close() {
 	}
 
 	libusb_free_device_list(list, 1);
-	libusb_exit(NULL);
+	libusb_exit(nullptr);
 }
 
 /* cyusb_get_busnumber:

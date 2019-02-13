@@ -95,7 +95,9 @@ FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) : v
 }
 
 FX3USB3Connection::~FX3USB3Connection() {
-    cyusb_close();
+    libusb_close(cyusb_device.handle);
+    libusb_exit(nullptr);
+    //cyusb_close();
 }
 
 /**
@@ -616,8 +618,8 @@ void FX3USB3Connection::send_text_file() {
     free(buf);
     ::close(fd_outfile);
     ::close(fd_infile);
-    printf("Loopback recieved, checking if I received the same that I sended\n");
-    compare_files(out_text_filename, in_text_filename);
+    //compare_files(out_text_filename, in_text_filename);
+    files_match(out_text_filename, in_text_filename);
 }
 
 /**
@@ -677,6 +679,38 @@ int FX3USB3Connection::compare_files(char *fp1_string, char *fp2_string) {
     fclose(fp2);
     printf("Total missmatches between files : %d\n", error);
     return error;
+}
+
+/**
+ * Faster function to compare 2 files. Returns true if files are the same.
+ * Return false if not.
+ * It prints a message with the result.
+ * */
+bool FX3USB3Connection::files_match(const std::string &p1, const std::string &p2) {
+    bool files_match;
+    std::ifstream f1(p1, std::ifstream::binary|std::ifstream::ate);
+    std::ifstream f2(p2, std::ifstream::binary|std::ifstream::ate);
+
+    if (f1.fail() || f2.fail()) {
+        return false; //file problem
+    }
+
+    if (f1.tellg() != f2.tellg()) {
+        return false; //size mismatch
+    }
+
+    //seek back to beginning and use std::equal to compare contents
+    f1.seekg(0, std::ifstream::beg);
+    f2.seekg(0, std::ifstream::beg);
+    files_match = std::equal(std::istreambuf_iterator<char>(f1.rdbuf()),
+                             std::istreambuf_iterator<char>(),
+                             std::istreambuf_iterator<char>(f2.rdbuf()));
+    f1.close();
+    f2.close();
+    if (files_match) { printf("Files match\n"); fflush(stdout); }
+    else { printf("Files not equal\n"); fflush(stdout); }
+    fflush(stdout);
+    return files_match;
 }
 
 /**
@@ -968,6 +1002,10 @@ int FX3USB3Connection::print_devices() {
 
     return numdev;
 }
+
+/**
+ * Not yet tested
+ * */
 int FX3USB3Connection::clear_halt(unsigned char endpoint) {
     rStatus = libusb_clear_halt(cyusb_device.handle, endpoint);
     if(rStatus) {

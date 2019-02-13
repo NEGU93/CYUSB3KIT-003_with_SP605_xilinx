@@ -109,8 +109,8 @@ int main(int argc, char **argv) {
 		//char * fpga_filename = const_cast<char *>("../counter_for_testing.bin");
 		fx3USB3Connection.program_device(fpga_filename);
         //wait_for_enter();
-		sleep(3);
-        fx3USB3Connection.send_text_file();
+		//sleep(5);
+        //fx3USB3Connection.send_text_file();
 		//printf("\nReseting Device");
 		//fx3USB3Connection.reset_board();
     }
@@ -122,6 +122,5 @@ int main(int argc, char **argv) {
 		printf("No device found\n");
 		return 0;
 	}
-
 	return 0;
 }

@@ -133,6 +133,7 @@ private:
 
     // Bulk Transmision
     int compare_files(char *fp1_string, char *fp2_string);
+    bool files_match(const std::string& p1, const std::string& p2);
 
     // Test performance
     void free_transfer_buffers(unsigned char **databuffers, struct libusb_transfer **transfers, unsigned int queuedepth);
