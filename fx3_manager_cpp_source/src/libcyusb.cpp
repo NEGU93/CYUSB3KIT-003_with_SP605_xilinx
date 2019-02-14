@@ -222,7 +222,7 @@ static int renumerate() {
 /* cyusb_open:
    Opens handles to all USB devices of interest, and returns their count.
  */
-int cyusb_open (void)
+int cyusb_open ()
 {
 	int fd1;
 	int r;
@@ -237,7 +237,7 @@ int cyusb_open (void)
 		parse_configfile();	/* Parse the file and store information inside exported data structures */
 	}
 
-	r = libusb_init(NULL);
+	r = libusb_init(nullptr);
 	if (r) {
 		printf("Error in initializing libusb library...\n");
 		return -EACCES;
@@ -358,10 +358,7 @@ void cyusb_close() {
 /* cyusb_get_busnumber:
    Get USB bus number on which the specified device is connected.
  */
-int
-cyusb_get_busnumber (
-		cyusb_handle *h)
-{
+int cyusb_get_busnumber (cyusb_handle *h) {
 	cyusb_device *tdev = libusb_get_device(h);
 	return libusb_get_bus_number( tdev );
 }
@@ -369,10 +366,7 @@ cyusb_get_busnumber (
 /* cyusb_get_devaddr:
    Get USB device address assigned to the specified device.
  */
-int
-cyusb_get_devaddr (
-		cyusb_handle *h)
-{
+int cyusb_get_devaddr(cyusb_handle *h) {
 	cyusb_device *tdev = libusb_get_device(h);
 	return libusb_get_device_address( tdev );
 }
@@ -380,11 +374,7 @@ cyusb_get_devaddr (
 /* cyusb_get_max_packet_size:
    Get the max packet size for the specified USB endpoint.
  */
-int
-cyusb_get_max_packet_size (
-		cyusb_handle *h,
-		unsigned char endpoint)
-{
+int cyusb_get_max_packet_size(cyusb_handle *h, unsigned char endpoint) {
 	cyusb_device *tdev = libusb_get_device(h);
 	return ( libusb_get_max_packet_size(tdev, endpoint) );
 }

@@ -25,10 +25,9 @@ using namespace std;
 #define WRITE_REQUEST_TYPE  0x40
 #define READ_REQUEST_TYPE   0x80
 
-#define VND_CMD_SLAVESER_CFGLOAD 0xB2       /* Command to program_fx3_device the FPGA */
-#define VND_CMD_SLAVESER_CFGSTAT 0xB1       /* Switch to the Slave FIFO interface */
-
-#define RESET_BOARD			0x0A
+#define VND_CMD_SLAVESER_CFGLOAD    0xB2       /* Command to program_fx3_device the FPGA */
+#define VND_CMD_SLAVESER_CFGSTAT    0xB1       /* Switch to the Slave FIFO interface */
+#define VND_CMD_RESET_BOARD		    0xE0
 
 class ErrorOpeningLib : public exception {
 public:
@@ -69,9 +68,10 @@ class FX3USB3Connection {
 public:
 
     FX3USB3Connection();
-    FX3USB3Connection(unsigned short vid, unsigned short pid);
     ~FX3USB3Connection();
 
+    int connect();
+    int connect(unsigned short vid, unsigned short pid);
 
     int print_devices();
     int print_device_descriptor();
@@ -88,7 +88,7 @@ public:
 
     // Not tested
     int clear_halt(unsigned char endpoint);
-    int reset_board();
+    int soft_reset();
 
 private:
     //! Variables
