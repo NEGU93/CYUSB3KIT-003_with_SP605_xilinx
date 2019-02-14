@@ -21,15 +21,14 @@
  * Opens if there's only one USB3 device
  * */
 FX3USB3Connection::FX3USB3Connection() {
-    connect();
-    soft_reset();
+    rStatus = connect();
 }
 
 /**
  * Opens cyusb device given the pid and vid value.
  * */
 FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) {
-    connect(vid, pid);
+    rStatus = connect(vid, pid);
 }
 
 /**
@@ -63,6 +62,7 @@ int FX3USB3Connection::connect() {
     }
     else {
         printf("Many possible devices to connect with. Please select vid and pid number\n");
+        print_devices();
     }
     return rStatus;
 }
@@ -108,8 +108,59 @@ int FX3USB3Connection::connect(unsigned short vid, unsigned short pid) {
 FX3USB3Connection::~FX3USB3Connection() {
     libusb_close(cyusb_device.handle);
     libusb_exit(nullptr);
-    //cyusb_close();
+    sleep(1);
 }
+
+/**
+ *
+ * */
+int FX3USB3Connection::soft_reset() {
+    //return cyusb_reset_device(cyusb_device.handle);
+    unsigned int data;
+    unsigned short wLength = 16;
+    unsigned int timeout = 10*1000;
+    unsigned short wValue = 0, wIndex = 1;
+
+    //! Send reset command
+    rStatus = cyusb_control_write(
+            cyusb_device.handle,       /* a handle for the device to communicate with */
+            WRITE_REQUEST_TYPE,        /* bmRequestType: the request type field for the setup packet */
+            VND_CMD_RESET_BOARD,       /* bRequest: the request field for the setup packet */
+            wValue,                    /* wValue: the value field for the setup packet */
+            wIndex,                    /* wIndex: the index field for the setup packet */
+            (unsigned char *) &data,   /* *data: a suitably-sized data buffer */
+            wLength,                   /* wLength: the length field for the setup packet. The data buffer should be at least this size. */
+            timeout);                  /* timeout (in miliseconds) that this function should wait before giving up due to no response being received. For an unlimited timeout, use value 0. */
+    sleep(1);
+    //! Reconnect to FX3 device
+    rStatus = reconnect();
+    if (rStatus) {
+        fprintf (stderr, "Error: reconnect failed\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+    }
+
+    return 0;
+}
+
+
+/**
+ * Disconnect current device and connect again
+ * return 0 on success
+ * */
+int FX3USB3Connection::reconnect() {
+    //! Close handle
+    libusb_close(cyusb_device.handle);
+    sleep(1);   // Wait before reconnecting
+    rStatus = connect();
+    if(rStatus == 1) { return 0; }
+    assert(rStatus!=0);     // Should never return a 0
+    sleep(1);
+    return rStatus;
+}
+
+
+/*******************************************************************/
 
 /**
  * dump out the device descriptor for any USB device given its
@@ -252,13 +303,13 @@ int FX3USB3Connection::claim_interface(int interface) {
 int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
     fx3_fw_target tgt = FW_TARGET_NONE;
 
-    /*rStatus = reconnect();
+    rStatus = soft_reset();
     if (rStatus) {
         fprintf (stderr, "Error: reconnect failed\n");
         cyusb_error(rStatus);
         cyusb_close();
         return rStatus;
-    }*/
+    }
 
     if (strcasecmp (tgt_str, "ram") == 0) { tgt = FW_TARGET_RAM; }
     if (strcasecmp (tgt_str, "i2c") == 0) { tgt = FW_TARGET_I2C; }
@@ -690,35 +741,7 @@ int FX3USB3Connection::print_devices() {
 /**--------------------------------------------------------------------
  *              DANGER ZONE
  *------------------------------------------------------------------ */
-/**
- *  Not yet tested
- * */
-int FX3USB3Connection::soft_reset() {
-    //return cyusb_reset_device(cyusb_device.handle);
-    unsigned int data;
-    unsigned short wLength = 16;
-    unsigned int timeout = 10*1000;
-    unsigned short wValue = 0, wIndex = 1;
 
-    rStatus = cyusb_control_write(
-            cyusb_device.handle,       /* a handle for the device to communicate with */
-            WRITE_REQUEST_TYPE,        /* bmRequestType: the request type field for the setup packet */
-            VND_CMD_RESET_BOARD,       /* bRequest: the request field for the setup packet */
-            wValue,                    /* wValue: the value field for the setup packet */
-            wIndex,                    /* wIndex: the index field for the setup packet */
-            (unsigned char *) &data,   /* *data: a suitably-sized data buffer */
-            wLength,                   /* wLength: the length field for the setup packet. The data buffer should be at least this size. */
-            timeout);                  /* timeout (in miliseconds) that this function should wait before giving up due to no response being received. For an unlimited timeout, use value 0. */
-
-    rStatus = reconnect();
-    if (rStatus) {
-        fprintf (stderr, "Error: reconnect failed\n");
-        cyusb_error(rStatus);
-        cyusb_close();
-    }
-
-    return 0;
-}
 /**
  * Not yet tested
  * */
@@ -729,18 +752,3 @@ int FX3USB3Connection::clear_halt(unsigned char endpoint) {
     }
     return rStatus;
 }
-
-/**
- * Disconnect current device and connect again
- * return 0 on success
- * */
-int FX3USB3Connection::reconnect() {
-    libusb_close(cyusb_device.handle);
-    sleep(2);
-    rStatus = connect();
-    if(rStatus == 1) { return 0; }
-    assert(rStatus!=0);     // Should never return a 0
-    sleep(1);
-    return rStatus;
-}
-

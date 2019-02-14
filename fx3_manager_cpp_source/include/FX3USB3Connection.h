@@ -29,20 +29,6 @@ using namespace std;
 #define VND_CMD_SLAVESER_CFGSTAT    0xB1       /* Switch to the Slave FIFO interface */
 #define VND_CMD_RESET_BOARD		    0xE0
 
-class ErrorOpeningLib : public exception {
-public:
-    char * what () {
-        return const_cast<char *>("Error Opening Library");
-    }
-};
-
-class NoDeviceFound : public exception {
-public:
-    char * what () {
-        return const_cast<char *>("No Device Found");
-    }
-};
-
 /* Enumeration representing the FX3 firmware target. */
 typedef enum {
     FW_TARGET_NONE = 0,	// Invalid value
