@@ -52,30 +52,23 @@ const int i2c_eeprom_size[] =
 
 class FX3USB3Connection {
 public:
-
     FX3USB3Connection();
     FX3USB3Connection(unsigned short vid, unsigned short pid);
     ~FX3USB3Connection();
-
-    int connect();
-    int connect(unsigned short vid, unsigned short pid);
 
     int print_devices();
     int print_device_descriptor();
     int print_config_descriptor();
     int claim_interface(int interface);
+
+    // Programming methods
     int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"));
+    int program_device(char *fpga_firmware_filename);
 
     // Bulk methods
     void send_text_file(bool verbose);  // Loopback to test bulk comm
     int send_buffer(unsigned char *buf, int sz, unsigned int end_ptr = 0x01);
     int recive_buffer(unsigned char *buf, unsigned int data_count, unsigned int end_ptr = 0x81);
-
-    int program_device(char *fpga_firmware_filename);
-
-    // Not tested
-    int clear_halt(unsigned char endpoint);
-    int soft_reset();
 
 private:
     //! Variables
@@ -90,8 +83,10 @@ private:
     libusb_ss_endpoint_companion_descriptor *companionDesc;
 
     //! Methods
+    int connect();
+    int connect(unsigned short vid, unsigned short pid);
     int reconnect();
-
+    int soft_reset();
 
     int get_device_descriptor();
     int get_device_config();

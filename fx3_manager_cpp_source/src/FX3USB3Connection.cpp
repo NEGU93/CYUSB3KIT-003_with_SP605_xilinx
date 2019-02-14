@@ -112,7 +112,9 @@ FX3USB3Connection::~FX3USB3Connection() {
 }
 
 /**
- *
+ *  Send a reset command to the FX3 device and then reconnects to it.
+ * Returns 0 on success
+ * Returns cyusb error if not
  * */
 int FX3USB3Connection::soft_reset() {
     //return cyusb_reset_device(cyusb_device.handle);
@@ -143,7 +145,6 @@ int FX3USB3Connection::soft_reset() {
     return 0;
 }
 
-
 /**
  * Disconnect current device and connect again
  * return 0 on success
@@ -155,7 +156,7 @@ int FX3USB3Connection::reconnect() {
     rStatus = connect();
     if(rStatus == 1) { return 0; }
     assert(rStatus!=0);     // Should never return a 0
-    sleep(1);
+    //sleep(1);
     return rStatus;
 }
 
@@ -736,19 +737,4 @@ int FX3USB3Connection::print_devices() {
     }
 
     return numdev;
-}
-
-/**--------------------------------------------------------------------
- *              DANGER ZONE
- *------------------------------------------------------------------ */
-
-/**
- * Not yet tested
- * */
-int FX3USB3Connection::clear_halt(unsigned char endpoint) {
-    rStatus = libusb_clear_halt(cyusb_device.handle, endpoint);
-    if(rStatus) {
-        fprintf(stderr, "FX3USB3Connection::clear_halt(): Error %s for endpoint %u\n", libusb_error_name(rStatus), endpoint);
-    }
-    return rStatus;
 }
