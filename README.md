@@ -283,7 +283,7 @@ The cables will be connected as follow:
 
 4. Click on "Select Bitstream" and search for your bin file you want to upload to the board.
   - To generate a bin file with ISE instead of the bit file refer to: [Convert bit to bin](https://electronics.stackexchange.com/questions/407801/convert-bit-to-bin-xilinx-file).
-  
+
 5. Power up the FPGA.
    **Note**: It is possible to have the FPGA powered up before this point, but it will be necesarry to *cut* the PMODE\[2..0\] signals from the **FMC Interconnect Board** (This is actually what I did so for this application it is perfectly safe to do it if your application is the same as this one).
 
@@ -301,6 +301,8 @@ The cables will be connected as follow:
 
 The programming firmware was modified to print debugging messages over a UART interface using GPIO[46..49] of the FX3 device.
 To see those messages you must connect those pins to a UART device and use a program_fx3_device like *putty* or *Tera Term* to display the messages in question.
+
+**Note:** Serial speed = 115200.
 
 Example of *Tera Term* screen:
 ```
@@ -376,16 +378,17 @@ After programming, FX3 changes product ID from 0xF3 to 0xF1. For that reason, af
 1. After programming, FX3 changes product ID from 0xF3 to 0xF1. To the definition of product ID is done on: `cyfxslfifousbdscr`
 2. Endpoint defined on `cyfxslfifosync::CyFxSlFifoApplnStart()`
 
-## 7. Final implementation design notes:
+## 7.  Notes for board implementation
 
-1. In the final design it is important to add the following pullup resistors:
+The final project aim is to develop an own board what integrates both the FX3 and FPGA device. For confidentiality reasons the schematic and routed design cannot be uploaded. However, here are some tips followed when designing the board.
+
+1. Wire the M\[0..1\] signal to 11 for Slave Serial Configuration
+2. Wire PMODE\[0..2\] signals to 111 for FX3 USB boot
+1. In the final design it is important to add the following pull-up resistors:
 <p align="center">
 <img src="/img/final_board/pullups.png" width="400"/>
 </p>
-
-2. (Optional) It may be a good idea to add a UART usb connection for debugging with TeraTerm or any other software as explained on [4.3 debugging via UART](4.3-debugging-via-uart)
-
-
+2. (Optional) It may be a good idea to add a UART usb connection for debugging with TeraTerm or any other software as explained on [4.3 debugging via UART](#4.3-debugging-via-uart)
 
 ## 8. Citations
 
@@ -394,5 +397,4 @@ Just use this as you need!
 
 ## 9. TODO:
 
-1. Reset FX3 device from computer of rollback to programming mode.
-2. Check if after error I can still program FPGA without resetting anything.
+1. Multiple device implementation.
