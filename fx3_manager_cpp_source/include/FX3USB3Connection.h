@@ -68,6 +68,7 @@ class FX3USB3Connection {
 public:
 
     FX3USB3Connection();
+    FX3USB3Connection(unsigned short vid, unsigned short pid);
     ~FX3USB3Connection();
 
     int connect();
@@ -103,6 +104,9 @@ private:
     libusb_ss_endpoint_companion_descriptor *companionDesc;
 
     //! Methods
+    int reconnect();
+
+
     int get_device_descriptor();
     int get_device_config();
     int find_endpoint(unsigned int end_pt);

@@ -13,6 +13,7 @@
 #include "../include/FX3USB3Connection.h"
 
 #include <fstream>
+#include <cassert>
 
 //#define DEBUG
 
@@ -20,11 +21,89 @@
  * Opens if there's only one USB3 device
  * */
 FX3USB3Connection::FX3USB3Connection() {
+    connect();
+    soft_reset();
 }
 
 /**
  * Opens cyusb device given the pid and vid value.
  * */
+FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) {
+    connect(vid, pid);
+}
+
+/**
+ * Connects with the FX3 device provided only one is available
+ * Returns 0 on success
+ * Returns cyusb error if not
+ * */
+int FX3USB3Connection::connect() {
+    fp = stdout;
+    cyusb_handle *h = nullptr;
+    rStatus = cyusb_open();
+    //printf("%d\n", rStatus);
+    if ( rStatus < 0 ) {
+        cyusb_error(rStatus);
+        cyusb_close();
+    }
+    else if ( rStatus == 0 ) {
+        printf("No device was listed as a cyusb device\n");
+        print_devices();
+        rStatus = -5;
+    }
+    if(rStatus == 1) {
+        h = cyusb_gethandle(0);
+        cyusb_device.dev     = libusb_get_device(h);
+        cyusb_device.handle  = h;
+        cyusb_device.vid     = cyusb_getvendor(h);
+        cyusb_device.pid     = cyusb_getproduct(h);
+        cyusb_device.is_open = 1;
+        cyusb_device.busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
+        cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
+    }
+    else {
+        printf("Many possible devices to connect with. Please select vid and pid number\n");
+    }
+    return rStatus;
+}
+
+/**
+ * Connects with the FX3 device with given vid and pid
+ * Returns 0 on success
+ * Returns cyusb error if not
+ * */
+int FX3USB3Connection::connect(unsigned short vid, unsigned short pid) {
+    fp = stdout;
+    cyusb_handle *h = nullptr;
+    rStatus = cyusb_open(vid, pid);
+    //printf("%d\n", rStatus);
+    if ( rStatus < 0 ) {
+        fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
+        fflush(nullptr);
+        print_devices();
+    }
+    else if (rStatus == 0) {
+        print_devices();
+    }
+    else if(rStatus == 1) {
+        h = libusb_open_device_with_vid_pid(nullptr, vid, pid);
+        if ( !h ) {
+            //fprintf(stderr, "Device not found.\n");
+            fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
+        }
+        cyusb_device.dev     = libusb_get_device(h);
+        cyusb_device.handle  = h;
+        cyusb_device.vid     = cyusb_getvendor(h);
+        cyusb_device.pid     = cyusb_getproduct(h);
+        cyusb_device.is_open = 1;
+        cyusb_device.busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
+        cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
+    }
+    else {
+        printf("Many possible devices to connect with. Please select vid and pid number");
+    }
+    return rStatus;
+}
 
 FX3USB3Connection::~FX3USB3Connection() {
     libusb_close(cyusb_device.handle);
@@ -173,6 +252,14 @@ int FX3USB3Connection::claim_interface(int interface) {
 int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
     fx3_fw_target tgt = FW_TARGET_NONE;
 
+    /*rStatus = reconnect();
+    if (rStatus) {
+        fprintf (stderr, "Error: reconnect failed\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return rStatus;
+    }*/
+
     if (strcasecmp (tgt_str, "ram") == 0) { tgt = FW_TARGET_RAM; }
     if (strcasecmp (tgt_str, "i2c") == 0) { tgt = FW_TARGET_I2C; }
     if (strcasecmp (tgt_str, "spi") == 0) { tgt = FW_TARGET_SPI; }
@@ -205,9 +292,16 @@ int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
         fprintf (stderr, "Error: FX3 firmware programming failed\n");
         cyusb_error(rStatus);
         cyusb_close();
+        return rStatus;
     }
     else { printf("FX3 firmware programming to %s completed\n", tgt_str); }
-
+    rStatus = reconnect();
+    if (rStatus) {
+        fprintf (stderr, "Error: reconnect failed\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return rStatus;
+    }
     return rStatus;
 }
 
@@ -615,12 +709,13 @@ int FX3USB3Connection::soft_reset() {
             (unsigned char *) &data,   /* *data: a suitably-sized data buffer */
             wLength,                   /* wLength: the length field for the setup packet. The data buffer should be at least this size. */
             timeout);                  /* timeout (in miliseconds) that this function should wait before giving up due to no response being received. For an unlimited timeout, use value 0. */
-    /*if (rStatus < 0) {         // LIB_USB_ERROR
-        fprintf(stderr, "rStatus = %d\n", rStatus);
+
+    rStatus = reconnect();
+    if (rStatus) {
+        fprintf (stderr, "Error: reconnect failed\n");
         cyusb_error(rStatus);
         cyusb_close();
-        return rStatus;
-    }*/
+    }
 
     return 0;
 }
@@ -635,65 +730,17 @@ int FX3USB3Connection::clear_halt(unsigned char endpoint) {
     return rStatus;
 }
 
-int FX3USB3Connection::connect() {
-    fp = stdout;
-    cyusb_handle *h = nullptr;
-    rStatus = cyusb_open();
-    if ( rStatus < 0 ) {
-        cyusb_error(rStatus);
-        cyusb_close();
-        return rStatus;
-    }
-    else if ( rStatus == 0 ) {
-        print_devices();
-        return rStatus;
-    }
-    if(rStatus == 1) {
-        h = cyusb_gethandle(0);
-        cyusb_device.dev     = libusb_get_device(h);
-        cyusb_device.handle  = h;
-        cyusb_device.vid     = cyusb_getvendor(h);
-        cyusb_device.pid     = cyusb_getproduct(h);
-        cyusb_device.is_open = 1;
-        cyusb_device.busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
-        cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
-    }
-    else {
-        printf("Many possible devices to connect with. Please select vid and pid number");
-    }
+/**
+ * Disconnect current device and connect again
+ * return 0 on success
+ * */
+int FX3USB3Connection::reconnect() {
+    libusb_close(cyusb_device.handle);
+    sleep(2);
+    rStatus = connect();
+    if(rStatus == 1) { return 0; }
+    assert(rStatus!=0);     // Should never return a 0
+    sleep(1);
     return rStatus;
 }
 
-int FX3USB3Connection::connect(unsigned short vid, unsigned short pid) {
-    fp = stdout;
-    cyusb_handle *h = nullptr;
-    rStatus = cyusb_open(vid, pid);
-    if ( rStatus < 0 ) {
-        fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
-        fflush(nullptr);
-        print_devices();
-        throw ErrorOpeningLib();
-    }
-    else if (rStatus == 0) {
-        print_devices();
-        throw NoDeviceFound();
-    }
-    else if(rStatus == 1) {
-        h = libusb_open_device_with_vid_pid(nullptr, vid, pid);
-        if ( !h ) {
-            //fprintf(stderr, "Device not found.\n");
-            fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
-        }
-        cyusb_device.dev     = libusb_get_device(h);
-        cyusb_device.handle  = h;
-        cyusb_device.vid     = cyusb_getvendor(h);
-        cyusb_device.pid     = cyusb_getproduct(h);
-        cyusb_device.is_open = 1;
-        cyusb_device.busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
-        cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
-    }
-    else {
-        printf("Many possible devices to connect with. Please select vid and pid number");
-    }
-    return rStatus;
-}

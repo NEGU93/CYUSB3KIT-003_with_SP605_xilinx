@@ -222,8 +222,7 @@ static int renumerate() {
 /* cyusb_open:
    Opens handles to all USB devices of interest, and returns their count.
  */
-int cyusb_open ()
-{
+int cyusb_open () {
 	int fd1;
 	int r;
 
