@@ -77,13 +77,11 @@ int main(int argc, char **argv) {
 	//! PROGRAM FX3
 	char *filename = const_cast<char *>("../program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync.img");
 	char *tgt_str = const_cast<char *>("ram");
-	if (fx3USB3Connection.download_fx3_firmware(filename, tgt_str) != 0) {
+	if (fx3USB3Connection.download_fx3_firmware(filename, tgt_str, VID, PID_FX1) != 0) {
 		fprintf(stderr, "Failed to program FX3 device\n"); fflush(nullptr);
 		exit(-1);
 	}
 	sleep(1);
-
-
 
 	//! Program FPGA
 	char * fpga_filename = const_cast<char *>("../program_fpga/bin/slaveFIFO2b_fpga_top.bin");
@@ -95,6 +93,5 @@ int main(int argc, char **argv) {
 
 	//! Test loopback
 	fx3USB3Connection.send_text_file(true);
-
 	return 0;
 }

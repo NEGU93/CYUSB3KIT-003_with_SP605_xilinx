@@ -62,7 +62,7 @@ public:
     int claim_interface(int interface);
 
     // Programming methods
-    int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"));
+    int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0);
     int program_device(char *fpga_firmware_filename);
 
     // Bulk methods
@@ -76,6 +76,9 @@ private:
     int rStatus;                    // Return status variable
     FILE *fp;
 
+    unsigned short vid;
+    unsigned short pid;
+
     struct libusb_device_descriptor deviceDesc{};
     struct libusb_config_descriptor *configDesc;
     libusb_interface_descriptor *interfaceDesc;
@@ -84,7 +87,6 @@ private:
 
     //! Methods
     int connect();
-    int connect(unsigned short vid, unsigned short pid);
     int reconnect();
     int soft_reset();
 

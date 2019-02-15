@@ -44,8 +44,8 @@ struct VPD {
 };
 
 static struct VPD	vpd[MAX_ID_PAIRS];		/* Known device database. */
-static int 		maxdevices;			/* Number of devices in the vpd database. */
-static unsigned int 	checksum = 0;			/* Checksum calculated on the Cypress firmware binary. */
+static int 		maxdevices;					/* Number of devices in the vpd database. */
+static unsigned int 	checksum = 0;		/* Checksum calculated on the Cypress firmware binary. */
 
 /* The following variables are used by the cyusb_linux application. */
        char		pidfile[MAX_FILEPATH_LENGTH];	/* Full path to the PID file specified in /etc/cyusb.conf */
@@ -73,15 +73,14 @@ static bool isempty(char *buf, int L) {
 /* parse_configfile:
    Parse the /etc/cyusb.conf file and get the list of USB devices of interest.
  */
-static void
-parse_configfile (){
+static void parse_configfile (){
 	FILE *inp;
 	char buf[MAX_CFG_LINE_LENGTH];
 	char *cp1, *cp2, *cp3;
 	int i;
 
 	inp = fopen("/etc/cyusb.conf", "rStatus");
-	if (inp == NULL)
+	if (inp == nullptr)
 		return;
 
 	memset(buf,'\0',MAX_CFG_LINE_LENGTH);
@@ -90,16 +89,16 @@ parse_configfile (){
 			continue;
 		if ( buf[0] == '\n' )
 			continue;
-		if ( isempty(buf,strlen(buf)) )		/* Any blank line is also ignored		*/
+		if ( isempty(buf, static_cast<int>(strlen(buf))) )		/* Any blank line is also ignored		*/
 			continue;
 
 		cp1 = strtok(buf," =\t\n");
 		if ( !strcmp(cp1,"LogFile") ) {
-			cp2 = strtok(NULL," \t\n");
+			cp2 = strtok(nullptr," \t\n");
 			strcpy(logfile,cp2);
 		}
 		else if ( !strcmp(cp1,"PIDFile") ) {
-			cp2 = strtok(NULL," \t\n");
+			cp2 = strtok(nullptr," \t\n");
 			strcpy(pidfile,cp2);
 		}
 		else if ( !strcmp(cp1,"<VPD>") ) {
@@ -108,20 +107,20 @@ parse_configfile (){
 					continue;
 				if ( buf[0] == '\n' )
 					continue;
-				if ( isempty(buf,strlen(buf)) )	/* Any blank line is also ignored		*/
+				if ( isempty(buf, static_cast<int>(strlen(buf))) )	/* Any blank line is also ignored		*/
 					continue;
 				if ( maxdevices == (MAX_ID_PAIRS - 1) )
 					continue;
 				cp1 = strtok(buf," \t\n");
 				if ( !strcmp(cp1,"</VPD>") )
 					break;
-				cp2 = strtok(NULL, " \t");
-				cp3 = strtok(NULL, " \t\n");
+				cp2 = strtok(nullptr, " \t");
+				cp3 = strtok(nullptr, " \t\n");
 
-				vpd[maxdevices].vid = strtol(cp1,NULL,16);
-				vpd[maxdevices].pid = strtol(cp2,NULL,16);
+				vpd[maxdevices].vid = static_cast<unsigned short>(strtol(cp1, nullptr, 16));
+				vpd[maxdevices].pid = static_cast<unsigned short>(strtol(cp2, nullptr, 16));
 				strncpy(vpd[maxdevices].desc,cp3,MAX_STR_LEN);
-				vpd[maxdevices].desc[MAX_STR_LEN - 1] = '\0';   /* Make sure of NULL-termination. */
+				vpd[maxdevices].desc[MAX_STR_LEN - 1] = '\0';   /* Make sure of nullptr-termination. */
 
 				++maxdevices;
 			}
@@ -141,13 +140,13 @@ parse_configfile (){
 static int device_is_of_interest (cyusb_device *d){
 	int i;
 	int found = 0;
-	struct libusb_device_descriptor desc;
-	int vid;
-	int pid;
+	struct libusb_device_descriptor desc{};
+	//int vid;
+	//int pid;
 
 	libusb_get_device_descriptor(d, &desc);
-	vid = desc.idProduct;
-	pid = desc.idProduct;
+	//vid = desc.idProduct;
+	//pid = desc.idProduct;
 
 	for ( i = 0; i < maxdevices; ++i ) {
 		if ( (vpd[i].vid == desc.idVendor) && (vpd[i].pid == desc.idProduct) ) {
@@ -162,7 +161,7 @@ static int device_is_of_interest (cyusb_device *d){
    Get the Vendor ID for the current USB device.
  */
 unsigned short cyusb_getvendor (cyusb_handle *h){
-	struct libusb_device_descriptor d;
+	struct libusb_device_descriptor d{};
 	cyusb_get_device_descriptor(h, &d);
 	return d.idVendor;
 }
@@ -170,9 +169,8 @@ unsigned short cyusb_getvendor (cyusb_handle *h){
 /* cyusb_getproduct:
    Get the Product ID for the current USB device.
 */
-unsigned short cyusb_getproduct (cyusb_handle *h)
-{
-	struct libusb_device_descriptor d;
+unsigned short cyusb_getproduct (cyusb_handle *h) {
+	struct libusb_device_descriptor d{};
 	cyusb_get_device_descriptor(h, &d);
 	return d.idProduct;
 }
@@ -181,14 +179,14 @@ unsigned short cyusb_getproduct (cyusb_handle *h)
    Get handles to and store information about all USB devices of interest.
  */
 static int renumerate() {
-	cyusb_device *dev = NULL;
-	cyusb_handle *handle = NULL;
+	cyusb_device *dev = nullptr;
+	cyusb_handle *handle = nullptr;
 	int           numdev;
 	int           found = 0;
 	int           i;
 	int           r;
 
-	numdev = libusb_get_device_list(NULL, &list);
+	numdev = static_cast<int>(libusb_get_device_list(nullptr, &list));
 	if ( numdev < 0 ) {
 		printf("Library: Error in enumerating devices...\n");
 		return -ENODEV;
@@ -210,8 +208,8 @@ static int renumerate() {
 			cydev[nid].vid     = cyusb_getvendor(handle);
 			cydev[nid].pid     = cyusb_getproduct(handle);
 			cydev[nid].is_open = 1;
-			cydev[nid].busnum  = cyusb_get_busnumber(handle);
-			cydev[nid].devaddr = cyusb_get_devaddr(handle);
+			cydev[nid].busnum  = static_cast<unsigned char>(cyusb_get_busnumber(handle));
+			cydev[nid].devaddr = static_cast<unsigned char>(cyusb_get_devaddr(handle));
 			++nid;
 		}
 	}
@@ -250,10 +248,7 @@ int cyusb_open () {
 /* cyusb_open:
    Open a handle to the USB device with specified vid/pid.
  */
-int cyusb_open (
-		unsigned short vid,
-		unsigned short pid)
-{
+int cyusb_open (unsigned short vid, unsigned short pid) {
 	int r;
 	cyusb_handle *h = nullptr;
 
@@ -333,10 +328,7 @@ void cyusb_error (int err) {
 /* cyusb_gethandle:
    Get a handle to the USB device with specified index.
  */
-cyusb_handle *
-cyusb_gethandle (
-		int index)
-{
+cyusb_handle *cyusb_gethandle (int index) {
 	return cydev[index].handle;
 }
 
@@ -662,16 +654,12 @@ cyusb_control_write (
 /* cyusb_bulk_transfer:
    Perform a data transfer on a USB Bulk endpoint.
  */
-int
-cyusb_bulk_transfer (
-		cyusb_handle *h,
-	       	unsigned char endpoint,
-	       	unsigned char *data,
+int cyusb_bulk_transfer (cyusb_handle *h, unsigned char endpoint, unsigned char *data,
 	       	int length,
 		int *transferred,
 	       	int timeout)
 {
-	return ( libusb_bulk_transfer(h, endpoint, data, length, transferred, timeout) );
+	return ( libusb_bulk_transfer(h, endpoint, data, length, transferred, static_cast<unsigned int>(timeout)) );
 }
 
 /* cyusb_interrupt_transfer:
@@ -693,12 +681,8 @@ cyusb_interrupt_transfer (
    Download firmware to the Cypress FX2/FX2LP device using USB vendor commands.
  */
 int
-cyusb_download_fx2 (
-		cyusb_handle *h,
-		char *filename,
-		unsigned char vendor_command)
-{
-	FILE *fp = NULL;
+cyusb_download_fx2 (cyusb_handle *h, char *filename, unsigned char vendor_command) {
+	FILE *fp = nullptr;
 	char buf[256];
 	char tbuf1[3];
 	char tbuf2[5];
@@ -708,7 +692,7 @@ cyusb_download_fx2 (
 	int count = 0;
 	unsigned char num_bytes = 0;
 	unsigned short address = 0;
-	unsigned char *dbuf = NULL;
+	unsigned char *dbuf = nullptr;
 	int i;
 
 	fp = fopen(filename, "rStatus" );
@@ -727,17 +711,17 @@ cyusb_download_fx2 (
 
 	count = 0;
 
-	while ( fgets(buf, 256, fp) != NULL ) {
+	while ( fgets(buf, 256, fp) != nullptr ) {
 		if ( buf[8] == '1' )
 			break;
 		strncpy(tbuf1,buf+1,2);
-		num_bytes = strtoul(tbuf1,NULL,16);
+		num_bytes = static_cast<unsigned char>(strtoul(tbuf1, nullptr, 16));
 		strncpy(tbuf2,buf+3,4);
-		address = strtoul(tbuf2,NULL,16);
+		address = static_cast<unsigned short>(strtoul(tbuf2, nullptr, 16));
 		dbuf = (unsigned char *)malloc(num_bytes);
 		for ( i = 0; i < num_bytes; ++i ) {
 			strncpy(tbuf3,&buf[9+i*2],2);
-			dbuf[i] = strtoul(tbuf3,NULL,16);
+			dbuf[i] = static_cast<unsigned char>(strtoul(tbuf3, nullptr, 16));
 		}
 
 		r = cyusb_control_transfer(h, 0x40, vendor_command, address, 0x00, dbuf, num_bytes, 1000);
@@ -764,13 +748,7 @@ cyusb_download_fx2 (
    Internal function that issues the vendor command that incrementally loads firmware segments to the
    Cypress FX3 device RAM.
  */
-static void
-control_transfer (
-		cyusb_handle *h,
-	       	unsigned int address,
-	       	unsigned char *dbuf,
-	       	int len)
-{
+static void control_transfer (cyusb_handle *h, unsigned int address, unsigned char *dbuf, int len) {
 	int j;
 	int r;
 	int b;
@@ -803,17 +781,13 @@ control_transfer (
 /* cyusb_download_fx3:
    Download a firmware binary the Cypress FX3 device RAM.
  */
-int
-cyusb_download_fx3 (
-		cyusb_handle *h,
-	       	char *filename)
-{
+int cyusb_download_fx3 (cyusb_handle *h, char *filename) {
 	int fd;
 	unsigned char buf[FX3_MAX_FW_SIZE];
 	int nbr;
 	int dlen;
 	int count;
-	unsigned int *pdbuf = NULL;
+	unsigned int *pdbuf = nullptr;
 	unsigned int address;
 	unsigned int *pint;
 	unsigned int program_entry;
@@ -870,7 +844,7 @@ cyusb_download_fx3 (
 	}
 
 	sleep(1);
-	r = cyusb_control_transfer(h, 0x40, 0xA0, (program_entry & 0x0000ffff ) , program_entry >> 16, NULL, 0, 1000);
+	r = cyusb_control_transfer(h, 0x40, 0xA0, (program_entry & 0x0000ffff ) , program_entry >> 16, nullptr, 0, 1000);
 	if ( r ) {
 		printf("Ignored error in control_transfer: %d\n", r);
 		return 1;

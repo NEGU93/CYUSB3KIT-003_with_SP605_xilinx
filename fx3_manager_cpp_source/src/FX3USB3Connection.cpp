@@ -21,14 +21,16 @@
  * Opens if there's only one USB3 device
  * */
 FX3USB3Connection::FX3USB3Connection() {
+    vid = 0;
+    pid = 0;
     rStatus = connect();
 }
 
 /**
  * Opens cyusb device given the pid and vid value.
  * */
-FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) {
-    rStatus = connect(vid, pid);
+FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
+    rStatus = connect();
 }
 
 /**
@@ -39,18 +41,27 @@ FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) {
 int FX3USB3Connection::connect() {
     fp = stdout;
     cyusb_handle *h = nullptr;
-    rStatus = cyusb_open();
+    if (vid && pid) {
+        rStatus = cyusb_open(vid, pid);
+    }
+    else {
+        rStatus = cyusb_open();
+    }
     //printf("%d\n", rStatus);
     if ( rStatus < 0 ) {
         cyusb_error(rStatus);
         cyusb_close();
     }
     else if ( rStatus == 0 ) {
-        printf("No device was listed as a cyusb device\n");
+        if(vid && pid) { fprintf(stderr, "Couldn't find VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid); }
+        else { printf("No device was listed as a cyusb device\n"); }
         print_devices();
         rStatus = -5;
     }
-    if(rStatus == 1) {
+    else {  // rStatus > 0
+        if(rStatus > 1) {
+            printf("Warning: Many possible devices to connect with.\n");
+        }
         h = cyusb_gethandle(0);
         cyusb_device.dev     = libusb_get_device(h);
         cyusb_device.handle  = h;
@@ -59,48 +70,6 @@ int FX3USB3Connection::connect() {
         cyusb_device.is_open = 1;
         cyusb_device.busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
         cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
-    }
-    else {
-        printf("Many possible devices to connect with. Please select vid and pid number\n");
-        print_devices();
-    }
-    return rStatus;
-}
-
-/**
- * Connects with the FX3 device with given vid and pid
- * Returns 0 on success
- * Returns cyusb error if not
- * */
-int FX3USB3Connection::connect(unsigned short vid, unsigned short pid) {
-    fp = stdout;
-    cyusb_handle *h = nullptr;
-    rStatus = cyusb_open(vid, pid);
-    //printf("%d\n", rStatus);
-    if ( rStatus < 0 ) {
-        fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
-        fflush(nullptr);
-        print_devices();
-    }
-    else if (rStatus == 0) {
-        print_devices();
-    }
-    else if(rStatus == 1) {
-        h = libusb_open_device_with_vid_pid(nullptr, vid, pid);
-        if ( !h ) {
-            //fprintf(stderr, "Device not found.\n");
-            fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
-        }
-        cyusb_device.dev     = libusb_get_device(h);
-        cyusb_device.handle  = h;
-        cyusb_device.vid     = cyusb_getvendor(h);
-        cyusb_device.pid     = cyusb_getproduct(h);
-        cyusb_device.is_open = 1;
-        cyusb_device.busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
-        cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
-    }
-    else {
-        printf("Many possible devices to connect with. Please select vid and pid number");
     }
     return rStatus;
 }
@@ -300,8 +269,16 @@ int FX3USB3Connection::claim_interface(int interface) {
 
 /**
  * Next bunch of functions are done to upload a .img firmware to the FX3 device
+ * Input:
+ *  @filename: name of the firware.img file to be programmed
+ *  @tgt_str (Optional):
+ *      "ram" (Default)
+ *      "i2c"
+ *      "spi"
+ *  @pid & @vid (Optional):
+ *  If after programming, the board is supposed to change both vid and pid values it must be passed as parameters.
  * */
-int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
+int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str, unsigned short vid, unsigned short pid) {
     fx3_fw_target tgt = FW_TARGET_NONE;
 
     rStatus = soft_reset();
@@ -347,6 +324,10 @@ int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
         return rStatus;
     }
     else { printf("FX3 firmware programming to %s completed\n", tgt_str); }
+    if (pid && vid) {   // Before reconnecting, change the pid and vid if necessary.
+        this->pid = pid;
+        this->vid = vid;
+    }
     rStatus = reconnect();
     if (rStatus) {
         fprintf (stderr, "Error: reconnect failed\n");
@@ -709,8 +690,6 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
     free (buffer);
     return 0;
 }
-
-
 
 /**
  * Prints all USB devices BUS, VID, PID and bcd.
