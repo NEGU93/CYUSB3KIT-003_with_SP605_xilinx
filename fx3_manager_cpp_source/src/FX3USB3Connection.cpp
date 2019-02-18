@@ -600,7 +600,7 @@ int FX3USB3Connection::claim_interface(int interface) {
 }
 
 /**
- * Next bunch of functions are done to upload a .img firmware to the FX3 device
+ * Upload a .img firmware to the FX3 device
  * Input:
  *  @filename: name of the firware.img file to be programmed
  *  @tgt_str (Optional):
@@ -736,8 +736,8 @@ int FX3USB3Connection::find_endpoint(unsigned int end_pt) {
 }
 
 /**
- * Uses send and receive buffer to send a text file expecting a loopback.
- * It stores the data on some files and assest the received file is equal to se sent file.
+ * Uses send and receive buffer to send a text file and reads same size response
+ * It then checks the readed data is the same as the data sended
  * */
 void FX3USB3Connection::send_text_file(bool verbose) {
     ssize_t nbr;
@@ -890,7 +890,7 @@ bool FX3USB3Connection::files_match(const std::string &p1, const std::string &p2
 }
 
 /**
- * Sends the data stored on buf of size sz to the endpoint 0x01
+ * Sends the data stored on 'buf' of size 'sz' to the endpoint passed (default 0x01)
  * */
 int FX3USB3Connection::send_buffer(unsigned char *buf, int sz, unsigned int end_ptr) {
     int rStatus;
