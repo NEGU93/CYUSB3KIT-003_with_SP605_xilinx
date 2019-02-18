@@ -7,6 +7,7 @@
 
 #include <cstdio>
 #include <stdlib.h> // strol, calloc, free
+#include <list>
 #include "../include/cyusb.h"
 
 using namespace std;
@@ -28,6 +29,9 @@ using namespace std;
 #define VND_CMD_SLAVESER_CFGLOAD    0xB2       /* Command to program_fx3_device the FPGA */
 #define VND_CMD_SLAVESER_CFGSTAT    0xB1       /* Switch to the Slave FIFO interface */
 #define VND_CMD_RESET_BOARD		    0xE0
+
+/* Maximum length of a string read from the Configuration file (device.conf)*/
+#define MAX_CFG_LINE_LENGTH                     (120)
 
 /* Enumeration representing the FX3 firmware target. */
 typedef enum {
@@ -54,6 +58,7 @@ class FX3USB3Connection {
 public:
     FX3USB3Connection();
     FX3USB3Connection(unsigned short vid, unsigned short pid);
+    FX3USB3Connection(char *device_descriptors = const_cast<char *>("conf/device.conf"));
     ~FX3USB3Connection();
 
     int print_devices();
@@ -79,6 +84,7 @@ private:
     unsigned short vid;
     unsigned short pid;
 
+    list<libusb_device_descriptor> search_description;
     struct libusb_device_descriptor deviceDesc{};
     struct libusb_config_descriptor *configDesc;
     libusb_interface_descriptor *interfaceDesc;
@@ -90,6 +96,8 @@ private:
     int reconnect();
     int soft_reset();
 
+    int get_device_search_descriptor(char *device_descriptor_filename);
+    int get_match(int max_devices);
     int get_device_descriptor();
     int get_device_config();
     int find_endpoint(unsigned int end_pt);
