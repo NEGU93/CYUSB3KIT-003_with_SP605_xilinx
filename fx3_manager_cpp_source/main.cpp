@@ -72,8 +72,8 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	FX3USB3Connection fx3USB3Connection = FX3USB3Connection(const_cast<char *>("conf/device.conf"));
-
+	FX3USB3Connection fx3USB3Connection = FX3USB3Connection(nullptr);
+	//fx3USB3Connection.print_device_descriptor();
 	//! PROGRAM FX3
 	char *filename = const_cast<char *>("../program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync.img");
 	char *tgt_str = const_cast<char *>("ram");

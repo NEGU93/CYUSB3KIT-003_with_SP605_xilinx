@@ -17,6 +17,7 @@
 #include <regex>
 
 //#define DEBUG
+//#define DEBUG_MATCH_DEVICE
 
 /**
  * isempty:
@@ -37,21 +38,15 @@ static bool isempty(char *buf, int L) {
 }
 
 /**
- * Opens if there's only one USB3 device
- * */
-FX3USB3Connection::FX3USB3Connection() {
-    vid = 0;
-    pid = 0;
-    rStatus = connect();
-}
-
-/**
- * Opens if there's only one USB3 device
+ * Opens a usb device that matches any of the devices listed on device_descriptors (default: "conf/device.conf")
+ * If no other requirement other than being a Cypress device, device_descriptors should be a nullptr
  * */
 FX3USB3Connection::FX3USB3Connection(char *device_descriptors) {
     vid = 0;
     pid = 0;
-    get_device_search_descriptor(device_descriptors);
+    if(device_descriptors) {
+        get_device_search_descriptor(device_descriptors);
+    }
     rStatus = connect();
 }
 
@@ -91,7 +86,11 @@ int FX3USB3Connection::connect() {
         if(rStatus > 1) {
             printf("Warning: Many possible devices to connect with.\n");
         }
-        int index = get_match(rStatus);
+#ifdef DEBUG_MATCH_DEVICE
+        int index = get_match(rStatus, true);
+#else
+        int index = get_match(rStatus, false);
+#endif
         if (index < 0) {
             fprintf(stderr, "Device description not found\n");
             return -1;
@@ -165,6 +164,304 @@ int FX3USB3Connection::reconnect() {
     return rStatus;
 }
 
+/**
+ * Reads the configuration file passed and saves all the information of possible devices
+ * The configuration file must contain all the restrictions in the following way:
+ * <NAME_DEVICE>
+ *	bLength             = 18
+ *	bDescriptorType     = 1
+ *	bcdUSB              = 0x0210
+ *	bDeviceClass        = 0x00
+ *	bDeviceSubClass     = 0x00
+ *	bDeviceProtocol     = 0x00
+ *	bMaxPacketSize      = 64
+ *	idVendor            = 0x04b4
+ *	idProduct           = 0x00f3
+ *	bcdDevice           = 0x0000
+ *	iManufacturer       = 1
+ *	iProduct            = 2
+ *	iSerialNumber       = 0
+ *	bNumConfigurations  = 1
+ *</NAME_DEVICE>
+ * If a variable is not listed it means it can be any.
+ * This is used as a second filter to further state restrictions upon cyusb devices
+ *
+ * Input:
+ *  @device_descriptor_filename: File path with the information of devices to match.
+ * */
+int FX3USB3Connection::get_device_search_descriptor(char *device_descriptor_filename) {
+    FILE *inp;
+    char buf[MAX_CFG_LINE_LENGTH];
+    std::string cp1, cp2;
+    std::string key;
+    std::string::size_type sz;          // alias of size_t
+    std::string regex_str_start = "<.+?>";    // matches any character one or more times included
+    // inside < and >, expanding as needed
+    std::string regex_str_end = "</.+?>";
+
+    inp = fopen(device_descriptor_filename, "rStatus");
+    if (inp == nullptr) {
+        fprintf(stderr, "File for device descriptor %s not found. Ignoring file\n", device_descriptor_filename);
+        return 0;
+    };
+
+    memset(buf, '\0', MAX_CFG_LINE_LENGTH);
+    while ( fgets(buf, MAX_CFG_LINE_LENGTH, inp) ) {
+        if ( buf[0] == '#' ) 			/* Any line starting with a # is a comment 	*/
+            continue;
+        if ( buf[0] == '\n' )
+            continue;
+        if ( isempty(buf, static_cast<int>(strlen(buf))) )		/* Any blank line is also ignored		*/
+            continue;
+
+        cp1 = strtok(buf, " :=\t\n");   // TODO create token variable to not repeat
+#ifdef DEBUG
+        printf("Comparing %s with %s and gives %d\n", cp1.c_str(), device_start.str().c_str(), cp1.compare(device_start.str()));
+#endif
+        if ( std::regex_match(cp1, std::regex(regex_str_start)) ) {
+            struct libusb_device_descriptor descriptor{};
+            key = cp1;
+#ifdef DEBUG_MATCH_DEVICE
+            printf("Found device %s restrictions:\n", key.c_str());
+#endif
+            while ( fgets(buf, MAX_CFG_LINE_LENGTH, inp) ) {
+                if ( buf[0] == '#' ) { continue; }	/* Any line starting with a # is a comment 	*/
+                if ( buf[0] == '\n' ) { continue; }
+                if ( isempty(buf, static_cast<int>(strlen(buf))) ) {    /* Any blank line is also ignored		*/
+                    continue;
+                }
+                cp1 = strtok(buf, " :=\t\n");
+                if ( std::regex_match(cp1, std::regex(regex_str_end)) ) {
+                    // End of device
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("End of description of %s\n", key.c_str());
+#endif
+                    search_description[key] = descriptor;
+                    break;
+                }
+                cp2 = strtok(nullptr, " :=\t\n");
+#ifdef DEBUG_MATCH_DEVICE
+                printf("\t%s must be %s = ", cp1.c_str(), cp2.c_str());
+#endif
+                if(cp1 == "bLength") {
+                    descriptor.bLength = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bLength);
+#endif
+                }
+                else if(cp1 == "bDescriptorType") {
+                    descriptor.bDescriptorType = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bDescriptorType);
+#endif
+                }
+                else if(cp1 == "bcdUSB") {
+                    descriptor.bcdUSB = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bcdUSB);
+#endif
+                }
+                else if(cp1 == "bDeviceClass") {
+                    descriptor.bDeviceClass = static_cast<uint8_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bDeviceClass);
+#endif
+                }
+                else if(cp1 == "bDeviceSubClass") {
+                    descriptor.bDeviceSubClass = static_cast<uint8_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bDeviceSubClass);
+#endif
+                }
+                else if(cp1 == "bDeviceProtocol") {
+                    descriptor.bDeviceProtocol = static_cast<uint8_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bDeviceProtocol);
+#endif
+                }
+                else if(cp1 == "bMaxPacketSize") {
+                    descriptor.bMaxPacketSize0 = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bMaxPacketSize0);
+#endif
+                }
+                else if(cp1 == "idVendor") {
+                    descriptor.idVendor = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.idVendor);
+#endif
+                }
+                else if(cp1 == "idProduct") {
+                    descriptor.idProduct = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.idProduct);
+#endif
+                }
+                else if(cp1 == "bcdDevice") {
+                    descriptor.bcdDevice = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bcdDevice);
+#endif
+                }
+                else if(cp1 == "iManufacturer") {
+                    descriptor.iManufacturer = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.iManufacturer);
+#endif
+                }
+                else if(cp1 == "iProduct") {
+                    descriptor.iProduct = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.iProduct);
+#endif
+                }
+                else if(cp1 ==  "iSerialNumber") {
+                    descriptor.iSerialNumber = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.iSerialNumber);
+#endif
+                }
+                else if(cp1 == "bNumConfigurations") {
+                    descriptor.bNumConfigurations = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bNumConfigurations);
+#endif
+                }
+                else {
+                    printf("Warning: Option %s not recognized. Ignoring it...\n", cp1.c_str());
+                }
+            }
+        }
+        else {
+            printf("Error in config file: %s \n",buf);
+            exit(1);
+        }
+    }
+
+    fclose(inp);
+    return 0;
+}
+
+/**
+ * Get the amount of devices on liusb list that can be connected to.
+ * Check if any of those devices have a match with the devices parsed on "get_device_search_descriptor"
+ * The first of the devices that gets a match will be returned without checking any further,
+ * So if 2 exact devices are connected only the first one on the list will be selected
+ * returns:
+ *      index (between 0 and max_devices-1) of matched device is any
+ *      -1 if none of the devices where
+ *      -2 if error
+ * */
+int FX3USB3Connection::get_match(int max_devices, bool verbose) {
+    int index = 0;
+    int r;
+    bool found = false;
+    cyusb_handle *h = nullptr;
+    struct libusb_device_descriptor descriptor{};
+    if(search_description.empty()) {
+        return 0;   // No specific requirements
+    }
+    while( (index < max_devices) && !found) {
+        h = cyusb_gethandle(index);
+        r = cyusb_get_device_descriptor(h, &deviceDesc);
+        if (r) {
+            fprintf(stderr, "FX3USB3Connection::get_match(): Error getting device descriptor %d\n", index);
+            return -2;
+        }
+        for(const auto &descriptor_map : search_description) { // Search for all the cases to see if device is good enough
+            if(verbose)
+                printf("Searching match for %s: ", descriptor_map.first.c_str());
+            descriptor = descriptor_map.second;
+            if (descriptor.bNumConfigurations == 0 ||
+                descriptor.bNumConfigurations == deviceDesc.bNumConfigurations) {
+                if (descriptor.bcdDevice == 0 || descriptor.bcdDevice == deviceDesc.bcdDevice) {
+                    if (descriptor.bcdUSB == 0 || descriptor.bcdUSB == deviceDesc.bcdUSB) {
+                        if (descriptor.bDescriptorType == 0 || descriptor.bDescriptorType == deviceDesc.bDescriptorType) {
+                            if (descriptor.bDeviceClass == 0 || descriptor.bDeviceClass == deviceDesc.bDeviceClass) {
+                                if (descriptor.bDeviceProtocol == 0 || descriptor.bDeviceProtocol == deviceDesc.bDeviceProtocol) {
+                                    if (descriptor.bDeviceSubClass == 0 || descriptor.bDeviceSubClass == deviceDesc.bDeviceSubClass) {
+                                        if (descriptor.bLength == 0 || descriptor.bLength == deviceDesc.bLength) {
+                                            if (descriptor.bMaxPacketSize0 == 0 || descriptor.bMaxPacketSize0 == deviceDesc.bMaxPacketSize0) {
+                                                if (descriptor.iProduct == 0 || descriptor.iProduct == deviceDesc.iProduct) {
+                                                    if (descriptor.iSerialNumber == 0 || descriptor.iSerialNumber == deviceDesc.iSerialNumber) {
+                                                        if (descriptor.iManufacturer == 0 || descriptor.iManufacturer == deviceDesc.iManufacturer) {
+                                                            if (descriptor.idVendor == 0 || descriptor.idVendor == deviceDesc.idVendor) {
+                                                                if (descriptor.idProduct == 0 || descriptor.idProduct == deviceDesc.idProduct) {
+                                                                    if(verbose)
+                                                                        printf("device connected matched %s\n", descriptor_map.first.c_str());
+                                                                    found = true;   // Device gets all the descriptions
+                                                                    break; // Break from the for loop, the device was found.
+                                                                }
+                                                                else if(verbose) {
+                                                                    printf("search_descriptor idProduct %d does not match descriptor %d\n", descriptor.idProduct,
+                                                                           deviceDesc.idProduct);
+                                                                }
+                                                            }
+                                                            else if(verbose) {
+                                                                printf("search_descriptor idVendor %d does not match descriptor %d\n", descriptor.idVendor,
+                                                                       deviceDesc.idVendor);
+                                                            }
+                                                        }
+                                                        else if(verbose) {
+                                                            printf("search_descriptor iManufacturer %d does not match descriptor %d\n",
+                                                                   descriptor.iManufacturer, deviceDesc.iManufacturer);
+                                                        }
+                                                    }
+                                                    else if(verbose) {
+                                                        printf("search_descriptor iSerialNumber  %d does not match descriptor %d\n",
+                                                               descriptor.iSerialNumber, deviceDesc.iSerialNumber);
+                                                    }
+                                                }
+                                                else if(verbose) {
+                                                    printf("search_descriptor iProduct %d does not match descriptor %d\n", descriptor.iProduct,
+                                                           deviceDesc.iProduct);
+                                                }
+                                            }
+                                            else if(verbose) {
+                                                printf("search_descriptor bMaxPacketSize0 %d does not match descriptor %d\n",
+                                                       descriptor.bMaxPacketSize0, deviceDesc.bMaxPacketSize0);
+                                            }
+                                        }
+                                        else if(verbose) {
+                                            printf("search_descriptor bLength %d does not match descriptor %d\n", descriptor.bLength,
+                                                   deviceDesc.bLength);
+                                        }
+                                    }
+                                    else if(verbose) {
+                                        printf("search_descriptor bDeviceSubClass %d does not match descriptor %d\n",
+                                               descriptor.bDeviceSubClass, deviceDesc.bDeviceSubClass);
+                                    }
+                                }
+                                else if(verbose) {
+                                    printf("search_descriptor bDeviceProtocol %d does not match descriptor %d\n",
+                                           descriptor.bDeviceProtocol, deviceDesc.bDeviceProtocol);
+                                }
+                            } else if(verbose) {
+                                printf("search_descriptor bDeviceClass %d does not match descriptor %d\n",
+                                       descriptor.bDeviceClass, deviceDesc.bDeviceClass);
+                            }
+                        } else if(verbose) {
+                            printf("search_descriptor bDescriptorType %d does not match descriptor %d\n",
+                                   descriptor.bDescriptorType, deviceDesc.bDescriptorType);
+                        }
+                    }else if(verbose) {
+                        printf("search_descriptor bcdUSB %d does not match descriptor %d\n", descriptor.bcdUSB,
+                               deviceDesc.bcdUSB);
+                    }
+                }else if(verbose) {
+                    printf("search_descriptor bcdDevice %d does not match descriptor %d\n", descriptor.bcdDevice,
+                           deviceDesc.bcdDevice);
+                }
+            } else if(verbose) {
+                printf("search_descriptor bNumConfigurations %d does not match descriptor %d\n",
+                       descriptor.bNumConfigurations, deviceDesc.bNumConfigurations);
+            }
+        }
+        if (!found) { index++; } // If the device was not found increment index
+    }
+    if(found) { return index; }
+    else { return -1; }
+}
 
 /*******************************************************************/
 
@@ -233,7 +530,6 @@ int FX3USB3Connection::get_device_config() {
 
     return 0;
 }
-
 int FX3USB3Connection::print_config_descriptor() {
     char tbuf[64];
 
@@ -312,7 +608,7 @@ int FX3USB3Connection::claim_interface(int interface) {
  *      "i2c"
  *      "spi"
  *  @pid & @vid (Optional):
- *  If after programming, the board is supposed to change both vid and pid values it must be passed as parameters.
+ *      If after programming, the board is supposed to change both vid and pid values it must be passed as parameters.
  * */
 int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str, unsigned short vid, unsigned short pid) {
     fx3_fw_target tgt = FW_TARGET_NONE;
@@ -752,219 +1048,4 @@ int FX3USB3Connection::print_devices() {
     }
 
     return numdev;
-}
-
-/**
- * Reads the configuration file passed and checks for a specific device name
- * Input:
- *  @device_descriptor_filename: File path with the information of devices to match.
- *  @device_name: Device to be matched.
- * */
-int FX3USB3Connection::get_device_search_descriptor(char *device_descriptor_filename) {
-    FILE *inp;
-    char buf[MAX_CFG_LINE_LENGTH];
-    std::string cp1, cp2;
-    std::string::size_type sz;          // alias of size_t
-    std::string regex_str_start = "<.+?>";    // matches any character one or more times included
-                                        // inside < and >, expanding as needed
-    std::string regex_str_end = "</.+?>";
-
-    inp = fopen(device_descriptor_filename, "rStatus");
-    if (inp == nullptr) {
-        fprintf(stderr, "File for device descriptor %s not found. Ignoring file\n", device_descriptor_filename);
-        return 0;
-    };
-
-    memset(buf, '\0', MAX_CFG_LINE_LENGTH);
-    while ( fgets(buf, MAX_CFG_LINE_LENGTH, inp) ) {
-        if ( buf[0] == '#' ) 			/* Any line starting with a # is a comment 	*/
-            continue;
-        if ( buf[0] == '\n' )
-            continue;
-        if ( isempty(buf, static_cast<int>(strlen(buf))) )		/* Any blank line is also ignored		*/
-            continue;
-
-        cp1 = strtok(buf, " :=\t\n");   // TODO create token variable to not repeat
-#ifdef DEBUG
-        printf("Comparing %s with %s and gives %d\n", cp1.c_str(), device_start.str().c_str(), cp1.compare(device_start.str()));
-#endif
-        if ( std::regex_match(cp1, std::regex(regex_str_start)) ) {
-            struct libusb_device_descriptor descriptor{};
-            printf("Found device %s restrictions:\n", cp1.c_str());
-
-            while ( fgets(buf, MAX_CFG_LINE_LENGTH, inp) ) {
-                if ( buf[0] == '#' ) { continue; }	/* Any line starting with a # is a comment 	*/
-                if ( buf[0] == '\n' ) { continue; }
-                if ( isempty(buf, static_cast<int>(strlen(buf))) ) {    /* Any blank line is also ignored		*/
-                    continue;
-                }
-                cp1 = strtok(buf, " :=\t\n");
-                if ( std::regex_match(cp1, std::regex(regex_str_end)) ) {
-                    // End of device
-                    printf("End of description\n");
-                    search_description.push_back(descriptor);
-                    break;
-                }
-                cp2 = strtok(nullptr, " :=\t\n");
-
-                printf("\t%s must be %s\n", cp1.c_str(), cp2.c_str());
-
-                if(cp1 == "bLength") {
-                    descriptor.bLength = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "bDescriptorType") {
-                    descriptor.bDescriptorType = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "bcdUSB") {
-                    descriptor.bcdUSB = static_cast<uint16_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "bDeviceClass") {
-                    descriptor.bDeviceClass = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "bDeviceSubClass") {
-                    descriptor.bDeviceSubClass = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "bDeviceProtocol") {
-                    descriptor.bDeviceProtocol = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "bMaxPacketSize") {
-                    descriptor.bMaxPacketSize0 = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "idVendor") {
-                    descriptor.idVendor = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
-                }
-                else if(cp1 == "idProduct") {
-                    descriptor.idProduct = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
-                }
-                else if(cp1 == "bcdDevice") {
-                    descriptor.bcdDevice = static_cast<uint16_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "iManufacturer") {
-                    descriptor.iManufacturer = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "iProduct") {
-                    descriptor.iProduct = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 ==  "iSerialNumber") {
-                    descriptor.iSerialNumber = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else if(cp1 == "bNumConfigurations") {
-                    descriptor.bNumConfigurations = static_cast<uint8_t>(std::stoi(cp2, &sz));
-                }
-                else {
-                    printf("Warning: Option %s not recognized. Ignoring it...\n", cp1.c_str());
-                }
-            }
-        }
-        else {
-            printf("Error in config file: %s \n",buf);
-            exit(1);
-        }
-    }
-
-    fclose(inp);
-    return 0;
-}
-
-
-int FX3USB3Connection::get_match(int max_devices) {
-    int index = 0;
-    int r;
-    bool found = false;
-    cyusb_handle *h = nullptr;
-    while( (index < max_devices) && !found) {
-        h = cyusb_gethandle(index);
-        r = cyusb_get_device_descriptor(h, &deviceDesc);
-        if (r) {
-            fprintf(stderr, "FX3USB3Connection::get_match(): Error getting device descriptor %d\n", index);
-            return -2;
-        }
-        for(auto descriptor : search_description) { // Search for all the cases to see if device is good enough
-            if (descriptor.bNumConfigurations == 0 ||
-                    descriptor.bNumConfigurations == deviceDesc.bNumConfigurations) {
-                if (descriptor.bcdDevice == 0 || descriptor.bcdDevice == deviceDesc.bcdDevice) {
-                    if (descriptor.bcdUSB == 0 || descriptor.bcdUSB == deviceDesc.bcdUSB) {
-                        if (descriptor.bDescriptorType == 0 || descriptor.bDescriptorType == deviceDesc.bDescriptorType) {
-                            if (descriptor.bDeviceClass == 0 || descriptor.bDeviceClass == deviceDesc.bDeviceClass) {
-                                if (descriptor.bDeviceProtocol == 0 || descriptor.bDeviceProtocol == deviceDesc.bDeviceProtocol) {
-                                    if (descriptor.bDeviceSubClass == 0 || descriptor.bDeviceSubClass == deviceDesc.bDeviceSubClass) {
-                                        if (descriptor.bLength == 0 || descriptor.bLength == deviceDesc.bLength) {
-                                            if (descriptor.bMaxPacketSize0 == 0 || descriptor.bMaxPacketSize0 == deviceDesc.bMaxPacketSize0) {
-                                                if (descriptor.iProduct == 0 || descriptor.iProduct == deviceDesc.iProduct) {
-                                                    if (descriptor.iSerialNumber == 0 || descriptor.iSerialNumber == deviceDesc.iSerialNumber) {
-                                                        if (descriptor.iManufacturer == 0 || descriptor.iManufacturer == deviceDesc.iManufacturer) {
-                                                            if (descriptor.idVendor == 0 || descriptor.idVendor == deviceDesc.idVendor) {
-                                                                if (descriptor.idProduct == 0 || descriptor.idProduct == deviceDesc.idProduct) {
-                                                                    found = true;   // Device gets all the descriptions
-                                                                    break; // Break from the for loop, the device was found.
-                                                                }
-                                                                else {
-                                                                    printf("search_descriptor idProduct %d does not match descriptor %d\n", descriptor.idProduct,
-                                                                           deviceDesc.idProduct);
-                                                                }
-                                                            }
-                                                            else {
-                                                                printf("search_descriptor idVendor %d does not match descriptor %d\n", descriptor.idVendor,
-                                                                       deviceDesc.idVendor);
-                                                            }
-                                                        }
-                                                        else {
-                                                            printf("search_descriptor iManufacturer %d does not match descriptor %d\n",
-                                                                   descriptor.iManufacturer, deviceDesc.iManufacturer);
-                                                        }
-                                                    }
-                                                    else {
-                                                        printf("search_descriptor iSerialNumber  %d does not match descriptor %d\n",
-                                                               descriptor.iSerialNumber, deviceDesc.iSerialNumber);
-                                                    }
-                                                }
-                                                else {
-                                                    printf("search_descriptor iProduct %d does not match descriptor %d\n", descriptor.iProduct,
-                                                           deviceDesc.iProduct);
-                                                }
-                                            }
-                                            else {
-                                                printf("search_descriptor bMaxPacketSize0 %d does not match descriptor %d\n",
-                                                       descriptor.bMaxPacketSize0, deviceDesc.bMaxPacketSize0);
-                                            }
-                                        }
-                                        else {
-                                            printf("search_descriptor bLength %d does not match descriptor %d\n", descriptor.bLength,
-                                                   deviceDesc.bLength);
-                                        }
-                                    }
-                                    else {
-                                        printf("search_descriptor bDeviceSubClass %d does not match descriptor %d\n",
-                                               descriptor.bDeviceSubClass, deviceDesc.bDeviceSubClass);
-                                    }
-                                }
-                                else {
-                                    printf("search_descriptor bDeviceProtocol %d does not match descriptor %d\n",
-                                           descriptor.bDeviceProtocol, deviceDesc.bDeviceProtocol);
-                                }
-                            } else {
-                                printf("search_descriptor bDeviceClass %d does not match descriptor %d\n",
-                                       descriptor.bDeviceClass, deviceDesc.bDeviceClass);
-                            }
-                        } else {
-                            printf("search_descriptor bDescriptorType %d does not match descriptor %d\n",
-                                   descriptor.bDescriptorType, deviceDesc.bDescriptorType);
-                        }
-                    }else {
-                        printf("search_descriptor bcdUSB %d does not match descriptor %d\n", descriptor.bcdUSB,
-                               deviceDesc.bcdUSB);
-                    }
-                }else {
-                    printf("search_descriptor bcdDevice %d does not match descriptor %d\n", descriptor.bcdDevice,
-                           deviceDesc.bcdDevice);
-                }
-            } else {
-                printf("search_descriptor bNumConfigurations %d does not match descriptor %d\n",
-                       descriptor.bNumConfigurations, deviceDesc.bNumConfigurations);
-            }
-        }
-        if (!found) { index++; } // If the device was not found increment index
-    }
-    if(found) { return index; }
-    else { return -1; }
 }

@@ -7,7 +7,7 @@
 
 #include <cstdio>
 #include <stdlib.h> // strol, calloc, free
-#include <list>
+#include <map>
 #include "../include/cyusb.h"
 
 using namespace std;
@@ -56,14 +56,15 @@ const int i2c_eeprom_size[] =
 
 class FX3USB3Connection {
 public:
-    FX3USB3Connection();
-    FX3USB3Connection(unsigned short vid, unsigned short pid);
     FX3USB3Connection(char *device_descriptors = const_cast<char *>("conf/device.conf"));
+    FX3USB3Connection(unsigned short vid, unsigned short pid);
     ~FX3USB3Connection();
 
     int print_devices();
     int print_device_descriptor();
     int print_config_descriptor();
+
+    int soft_reset();
     int claim_interface(int interface);
 
     // Programming methods
@@ -84,7 +85,7 @@ private:
     unsigned short vid;
     unsigned short pid;
 
-    list<libusb_device_descriptor> search_description;
+    map<std::string, libusb_device_descriptor> search_description;
     struct libusb_device_descriptor deviceDesc{};
     struct libusb_config_descriptor *configDesc;
     libusb_interface_descriptor *interfaceDesc;
@@ -94,10 +95,9 @@ private:
     //! Methods
     int connect();
     int reconnect();
-    int soft_reset();
 
     int get_device_search_descriptor(char *device_descriptor_filename);
-    int get_match(int max_devices);
+    int get_match(int max_devices, bool verbose = false);
     int get_device_descriptor();
     int get_device_config();
     int find_endpoint(unsigned int end_pt);
