@@ -42,7 +42,7 @@ signal data_array : memory;
 
 begin -- arch begin
 
-
+-- Go to next value of write
 process(fifo_clk, reset_al) begin
 	if (reset_al = '0') then
 		write_ptr <= "00000000";
@@ -54,13 +54,13 @@ end process;
 --Calculate next write pointer value
 process (fifo_flush, write_busy, write_ptr, fifo_full_s) begin
 	if(fifo_flush = '1')then
-		next_write_ptr <= "00000000";
+		next_write_ptr <= "00000000";	-- Flush empties fifo
 	else
 		next_write_ptr <= (write_ptr + (write_busy and (not fifo_full_s)));
 	end if;
 end process;	
 
-
+-- Go to next value of read
 process(fifo_clk, reset_al) begin
 	if (reset_al = '0') then 
       read_ptr <= "00000000";
@@ -98,6 +98,7 @@ end process;
 
 
 -- read memory data 
+-- Send data out!
 process(fifo_clk) begin
 	if(fifo_clk'event and fifo_clk = '1')then
 		dout <= dout_next; 
@@ -105,6 +106,7 @@ process(fifo_clk) begin
 end process;
 
 dout_next <= data_array(conv_integer(read_index(7 downto 0)));
+
 
 process(fifo_clk, reset_al) begin
 	if (reset_al  = '0') then

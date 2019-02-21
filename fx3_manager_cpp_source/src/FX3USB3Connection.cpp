@@ -23,7 +23,7 @@
  * isempty:
    Check if the first L characters of the string buf are white-space characters.
  */
-static bool isempty(char *buf, int L) {
+static bool isempty(const char *buf, int L) {
     bool flag = true;
     int i;
 
@@ -73,6 +73,7 @@ int FX3USB3Connection::connect() {
     }
     //printf("%d\n", rStatus);
     if ( rStatus < 0 ) {
+        fprintf(stderr, "Couldn't open cyusb device(s)\n");
         cyusb_error(rStatus);
         cyusb_close();
     }
@@ -202,7 +203,7 @@ int FX3USB3Connection::get_device_search_descriptor(char *device_descriptor_file
     inp = fopen(device_descriptor_filename, "rStatus");
     if (inp == nullptr) {
         fprintf(stderr, "File for device descriptor %s not found. Ignoring file\n", device_descriptor_filename);
-        return 0;
+        return -1;
     };
 
     memset(buf, '\0', MAX_CFG_LINE_LENGTH);
@@ -470,16 +471,16 @@ int FX3USB3Connection::get_match(int max_devices, bool verbose) {
  * VID/PID. The program itself accepts options : Either vid/pid on the command line OR first
  * VID/PID of interest in cyusb.conf
  * */
-int FX3USB3Connection::get_device_descriptor() {
+int FX3USB3Connection::fetch_device_descriptor() {
     rStatus = cyusb_get_device_descriptor(cyusb_device.handle, &deviceDesc);
     if ( rStatus ) {
-        fprintf(stderr, "FX3USB3Connection::get_device_descriptor(): Error getting device descriptor\n");
+        fprintf(stderr, "FX3USB3Connection::fetch_device_descriptor(): Error getting device descriptor\n");
         return -2;
     }
     return rStatus;
 }
 int FX3USB3Connection::print_device_descriptor(){
-    rStatus = get_device_descriptor();
+    rStatus = fetch_device_descriptor();
     if(!rStatus) {
         fprintf(fp, "bLength             = %d\n", deviceDesc.bLength);
         fprintf(fp, "bDescriptorType     = %d\n", deviceDesc.bDescriptorType);
@@ -499,9 +500,16 @@ int FX3USB3Connection::print_device_descriptor(){
     }
     else { return rStatus; }
 }
+/**
+ * Returns a libusb_device_descriptor with the information of the connected device.
+ * */
+libusb_device_descriptor FX3USB3Connection::get_device_descriptor() {
+    fetch_device_descriptor();  // Make sure the descriptor is updated
+    return deviceDesc;
+}
 
 /**This program is a CLI program to extract the current configuration of a device.*/
-int FX3USB3Connection::get_device_config() {
+int FX3USB3Connection::fetch_device_config() {
     int config = 0;
 
     rStatus = cyusb_get_configuration(cyusb_device.handle,&config);
@@ -522,7 +530,7 @@ int FX3USB3Connection::get_device_config() {
 
     rStatus = cyusb_get_active_config_descriptor(cyusb_device.handle, &configDesc);
     if ( rStatus ) {
-        fprintf(stderr, "FX3USB3Connection::get_device_config(): Error retrieving config descriptor\n");
+        fprintf(stderr, "FX3USB3Connection::fetch_device_config(): Error retrieving config descriptor\n");
         cyusb_error(rStatus);
         cyusb_close();
         return rStatus;
@@ -533,7 +541,7 @@ int FX3USB3Connection::get_device_config() {
 int FX3USB3Connection::print_config_descriptor() {
     char tbuf[64];
 
-    rStatus = get_device_config();
+    rStatus = fetch_device_config();
     if(!rStatus) {
         sprintf(tbuf, "bLength             = %d\n", configDesc->bLength);
         printf("%s", tbuf);
@@ -610,7 +618,7 @@ int FX3USB3Connection::claim_interface(int interface) {
  *  @pid & @vid (Optional):
  *      If after programming, the board is supposed to change both vid and pid values it must be passed as parameters.
  * */
-int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str, unsigned short vid, unsigned short pid) {
+int FX3USB3Connection::download_fx3_firmware(const char *filename, char *tgt_str, unsigned short vid, unsigned short pid) {
     fx3_fw_target tgt = FW_TARGET_NONE;
 
     rStatus = soft_reset();
@@ -632,7 +640,7 @@ int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str, unsi
 
     switch (tgt) {
         case FW_TARGET_RAM:
-            rStatus = cyusb_download_fx3(cyusb_device.handle, filename);
+            rStatus = cyusb_download_fx3(cyusb_device.handle, const_cast<char*>(filename));
             break;
         case FW_TARGET_I2C:
             fprintf (stderr, "Error: I2C target not yet implemented %s\n", tgt_str);
@@ -690,7 +698,7 @@ int FX3USB3Connection::find_endpoint(unsigned int end_pt) {
     }
 
     // Step 2: Read the configuration descriptor.
-    rStatus = get_device_config();
+    rStatus = fetch_device_config();
 
     // Step 3: Check each of the interfaces one by one and check if we can find the desired endpoint there.
     for (int i = 0; i < configDesc->bNumInterfaces; i++) {
@@ -891,6 +899,13 @@ bool FX3USB3Connection::files_match(const std::string &p1, const std::string &p2
 
 /**
  * Sends the data stored on 'buf' of size 'sz' to the endpoint passed (default 0x01)
+ * Returns:
+ *   0 on success (and populates transferred)
+ *   LIBUSB_ERROR_TIMEOUT if the transfer timed out (and populates transferred)
+ *   LIBUSB_ERROR_PIPE if the endpoint halted
+ *   LIBUSB_ERROR_OVERFLOW if the device offered more data, see Packets and overflows
+ *   LIBUSB_ERROR_NO_DEVICE if the device has been disconnected
+ *   another LIBUSB_ERROR code on other failures
  * */
 int FX3USB3Connection::send_buffer(unsigned char *buf, int sz, unsigned int end_ptr) {
     int rStatus;
@@ -909,8 +924,8 @@ int FX3USB3Connection::send_buffer(unsigned char *buf, int sz, unsigned int end_
         fprintf(stderr, "Error in send buffer: ");
         cyusb_error(rStatus);
         cyusb_close();
-        return rStatus;
     }
+    return rStatus;
 }
 
 /**
@@ -950,7 +965,7 @@ int FX3USB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count
  *   LIBUSB_ERROR_NO_DEVICE if the device has been disconnected
  *   another LIBUSB_ERROR code on other failures
  * */
-int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
+int FX3USB3Connection::program_device(const char *fpga_firmware_filename) {
     FILE * fpga_file;
     unsigned int fpga_firmware_size;
     char * buffer;

@@ -63,13 +63,14 @@ public:
     int print_devices();
     int print_device_descriptor();
     int print_config_descriptor();
+    libusb_device_descriptor get_device_descriptor();
 
     int soft_reset();
     int claim_interface(int interface);
 
     // Programming methods
-    int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0);
-    int program_device(char *fpga_firmware_filename);
+    int download_fx3_firmware(const char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0);
+    int program_device(const char *fpga_firmware_filename);
 
     // Bulk methods
     void send_text_file(bool verbose);  // Loopback to test bulk comm
@@ -98,8 +99,8 @@ private:
 
     int get_device_search_descriptor(char *device_descriptor_filename);
     int get_match(int max_devices, bool verbose = false);
-    int get_device_descriptor();
-    int get_device_config();
+    int fetch_device_descriptor();
+    int fetch_device_config();
     int find_endpoint(unsigned int end_pt);
 
     // Bulk Transmision
