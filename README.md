@@ -480,12 +480,17 @@ Prints the connected device configuration
 The final project aim is to develop an own board what integrates both the FX3 and FPGA device. For confidentiality reasons the schematic and routed design cannot be uploaded. However, here are some tips followed when designing the board.
 
 1. Wire the M\[0..1\] signal to 11 for Slave Serial Configuration
+
 2. Wire PMODE\[0..2\] signals to 111 for FX3 USB boot
+
 3. In the final design it is important to add the following pull-up resistors:
+
 <p align="center">
 <img src="/img/final_board/pullups.png" width="400"/>
 </p>
+
 4. (Optional) It may be a good idea to add a UART usb connection for debugging with TeraTerm or any other software as explained on [4.3 debugging via UART](#4.3-debugging-via-uart)
+
 5. On the code there are 2 ways to connect to the device, one is to give the constructor a PID and VID and the other is to let the constructor find a device which he recognizes. For the second option there's a file with all the default devices on `/etc/cyusb.conf` if the implemented board uses another PID or VID it may be advisable to add the PID and VID of the implemented board.
 
 ## 8. Citations
