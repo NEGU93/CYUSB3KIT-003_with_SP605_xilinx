@@ -42,23 +42,10 @@ static void print_usage(FILE *stream, int exit_code) {
 
 static FILE *fp = stdout;
 
-
 void wait_for_enter(const string &msg = "") {
     cout << msg;
     cout << "press enter to continue..." << endl;
     cin.get();
-}
-
-
-void program() {
-    char *filename = const_cast<char *>("../program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync_32.img");
-    char *tgt_str = const_cast<char *>("ram");
-
-	FX3USB3Connection fx3USB3Connection = FX3USB3Connection();
-	if (fx3USB3Connection.download_fx3_firmware(filename, tgt_str) != 0) {
-		printf("Failed to program FX3 device");
-		exit(-1);
-	}
 }
 
 int main(int argc, char **argv) {
@@ -85,24 +72,26 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	try {
-	    program();
-	    sleep(1);
-
-		FX3USB3Connection fx3USB3Connection = FX3USB3Connection(VID, PID_FX1);
-        char * fpga_filename = const_cast<char *>("../program_fpga/bin/slaveFIFO2b_fpga_top.bin");
-		fx3USB3Connection.program_device(fpga_filename);
-
-		sleep(1);
-        fx3USB3Connection.send_text_file(true);
-    }
-	catch (ErrorOpeningLib& e) {
-		printf("Error opening library\n");
-		return -1;
+	FX3USB3Connection fx3USB3Connection = FX3USB3Connection(nullptr);
+	//fx3USB3Connection.print_device_descriptor();
+	//! PROGRAM FX3
+	char *filename = const_cast<char *>("../program_fpga/bin/FX3 firmware/ConfigFpgaSlaveFifoSync.img");
+	char *tgt_str = const_cast<char *>("ram");
+	if (fx3USB3Connection.download_fx3_firmware(filename, tgt_str, VID, PID_FX1) != 0) {
+		fprintf(stderr, "Failed to program FX3 device\n"); fflush(nullptr);
+		exit(-1);
 	}
-	catch (NoDeviceFound& e) {
-		printf("No device found\n");
-		return 0;
+	sleep(1);
+
+	//! Program FPGA
+	char * fpga_filename = const_cast<char *>("../program_fpga/bin/slaveFIFO2b_fpga_top.bin");
+	if(fx3USB3Connection.program_device(fpga_filename)) {
+		fprintf(stderr, "Failed to program FPGA\n"); fflush(nullptr);
+		exit(-1);
 	}
+	sleep(1);
+
+	//! Test loopback
+	fx3USB3Connection.send_text_file(true);
 	return 0;
 }

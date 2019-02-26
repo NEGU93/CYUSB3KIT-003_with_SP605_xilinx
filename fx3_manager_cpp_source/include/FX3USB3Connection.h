@@ -7,6 +7,7 @@
 
 #include <cstdio>
 #include <stdlib.h> // strol, calloc, free
+#include <map>
 #include "../include/cyusb.h"
 
 using namespace std;
@@ -25,24 +26,12 @@ using namespace std;
 #define WRITE_REQUEST_TYPE  0x40
 #define READ_REQUEST_TYPE   0x80
 
-#define VND_CMD_SLAVESER_CFGLOAD 0xB2       /* Command to program_fx3_device the FPGA */
-#define VND_CMD_SLAVESER_CFGSTAT 0xB1       /* Switch to the Slave FIFO interface */
+#define VND_CMD_SLAVESER_CFGLOAD    0xB2       /* Command to program_fx3_device the FPGA */
+#define VND_CMD_SLAVESER_CFGSTAT    0xB1       /* Switch to the Slave FIFO interface */
+#define VND_CMD_RESET_BOARD		    0xE0
 
-#define RESET_BOARD			0x0A
-
-class ErrorOpeningLib : public exception {
-public:
-    char * what () {
-        return const_cast<char *>("Error Opening Library");
-    }
-};
-
-class NoDeviceFound : public exception {
-public:
-    char * what () {
-        return const_cast<char *>("No Device Found");
-    }
-};
+/* Maximum length of a string read from the Configuration file (device.conf)*/
+#define MAX_CFG_LINE_LENGTH                     (120)
 
 /* Enumeration representing the FX3 firmware target. */
 typedef enum {
@@ -67,28 +56,26 @@ const int i2c_eeprom_size[] =
 
 class FX3USB3Connection {
 public:
-
-    FX3USB3Connection();
+    FX3USB3Connection(char *device_descriptors = const_cast<char *>("conf/device.conf"));
     FX3USB3Connection(unsigned short vid, unsigned short pid);
     ~FX3USB3Connection();
-
 
     int print_devices();
     int print_device_descriptor();
     int print_config_descriptor();
+    libusb_device_descriptor get_device_descriptor();
+
+    int soft_reset();
     int claim_interface(int interface);
-    int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"));
+
+    // Programming methods
+    int download_fx3_firmware(const char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0);
+    int program_device(const char *fpga_firmware_filename);
 
     // Bulk methods
     void send_text_file(bool verbose);  // Loopback to test bulk comm
     int send_buffer(unsigned char *buf, int sz, unsigned int end_ptr = 0x01);
     int recive_buffer(unsigned char *buf, unsigned int data_count, unsigned int end_ptr = 0x81);
-
-    int program_device(char *fpga_firmware_filename);
-
-    // Not tested
-    int clear_halt(unsigned char endpoint);
-    int reset_board();
 
 private:
     //! Variables
@@ -96,6 +83,10 @@ private:
     int rStatus;                    // Return status variable
     FILE *fp;
 
+    unsigned short vid;
+    unsigned short pid;
+
+    map<std::string, libusb_device_descriptor> search_description;
     struct libusb_device_descriptor deviceDesc{};
     struct libusb_config_descriptor *configDesc;
     libusb_interface_descriptor *interfaceDesc;
@@ -103,8 +94,13 @@ private:
     libusb_ss_endpoint_companion_descriptor *companionDesc;
 
     //! Methods
-    int get_device_descriptor();
-    int get_device_config();
+    int connect();
+    int reconnect();
+
+    int get_device_search_descriptor(char *device_descriptor_filename);
+    int get_match(int max_devices, bool verbose = false);
+    int fetch_device_descriptor();
+    int fetch_device_config();
     int find_endpoint(unsigned int end_pt);
 
     // Bulk Transmision

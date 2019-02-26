@@ -13,87 +13,474 @@
 #include "../include/FX3USB3Connection.h"
 
 #include <fstream>
+#include <cassert>
+#include <regex>
 
 //#define DEBUG
+//#define DEBUG_MATCH_DEVICE
 
 /**
- * Opens if there's only one USB3 device
+ * isempty:
+   Check if the first L characters of the string buf are white-space characters.
+ */
+static bool isempty(const char *buf, int L) {
+    bool flag = true;
+    int i;
+
+    for (i = 0; i < L; ++i ) {
+        if ( (buf[i] != ' ') && ( buf[i] != '\t' ) ) {
+            flag = false;
+            break;
+        }
+    }
+
+    return flag;
+}
+
+/**
+ * Opens a usb device that matches any of the devices listed on device_descriptors (default: "conf/device.conf")
+ * If no other requirement other than being a Cypress device, device_descriptors should be a nullptr
  * */
-FX3USB3Connection::FX3USB3Connection() {
-    fp = stdout;
-    cyusb_handle *h = nullptr;
-    rStatus = cyusb_open();
-    if ( rStatus < 0 ) { throw ErrorOpeningLib(); }
-    else if ( rStatus == 0 ) { throw NoDeviceFound(); }
-    if(rStatus == 1) {
-        h = cyusb_gethandle(0);
-        cyusb_device.dev     = libusb_get_device(h);
-        cyusb_device.handle  = h;
-        cyusb_device.vid     = cyusb_getvendor(h);
-        cyusb_device.pid     = cyusb_getproduct(h);
-        cyusb_device.is_open = 1;
-        cyusb_device.busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
-        cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
+FX3USB3Connection::FX3USB3Connection(char *device_descriptors) {
+    vid = 0;
+    pid = 0;
+    if(device_descriptors) {
+        get_device_search_descriptor(device_descriptors);
     }
-    else {
-        printf("Many possible devices to connect with. Please select vid and pid number");
-    }
+    rStatus = connect();
 }
 
 /**
  * Opens cyusb device given the pid and vid value.
  * */
-FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) {
+FX3USB3Connection::FX3USB3Connection(unsigned short vid, unsigned short pid) : vid(vid), pid(pid) {
+    rStatus = connect();
+}
+
+/**
+ * Connects with the FX3 device provided only one is available
+ * Returns 0 on success
+ * Returns cyusb error if not
+ * */
+int FX3USB3Connection::connect() {
     fp = stdout;
     cyusb_handle *h = nullptr;
-    rStatus = cyusb_open(vid, pid);
-    if ( rStatus < 0 ) {
-        fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
-        fflush(nullptr);
-        print_devices();
-        throw ErrorOpeningLib();
-    }
-    else if (rStatus == 0) { throw NoDeviceFound(); }
-    else if(rStatus == 1) {
-        h = libusb_open_device_with_vid_pid(nullptr, vid, pid);
-        if ( !h ) {
-            //fprintf(stderr, "Device not found.\n");
-            fprintf(stderr, "VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid);
-        }
-        cyusb_device.dev     = libusb_get_device(h);
-        cyusb_device.handle  = h;
-        cyusb_device.vid     = cyusb_getvendor(h);
-        cyusb_device.pid     = cyusb_getproduct(h);
-        cyusb_device.is_open = 1;
-        cyusb_device.busnum  = static_cast<unsigned char>(cyusb_get_busnumber(h));
-        cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
+    if (vid && pid) {
+        rStatus = cyusb_open(vid, pid);
     }
     else {
-        printf("Many possible devices to connect with. Please select vid and pid number");
+        rStatus = cyusb_open();
     }
+    //printf("%d\n", rStatus);
+    if ( rStatus < 0 ) {
+        fprintf(stderr, "Couldn't open cyusb device(s)\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+    }
+    else if (rStatus == 0) {
+        if(vid && pid) { fprintf(stderr, "Couldn't find VendorID 0x%04x,\tProdID 0x%04x\n", vid, pid); }
+        else { printf("No device was listed as a cyusb device\n"); }
+        print_devices();
+        rStatus = -5;
+    }
+    else {  // rStatus > 0
+        if(rStatus > 1) {
+            printf("Warning: Many possible devices to connect with.\n");
+        }
+#ifdef DEBUG_MATCH_DEVICE
+        int index = get_match(rStatus, true);
+#else
+        int index = get_match(rStatus, false);
+#endif
+        if (index < 0) {
+            fprintf(stderr, "Device description not found\n");
+            return -1;
+        }
+        else {
+            h = cyusb_gethandle(index);
+            cyusb_device.dev = libusb_get_device(h);
+            cyusb_device.handle = h;
+            cyusb_device.vid = cyusb_getvendor(h);
+            cyusb_device.pid = cyusb_getproduct(h);
+            cyusb_device.is_open = 1;
+            cyusb_device.busnum = static_cast<unsigned char>(cyusb_get_busnumber(h));
+            cyusb_device.devaddr = static_cast<unsigned char>(cyusb_get_devaddr(h));
+        }
+    }
+    return rStatus;
 }
 
 FX3USB3Connection::~FX3USB3Connection() {
     libusb_close(cyusb_device.handle);
     libusb_exit(nullptr);
-    //cyusb_close();
+    sleep(1);
 }
+
+/**
+ *  Send a reset command to the FX3 device and then reconnects to it.
+ * Returns 0 on success
+ * Returns cyusb error if not
+ * */
+int FX3USB3Connection::soft_reset() {
+    //return cyusb_reset_device(cyusb_device.handle);
+    unsigned int data;
+    unsigned short wLength = 16;
+    unsigned int timeout = 10*1000;
+    unsigned short wValue = 0, wIndex = 1;
+
+    //! Send reset command
+    rStatus = cyusb_control_write(
+            cyusb_device.handle,       /* a handle for the device to communicate with */
+            WRITE_REQUEST_TYPE,        /* bmRequestType: the request type field for the setup packet */
+            VND_CMD_RESET_BOARD,       /* bRequest: the request field for the setup packet */
+            wValue,                    /* wValue: the value field for the setup packet */
+            wIndex,                    /* wIndex: the index field for the setup packet */
+            (unsigned char *) &data,   /* *data: a suitably-sized data buffer */
+            wLength,                   /* wLength: the length field for the setup packet. The data buffer should be at least this size. */
+            timeout);                  /* timeout (in miliseconds) that this function should wait before giving up due to no response being received. For an unlimited timeout, use value 0. */
+    sleep(1);
+    //! Reconnect to FX3 device
+    rStatus = reconnect();
+    if (rStatus) {
+        fprintf (stderr, "Error: reconnect failed\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+    }
+
+    return 0;
+}
+
+/**
+ * Disconnect current device and connect again
+ * return 0 on success
+ * */
+int FX3USB3Connection::reconnect() {
+    //! Close handle
+    libusb_close(cyusb_device.handle);
+    sleep(1);   // Wait before reconnecting
+    rStatus = connect();
+    if(rStatus == 1) { return 0; }
+    assert(rStatus!=0);     // Should never return a 0
+    //sleep(1);
+    return rStatus;
+}
+
+/**
+ * Reads the configuration file passed and saves all the information of possible devices
+ * The configuration file must contain all the restrictions in the following way:
+ * <NAME_DEVICE>
+ *	bLength             = 18
+ *	bDescriptorType     = 1
+ *	bcdUSB              = 0x0210
+ *	bDeviceClass        = 0x00
+ *	bDeviceSubClass     = 0x00
+ *	bDeviceProtocol     = 0x00
+ *	bMaxPacketSize      = 64
+ *	idVendor            = 0x04b4
+ *	idProduct           = 0x00f3
+ *	bcdDevice           = 0x0000
+ *	iManufacturer       = 1
+ *	iProduct            = 2
+ *	iSerialNumber       = 0
+ *	bNumConfigurations  = 1
+ *</NAME_DEVICE>
+ * If a variable is not listed it means it can be any.
+ * This is used as a second filter to further state restrictions upon cyusb devices
+ *
+ * Input:
+ *  @device_descriptor_filename: File path with the information of devices to match.
+ * */
+int FX3USB3Connection::get_device_search_descriptor(char *device_descriptor_filename) {
+    FILE *inp;
+    char buf[MAX_CFG_LINE_LENGTH];
+    std::string cp1, cp2;
+    std::string key;
+    std::string::size_type sz;          // alias of size_t
+    std::string regex_str_start = "<.+?>";    // matches any character one or more times included
+    // inside < and >, expanding as needed
+    std::string regex_str_end = "</.+?>";
+
+    inp = fopen(device_descriptor_filename, "rStatus");
+    if (inp == nullptr) {
+        fprintf(stderr, "File for device descriptor %s not found. Ignoring file\n", device_descriptor_filename);
+        return -1;
+    };
+
+    memset(buf, '\0', MAX_CFG_LINE_LENGTH);
+    while ( fgets(buf, MAX_CFG_LINE_LENGTH, inp) ) {
+        if ( buf[0] == '#' ) 			/* Any line starting with a # is a comment 	*/
+            continue;
+        if ( buf[0] == '\n' )
+            continue;
+        if ( isempty(buf, static_cast<int>(strlen(buf))) )		/* Any blank line is also ignored		*/
+            continue;
+
+        cp1 = strtok(buf, " :=\t\n");   // TODO create token variable to not repeat
+#ifdef DEBUG
+        printf("Comparing %s with %s and gives %d\n", cp1.c_str(), device_start.str().c_str(), cp1.compare(device_start.str()));
+#endif
+        if ( std::regex_match(cp1, std::regex(regex_str_start)) ) {
+            struct libusb_device_descriptor descriptor{};
+            key = cp1;
+#ifdef DEBUG_MATCH_DEVICE
+            printf("Found device %s restrictions:\n", key.c_str());
+#endif
+            while ( fgets(buf, MAX_CFG_LINE_LENGTH, inp) ) {
+                if ( buf[0] == '#' ) { continue; }	/* Any line starting with a # is a comment 	*/
+                if ( buf[0] == '\n' ) { continue; }
+                if ( isempty(buf, static_cast<int>(strlen(buf))) ) {    /* Any blank line is also ignored		*/
+                    continue;
+                }
+                cp1 = strtok(buf, " :=\t\n");
+                if ( std::regex_match(cp1, std::regex(regex_str_end)) ) {
+                    // End of device
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("End of description of %s\n", key.c_str());
+#endif
+                    search_description[key] = descriptor;
+                    break;
+                }
+                cp2 = strtok(nullptr, " :=\t\n");
+#ifdef DEBUG_MATCH_DEVICE
+                printf("\t%s must be %s = ", cp1.c_str(), cp2.c_str());
+#endif
+                if(cp1 == "bLength") {
+                    descriptor.bLength = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bLength);
+#endif
+                }
+                else if(cp1 == "bDescriptorType") {
+                    descriptor.bDescriptorType = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bDescriptorType);
+#endif
+                }
+                else if(cp1 == "bcdUSB") {
+                    descriptor.bcdUSB = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bcdUSB);
+#endif
+                }
+                else if(cp1 == "bDeviceClass") {
+                    descriptor.bDeviceClass = static_cast<uint8_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bDeviceClass);
+#endif
+                }
+                else if(cp1 == "bDeviceSubClass") {
+                    descriptor.bDeviceSubClass = static_cast<uint8_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bDeviceSubClass);
+#endif
+                }
+                else if(cp1 == "bDeviceProtocol") {
+                    descriptor.bDeviceProtocol = static_cast<uint8_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bDeviceProtocol);
+#endif
+                }
+                else if(cp1 == "bMaxPacketSize") {
+                    descriptor.bMaxPacketSize0 = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bMaxPacketSize0);
+#endif
+                }
+                else if(cp1 == "idVendor") {
+                    descriptor.idVendor = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.idVendor);
+#endif
+                }
+                else if(cp1 == "idProduct") {
+                    descriptor.idProduct = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.idProduct);
+#endif
+                }
+                else if(cp1 == "bcdDevice") {
+                    descriptor.bcdDevice = static_cast<uint16_t>(std::stoi(cp2, &sz, 16));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bcdDevice);
+#endif
+                }
+                else if(cp1 == "iManufacturer") {
+                    descriptor.iManufacturer = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.iManufacturer);
+#endif
+                }
+                else if(cp1 == "iProduct") {
+                    descriptor.iProduct = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.iProduct);
+#endif
+                }
+                else if(cp1 ==  "iSerialNumber") {
+                    descriptor.iSerialNumber = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.iSerialNumber);
+#endif
+                }
+                else if(cp1 == "bNumConfigurations") {
+                    descriptor.bNumConfigurations = static_cast<uint8_t>(std::stoi(cp2, &sz));
+#ifdef DEBUG_MATCH_DEVICE
+                    printf("%d\n", descriptor.bNumConfigurations);
+#endif
+                }
+                else {
+                    printf("Warning: Option %s not recognized. Ignoring it...\n", cp1.c_str());
+                }
+            }
+        }
+        else {
+            printf("Error in config file: %s \n",buf);
+            exit(1);
+        }
+    }
+
+    fclose(inp);
+    return 0;
+}
+
+/**
+ * Get the amount of devices on liusb list that can be connected to.
+ * Check if any of those devices have a match with the devices parsed on "get_device_search_descriptor"
+ * The first of the devices that gets a match will be returned without checking any further,
+ * So if 2 exact devices are connected only the first one on the list will be selected
+ * returns:
+ *      index (between 0 and max_devices-1) of matched device is any
+ *      -1 if none of the devices where
+ *      -2 if error
+ * */
+int FX3USB3Connection::get_match(int max_devices, bool verbose) {
+    int index = 0;
+    int r;
+    bool found = false;
+    cyusb_handle *h = nullptr;
+    struct libusb_device_descriptor descriptor{};
+    if(search_description.empty()) {
+        return 0;   // No specific requirements
+    }
+    while( (index < max_devices) && !found) {
+        h = cyusb_gethandle(index);
+        r = cyusb_get_device_descriptor(h, &deviceDesc);
+        if (r) {
+            fprintf(stderr, "FX3USB3Connection::get_match(): Error getting device descriptor %d\n", index);
+            return -2;
+        }
+        for(const auto &descriptor_map : search_description) { // Search for all the cases to see if device is good enough
+            if(verbose)
+                printf("Searching match for %s: ", descriptor_map.first.c_str());
+            descriptor = descriptor_map.second;
+            if (descriptor.bNumConfigurations == 0 ||
+                descriptor.bNumConfigurations == deviceDesc.bNumConfigurations) {
+                if (descriptor.bcdDevice == 0 || descriptor.bcdDevice == deviceDesc.bcdDevice) {
+                    if (descriptor.bcdUSB == 0 || descriptor.bcdUSB == deviceDesc.bcdUSB) {
+                        if (descriptor.bDescriptorType == 0 || descriptor.bDescriptorType == deviceDesc.bDescriptorType) {
+                            if (descriptor.bDeviceClass == 0 || descriptor.bDeviceClass == deviceDesc.bDeviceClass) {
+                                if (descriptor.bDeviceProtocol == 0 || descriptor.bDeviceProtocol == deviceDesc.bDeviceProtocol) {
+                                    if (descriptor.bDeviceSubClass == 0 || descriptor.bDeviceSubClass == deviceDesc.bDeviceSubClass) {
+                                        if (descriptor.bLength == 0 || descriptor.bLength == deviceDesc.bLength) {
+                                            if (descriptor.bMaxPacketSize0 == 0 || descriptor.bMaxPacketSize0 == deviceDesc.bMaxPacketSize0) {
+                                                if (descriptor.iProduct == 0 || descriptor.iProduct == deviceDesc.iProduct) {
+                                                    if (descriptor.iSerialNumber == 0 || descriptor.iSerialNumber == deviceDesc.iSerialNumber) {
+                                                        if (descriptor.iManufacturer == 0 || descriptor.iManufacturer == deviceDesc.iManufacturer) {
+                                                            if (descriptor.idVendor == 0 || descriptor.idVendor == deviceDesc.idVendor) {
+                                                                if (descriptor.idProduct == 0 || descriptor.idProduct == deviceDesc.idProduct) {
+                                                                    if(verbose)
+                                                                        printf("device connected matched %s\n", descriptor_map.first.c_str());
+                                                                    found = true;   // Device gets all the descriptions
+                                                                    break; // Break from the for loop, the device was found.
+                                                                }
+                                                                else if(verbose) {
+                                                                    printf("search_descriptor idProduct %d does not match descriptor %d\n", descriptor.idProduct,
+                                                                           deviceDesc.idProduct);
+                                                                }
+                                                            }
+                                                            else if(verbose) {
+                                                                printf("search_descriptor idVendor %d does not match descriptor %d\n", descriptor.idVendor,
+                                                                       deviceDesc.idVendor);
+                                                            }
+                                                        }
+                                                        else if(verbose) {
+                                                            printf("search_descriptor iManufacturer %d does not match descriptor %d\n",
+                                                                   descriptor.iManufacturer, deviceDesc.iManufacturer);
+                                                        }
+                                                    }
+                                                    else if(verbose) {
+                                                        printf("search_descriptor iSerialNumber  %d does not match descriptor %d\n",
+                                                               descriptor.iSerialNumber, deviceDesc.iSerialNumber);
+                                                    }
+                                                }
+                                                else if(verbose) {
+                                                    printf("search_descriptor iProduct %d does not match descriptor %d\n", descriptor.iProduct,
+                                                           deviceDesc.iProduct);
+                                                }
+                                            }
+                                            else if(verbose) {
+                                                printf("search_descriptor bMaxPacketSize0 %d does not match descriptor %d\n",
+                                                       descriptor.bMaxPacketSize0, deviceDesc.bMaxPacketSize0);
+                                            }
+                                        }
+                                        else if(verbose) {
+                                            printf("search_descriptor bLength %d does not match descriptor %d\n", descriptor.bLength,
+                                                   deviceDesc.bLength);
+                                        }
+                                    }
+                                    else if(verbose) {
+                                        printf("search_descriptor bDeviceSubClass %d does not match descriptor %d\n",
+                                               descriptor.bDeviceSubClass, deviceDesc.bDeviceSubClass);
+                                    }
+                                }
+                                else if(verbose) {
+                                    printf("search_descriptor bDeviceProtocol %d does not match descriptor %d\n",
+                                           descriptor.bDeviceProtocol, deviceDesc.bDeviceProtocol);
+                                }
+                            } else if(verbose) {
+                                printf("search_descriptor bDeviceClass %d does not match descriptor %d\n",
+                                       descriptor.bDeviceClass, deviceDesc.bDeviceClass);
+                            }
+                        } else if(verbose) {
+                            printf("search_descriptor bDescriptorType %d does not match descriptor %d\n",
+                                   descriptor.bDescriptorType, deviceDesc.bDescriptorType);
+                        }
+                    }else if(verbose) {
+                        printf("search_descriptor bcdUSB %d does not match descriptor %d\n", descriptor.bcdUSB,
+                               deviceDesc.bcdUSB);
+                    }
+                }else if(verbose) {
+                    printf("search_descriptor bcdDevice %d does not match descriptor %d\n", descriptor.bcdDevice,
+                           deviceDesc.bcdDevice);
+                }
+            } else if(verbose) {
+                printf("search_descriptor bNumConfigurations %d does not match descriptor %d\n",
+                       descriptor.bNumConfigurations, deviceDesc.bNumConfigurations);
+            }
+        }
+        if (!found) { index++; } // If the device was not found increment index
+    }
+    if(found) { return index; }
+    else { return -1; }
+}
+
+/*******************************************************************/
 
 /**
  * dump out the device descriptor for any USB device given its
  * VID/PID. The program itself accepts options : Either vid/pid on the command line OR first
  * VID/PID of interest in cyusb.conf
  * */
-int FX3USB3Connection::get_device_descriptor() {
+int FX3USB3Connection::fetch_device_descriptor() {
     rStatus = cyusb_get_device_descriptor(cyusb_device.handle, &deviceDesc);
     if ( rStatus ) {
-        fprintf(stderr, "FX3USB3Connection::get_device_descriptor(): Error getting device descriptor\n");
+        fprintf(stderr, "FX3USB3Connection::fetch_device_descriptor(): Error getting device descriptor\n");
         return -2;
     }
     return rStatus;
 }
 int FX3USB3Connection::print_device_descriptor(){
-    rStatus = get_device_descriptor();
+    rStatus = fetch_device_descriptor();
     if(!rStatus) {
         fprintf(fp, "bLength             = %d\n", deviceDesc.bLength);
         fprintf(fp, "bDescriptorType     = %d\n", deviceDesc.bDescriptorType);
@@ -113,9 +500,16 @@ int FX3USB3Connection::print_device_descriptor(){
     }
     else { return rStatus; }
 }
+/**
+ * Returns a libusb_device_descriptor with the information of the connected device.
+ * */
+libusb_device_descriptor FX3USB3Connection::get_device_descriptor() {
+    fetch_device_descriptor();  // Make sure the descriptor is updated
+    return deviceDesc;
+}
 
 /**This program is a CLI program to extract the current configuration of a device.*/
-int FX3USB3Connection::get_device_config() {
+int FX3USB3Connection::fetch_device_config() {
     int config = 0;
 
     rStatus = cyusb_get_configuration(cyusb_device.handle,&config);
@@ -136,7 +530,7 @@ int FX3USB3Connection::get_device_config() {
 
     rStatus = cyusb_get_active_config_descriptor(cyusb_device.handle, &configDesc);
     if ( rStatus ) {
-        fprintf(stderr, "FX3USB3Connection::get_device_config(): Error retrieving config descriptor\n");
+        fprintf(stderr, "FX3USB3Connection::fetch_device_config(): Error retrieving config descriptor\n");
         cyusb_error(rStatus);
         cyusb_close();
         return rStatus;
@@ -144,11 +538,10 @@ int FX3USB3Connection::get_device_config() {
 
     return 0;
 }
-
 int FX3USB3Connection::print_config_descriptor() {
     char tbuf[64];
 
-    rStatus = get_device_config();
+    rStatus = fetch_device_config();
     if(!rStatus) {
         sprintf(tbuf, "bLength             = %d\n", configDesc->bLength);
         printf("%s", tbuf);
@@ -215,10 +608,26 @@ int FX3USB3Connection::claim_interface(int interface) {
 }
 
 /**
- * Next bunch of functions are done to upload a .img firmware to the FX3 device
+ * Upload a .img firmware to the FX3 device
+ * Input:
+ *  @filename: name of the firware.img file to be programmed
+ *  @tgt_str (Optional):
+ *      "ram" (Default)
+ *      "i2c"
+ *      "spi"
+ *  @pid & @vid (Optional):
+ *      If after programming, the board is supposed to change both vid and pid values it must be passed as parameters.
  * */
-int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
+int FX3USB3Connection::download_fx3_firmware(const char *filename, char *tgt_str, unsigned short vid, unsigned short pid) {
     fx3_fw_target tgt = FW_TARGET_NONE;
+
+    rStatus = soft_reset();
+    if (rStatus) {
+        fprintf (stderr, "Error: reconnect failed\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return rStatus;
+    }
 
     if (strcasecmp (tgt_str, "ram") == 0) { tgt = FW_TARGET_RAM; }
     if (strcasecmp (tgt_str, "i2c") == 0) { tgt = FW_TARGET_I2C; }
@@ -231,7 +640,7 @@ int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
 
     switch (tgt) {
         case FW_TARGET_RAM:
-            rStatus = cyusb_download_fx3(cyusb_device.handle, filename);
+            rStatus = cyusb_download_fx3(cyusb_device.handle, const_cast<char*>(filename));
             break;
         case FW_TARGET_I2C:
             fprintf (stderr, "Error: I2C target not yet implemented %s\n", tgt_str);
@@ -252,9 +661,20 @@ int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str) {
         fprintf (stderr, "Error: FX3 firmware programming failed\n");
         cyusb_error(rStatus);
         cyusb_close();
+        return rStatus;
     }
     else { printf("FX3 firmware programming to %s completed\n", tgt_str); }
-
+    if (pid && vid) {   // Before reconnecting, change the pid and vid if necessary.
+        this->pid = pid;
+        this->vid = vid;
+    }
+    rStatus = reconnect();
+    if (rStatus) {
+        fprintf (stderr, "Error: reconnect failed\n");
+        cyusb_error(rStatus);
+        cyusb_close();
+        return rStatus;
+    }
     return rStatus;
 }
 
@@ -278,7 +698,7 @@ int FX3USB3Connection::find_endpoint(unsigned int end_pt) {
     }
 
     // Step 2: Read the configuration descriptor.
-    rStatus = get_device_config();
+    rStatus = fetch_device_config();
 
     // Step 3: Check each of the interfaces one by one and check if we can find the desired endpoint there.
     for (int i = 0; i < configDesc->bNumInterfaces; i++) {
@@ -324,8 +744,8 @@ int FX3USB3Connection::find_endpoint(unsigned int end_pt) {
 }
 
 /**
- * Uses send and receive buffer to send a text file expecting a loopback.
- * It stores the data on some files and assest the received file is equal to se sent file.
+ * Uses send and receive buffer to send a text file and reads same size response
+ * It then checks the readed data is the same as the data sended
  * */
 void FX3USB3Connection::send_text_file(bool verbose) {
     ssize_t nbr;
@@ -478,7 +898,14 @@ bool FX3USB3Connection::files_match(const std::string &p1, const std::string &p2
 }
 
 /**
- * Sends the data stored on buf of size sz to the endpoint 0x01
+ * Sends the data stored on 'buf' of size 'sz' to the endpoint passed (default 0x01)
+ * Returns:
+ *   0 on success (and populates transferred)
+ *   LIBUSB_ERROR_TIMEOUT if the transfer timed out (and populates transferred)
+ *   LIBUSB_ERROR_PIPE if the endpoint halted
+ *   LIBUSB_ERROR_OVERFLOW if the device offered more data, see Packets and overflows
+ *   LIBUSB_ERROR_NO_DEVICE if the device has been disconnected
+ *   another LIBUSB_ERROR code on other failures
  * */
 int FX3USB3Connection::send_buffer(unsigned char *buf, int sz, unsigned int end_ptr) {
     int rStatus;
@@ -497,8 +924,8 @@ int FX3USB3Connection::send_buffer(unsigned char *buf, int sz, unsigned int end_
         fprintf(stderr, "Error in send buffer: ");
         cyusb_error(rStatus);
         cyusb_close();
-        return rStatus;
     }
+    return rStatus;
 }
 
 /**
@@ -538,7 +965,7 @@ int FX3USB3Connection::recive_buffer(unsigned char *buf, unsigned int data_count
  *   LIBUSB_ERROR_NO_DEVICE if the device has been disconnected
  *   another LIBUSB_ERROR code on other failures
  * */
-int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
+int FX3USB3Connection::program_device(const char *fpga_firmware_filename) {
     FILE * fpga_file;
     unsigned int fpga_firmware_size;
     char * buffer;
@@ -589,6 +1016,7 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
         return rStatus;
     }
     send_buffer(reinterpret_cast<unsigned char *>(buffer), fpga_firmware_size);  // Send the FPGA firmware
+    sleep(5);
     rStatus = cyusb_control_read(
             cyusb_device.handle,       /* a handle for the device to communicate with */
             0xC0,                      /* bmRequestType: the request type field for the setup packet */
@@ -609,8 +1037,6 @@ int FX3USB3Connection::program_device(char *fpga_firmware_filename) {
     free (buffer);
     return 0;
 }
-
-
 
 /**
  * Prints all USB devices BUS, VID, PID and bcd.
@@ -637,48 +1063,4 @@ int FX3USB3Connection::print_devices() {
     }
 
     return numdev;
-}
-
-/**--------------------------------------------------------------------
- *              DANGER ZONE
- *------------------------------------------------------------------ */
-/**
- *  Not yet tested
- * */
-int FX3USB3Connection::reset_board() {
-    return cyusb_reset_device(cyusb_device.handle);
-    /*unsigned char instruction[32];
-    int transferred = 0;
-
-    instruction[0] = RESET_BOARD;
-    instruction[1] = 1;
-
-    rStatus = libusb_bulk_transfer(cyusb_device.handle, 1, instruction, 2, &transferred, 1000);
-    if (rStatus || transferred != 2) {
-        fprintf(stderr, "Reset set failed \n");
-        cyusb_error(rStatus);
-        cyusb_close();
-        return rStatus;
-    }
-
-    instruction[1] = 0;
-    rStatus = libusb_bulk_transfer(cyusb_device.handle, 1, instruction, 2, &transferred, 1000);
-    if (rStatus || transferred != 2) {
-        fprintf(stderr, "Reset relese failed \n");
-        cyusb_error(rStatus);
-        cyusb_close();
-        return rStatus;
-    }
-
-    return 0;*/
-}
-/**
- * Not yet tested
- * */
-int FX3USB3Connection::clear_halt(unsigned char endpoint) {
-    rStatus = libusb_clear_halt(cyusb_device.handle, endpoint);
-    if(rStatus) {
-        fprintf(stderr, "FX3USB3Connection::clear_halt(): Error %s for endpoint %u\n", libusb_error_name(rStatus), endpoint);
-    }
-    return rStatus;
 }
