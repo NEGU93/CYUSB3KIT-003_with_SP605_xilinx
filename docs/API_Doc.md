@@ -81,7 +81,8 @@ Print information
 Prints the connected device descriptor.
 - `int print_config_descriptor();`:
 Prints the connected device configuration
-
+- `libusb_device_descriptor get_device_descriptor()`
+Returns a [libusb_device_descriptor](http://libusb.sourceforge.net/api-1.0/structlibusb__device__descriptor.html) with the information of the connected device.
   Others:
 - `int soft_reset();`:
 ```
