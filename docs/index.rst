@@ -1,6 +1,11 @@
+===============================
+CYUSB3KIT-003 with SP605 xilinx
+===============================
+
 The cpp code is a class. When initializing the object, it automatically connects to a Cypress device:
 
-**Constructor**
+Constructor
+===========
 
 For initializing the device there are 3 options according to the need.
 1. If the VID and PID is known, the device can be initialized direcly with:
@@ -14,9 +19,12 @@ But make sure the device is listed on: `/etc/cyusb.conf`
 or
  - `FX3USB3Connection fx3USB3Connection = FX3USB3Connection("path/to/conf/file");` for using another conf file.
 
-**Public methods**
+Public methods
+==============
 
 Programming
+-----------
+
 - `int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0);`:
 ```
 /**
@@ -45,6 +53,8 @@ Programming
  * */
 ```
 Bulk Methods
+------------
+
 - `void send_text_file(bool verbose);`:
 ```
 /**
@@ -67,6 +77,8 @@ Bulk Methods
  * */
 ```
 Print information
+-----------------
+
 - `int print_devices();`:
 ```
 /**
@@ -80,7 +92,9 @@ Prints the connected device descriptor.
 - `int print_config_descriptor();`:
 Prints the connected device configuration
 
-  Others:
+Others
+------
+
 - `int soft_reset();`:
 ```
 /**
