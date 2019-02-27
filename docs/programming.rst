@@ -5,7 +5,7 @@ Programming
 Download fx3 firmware
 ---------------------
 
-.. cpp:function:: int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0)
+.. cpp:function:: int FX3USB3Connection::download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0)
 
 Upload a .img firmware to the FX3 device
 Input:
@@ -20,7 +20,7 @@ Input:
 Program Device
 --------------
 
-.. cpp:function:: int program_device(char *fpga_firmware_filename)
+.. cpp:function:: int FX3USB3Connection::program_device(char *fpga_firmware_filename)
 
 Program FPGA with the file passed as input.
 Returns:

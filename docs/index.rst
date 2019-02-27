@@ -8,9 +8,7 @@ The cpp code is a class. When initializing the object, it automatically connects
 
 Content
 
-==================
-
-
+=======
 
 .. toctree::
    
