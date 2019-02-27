@@ -13,12 +13,12 @@ Receives
 	- ``unsigned int data_count``: Size of data to be sent
 	- (Optional) ``unsigned int end_ptr``: endpoint number where to send the data (default 0x01)
 Returns
-	0 on success (and populates transferred)
-	LIBUSB_ERROR_TIMEOUT if the transfer timed out (and populates transferred)
-	LIBUSB_ERROR_PIPE if the endpoint halted
-	LIBUSB_ERROR_OVERFLOW if the device offered more data, see Packets and overflows
-	LIBUSB_ERROR_NO_DEVICE if the device has been disconnected
-	another LIBUSB_ERROR code on other failures
+	- 0 on success (and populates transferred)
+	- LIBUSB_ERROR_TIMEOUT if the transfer timed out (and populates transferred)
+	- LIBUSB_ERROR_PIPE if the endpoint halted
+	- LIBUSB_ERROR_OVERFLOW if the device offered more data, see Packets and overflows
+	- LIBUSB_ERROR_NO_DEVICE if the device has been disconnected
+	- another LIBUSB_ERROR code on other failures
 
 Recive Buffer
 -------------
