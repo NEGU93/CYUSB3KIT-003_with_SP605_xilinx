@@ -37,7 +37,7 @@ Returns
 
 Send Text Files
 ---------------
-.. cpp:function:: FX3USB3Connection::void send_text_file(bool verbose)
+.. cpp:function:: void FX3USB3Connection::send_text_file(bool verbose)
 
 Description
 	Uses send and receive buffer functions to send a text file and reads same size response
