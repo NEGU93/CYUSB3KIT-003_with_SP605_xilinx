@@ -10,12 +10,14 @@ Constructor
 ===========
 
 For initializing the device there are 3 options according to the need.
-1. If the VID and PID is known, the device can be initialized direcly with:
 
+1. If the VID and PID is known, the device can be initialized direcly with:
 `FX3USB3Connection fx3USB3Connection = FX3USB3Connection(vid, pid);`
+
 2. If any cypress device will be OK, then initialize with:
 `FX3USB3Connection fx3USB3Connection = FX3USB3Connection(nullptr);`
 But make sure the device is listed on: `/etc/cyusb.conf`
+
 3. If VID and PID is not good enough, put your description on `conf/device.conf` and run:
 
  - `FX3USB3Connection fx3USB3Connection = FX3USB3Connection();`
@@ -42,6 +44,7 @@ Input:
 
 
 .. cpp:function:: int program_device(char *fpga_firmware_filename)
+
 Program FPGA with the file passed as input.
 Returns:
 	0 on success
@@ -54,13 +57,16 @@ Bulk Methods
 ------------
 
 .. cpp:function:: void send_text_file(bool verbose)
+
 Uses send and receive buffer to send a text file and reads same size response
 It then checks the readed data is the same as the data sended
 
 .. cpp:function:: int send_buffer(unsigned char *buf, int sz, unsigned int end_ptr = 0x01)
+
 Sends the data stored on 'buf' of size 'sz' to the endpoint passed (default 0x01)
 
 .. cpp:function:: int recive_buffer(unsigned char *buf, unsigned int data_count, unsigned int end_ptr = 0x81)
+
 Reads data from endpoint 0x81 (default) to buf and returns the size of data read(should be same as data_count)
 	Returns lenght of data readed.
 
@@ -68,14 +74,17 @@ Print information
 -----------------
 
 .. cpp:function:: int print_devices()
+
 Prints all USB devices BUS, VID, PID and bcd.
 	Returns number of USB devices on success
 	libusb error upon error.
 
 .. cpp:function:: int print_device_descriptor()
+
 Prints the connected device descriptor.
 
 .. cpp:function:: int print_config_descriptor()
+
 Prints the connected device configuration
 
 Others
