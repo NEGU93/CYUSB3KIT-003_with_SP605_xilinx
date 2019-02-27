@@ -4,7 +4,7 @@ CYUSB3KIT-003 with SP605 xilinx
 
 The cpp code is a class. When initializing the object, it automatically connects to a Cypress device:
 
-.. cpp:class:: MyClass : public MyBase, MyOtherBase
+.. cpp:class:: FX3USB3Connection
 
 Constructor
 ===========
@@ -28,7 +28,7 @@ Public methods
 Programming
 -----------
 
-- `int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0);`:
+- .. cpp:function:: int download_fx3_firmware(char *filename, char *tgt_str = const_cast<char *>("ram"), unsigned short vid = 0, unsigned short pid = 0)
 ```
 /**
  * Upload a .img firmware to the FX3 device
@@ -43,7 +43,7 @@ Programming
  * */
 ```
 
-- `int program_device(char *fpga_firmware_filename);`:
+-  .. cpp:function:: int program_device(char *fpga_firmware_filename)
 ```
 /**
  *  Program FPGA with the file passed as input.
@@ -58,20 +58,20 @@ Programming
 Bulk Methods
 ------------
 
-- `void send_text_file(bool verbose);`:
+- .. cpp:function:: void send_text_file(bool verbose)
 ```
 /**
  * Uses send and receive buffer to send a text file and reads same size response
  * It then checks the readed data is the same as the data sended
  * */
 ```
-- `int send_buffer(unsigned char *buf, int sz, unsigned int end_ptr = 0x01);`:
+- .. cpp:function:: int send_buffer(unsigned char *buf, int sz, unsigned int end_ptr = 0x01)
 ```
 /**
  * Sends the data stored on 'buf' of size 'sz' to the endpoint passed (default 0x01)
  * */
 ```
-- `int recive_buffer(unsigned char *buf, unsigned int data_count, unsigned int end_ptr = 0x81);`:
+- .. cpp:function:: int recive_buffer(unsigned char *buf, unsigned int data_count, unsigned int end_ptr = 0x81)
 ```
 /**
  * Reads data from endpoint 0x81 (default) to buf and returns the size of data read
@@ -82,7 +82,7 @@ Bulk Methods
 Print information
 -----------------
 
-- `int print_devices();`:
+- .. cpp:function:: int print_devices()
 ```
 /**
  * Prints all USB devices BUS, VID, PID and bcd.
@@ -90,7 +90,7 @@ Print information
  * libusb error upon error.
  * */
 ```
-- `int print_device_descriptor();`:
+- .. cpp:function:: int print_device_descriptor()
 Prints the connected device descriptor.
 - `int print_config_descriptor();`:
 Prints the connected device configuration
@@ -98,7 +98,7 @@ Prints the connected device configuration
 Others
 ------
 
-- `int soft_reset();`:
+- .. cpp:function:: int soft_reset()
 ```
 /**
  *  Send a reset command to the FX3 device and then reconnects to it.
@@ -106,7 +106,7 @@ Others
  * Returns cyusb error if not
  * */
 ```
-- `int claim_interface(int interface);`:
+- .. cpp:function:: int claim_interface(int interface)
 ```
 /**
  * This program is a CLI program to claim an interface for a device which has an unclaimed
