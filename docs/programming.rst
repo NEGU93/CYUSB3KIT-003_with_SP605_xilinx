@@ -9,12 +9,12 @@ Download fx3 firmware
 Description
 	Upload a .img firmware to the FX3 device
 Receives
-	- filename: name of the firware.img file to be programmed
-	- tgt_str (Optional):
-		- "ram" (Default)
-		- "i2c"
-		- "spi"
-	- (Optional) pid & vid : If after programming, the board is supposed to change both vid and pid values it must be passed as parameters.
+	- ``filename``: name of the firware.img file to be programmed
+	- (Optional) ``tgt_str``:
+	* "ram" (Default)
+	* "i2c"
+	* "spi"
+	- (Optional) ``pid`` & ``vid``: If after programming, the board is supposed to change both vid and pid values it must be passed as parameters.
 Returns
 	- 0 on success
 	- EINVAL: if filename or tgt_str values where incorrect
