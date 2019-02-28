@@ -41,7 +41,6 @@
 //#define STREAM_IN_OUT
 
 //#define USB_2_0
-
 #ifdef LOOPBACK_SHRT_ZLP
 #define DMA_BUF_SIZE						  (1)
 #define CY_FX_SLFIFO_DMA_BUF_COUNT_P_2_U      (2)                       /* Slave FIFO P_2_U channel buffer count */

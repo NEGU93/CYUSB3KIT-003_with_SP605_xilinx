@@ -332,1058 +332,1138 @@
  343              		@ args = 0, pretend = 0, frame = 16
  344              		@ frame_needed = 0, uses_anonymous_args = 0
  345 03dc 1F402DE9 		stmfd	sp!, {r0, r1, r2, r3, r4, lr}
- 346 03e0 98309FE5 		ldr	r3, .L63
- 347 03e4 0040A0E3 		mov	r4, #0
- 348 03e8 0100A0E3 		mov	r0, #1
- 349 03ec 084083E5 		str	r4, [r3, #8]
- 350 03f0 FEFFFFEB 		bl	CyU3PUsbFlushEp
- 351 03f4 8100A0E3 		mov	r0, #129
- 352 03f8 FEFFFFEB 		bl	CyU3PUsbFlushEp
- 353 03fc 80009FE5 		ldr	r0, .L63+4
- 354 0400 FEFFFFEB 		bl	CyU3PDmaChannelDestroy
- 355 0404 7C009FE5 		ldr	r0, .L63+8
- 356 0408 FEFFFFEB 		bl	CyU3PDmaChannelDestroy
- 357 040c 0C20A0E3 		mov	r2, #12
- 358 0410 04008DE2 		add	r0, sp, #4
- 359 0414 0410A0E1 		mov	r1, r4
- 360 0418 FEFFFFEB 		bl	CyU3PMemSet
- 361 041c 0100A0E3 		mov	r0, #1
- 362 0420 04108DE2 		add	r1, sp, #4
- 363 0424 04408DE5 		str	r4, [sp, #4]
- 364 0428 FEFFFFEB 		bl	CyU3PSetEpConfig
- 365 042c 002050E2 		subs	r2, r0, #0
- 366 0430 0500000A 		beq	.L59
- 367 0434 0400A0E3 		mov	r0, #4
- 368 0438 4C109FE5 		ldr	r1, .L63+12
- 369 043c FEFFFFEB 		bl	CyU3PDebugPrint
- 370              	.L60:
- 371 0440 6400A0E3 		mov	r0, #100
- 372 0444 FEFFFFEB 		bl	_tx_thread_sleep
- 373 0448 FCFFFFEA 		b	.L60
- 374              	.L59:
- 375 044c 8100A0E3 		mov	r0, #129
- 376 0450 04108DE2 		add	r1, sp, #4
- 377 0454 FEFFFFEB 		bl	CyU3PSetEpConfig
- 378 0458 002050E2 		subs	r2, r0, #0
- 379 045c 0500000A 		beq	.L58
- 380 0460 0400A0E3 		mov	r0, #4
- 381 0464 20109FE5 		ldr	r1, .L63+12
- 382 0468 FEFFFFEB 		bl	CyU3PDebugPrint
- 383              	.L62:
- 384 046c 6400A0E3 		mov	r0, #100
- 385 0470 FEFFFFEB 		bl	_tx_thread_sleep
- 386 0474 FCFFFFEA 		b	.L62
- 387              	.L58:
- 388 0478 10D08DE2 		add	sp, sp, #16
- 389              		@ sp needed
- 390 047c 1080BDE8 		ldmfd	sp!, {r4, pc}
- 391              	.L64:
- 392              		.align	2
- 393              	.L63:
- 394 0480 00000000 		.word	.LANCHOR0
- 395 0484 00000000 		.word	glChHandleSlFifoUtoP
- 396 0488 00000000 		.word	glChHandleSlFifoPtoU
- 397 048c 8C000000 		.word	.LC4
- 399              		.align	2
- 400              		.global	CyFxSlFifoApplnUSBSetupCB
- 402              	CyFxSlFifoApplnUSBSetupCB:
- 403              		@ args = 0, pretend = 0, frame = 8
- 404              		@ frame_needed = 0, uses_anonymous_args = 0
- 405 0490 F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 406 0494 FF5C00E2 		and	r5, r0, #65280
- 407 0498 01A8A0E1 		mov	r10, r1, asl #16
- 408 049c 24D04DE2 		sub	sp, sp, #36
- 409 04a0 20C8A0E1 		mov	ip, r0, lsr #16
- 410 04a4 604000E2 		and	r4, r0, #96
- 411 04a8 037000E2 		and	r7, r0, #3
- 412 04ac 2554A0E1 		mov	r5, r5, lsr #8
- 413 04b0 21B8A0E1 		mov	fp, r1, lsr #16
- 414 04b4 2A38A0E1 		mov	r3, r10, lsr #16
- 415 04b8 FF2000E2 		and	r2, r0, #255
- 416 04bc 20108DE9 		stmib	sp, {r5, ip}
- 417 04c0 0C308DE5 		str	r3, [sp, #12]
- 418 04c4 0060A0E1 		mov	r6, r0
- 419 04c8 0190A0E1 		mov	r9, r1
- 420 04cc 00708DE5 		str	r7, [sp]
- 421 04d0 10B08DE5 		str	fp, [sp, #16]
- 422 04d4 0400A0E3 		mov	r0, #4
- 423 04d8 1C129FE5 		ldr	r1, .L90
- 424 04dc 0430A0E1 		mov	r3, r4
- 425 04e0 1CC08DE5 		str	ip, [sp, #28]
- 426 04e4 FEFFFFEB 		bl	CyU3PDebugPrint
- 427 04e8 000054E3 		cmp	r4, #0
- 428 04ec FF8005E2 		and	r8, r5, #255
- 429 04f0 1CC09DE5 		ldr	ip, [sp, #28]
- 430 04f4 3E00001A 		bne	.L66
- 431 04f8 0400A0E3 		mov	r0, #4
- 432 04fc FC119FE5 		ldr	r1, .L90+4
- 433 0500 0520A0E1 		mov	r2, r5
- 434 0504 0C60A0E1 		mov	r6, ip
- 435 0508 FEFFFFEB 		bl	CyU3PDebugPrint
- 436 050c 010057E3 		cmp	r7, #1
- 437 0510 0F00001A 		bne	.L67
- 438 0514 FD3005E2 		and	r3, r5, #253
- 439 0518 010053E3 		cmp	r3, #1
- 440 051c 0C00001A 		bne	.L67
- 441 0520 000056E3 		cmp	r6, #0
- 442 0524 0A00001A 		bne	.L67
- 443 0528 D4319FE5 		ldr	r3, .L90+8
- 444 052c 083093E5 		ldr	r3, [r3, #8]
- 445 0530 000053E3 		cmp	r3, #0
- 446 0534 0100000A 		beq	.L68
- 447 0538 FEFFFFEB 		bl	CyU3PUsbAckSetup
- 448 053c 030000EA 		b	.L88
- 449              	.L68:
- 450 0540 0600A0E1 		mov	r0, r6
- 451 0544 0710A0E1 		mov	r1, r7
- 452 0548 0620A0E1 		mov	r2, r6
- 453 054c FEFFFFEB 		bl	CyU3PUsbStall
- 454              	.L88:
- 455 0550 0740A0E1 		mov	r4, r7
- 456              	.L67:
- 457 0554 020057E3 		cmp	r7, #2
- 458 0558 01005803 		cmpeq	r8, #1
- 459 055c 6300001A 		bne	.L83
- 460 0560 000056E3 		cmp	r6, #0
- 461 0564 6100001A 		bne	.L83
- 462 0568 0400A0E3 		mov	r0, #4
- 463 056c 94119FE5 		ldr	r1, .L90+12
- 464 0570 0520A0E1 		mov	r2, r5
- 465 0574 FEFFFFEB 		bl	CyU3PDebugPrint
- 466 0578 84319FE5 		ldr	r3, .L90+8
- 467 057c 083093E5 		ldr	r3, [r3, #8]
- 468 0580 000053E3 		cmp	r3, #0
- 469 0584 5900000A 		beq	.L83
- 470 0588 2A48A0E1 		mov	r4, r10, lsr #16
- 471 058c 010054E3 		cmp	r4, #1
- 472 0590 0700001A 		bne	.L70
- 473 0594 70019FE5 		ldr	r0, .L90+16
- 474 0598 FEFFFFEB 		bl	CyU3PDmaChannelReset
- 475 059c 0400A0E1 		mov	r0, r4
- 476 05a0 FEFFFFEB 		bl	CyU3PUsbFlushEp
- 477 05a4 0400A0E1 		mov	r0, r4
- 478 05a8 FEFFFFEB 		bl	CyU3PUsbResetEp
- 479 05ac 58019FE5 		ldr	r0, .L90+16
- 480 05b0 080000EA 		b	.L89
- 481              	.L70:
- 482 05b4 810054E3 		cmp	r4, #129
- 483 05b8 0800001A 		bne	.L71
- 484 05bc 4C019FE5 		ldr	r0, .L90+20
- 485 05c0 FEFFFFEB 		bl	CyU3PDmaChannelReset
- 486 05c4 0400A0E1 		mov	r0, r4
- 487 05c8 FEFFFFEB 		bl	CyU3PUsbFlushEp
- 488 05cc 0400A0E1 		mov	r0, r4
- 489 05d0 FEFFFFEB 		bl	CyU3PUsbResetEp
- 490 05d4 34019FE5 		ldr	r0, .L90+20
- 491              	.L89:
- 492 05d8 0610A0E1 		mov	r1, r6
- 493 05dc FEFFFFEB 		bl	CyU3PDmaChannelSetXfer
- 494              	.L71:
- 495 05e0 FF0009E2 		and	r0, r9, #255
- 496 05e4 0010A0E3 		mov	r1, #0
- 497 05e8 0120A0E3 		mov	r2, #1
- 498 05ec FEFFFFEB 		bl	CyU3PUsbStall
- 499 05f0 3B0000EA 		b	.L80
- 500              	.L66:
- 501 05f4 400054E3 		cmp	r4, #64
- 502 05f8 3B00001A 		bne	.L79
- 503 05fc 0400A0E3 		mov	r0, #4
- 504 0600 0C119FE5 		ldr	r1, .L90+24
- 505 0604 0520A0E1 		mov	r2, r5
- 506 0608 FEFFFFEB 		bl	CyU3PDebugPrint
- 507 060c B20058E3 		cmp	r8, #178
- 508 0610 1E00001A 		bne	.L73
- 509 0614 0400A0E3 		mov	r0, #4
- 510 0618 F8109FE5 		ldr	r1, .L90+28
- 511 061c FEFFFFEB 		bl	CyU3PDebugPrint
- 512 0620 800016E3 		tst	r6, #128
- 513 0624 3000001A 		bne	.L79
- 514 0628 EC409FE5 		ldr	r4, .L90+32
- 515 062c 0B00A0E1 		mov	r0, fp
- 516 0630 0410A0E1 		mov	r1, r4
- 517 0634 0020A0E3 		mov	r2, #0
- 518 0638 FEFFFFEB 		bl	CyU3PUsbGetEP0Data
- 519 063c 0220D4E5 		ldrb	r2, [r4, #2]	@ zero_extendqisi2
- 520 0640 0330D4E5 		ldrb	r3, [r4, #3]	@ zero_extendqisi2
- 521 0644 0228A0E1 		mov	r2, r2, asl #16
- 522 0648 032C82E1 		orr	r2, r2, r3, asl #24
- 523 064c 0030D4E5 		ldrb	r3, [r4]	@ zero_extendqisi2
- 524 0650 C8109FE5 		ldr	r1, .L90+36
- 525 0654 032082E1 		orr	r2, r2, r3
- 526 0658 0130D4E5 		ldrb	r3, [r4, #1]	@ zero_extendqisi2
- 527 065c 0400A0E3 		mov	r0, #4
- 528 0660 032482E1 		orr	r2, r2, r3, asl #8
- 529 0664 B8309FE5 		ldr	r3, .L90+40
- 530 0668 0140A0E3 		mov	r4, #1
- 531 066c 002083E5 		str	r2, [r3]
- 532 0670 FEFFFFEB 		bl	CyU3PDebugPrint
- 533 0674 AC309FE5 		ldr	r3, .L90+44
- 534 0678 0410A0E1 		mov	r1, r4
- 535 067c 0020A0E3 		mov	r2, #0
- 536 0680 A4009FE5 		ldr	r0, .L90+48
- 537 0684 004083E5 		str	r4, [r3]
- 538 0688 FEFFFFEB 		bl	_txe_event_flags_set
- 539 068c 170000EA 		b	.L83
- 540              	.L73:
- 541 0690 B10058E3 		cmp	r8, #177
- 542 0694 1400001A 		bne	.L79
- 543 0698 0400A0E3 		mov	r0, #4
- 544 069c 8C109FE5 		ldr	r1, .L90+52
- 545 06a0 0520A0E1 		mov	r2, r5
- 546 06a4 FEFFFFEB 		bl	CyU3PDebugPrint
- 547 06a8 800016E3 		tst	r6, #128
- 548 06ac 0E00000A 		beq	.L79
- 549 06b0 70409FE5 		ldr	r4, .L90+44
- 550 06b4 60109FE5 		ldr	r1, .L90+32
- 551 06b8 003094E5 		ldr	r3, [r4]
- 552 06bc 0B00A0E1 		mov	r0, fp
- 553 06c0 0030C1E5 		strb	r3, [r1]
- 554 06c4 FEFFFFEB 		bl	CyU3PUsbSendEP0Data
- 555 06c8 003094E5 		ldr	r3, [r4]
- 556 06cc 000053E3 		cmp	r3, #0
- 557 06d0 0300000A 		beq	.L80
- 558 06d4 50009FE5 		ldr	r0, .L90+48
- 559 06d8 0210A0E3 		mov	r1, #2
- 560 06dc 0020A0E3 		mov	r2, #0
- 561 06e0 FEFFFFEB 		bl	_txe_event_flags_set
- 562              	.L80:
- 563 06e4 0140A0E3 		mov	r4, #1
- 564 06e8 000000EA 		b	.L83
- 565              	.L79:
- 566 06ec 0040A0E3 		mov	r4, #0
- 567              	.L83:
- 568 06f0 0400A0E1 		mov	r0, r4
- 569 06f4 24D08DE2 		add	sp, sp, #36
- 570              		@ sp needed
- 571 06f8 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 572              	.L91:
- 573              		.align	2
- 574              	.L90:
- 575 06fc 15010000 		.word	.LC7
- 576 0700 7B010000 		.word	.LC8
- 577 0704 00000000 		.word	.LANCHOR0
- 578 0708 9C010000 		.word	.LC9
- 579 070c 00000000 		.word	glChHandleSlFifoUtoP
- 580 0710 00000000 		.word	glChHandleSlFifoPtoU
- 581 0714 AE010000 		.word	.LC10
- 582 0718 CD010000 		.word	.LC11
- 583 071c 00000000 		.word	glEp0Buffer
- 584 0720 EA010000 		.word	.LC12
- 585 0724 00000000 		.word	filelen
- 586 0728 00000000 		.word	glConfigDone
- 587 072c 00000000 		.word	glFxConfigFpgaAppEvent
- 588 0730 FB010000 		.word	.LC13
- 590              		.align	2
- 591              		.global	CyFxSlFifoApplnUSBEventCB
- 593              	CyFxSlFifoApplnUSBEventCB:
- 594              		@ args = 0, pretend = 0, frame = 0
- 595              		@ frame_needed = 0, uses_anonymous_args = 0
- 596 0734 040050E3 		cmp	r0, #4
- 597 0738 08402DE9 		stmfd	sp!, {r3, lr}
- 598 073c 0C00000A 		beq	.L94
- 599 0740 050050E3 		cmp	r0, #5
- 600 0744 0200000A 		beq	.L95
- 601 0748 010050E3 		cmp	r0, #1
- 602 074c 0880BD18 		ldmnefd	sp!, {r3, pc}
- 603 0750 070000EA 		b	.L94
- 604              	.L95:
- 605 0754 30309FE5 		ldr	r3, .L109
- 606 0758 083093E5 		ldr	r3, [r3, #8]
- 607 075c 000053E3 		cmp	r3, #0
- 608 0760 0000000A 		beq	.L96
- 609 0764 FEFFFFEB 		bl	CyFxSlFifoApplnStop
- 610              	.L96:
- 611 0768 FEFFFFEB 		bl	CyU3PUsbLPMDisable
- 612 076c 0840BDE8 		ldmfd	sp!, {r3, lr}
- 613 0770 FEFFFFEA 		b	CyFxConfigFpgaApplnStart
- 614              	.L94:
- 615 0774 10309FE5 		ldr	r3, .L109
- 616 0778 083093E5 		ldr	r3, [r3, #8]
- 617 077c 000053E3 		cmp	r3, #0
- 618 0780 0880BD08 		ldmeqfd	sp!, {r3, pc}
- 619 0784 0840BDE8 		ldmfd	sp!, {r3, lr}
- 620 0788 FEFFFFEA 		b	CyFxSlFifoApplnStop
- 621              	.L110:
- 622              		.align	2
- 623              	.L109:
- 624 078c 00000000 		.word	.LANCHOR0
+ 346 03e0 A4109FE5 		ldr	r1, .L63
+ 347 03e4 0400A0E3 		mov	r0, #4
+ 348 03e8 FEFFFFEB 		bl	CyU3PDebugPrint
+ 349 03ec 9C309FE5 		ldr	r3, .L63+4
+ 350 03f0 0040A0E3 		mov	r4, #0
+ 351 03f4 0100A0E3 		mov	r0, #1
+ 352 03f8 084083E5 		str	r4, [r3, #8]
+ 353 03fc FEFFFFEB 		bl	CyU3PUsbFlushEp
+ 354 0400 8100A0E3 		mov	r0, #129
+ 355 0404 FEFFFFEB 		bl	CyU3PUsbFlushEp
+ 356 0408 84009FE5 		ldr	r0, .L63+8
+ 357 040c FEFFFFEB 		bl	CyU3PDmaChannelDestroy
+ 358 0410 80009FE5 		ldr	r0, .L63+12
+ 359 0414 FEFFFFEB 		bl	CyU3PDmaChannelDestroy
+ 360 0418 0C20A0E3 		mov	r2, #12
+ 361 041c 04008DE2 		add	r0, sp, #4
+ 362 0420 0410A0E1 		mov	r1, r4
+ 363 0424 FEFFFFEB 		bl	CyU3PMemSet
+ 364 0428 0100A0E3 		mov	r0, #1
+ 365 042c 04108DE2 		add	r1, sp, #4
+ 366 0430 04408DE5 		str	r4, [sp, #4]
+ 367 0434 FEFFFFEB 		bl	CyU3PSetEpConfig
+ 368 0438 002050E2 		subs	r2, r0, #0
+ 369 043c 0500000A 		beq	.L59
+ 370 0440 0400A0E3 		mov	r0, #4
+ 371 0444 50109FE5 		ldr	r1, .L63+16
+ 372 0448 FEFFFFEB 		bl	CyU3PDebugPrint
+ 373              	.L60:
+ 374 044c 6400A0E3 		mov	r0, #100
+ 375 0450 FEFFFFEB 		bl	_tx_thread_sleep
+ 376 0454 FCFFFFEA 		b	.L60
+ 377              	.L59:
+ 378 0458 8100A0E3 		mov	r0, #129
+ 379 045c 04108DE2 		add	r1, sp, #4
+ 380 0460 FEFFFFEB 		bl	CyU3PSetEpConfig
+ 381 0464 002050E2 		subs	r2, r0, #0
+ 382 0468 0500000A 		beq	.L58
+ 383 046c 0400A0E3 		mov	r0, #4
+ 384 0470 24109FE5 		ldr	r1, .L63+16
+ 385 0474 FEFFFFEB 		bl	CyU3PDebugPrint
+ 386              	.L62:
+ 387 0478 6400A0E3 		mov	r0, #100
+ 388 047c FEFFFFEB 		bl	_tx_thread_sleep
+ 389 0480 FCFFFFEA 		b	.L62
+ 390              	.L58:
+ 391 0484 10D08DE2 		add	sp, sp, #16
+ 392              		@ sp needed
+ 393 0488 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 394              	.L64:
+ 395              		.align	2
+ 396              	.L63:
+ 397 048c 15010000 		.word	.LC7
+ 398 0490 00000000 		.word	.LANCHOR0
+ 399 0494 00000000 		.word	glChHandleSlFifoUtoP
+ 400 0498 00000000 		.word	glChHandleSlFifoPtoU
+ 401 049c 8C000000 		.word	.LC4
+ 403              		.align	2
+ 404              		.global	CyFxSlFifoApplnUSBSetupCB
+ 406              	CyFxSlFifoApplnUSBSetupCB:
+ 407              		@ args = 0, pretend = 0, frame = 8
+ 408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 409 04a0 F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 410 04a4 FF5C00E2 		and	r5, r0, #65280
+ 411 04a8 01A8A0E1 		mov	r10, r1, asl #16
+ 412 04ac 24D04DE2 		sub	sp, sp, #36
+ 413 04b0 20C8A0E1 		mov	ip, r0, lsr #16
+ 414 04b4 604000E2 		and	r4, r0, #96
+ 415 04b8 037000E2 		and	r7, r0, #3
+ 416 04bc 2554A0E1 		mov	r5, r5, lsr #8
+ 417 04c0 21B8A0E1 		mov	fp, r1, lsr #16
+ 418 04c4 2A38A0E1 		mov	r3, r10, lsr #16
+ 419 04c8 FF2000E2 		and	r2, r0, #255
+ 420 04cc 20108DE9 		stmib	sp, {r5, ip}
+ 421 04d0 0C308DE5 		str	r3, [sp, #12]
+ 422 04d4 0060A0E1 		mov	r6, r0
+ 423 04d8 0190A0E1 		mov	r9, r1
+ 424 04dc 00708DE5 		str	r7, [sp]
+ 425 04e0 10B08DE5 		str	fp, [sp, #16]
+ 426 04e4 0400A0E3 		mov	r0, #4
+ 427 04e8 8C129FE5 		ldr	r1, .L93
+ 428 04ec 0430A0E1 		mov	r3, r4
+ 429 04f0 1CC08DE5 		str	ip, [sp, #28]
+ 430 04f4 FEFFFFEB 		bl	CyU3PDebugPrint
+ 431 04f8 000054E3 		cmp	r4, #0
+ 432 04fc FF8005E2 		and	r8, r5, #255
+ 433 0500 1CC09DE5 		ldr	ip, [sp, #28]
+ 434 0504 3E00001A 		bne	.L66
+ 435 0508 0400A0E3 		mov	r0, #4
+ 436 050c 6C129FE5 		ldr	r1, .L93+4
+ 437 0510 0520A0E1 		mov	r2, r5
+ 438 0514 0C60A0E1 		mov	r6, ip
+ 439 0518 FEFFFFEB 		bl	CyU3PDebugPrint
+ 440 051c 010057E3 		cmp	r7, #1
+ 441 0520 0F00001A 		bne	.L67
+ 442 0524 FD3005E2 		and	r3, r5, #253
+ 443 0528 010053E3 		cmp	r3, #1
+ 444 052c 0C00001A 		bne	.L67
+ 445 0530 000056E3 		cmp	r6, #0
+ 446 0534 0A00001A 		bne	.L67
+ 447 0538 44329FE5 		ldr	r3, .L93+8
+ 448 053c 083093E5 		ldr	r3, [r3, #8]
+ 449 0540 000053E3 		cmp	r3, #0
+ 450 0544 0100000A 		beq	.L68
+ 451 0548 FEFFFFEB 		bl	CyU3PUsbAckSetup
+ 452 054c 030000EA 		b	.L91
+ 453              	.L68:
+ 454 0550 0600A0E1 		mov	r0, r6
+ 455 0554 0710A0E1 		mov	r1, r7
+ 456 0558 0620A0E1 		mov	r2, r6
+ 457 055c FEFFFFEB 		bl	CyU3PUsbStall
+ 458              	.L91:
+ 459 0560 0740A0E1 		mov	r4, r7
+ 460              	.L67:
+ 461 0564 020057E3 		cmp	r7, #2
+ 462 0568 01005803 		cmpeq	r8, #1
+ 463 056c 7F00001A 		bne	.L86
+ 464 0570 000056E3 		cmp	r6, #0
+ 465 0574 7D00001A 		bne	.L86
+ 466 0578 0400A0E3 		mov	r0, #4
+ 467 057c 04129FE5 		ldr	r1, .L93+12
+ 468 0580 0520A0E1 		mov	r2, r5
+ 469 0584 FEFFFFEB 		bl	CyU3PDebugPrint
+ 470 0588 F4319FE5 		ldr	r3, .L93+8
+ 471 058c 083093E5 		ldr	r3, [r3, #8]
+ 472 0590 000053E3 		cmp	r3, #0
+ 473 0594 7500000A 		beq	.L86
+ 474 0598 2A48A0E1 		mov	r4, r10, lsr #16
+ 475 059c 010054E3 		cmp	r4, #1
+ 476 05a0 0700001A 		bne	.L70
+ 477 05a4 E0019FE5 		ldr	r0, .L93+16
+ 478 05a8 FEFFFFEB 		bl	CyU3PDmaChannelReset
+ 479 05ac 0400A0E1 		mov	r0, r4
+ 480 05b0 FEFFFFEB 		bl	CyU3PUsbFlushEp
+ 481 05b4 0400A0E1 		mov	r0, r4
+ 482 05b8 FEFFFFEB 		bl	CyU3PUsbResetEp
+ 483 05bc C8019FE5 		ldr	r0, .L93+16
+ 484 05c0 080000EA 		b	.L92
+ 485              	.L70:
+ 486 05c4 810054E3 		cmp	r4, #129
+ 487 05c8 0800001A 		bne	.L71
+ 488 05cc BC019FE5 		ldr	r0, .L93+20
+ 489 05d0 FEFFFFEB 		bl	CyU3PDmaChannelReset
+ 490 05d4 0400A0E1 		mov	r0, r4
+ 491 05d8 FEFFFFEB 		bl	CyU3PUsbFlushEp
+ 492 05dc 0400A0E1 		mov	r0, r4
+ 493 05e0 FEFFFFEB 		bl	CyU3PUsbResetEp
+ 494 05e4 A4019FE5 		ldr	r0, .L93+20
+ 495              	.L92:
+ 496 05e8 0610A0E1 		mov	r1, r6
+ 497 05ec FEFFFFEB 		bl	CyU3PDmaChannelSetXfer
+ 498              	.L71:
+ 499 05f0 FF0009E2 		and	r0, r9, #255
+ 500 05f4 0010A0E3 		mov	r1, #0
+ 501 05f8 0120A0E3 		mov	r2, #1
+ 502 05fc FEFFFFEB 		bl	CyU3PUsbStall
+ 503 0600 590000EA 		b	.L83
+ 504              	.L66:
+ 505 0604 400054E3 		cmp	r4, #64
+ 506 0608 5500001A 		bne	.L82
+ 507 060c 0400A0E3 		mov	r0, #4
+ 508 0610 7C119FE5 		ldr	r1, .L93+24
+ 509 0614 0520A0E1 		mov	r2, r5
+ 510 0618 FEFFFFEB 		bl	CyU3PDebugPrint
+ 511 061c B20058E3 		cmp	r8, #178
+ 512 0620 1E00001A 		bne	.L73
+ 513 0624 0400A0E3 		mov	r0, #4
+ 514 0628 68119FE5 		ldr	r1, .L93+28
+ 515 062c FEFFFFEB 		bl	CyU3PDebugPrint
+ 516 0630 800016E3 		tst	r6, #128
+ 517 0634 4A00001A 		bne	.L82
+ 518 0638 5C419FE5 		ldr	r4, .L93+32
+ 519 063c 0B00A0E1 		mov	r0, fp
+ 520 0640 0410A0E1 		mov	r1, r4
+ 521 0644 0020A0E3 		mov	r2, #0
+ 522 0648 FEFFFFEB 		bl	CyU3PUsbGetEP0Data
+ 523 064c 0220D4E5 		ldrb	r2, [r4, #2]	@ zero_extendqisi2
+ 524 0650 0330D4E5 		ldrb	r3, [r4, #3]	@ zero_extendqisi2
+ 525 0654 0228A0E1 		mov	r2, r2, asl #16
+ 526 0658 032C82E1 		orr	r2, r2, r3, asl #24
+ 527 065c 0030D4E5 		ldrb	r3, [r4]	@ zero_extendqisi2
+ 528 0660 38119FE5 		ldr	r1, .L93+36
+ 529 0664 032082E1 		orr	r2, r2, r3
+ 530 0668 0130D4E5 		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 531 066c 0400A0E3 		mov	r0, #4
+ 532 0670 032482E1 		orr	r2, r2, r3, asl #8
+ 533 0674 28319FE5 		ldr	r3, .L93+40
+ 534 0678 0140A0E3 		mov	r4, #1
+ 535 067c 002083E5 		str	r2, [r3]
+ 536 0680 FEFFFFEB 		bl	CyU3PDebugPrint
+ 537 0684 1C319FE5 		ldr	r3, .L93+44
+ 538 0688 0410A0E1 		mov	r1, r4
+ 539 068c 0020A0E3 		mov	r2, #0
+ 540 0690 14019FE5 		ldr	r0, .L93+48
+ 541 0694 004083E5 		str	r4, [r3]
+ 542 0698 FEFFFFEB 		bl	_txe_event_flags_set
+ 543 069c 330000EA 		b	.L86
+ 544              	.L73:
+ 545 06a0 B10058E3 		cmp	r8, #177
+ 546 06a4 1C00001A 		bne	.L75
+ 547 06a8 0400A0E3 		mov	r0, #4
+ 548 06ac FC109FE5 		ldr	r1, .L93+52
+ 549 06b0 0520A0E1 		mov	r2, r5
+ 550 06b4 FEFFFFEB 		bl	CyU3PDebugPrint
+ 551 06b8 800016E3 		tst	r6, #128
+ 552 06bc 2800000A 		beq	.L82
+ 553 06c0 E0509FE5 		ldr	r5, .L93+44
+ 554 06c4 D0409FE5 		ldr	r4, .L93+32
+ 555 06c8 003095E5 		ldr	r3, [r5]
+ 556 06cc E0109FE5 		ldr	r1, .L93+56
+ 557 06d0 0030C4E5 		strb	r3, [r4]
+ 558 06d4 0420A0E1 		mov	r2, r4
+ 559 06d8 0B30A0E1 		mov	r3, fp
+ 560 06dc 0400A0E3 		mov	r0, #4
+ 561 06e0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 562 06e4 0B00A0E1 		mov	r0, fp
+ 563 06e8 0410A0E1 		mov	r1, r4
+ 564 06ec FEFFFFEB 		bl	CyU3PUsbSendEP0Data
+ 565 06f0 003095E5 		ldr	r3, [r5]
+ 566 06f4 000053E3 		cmp	r3, #0
+ 567 06f8 1B00000A 		beq	.L83
+ 568 06fc B4109FE5 		ldr	r1, .L93+60
+ 569 0700 0400A0E3 		mov	r0, #4
+ 570 0704 FEFFFFEB 		bl	CyU3PDebugPrint
+ 571 0708 0210A0E3 		mov	r1, #2
+ 572 070c 0020A0E3 		mov	r2, #0
+ 573 0710 94009FE5 		ldr	r0, .L93+48
+ 574 0714 FEFFFFEB 		bl	_txe_event_flags_set
+ 575 0718 130000EA 		b	.L83
+ 576              	.L75:
+ 577 071c E00058E3 		cmp	r8, #224
+ 578 0720 0F00001A 		bne	.L82
+ 579 0724 0520A0E1 		mov	r2, r5
+ 580 0728 8C109FE5 		ldr	r1, .L93+64
+ 581 072c 0400A0E3 		mov	r0, #4
+ 582 0730 FEFFFFEB 		bl	CyU3PDebugPrint
+ 583 0734 FEFFFFEB 		bl	CyU3PUsbAckSetup
+ 584 0738 7D0EA0E3 		mov	r0, #2000
+ 585 073c FEFFFFEB 		bl	_tx_thread_sleep
+ 586 0740 0110A0E3 		mov	r1, #1
+ 587 0744 0000A0E3 		mov	r0, #0
+ 588 0748 FEFFFFEB 		bl	CyU3PConnectState
+ 589 074c FA0FA0E3 		mov	r0, #1000
+ 590 0750 FEFFFFEB 		bl	_tx_thread_sleep
+ 591 0754 0000A0E3 		mov	r0, #0
+ 592 0758 FEFFFFEB 		bl	CyU3PDeviceReset
+ 593 075c FA0FA0E3 		mov	r0, #1000
+ 594 0760 FEFFFFEB 		bl	_tx_thread_sleep
+ 595              	.L82:
+ 596 0764 0040A0E3 		mov	r4, #0
+ 597 0768 000000EA 		b	.L86
+ 598              	.L83:
+ 599 076c 0140A0E3 		mov	r4, #1
+ 600              	.L86:
+ 601 0770 0400A0E1 		mov	r0, r4
+ 602 0774 24D08DE2 		add	sp, sp, #36
+ 603              		@ sp needed
+ 604 0778 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 605              	.L94:
+ 606              		.align	2
+ 607              	.L93:
+ 608 077c 27010000 		.word	.LC8
+ 609 0780 8D010000 		.word	.LC9
+ 610 0784 00000000 		.word	.LANCHOR0
+ 611 0788 AE010000 		.word	.LC10
+ 612 078c 00000000 		.word	glChHandleSlFifoUtoP
+ 613 0790 00000000 		.word	glChHandleSlFifoPtoU
+ 614 0794 C0010000 		.word	.LC11
+ 615 0798 DF010000 		.word	.LC12
+ 616 079c 00000000 		.word	glEp0Buffer
+ 617 07a0 FC010000 		.word	.LC13
+ 618 07a4 00000000 		.word	filelen
+ 619 07a8 00000000 		.word	glConfigDone
+ 620 07ac 00000000 		.word	glFxConfigFpgaAppEvent
+ 621 07b0 0D020000 		.word	.LC14
+ 622 07b4 2A020000 		.word	.LC15
+ 623 07b8 4D020000 		.word	.LC16
+ 624 07bc 70020000 		.word	.LC17
  626              		.align	2
- 627              		.global	CyFxApplnLPMRqtCB
- 629              	CyFxApplnLPMRqtCB:
+ 627              		.global	CyFxSlFifoApplnUSBEventCB
+ 629              	CyFxSlFifoApplnUSBEventCB:
  630              		@ args = 0, pretend = 0, frame = 0
  631              		@ frame_needed = 0, uses_anonymous_args = 0
- 632              		@ link register save eliminated.
- 633 0790 0100A0E3 		mov	r0, #1
- 634 0794 1EFF2FE1 		bx	lr
- 636              		.align	2
- 637              		.global	CyFxSlFifoApplnInit
- 639              	CyFxSlFifoApplnInit:
- 640              		@ args = 0, pretend = 0, frame = 16
- 641              		@ frame_needed = 0, uses_anonymous_args = 0
- 642 0798 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
- 643 079c 0230A0E3 		mov	r3, #2
- 644 07a0 18D04DE2 		sub	sp, sp, #24
- 645 07a4 B830CDE1 		strh	r3, [sp, #8]	@ movhi
- 646 07a8 0350A0E3 		mov	r5, #3
- 647 07ac 0030A0E3 		mov	r3, #0
- 648 07b0 0100A0E3 		mov	r0, #1
- 649 07b4 08108DE2 		add	r1, sp, #8
- 650 07b8 1450CDE5 		strb	r5, [sp, #20]
- 651 07bc 0C308DE5 		str	r3, [sp, #12]
- 652 07c0 10308DE5 		str	r3, [sp, #16]
- 653 07c4 FEFFFFEB 		bl	CyU3PPibInit
- 654 07c8 002050E2 		subs	r2, r0, #0
- 655 07cc 0500000A 		beq	.L113
- 656 07d0 0400A0E3 		mov	r0, #4
- 657 07d4 9C109FE5 		ldr	r1, .L119
- 658 07d8 FEFFFFEB 		bl	CyU3PDebugPrint
- 659              	.L114:
- 660 07dc 6400A0E3 		mov	r0, #100
- 661 07e0 FEFFFFEB 		bl	_tx_thread_sleep
- 662 07e4 FCFFFFEA 		b	.L114
+ 632 07c0 040050E3 		cmp	r0, #4
+ 633 07c4 08402DE9 		stmfd	sp!, {r3, lr}
+ 634 07c8 0F00000A 		beq	.L97
+ 635 07cc 050050E3 		cmp	r0, #5
+ 636 07d0 0200000A 		beq	.L98
+ 637 07d4 010050E3 		cmp	r0, #1
+ 638 07d8 0880BD18 		ldmnefd	sp!, {r3, pc}
+ 639 07dc 0A0000EA 		b	.L97
+ 640              	.L98:
+ 641 07e0 48309FE5 		ldr	r3, .L112
+ 642 07e4 083093E5 		ldr	r3, [r3, #8]
+ 643 07e8 000053E3 		cmp	r3, #0
+ 644 07ec 0000000A 		beq	.L99
+ 645 07f0 FEFFFFEB 		bl	CyFxSlFifoApplnStop
+ 646              	.L99:
+ 647 07f4 38109FE5 		ldr	r1, .L112+4
+ 648 07f8 0400A0E3 		mov	r0, #4
+ 649 07fc FEFFFFEB 		bl	CyU3PDebugPrint
+ 650 0800 FEFFFFEB 		bl	CyU3PUsbLPMDisable
+ 651 0804 0840BDE8 		ldmfd	sp!, {r3, lr}
+ 652 0808 FEFFFFEA 		b	CyFxConfigFpgaApplnStart
+ 653              	.L97:
+ 654 080c 0400A0E3 		mov	r0, #4
+ 655 0810 20109FE5 		ldr	r1, .L112+8
+ 656 0814 FEFFFFEB 		bl	CyU3PDebugPrint
+ 657 0818 10309FE5 		ldr	r3, .L112
+ 658 081c 083093E5 		ldr	r3, [r3, #8]
+ 659 0820 000053E3 		cmp	r3, #0
+ 660 0824 0880BD08 		ldmeqfd	sp!, {r3, pc}
+ 661 0828 0840BDE8 		ldmfd	sp!, {r3, lr}
+ 662 082c FEFFFFEA 		b	CyFxSlFifoApplnStop
  663              	.L113:
- 664 07e8 8C009FE5 		ldr	r0, .L119+4
- 665 07ec FEFFFFEB 		bl	CyU3PGpifLoad
- 666 07f0 004050E2 		subs	r4, r0, #0
- 667 07f4 0600000A 		beq	.L115
- 668 07f8 0400A0E3 		mov	r0, #4
- 669 07fc 7C109FE5 		ldr	r1, .L119+8
- 670 0800 0420A0E1 		mov	r2, r4
- 671 0804 FEFFFFEB 		bl	CyU3PDebugPrint
- 672              	.L116:
- 673 0808 6400A0E3 		mov	r0, #100
- 674 080c FEFFFFEB 		bl	_tx_thread_sleep
- 675 0810 FCFFFFEA 		b	.L116
- 676              	.L115:
- 677 0814 0160A0E3 		mov	r6, #1
- 678 0818 011CA0E3 		mov	r1, #256
- 679 081c 0620A0E3 		mov	r2, #6
- 680 0820 0430A0E1 		mov	r3, r4
- 681 0824 00608DE5 		str	r6, [sp]
- 682 0828 FEFFFFEB 		bl	CyU3PGpifSocketConfigure
- 683 082c 0620A0E3 		mov	r2, #6
- 684 0830 4C109FE5 		ldr	r1, .L119+12
- 685 0834 0430A0E1 		mov	r3, r4
- 686 0838 00608DE5 		str	r6, [sp]
- 687 083c 0500A0E1 		mov	r0, r5
- 688 0840 FEFFFFEB 		bl	CyU3PGpifSocketConfigure
- 689 0844 0400A0E1 		mov	r0, r4
- 690 0848 0C10A0E3 		mov	r1, #12
- 691 084c FEFFFFEB 		bl	CyU3PGpifSMStart
- 692 0850 002050E2 		subs	r2, r0, #0
- 693 0854 0500000A 		beq	.L112
- 694 0858 0400A0E3 		mov	r0, #4
- 695 085c 24109FE5 		ldr	r1, .L119+16
- 696 0860 FEFFFFEB 		bl	CyU3PDebugPrint
- 697              	.L118:
- 698 0864 6400A0E3 		mov	r0, #100
- 699 0868 FEFFFFEB 		bl	_tx_thread_sleep
- 700 086c FCFFFFEA 		b	.L118
- 701              	.L112:
- 702 0870 18D08DE2 		add	sp, sp, #24
- 703              		@ sp needed
- 704 0874 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
- 705              	.L120:
- 706              		.align	2
- 707              	.L119:
- 708 0878 18020000 		.word	.LC14
- 709 087c 00000000 		.word	.LANCHOR1
- 710 0880 47020000 		.word	.LC15
- 711 0884 03010000 		.word	259
- 712 0888 6E020000 		.word	.LC16
- 714              		.align	2
- 715              		.global	CyFxSwitchtoslFifo
- 717              	CyFxSwitchtoslFifo:
- 718              		@ args = 0, pretend = 0, frame = 40
- 719              		@ frame_needed = 0, uses_anonymous_args = 0
- 720 088c 04E02DE5 		str	lr, [sp, #-4]!
- 721 0890 2CD04DE2 		sub	sp, sp, #44
- 722 0894 0030A0E3 		mov	r3, #0
- 723 0898 0120A0E3 		mov	r2, #1
- 724 089c 0D00A0E1 		mov	r0, sp
- 725 08a0 0C008DE9 		stmib	sp, {r2, r3}
- 726 08a4 0C308DE5 		str	r3, [sp, #12]
- 727 08a8 10308DE5 		str	r3, [sp, #16]
- 728 08ac 00208DE5 		str	r2, [sp]
- 729 08b0 1630CDE5 		strb	r3, [sp, #22]
- 730 08b4 18308DE5 		str	r3, [sp, #24]
- 731 08b8 1C308DE5 		str	r3, [sp, #28]
- 732 08bc 20308DE5 		str	r3, [sp, #32]
- 733 08c0 24308DE5 		str	r3, [sp, #36]
- 734 08c4 FEFFFFEB 		bl	CyU3PDeviceConfigureIOMatrix
- 735 08c8 000050E3 		cmp	r0, #0
- 736 08cc 0000000A 		beq	.L121
- 737              	.L123:
- 738 08d0 FEFFFFEA 		b	.L123
- 739              	.L121:
- 740 08d4 2CD08DE2 		add	sp, sp, #44
- 741              		@ sp needed
- 742 08d8 04F09DE4 		ldr	pc, [sp], #4
- 744              		.align	2
- 745              		.global	SlFifoAppThread_Entry
- 747              	SlFifoAppThread_Entry:
- 748              		@ args = 0, pretend = 0, frame = 8
- 749              		@ frame_needed = 0, uses_anonymous_args = 0
- 750 08dc 30402DE9 		stmfd	sp!, {r4, r5, lr}
- 751 08e0 9C509FE5 		ldr	r5, .L133
- 752 08e4 14D04DE2 		sub	sp, sp, #20
- 753 08e8 FEFFFFEB 		bl	CyFxSlFifoApplnDebugInit
- 754 08ec FEFFFFEB 		bl	CyFxConfigFpgaApplnInit
- 755 08f0 0540A0E1 		mov	r4, r5
- 756              	.L126:
- 757 08f4 083095E5 		ldr	r3, [r5, #8]
- 758 08f8 000053E3 		cmp	r3, #0
- 759 08fc FCFFFF0A 		beq	.L126
- 760 0900 0030E0E3 		mvn	r3, #0
- 761 0904 00308DE5 		str	r3, [sp]
- 762 0908 78009FE5 		ldr	r0, .L133+4
- 763 090c 0310A0E3 		mov	r1, #3
- 764 0910 0120A0E3 		mov	r2, #1
- 765 0914 0C308DE2 		add	r3, sp, #12
- 766 0918 FEFFFFEB 		bl	_txe_event_flags_get
- 767 091c 000050E3 		cmp	r0, #0
- 768 0920 1200001A 		bne	.L127
- 769 0924 0C309DE5 		ldr	r3, [sp, #12]
- 770 0928 010013E3 		tst	r3, #1
- 771 092c 0600000A 		beq	.L128
- 772 0930 54109FE5 		ldr	r1, .L133+8
- 773 0934 0400A0E3 		mov	r0, #4
- 774 0938 FEFFFFEB 		bl	CyU3PDebugPrint
- 775 093c 4C309FE5 		ldr	r3, .L133+12
- 776 0940 000093E5 		ldr	r0, [r3]
- 777 0944 FEFFFFEB 		bl	CyFxConfigFpga
- 778 0948 080000EA 		b	.L127
- 779              	.L128:
- 780 094c 020013E3 		tst	r3, #2
- 781 0950 0600000A 		beq	.L127
- 782 0954 38109FE5 		ldr	r1, .L133+16
- 783 0958 0400A0E3 		mov	r0, #4
- 784 095c FEFFFFEB 		bl	CyU3PDebugPrint
- 785 0960 FEFFFFEB 		bl	CyFxConfigFpgaApplnStop
- 786 0964 FEFFFFEB 		bl	CyFxSwitchtoslFifo
- 787 0968 FEFFFFEB 		bl	CyFxSlFifoApplnInit
- 788 096c FEFFFFEB 		bl	CyFxSlFifoApplnStart
- 789              	.L127:
- 790 0970 20109FE5 		ldr	r1, .L133+20
- 791 0974 0C0094E8 		ldmia	r4, {r2, r3}
- 792 0978 0600A0E3 		mov	r0, #6
- 793 097c FEFFFFEB 		bl	CyU3PDebugPrint
- 794 0980 DBFFFFEA 		b	.L126
- 795              	.L134:
- 796              		.align	2
- 797              	.L133:
- 798 0984 00000000 		.word	.LANCHOR0
- 799 0988 00000000 		.word	glFxConfigFpgaAppEvent
- 800 098c 98020000 		.word	.LC17
- 801 0990 00000000 		.word	filelen
- 802 0994 B7020000 		.word	.LC18
- 803 0998 D8020000 		.word	.LC19
- 805              		.align	2
- 806              		.global	CyFxApplicationDefine
- 808              	CyFxApplicationDefine:
- 809              		@ args = 0, pretend = 0, frame = 0
- 810              		@ frame_needed = 0, uses_anonymous_args = 0
- 811 099c 04E02DE5 		str	lr, [sp, #-4]!
- 812 09a0 010BA0E3 		mov	r0, #1024
- 813 09a4 24D04DE2 		sub	sp, sp, #36
- 814 09a8 FEFFFFEB 		bl	CyU3PMemAlloc
- 815 09ac 013BA0E3 		mov	r3, #1024
- 816 09b0 04308DE5 		str	r3, [sp, #4]
- 817 09b4 0120A0E3 		mov	r2, #1
- 818 09b8 0830A0E3 		mov	r3, #8
- 819 09bc 08308DE5 		str	r3, [sp, #8]
- 820 09c0 0C308DE5 		str	r3, [sp, #12]
- 821 09c4 14208DE5 		str	r2, [sp, #20]
- 822 09c8 0030A0E3 		mov	r3, #0
- 823 09cc A820A0E3 		mov	r2, #168
- 824 09d0 18208DE5 		str	r2, [sp, #24]
- 825 09d4 10308DE5 		str	r3, [sp, #16]
- 826 09d8 20109FE5 		ldr	r1, .L138
- 827 09dc 20209FE5 		ldr	r2, .L138+4
- 828 09e0 00008DE5 		str	r0, [sp]
- 829 09e4 1C009FE5 		ldr	r0, .L138+8
- 830 09e8 FEFFFFEB 		bl	_txe_thread_create
- 831 09ec 000050E3 		cmp	r0, #0
- 832 09f0 0000000A 		beq	.L135
- 833              	.L137:
- 834 09f4 FEFFFFEA 		b	.L137
- 835              	.L135:
- 836 09f8 24D08DE2 		add	sp, sp, #36
- 837              		@ sp needed
- 838 09fc 04F09DE4 		ldr	pc, [sp], #4
- 839              	.L139:
+ 664              		.align	2
+ 665              	.L112:
+ 666 0830 00000000 		.word	.LANCHOR0
+ 667 0834 8A020000 		.word	.LC18
+ 668 0838 AC020000 		.word	.LC19
+ 670              		.align	2
+ 671              		.global	CyFxApplnLPMRqtCB
+ 673              	CyFxApplnLPMRqtCB:
+ 674              		@ args = 0, pretend = 0, frame = 0
+ 675              		@ frame_needed = 0, uses_anonymous_args = 0
+ 676              		@ link register save eliminated.
+ 677 083c 0100A0E3 		mov	r0, #1
+ 678 0840 1EFF2FE1 		bx	lr
+ 680              		.align	2
+ 681              		.global	CyFxSlFifoApplnInit
+ 683              	CyFxSlFifoApplnInit:
+ 684              		@ args = 0, pretend = 0, frame = 16
+ 685              		@ frame_needed = 0, uses_anonymous_args = 0
+ 686 0844 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 687 0848 0230A0E3 		mov	r3, #2
+ 688 084c 18D04DE2 		sub	sp, sp, #24
+ 689 0850 B830CDE1 		strh	r3, [sp, #8]	@ movhi
+ 690 0854 0350A0E3 		mov	r5, #3
+ 691 0858 0030A0E3 		mov	r3, #0
+ 692 085c 0100A0E3 		mov	r0, #1
+ 693 0860 08108DE2 		add	r1, sp, #8
+ 694 0864 1450CDE5 		strb	r5, [sp, #20]
+ 695 0868 0C308DE5 		str	r3, [sp, #12]
+ 696 086c 10308DE5 		str	r3, [sp, #16]
+ 697 0870 FEFFFFEB 		bl	CyU3PPibInit
+ 698 0874 002050E2 		subs	r2, r0, #0
+ 699 0878 0500000A 		beq	.L116
+ 700 087c 0400A0E3 		mov	r0, #4
+ 701 0880 9C109FE5 		ldr	r1, .L122
+ 702 0884 FEFFFFEB 		bl	CyU3PDebugPrint
+ 703              	.L117:
+ 704 0888 6400A0E3 		mov	r0, #100
+ 705 088c FEFFFFEB 		bl	_tx_thread_sleep
+ 706 0890 FCFFFFEA 		b	.L117
+ 707              	.L116:
+ 708 0894 8C009FE5 		ldr	r0, .L122+4
+ 709 0898 FEFFFFEB 		bl	CyU3PGpifLoad
+ 710 089c 004050E2 		subs	r4, r0, #0
+ 711 08a0 0600000A 		beq	.L118
+ 712 08a4 0400A0E3 		mov	r0, #4
+ 713 08a8 7C109FE5 		ldr	r1, .L122+8
+ 714 08ac 0420A0E1 		mov	r2, r4
+ 715 08b0 FEFFFFEB 		bl	CyU3PDebugPrint
+ 716              	.L119:
+ 717 08b4 6400A0E3 		mov	r0, #100
+ 718 08b8 FEFFFFEB 		bl	_tx_thread_sleep
+ 719 08bc FCFFFFEA 		b	.L119
+ 720              	.L118:
+ 721 08c0 0160A0E3 		mov	r6, #1
+ 722 08c4 011CA0E3 		mov	r1, #256
+ 723 08c8 0620A0E3 		mov	r2, #6
+ 724 08cc 0430A0E1 		mov	r3, r4
+ 725 08d0 00608DE5 		str	r6, [sp]
+ 726 08d4 FEFFFFEB 		bl	CyU3PGpifSocketConfigure
+ 727 08d8 0620A0E3 		mov	r2, #6
+ 728 08dc 4C109FE5 		ldr	r1, .L122+12
+ 729 08e0 0430A0E1 		mov	r3, r4
+ 730 08e4 00608DE5 		str	r6, [sp]
+ 731 08e8 0500A0E1 		mov	r0, r5
+ 732 08ec FEFFFFEB 		bl	CyU3PGpifSocketConfigure
+ 733 08f0 0400A0E1 		mov	r0, r4
+ 734 08f4 0C10A0E3 		mov	r1, #12
+ 735 08f8 FEFFFFEB 		bl	CyU3PGpifSMStart
+ 736 08fc 002050E2 		subs	r2, r0, #0
+ 737 0900 0500000A 		beq	.L115
+ 738 0904 0400A0E3 		mov	r0, #4
+ 739 0908 24109FE5 		ldr	r1, .L122+16
+ 740 090c FEFFFFEB 		bl	CyU3PDebugPrint
+ 741              	.L121:
+ 742 0910 6400A0E3 		mov	r0, #100
+ 743 0914 FEFFFFEB 		bl	_tx_thread_sleep
+ 744 0918 FCFFFFEA 		b	.L121
+ 745              	.L115:
+ 746 091c 18D08DE2 		add	sp, sp, #24
+ 747              		@ sp needed
+ 748 0920 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 749              	.L123:
+ 750              		.align	2
+ 751              	.L122:
+ 752 0924 CD020000 		.word	.LC20
+ 753 0928 00000000 		.word	.LANCHOR1
+ 754 092c FC020000 		.word	.LC21
+ 755 0930 03010000 		.word	259
+ 756 0934 23030000 		.word	.LC22
+ 758              		.align	2
+ 759              		.global	CyFxSwitchtoslFifo
+ 761              	CyFxSwitchtoslFifo:
+ 762              		@ args = 0, pretend = 0, frame = 40
+ 763              		@ frame_needed = 0, uses_anonymous_args = 0
+ 764 0938 04E02DE5 		str	lr, [sp, #-4]!
+ 765 093c 2CD04DE2 		sub	sp, sp, #44
+ 766 0940 0030A0E3 		mov	r3, #0
+ 767 0944 0120A0E3 		mov	r2, #1
+ 768 0948 0D00A0E1 		mov	r0, sp
+ 769 094c 0C008DE9 		stmib	sp, {r2, r3}
+ 770 0950 0C308DE5 		str	r3, [sp, #12]
+ 771 0954 10308DE5 		str	r3, [sp, #16]
+ 772 0958 00208DE5 		str	r2, [sp]
+ 773 095c 1630CDE5 		strb	r3, [sp, #22]
+ 774 0960 18308DE5 		str	r3, [sp, #24]
+ 775 0964 1C308DE5 		str	r3, [sp, #28]
+ 776 0968 20308DE5 		str	r3, [sp, #32]
+ 777 096c 24308DE5 		str	r3, [sp, #36]
+ 778 0970 FEFFFFEB 		bl	CyU3PDeviceConfigureIOMatrix
+ 779 0974 000050E3 		cmp	r0, #0
+ 780 0978 0000000A 		beq	.L124
+ 781              	.L126:
+ 782 097c FEFFFFEA 		b	.L126
+ 783              	.L124:
+ 784 0980 2CD08DE2 		add	sp, sp, #44
+ 785              		@ sp needed
+ 786 0984 04F09DE4 		ldr	pc, [sp], #4
+ 788              		.align	2
+ 789              		.global	SlFifoAppThread_Entry
+ 791              	SlFifoAppThread_Entry:
+ 792              		@ args = 0, pretend = 0, frame = 8
+ 793              		@ frame_needed = 0, uses_anonymous_args = 0
+ 794 0988 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 795 098c 9C509FE5 		ldr	r5, .L136
+ 796 0990 14D04DE2 		sub	sp, sp, #20
+ 797 0994 FEFFFFEB 		bl	CyFxSlFifoApplnDebugInit
+ 798 0998 FEFFFFEB 		bl	CyFxConfigFpgaApplnInit
+ 799 099c 0540A0E1 		mov	r4, r5
+ 800              	.L129:
+ 801 09a0 083095E5 		ldr	r3, [r5, #8]
+ 802 09a4 000053E3 		cmp	r3, #0
+ 803 09a8 FCFFFF0A 		beq	.L129
+ 804 09ac 0030E0E3 		mvn	r3, #0
+ 805 09b0 00308DE5 		str	r3, [sp]
+ 806 09b4 78009FE5 		ldr	r0, .L136+4
+ 807 09b8 0310A0E3 		mov	r1, #3
+ 808 09bc 0120A0E3 		mov	r2, #1
+ 809 09c0 0C308DE2 		add	r3, sp, #12
+ 810 09c4 FEFFFFEB 		bl	_txe_event_flags_get
+ 811 09c8 000050E3 		cmp	r0, #0
+ 812 09cc 1200001A 		bne	.L130
+ 813 09d0 0C309DE5 		ldr	r3, [sp, #12]
+ 814 09d4 010013E3 		tst	r3, #1
+ 815 09d8 0600000A 		beq	.L131
+ 816 09dc 54109FE5 		ldr	r1, .L136+8
+ 817 09e0 0400A0E3 		mov	r0, #4
+ 818 09e4 FEFFFFEB 		bl	CyU3PDebugPrint
+ 819 09e8 4C309FE5 		ldr	r3, .L136+12
+ 820 09ec 000093E5 		ldr	r0, [r3]
+ 821 09f0 FEFFFFEB 		bl	CyFxConfigFpga
+ 822 09f4 080000EA 		b	.L130
+ 823              	.L131:
+ 824 09f8 020013E3 		tst	r3, #2
+ 825 09fc 0600000A 		beq	.L130
+ 826 0a00 38109FE5 		ldr	r1, .L136+16
+ 827 0a04 0400A0E3 		mov	r0, #4
+ 828 0a08 FEFFFFEB 		bl	CyU3PDebugPrint
+ 829 0a0c FEFFFFEB 		bl	CyFxConfigFpgaApplnStop
+ 830 0a10 FEFFFFEB 		bl	CyFxSwitchtoslFifo
+ 831 0a14 FEFFFFEB 		bl	CyFxSlFifoApplnInit
+ 832 0a18 FEFFFFEB 		bl	CyFxSlFifoApplnStart
+ 833              	.L130:
+ 834 0a1c 20109FE5 		ldr	r1, .L136+20
+ 835 0a20 0C0094E8 		ldmia	r4, {r2, r3}
+ 836 0a24 0600A0E3 		mov	r0, #6
+ 837 0a28 FEFFFFEB 		bl	CyU3PDebugPrint
+ 838 0a2c DBFFFFEA 		b	.L129
+ 839              	.L137:
  840              		.align	2
- 841              	.L138:
- 842 0a00 10030000 		.word	.LC20
- 843 0a04 00000000 		.word	SlFifoAppThread_Entry
- 844 0a08 00000000 		.word	slFifoAppThread
- 846              		.comm	seqnum_p,4,4
- 847              		.comm	glEp0Buffer,32,1
- 848              		.global	glIsApplnActive
- 849              		.global	glDMATxCount
- 850              		.global	glDMARxCount
- 851              		.comm	glChHandleSlFifoPtoU,172,4
- 852              		.comm	glChHandleSlFifoUtoP,172,4
- 853              		.comm	slFifoAppThread,168,4
- 854              		.global	CyFxGpifConfig
- 855              		.global	CyFxGpifRegValue
- 856              		.global	CyFxGpifWavedataPosition
- 857              		.global	CyFxGpifWavedata
- 858              		.global	CyFxGpifTransition
- 859              		.section	.rodata
- 860              		.align	2
- 861              		.set	.LANCHOR1,. + 0
- 864              	CyFxGpifConfig:
- 865 0000 C700     		.short	199
- 866 0002 0000     		.space	2
- 867 0004 00000000 		.word	CyFxGpifWavedata
- 868 0008 00000000 		.word	CyFxGpifWavedataPosition
- 869 000c 0700     		.short	7
- 870 000e 0000     		.space	2
- 871 0010 00000000 		.word	CyFxGpifTransition
- 872 0014 4C00     		.short	76
- 873 0016 0000     		.space	2
- 874 0018 00000000 		.word	CyFxGpifRegValue
- 875              		.section	.rodata.str1.1,"aMS",%progbits,1
- 876              	.LC0:
- 877 0000 0D552074 		.ascii	"\015U to P DMA Callback called\015\012\000"
- 877      6F205020 
- 877      444D4120 
- 877      43616C6C 
- 877      6261636B 
- 878              	.LC1:
- 879 001e 43795533 		.ascii	"CyU3PDmaChannelCommitBuffer failed, Error code = %d"
- 879      50446D61 
- 879      4368616E 
- 879      6E656C43 
- 879      6F6D6D69 
- 880 0051 0A00     		.ascii	"\012\000"
- 881              	.LC2:
- 882 0053 0D502074 		.ascii	"\015P to U DMA Callback called\015\012\000"
- 882      6F205520 
- 882      444D4120 
- 882      43616C6C 
- 882      6261636B 
- 883              	.LC3:
- 884 0071 4572726F 		.ascii	"Error! Invalid USB speed.\012\000"
- 884      72212049 
- 884      6E76616C 
- 884      69642055 
- 884      53422073 
- 885              	.LC4:
- 886 008c 43795533 		.ascii	"CyU3PSetEpConfig failed, Error code = %d\012\000"
- 886      50536574 
- 886      4570436F 
- 886      6E666967 
- 886      20666169 
- 887              	.LC5:
- 888 00b6 43795533 		.ascii	"CyU3PDmaChannelCreate failed, Error code = %d\012\000"
- 888      50446D61 
- 888      4368616E 
- 888      6E656C43 
- 888      72656174 
- 889              	.LC6:
- 890 00e5 43795533 		.ascii	"CyU3PDmaChannelSetXfer Failed, Error code = %d\012\000"
- 890      50446D61 
- 890      4368616E 
- 890      6E656C53 
- 890      65745866 
- 891              	.LC7:
- 892 0115 0D092062 		.ascii	"\015\011 bReqType: %X\015\012\011 bType: %X\015\012"
- 892      52657154 
- 892      7970653A 
- 892      2025580D 
- 892      0A092062 
- 893 0133 09206254 		.ascii	"\011 bTarget: %X\015\012\011 bRequest: %X\015\012\011"
- 893      61726765 
- 893      743A2025 
- 893      580D0A09 
- 893      20625265 
- 894 0153 2056616C 		.ascii	" Value: %d\015\012\011 Index: %d\015\012\011 Length"
- 894      75653A20 
- 894      25640D0A 
- 894      0920496E 
- 894      6465783A 
- 895 0174 3A202564 		.ascii	": %d\015\012\000"
- 895      0D0A00
- 896              	.LC8:
- 897 017b 0D537461 		.ascii	"\015Standard Request received: %X\015\012\000"
- 897      6E646172 
- 897      64205265 
- 897      71756573 
- 897      74207265 
- 898              	.LC9:
- 899 019c 0D09434C 		.ascii	"\015\011CLEAR_FEATURE\015\012\000"
- 899      4541525F 
- 899      46454154 
- 899      5552450D 
- 899      0A00
- 900              	.LC10:
- 901 01ae 0D56656E 		.ascii	"\015Vendor Request received: %X\015\012\000"
- 901      646F7220 
- 901      52657175 
- 901      65737420 
- 901      72656365 
- 902              	.LC11:
- 903 01cd 0D09564E 		.ascii	"\015\011VND_CMD_SLAVESER_CFGLOAD\015\012\000"
- 903      445F434D 
- 903      445F534C 
- 903      41564553 
- 903      45525F43 
- 904              	.LC12:
- 905 01ea 0D096669 		.ascii	"\015\011filelen = %d\015\012\000"
- 905      6C656C65 
- 905      6E203D20 
- 905      25640D0A 
- 905      00
- 906              	.LC13:
- 907 01fb 0D09564E 		.ascii	"\015\011VND_CMD_SLAVESER_CFGSTAT\015\012\000"
- 907      445F434D 
- 907      445F534C 
- 907      41564553 
- 907      45525F43 
- 908              	.LC14:
- 909 0218 502D706F 		.ascii	"P-port Initialization failed, Error Code = %d\012\000"
- 909      72742049 
- 909      6E697469 
- 909      616C697A 
- 909      6174696F 
- 910              	.LC15:
- 911 0247 43795533 		.ascii	"CyU3PGpifLoad failed, Error Code = %d\012\000"
- 911      50477069 
- 911      664C6F61 
- 911      64206661 
- 911      696C6564 
- 912              	.LC16:
- 913 026e 43795533 		.ascii	"CyU3PGpifSMStart failed, Error Code = %d\012\000"
- 913      50477069 
- 913      66534D53 
- 913      74617274 
- 913      20666169 
- 914              	.LC17:
- 915 0298 0D537461 		.ascii	"\015Start Configuration of FPGA\015\012\000"
- 915      72742043 
- 915      6F6E6669 
- 915      67757261 
- 915      74696F6E 
- 916              	.LC18:
- 917 02b7 0D537769 		.ascii	"\015Switch to SlaveFIFO interface\015\012\000"
- 917      74636820 
- 917      746F2053 
- 917      6C617665 
- 917      4649464F 
- 918              	.LC19:
- 919 02d8 44617461 		.ascii	"Data tracker: buffers received: %d, buffers sent: %"
- 919      20747261 
- 919      636B6572 
- 919      3A206275 
- 919      66666572 
- 920 030b 642E0D0A 		.ascii	"d.\015\012\000"
- 920      00
- 921              	.LC20:
- 922 0310 32313A53 		.ascii	"21:Slave_FIFO_sync\000"
- 922      6C617665 
- 922      5F464946 
- 922      4F5F7379 
- 922      6E6300
- 923              		.data
- 924              		.align	2
- 927              	CyFxGpifRegValue:
- 928 0000 80030080 		.word	-2147482752
- 929 0004 AC100000 		.word	4268
- 930 0008 02000701 		.word	17235970
- 931 000c 44000000 		.word	68
- 932 0010 00000000 		.word	0
- 933 0014 00000000 		.word	0
- 934 0018 00000000 		.word	0
- 935 001c 82000000 		.word	130
- 936 0020 82070000 		.word	1922
- 937 0024 00150100 		.word	70912
- 938 0028 8FFE0000 		.word	65167
- 939 002c FF010000 		.word	511
- 940 0030 00000000 		.word	0
- 941 0034 00000000 		.word	0
- 942 0038 00000000 		.word	0
- 943 003c 00000000 		.word	0
- 944 0040 00000000 		.word	0
- 945 0044 10000000 		.word	16
- 946 0048 14000000 		.word	20
- 947 004c 13000000 		.word	19
- 948 0050 00000000 		.word	0
- 949 0054 17000000 		.word	23
- 950 0058 00000000 		.word	0
- 951 005c 00000000 		.word	0
- 952 0060 00000000 		.word	0
- 953 0064 00000000 		.word	0
- 954 0068 00000000 		.word	0
- 955 006c 00000000 		.word	0
- 956 0070 00000000 		.word	0
- 957 0074 06000000 		.word	6
- 958 0078 00000000 		.word	0
- 959 007c FFFF0000 		.word	65535
- 960 0080 0A010000 		.word	266
- 961 0084 00000000 		.word	0
- 962 0088 FFFF0000 		.word	65535
- 963 008c 00000000 		.word	0
- 964 0090 FFFF0000 		.word	65535
- 965 0094 0A010000 		.word	266
- 966 0098 00000000 		.word	0
- 967 009c FFFF0000 		.word	65535
- 968 00a0 00000000 		.word	0
- 969 00a4 00000000 		.word	0
- 970 00a8 00000000 		.word	0
- 971 00ac 00000000 		.word	0
- 972 00b0 00000000 		.word	0
- 973 00b4 00000000 		.word	0
- 974 00b8 00000000 		.word	0
- 975 00bc 00000000 		.word	0
- 976 00c0 00000000 		.word	0
- 977 00c4 00000000 		.word	0
- 978 00c8 00000000 		.word	0
- 979 00cc 00000000 		.word	0
- 980 00d0 00000000 		.word	0
- 981 00d4 00000000 		.word	0
- 982 00d8 00000000 		.word	0
- 983 00dc 00000000 		.word	0
- 984 00e0 00000000 		.word	0
- 985 00e4 00000000 		.word	0
- 986 00e8 00000000 		.word	0
- 987 00ec 00000000 		.word	0
- 988 00f0 00000000 		.word	0
- 989 00f4 00000000 		.word	0
- 990 00f8 00000000 		.word	0
- 991 00fc 00040180 		.word	-2147417088
- 992 0100 01040180 		.word	-2147417087
- 993 0104 02040180 		.word	-2147417086
- 994 0108 03040180 		.word	-2147417085
- 995 010c 00000000 		.word	0
- 996 0110 00000000 		.word	0
- 997 0114 00000000 		.word	0
- 998 0118 00000C00 		.word	786432
- 999 011c 00000000 		.word	0
- 1000 0120 00000000 		.word	0
- 1001 0124 00000000 		.word	0
- 1002 0128 00000000 		.word	0
- 1003 012c C1FFFFFF 		.word	-63
- 1006              	CyFxGpifWavedataPosition:
- 1007 0130 00       		.byte	0
- 1008 0131 01       		.byte	1
- 1009 0132 00       		.byte	0
- 1010 0133 02       		.byte	2
- 1011 0134 00       		.byte	0
- 1012 0135 00       		.byte	0
- 1013 0136 03       		.byte	3
- 1014 0137 04       		.byte	4
- 1015 0138 04       		.byte	4
- 1016 0139 04       		.byte	4
- 1017 013a 04       		.byte	4
- 1018 013b 04       		.byte	4
- 1019 013c 04       		.byte	4
- 1020 013d 04       		.byte	4
- 1021 013e 04       		.byte	4
- 1022 013f 04       		.byte	4
- 1023 0140 04       		.byte	4
- 1024 0141 04       		.byte	4
- 1025 0142 04       		.byte	4
- 1026 0143 04       		.byte	4
- 1027 0144 04       		.byte	4
- 1028 0145 04       		.byte	4
- 1029 0146 04       		.byte	4
- 1030 0147 04       		.byte	4
- 1031 0148 04       		.byte	4
- 1032 0149 04       		.byte	4
- 1033 014a 04       		.byte	4
- 1034 014b 04       		.byte	4
- 1035 014c 04       		.byte	4
- 1036 014d 04       		.byte	4
- 1037 014e 04       		.byte	4
- 1038 014f 04       		.byte	4
- 1039 0150 04       		.byte	4
- 1040 0151 04       		.byte	4
- 1041 0152 04       		.byte	4
- 1042 0153 04       		.byte	4
- 1043 0154 04       		.byte	4
- 1044 0155 04       		.byte	4
- 1045 0156 04       		.byte	4
- 1046 0157 04       		.byte	4
- 1047 0158 04       		.byte	4
- 1048 0159 04       		.byte	4
- 1049 015a 04       		.byte	4
- 1050 015b 04       		.byte	4
- 1051 015c 04       		.byte	4
- 1052 015d 04       		.byte	4
- 1053 015e 04       		.byte	4
- 1054 015f 04       		.byte	4
- 1055 0160 04       		.byte	4
- 1056 0161 04       		.byte	4
- 1057 0162 04       		.byte	4
- 1058 0163 04       		.byte	4
- 1059 0164 04       		.byte	4
- 1060 0165 04       		.byte	4
- 1061 0166 04       		.byte	4
- 1062 0167 04       		.byte	4
- 1063 0168 04       		.byte	4
- 1064 0169 04       		.byte	4
- 1065 016a 04       		.byte	4
- 1066 016b 04       		.byte	4
- 1067 016c 04       		.byte	4
- 1068 016d 04       		.byte	4
- 1069 016e 04       		.byte	4
- 1070 016f 04       		.byte	4
- 1071 0170 00       		.byte	0
- 1072 0171 05       		.byte	5
- 1073 0172 00       		.byte	0
- 1074 0173 02       		.byte	2
- 1075 0174 00       		.byte	0
- 1076 0175 00       		.byte	0
- 1077 0176 05       		.byte	5
- 1078 0177 04       		.byte	4
- 1079 0178 04       		.byte	4
- 1080 0179 04       		.byte	4
- 1081 017a 04       		.byte	4
- 1082 017b 04       		.byte	4
- 1083 017c 04       		.byte	4
- 1084 017d 04       		.byte	4
- 1085 017e 04       		.byte	4
- 1086 017f 04       		.byte	4
- 1087 0180 04       		.byte	4
- 1088 0181 04       		.byte	4
- 1089 0182 04       		.byte	4
- 1090 0183 04       		.byte	4
- 1091 0184 04       		.byte	4
- 1092 0185 04       		.byte	4
- 1093 0186 04       		.byte	4
- 1094 0187 04       		.byte	4
- 1095 0188 04       		.byte	4
- 1096 0189 04       		.byte	4
- 1097 018a 04       		.byte	4
- 1098 018b 04       		.byte	4
- 1099 018c 04       		.byte	4
- 1100 018d 04       		.byte	4
- 1101 018e 04       		.byte	4
- 1102 018f 04       		.byte	4
- 1103 0190 04       		.byte	4
- 1104 0191 04       		.byte	4
- 1105 0192 04       		.byte	4
- 1106 0193 04       		.byte	4
- 1107 0194 04       		.byte	4
- 1108 0195 04       		.byte	4
- 1109 0196 04       		.byte	4
- 1110 0197 04       		.byte	4
- 1111 0198 04       		.byte	4
- 1112 0199 04       		.byte	4
- 1113 019a 04       		.byte	4
- 1114 019b 04       		.byte	4
- 1115 019c 04       		.byte	4
- 1116 019d 04       		.byte	4
- 1117 019e 04       		.byte	4
- 1118 019f 04       		.byte	4
- 1119 01a0 04       		.byte	4
- 1120 01a1 04       		.byte	4
- 1121 01a2 04       		.byte	4
- 1122 01a3 04       		.byte	4
- 1123 01a4 04       		.byte	4
- 1124 01a5 04       		.byte	4
- 1125 01a6 04       		.byte	4
- 1126 01a7 04       		.byte	4
- 1127 01a8 04       		.byte	4
- 1128 01a9 04       		.byte	4
- 1129 01aa 04       		.byte	4
- 1130 01ab 04       		.byte	4
- 1131 01ac 04       		.byte	4
- 1132 01ad 04       		.byte	4
- 1133 01ae 04       		.byte	4
- 1134 01af 04       		.byte	4
- 1135 01b0 00       		.byte	0
- 1136 01b1 06       		.byte	6
- 1137 01b2 00       		.byte	0
- 1138 01b3 02       		.byte	2
- 1139 01b4 00       		.byte	0
- 1140 01b5 00       		.byte	0
- 1141 01b6 06       		.byte	6
- 1142 01b7 04       		.byte	4
- 1143 01b8 04       		.byte	4
- 1144 01b9 04       		.byte	4
- 1145 01ba 04       		.byte	4
- 1146 01bb 04       		.byte	4
- 1147 01bc 04       		.byte	4
- 1148 01bd 04       		.byte	4
- 1149 01be 04       		.byte	4
- 1150 01bf 04       		.byte	4
- 1151 01c0 04       		.byte	4
- 1152 01c1 04       		.byte	4
- 1153 01c2 04       		.byte	4
- 1154 01c3 04       		.byte	4
- 1155 01c4 04       		.byte	4
- 1156 01c5 04       		.byte	4
- 1157 01c6 04       		.byte	4
- 1158 01c7 04       		.byte	4
- 1159 01c8 04       		.byte	4
- 1160 01c9 04       		.byte	4
- 1161 01ca 04       		.byte	4
- 1162 01cb 04       		.byte	4
- 1163 01cc 04       		.byte	4
- 1164 01cd 04       		.byte	4
- 1165 01ce 04       		.byte	4
- 1166 01cf 04       		.byte	4
- 1167 01d0 04       		.byte	4
- 1168 01d1 04       		.byte	4
- 1169 01d2 04       		.byte	4
- 1170 01d3 04       		.byte	4
- 1171 01d4 04       		.byte	4
- 1172 01d5 04       		.byte	4
- 1173 01d6 04       		.byte	4
- 1174 01d7 04       		.byte	4
- 1175 01d8 04       		.byte	4
- 1176 01d9 04       		.byte	4
- 1177 01da 04       		.byte	4
- 1178 01db 04       		.byte	4
- 1179 01dc 04       		.byte	4
- 1180 01dd 04       		.byte	4
- 1181 01de 04       		.byte	4
- 1182 01df 04       		.byte	4
- 1183 01e0 04       		.byte	4
- 1184 01e1 04       		.byte	4
- 1185 01e2 04       		.byte	4
- 1186 01e3 04       		.byte	4
- 1187 01e4 04       		.byte	4
- 1188 01e5 04       		.byte	4
- 1189 01e6 04       		.byte	4
- 1190 01e7 04       		.byte	4
- 1191 01e8 04       		.byte	4
- 1192 01e9 04       		.byte	4
- 1193 01ea 04       		.byte	4
- 1194 01eb 04       		.byte	4
- 1195 01ec 04       		.byte	4
- 1196 01ed 04       		.byte	4
- 1197 01ee 04       		.byte	4
- 1198 01ef 04       		.byte	4
- 1199 01f0 00       		.byte	0
- 1200 01f1 07       		.byte	7
- 1201 01f2 00       		.byte	0
- 1202 01f3 02       		.byte	2
- 1203 01f4 00       		.byte	0
- 1204 01f5 00       		.byte	0
- 1205 01f6 07       		.byte	7
- 1206 01f7 00       		.space	1
- 1209              	CyFxGpifWavedata:
- 1210 01f8 0160081E 		.word	503865345
- 1211 01fc C4020300 		.word	197316
- 1212 0200 00000080 		.word	-2147483648
- 1213 0204 00000000 		.word	0
- 1214 0208 00000000 		.word	0
- 1215 020c 00000000 		.word	0
- 1216 0210 0203084E 		.word	1309147906
- 1217 0214 00030000 		.word	768
- 1218 0218 00000080 		.word	-2147483648
- 1219 021c 0660081E 		.word	503865350
- 1220 0220 C4020300 		.word	197316
- 1221 0224 00000080 		.word	-2147483648
- 1222 0228 0160081E 		.word	503865345
- 1223 022c C4020300 		.word	197316
- 1224 0230 00000080 		.word	-2147483648
- 1225 0234 0407044E 		.word	1308886788
- 1226 0238 00030020 		.word	536871680
- 1227 023c 000010C0 		.word	-1072693248
- 1228 0240 0203084E 		.word	1309147906
- 1229 0244 00030000 		.word	768
- 1230 0248 00000080 		.word	-2147483648
- 1231 024c 0160081E 		.word	503865345
- 1232 0250 C4020300 		.word	197316
- 1233 0254 00000080 		.word	-2147483648
- 1234 0258 00000000 		.word	0
- 1235 025c 00000000 		.word	0
- 1236 0260 00000000 		.word	0
- 1237 0264 00000000 		.word	0
- 1238 0268 00000000 		.word	0
- 1239 026c 00000000 		.word	0
- 1240 0270 00000000 		.word	0
- 1241 0274 00000000 		.word	0
- 1242 0278 00000000 		.word	0
- 1243 027c 0587733E 		.word	1047758597
- 1244 0280 00030000 		.word	768
- 1245 0284 000010C0 		.word	-1072693248
- 1246 0288 00000000 		.word	0
- 1247 028c 00000000 		.word	0
- 1248 0290 00000000 		.word	0
- 1249 0294 0327005E 		.word	1577068291
- 1250 0298 0C030320 		.word	537068300
- 1251 029c 00000080 		.word	-2147483648
- 1252 02a0 00000000 		.word	0
- 1253 02a4 00000000 		.word	0
- 1254 02a8 00000000 		.word	0
- 1255 02ac 0407044E 		.word	1308886788
- 1256 02b0 00030020 		.word	536871680
- 1257 02b4 000010C0 		.word	-1072693248
- 1260              	CyFxGpifTransition:
- 1261 02b8 0000     		.short	0
- 1262 02ba 8080     		.short	-32640
- 1263 02bc 2222     		.short	8738
- 1264 02be 5555     		.short	21845
- 1265 02c0 7F7F     		.short	32639
- 1266 02c2 1F1F     		.short	7967
- 1267 02c4 8888     		.short	-30584
- 1268 02c6 0000     		.bss
- 1269              		.align	2
- 1270              		.set	.LANCHOR0,. + 0
- 1273              	glDMARxCount:
- 1274 0000 00000000 		.space	4
- 1277              	glDMATxCount:
- 1278 0004 00000000 		.space	4
- 1281              	glIsApplnActive:
- 1282 0008 00000000 		.space	4
- 1283              		.ident	"GCC: (Sourcery CodeBench Lite 2013.11-24) 4.8.1"
+ 841              	.L136:
+ 842 0a30 00000000 		.word	.LANCHOR0
+ 843 0a34 00000000 		.word	glFxConfigFpgaAppEvent
+ 844 0a38 4D030000 		.word	.LC23
+ 845 0a3c 00000000 		.word	filelen
+ 846 0a40 6C030000 		.word	.LC24
+ 847 0a44 8D030000 		.word	.LC25
+ 849              		.align	2
+ 850              		.global	CyFxApplicationDefine
+ 852              	CyFxApplicationDefine:
+ 853              		@ args = 0, pretend = 0, frame = 0
+ 854              		@ frame_needed = 0, uses_anonymous_args = 0
+ 855 0a48 04E02DE5 		str	lr, [sp, #-4]!
+ 856 0a4c 010BA0E3 		mov	r0, #1024
+ 857 0a50 24D04DE2 		sub	sp, sp, #36
+ 858 0a54 FEFFFFEB 		bl	CyU3PMemAlloc
+ 859 0a58 013BA0E3 		mov	r3, #1024
+ 860 0a5c 04308DE5 		str	r3, [sp, #4]
+ 861 0a60 0120A0E3 		mov	r2, #1
+ 862 0a64 0830A0E3 		mov	r3, #8
+ 863 0a68 08308DE5 		str	r3, [sp, #8]
+ 864 0a6c 0C308DE5 		str	r3, [sp, #12]
+ 865 0a70 14208DE5 		str	r2, [sp, #20]
+ 866 0a74 0030A0E3 		mov	r3, #0
+ 867 0a78 A820A0E3 		mov	r2, #168
+ 868 0a7c 18208DE5 		str	r2, [sp, #24]
+ 869 0a80 10308DE5 		str	r3, [sp, #16]
+ 870 0a84 20109FE5 		ldr	r1, .L141
+ 871 0a88 20209FE5 		ldr	r2, .L141+4
+ 872 0a8c 00008DE5 		str	r0, [sp]
+ 873 0a90 1C009FE5 		ldr	r0, .L141+8
+ 874 0a94 FEFFFFEB 		bl	_txe_thread_create
+ 875 0a98 000050E3 		cmp	r0, #0
+ 876 0a9c 0000000A 		beq	.L138
+ 877              	.L140:
+ 878 0aa0 FEFFFFEA 		b	.L140
+ 879              	.L138:
+ 880 0aa4 24D08DE2 		add	sp, sp, #36
+ 881              		@ sp needed
+ 882 0aa8 04F09DE4 		ldr	pc, [sp], #4
+ 883              	.L142:
+ 884              		.align	2
+ 885              	.L141:
+ 886 0aac C5030000 		.word	.LC26
+ 887 0ab0 00000000 		.word	SlFifoAppThread_Entry
+ 888 0ab4 00000000 		.word	slFifoAppThread
+ 890              		.comm	seqnum_p,4,4
+ 891              		.comm	glEp0Buffer,32,1
+ 892              		.global	glIsApplnActive
+ 893              		.global	glDMATxCount
+ 894              		.global	glDMARxCount
+ 895              		.comm	glChHandleSlFifoPtoU,172,4
+ 896              		.comm	glChHandleSlFifoUtoP,172,4
+ 897              		.comm	slFifoAppThread,168,4
+ 898              		.global	CyFxGpifConfig
+ 899              		.global	CyFxGpifRegValue
+ 900              		.global	CyFxGpifWavedataPosition
+ 901              		.global	CyFxGpifWavedata
+ 902              		.global	CyFxGpifTransition
+ 903              		.section	.rodata
+ 904              		.align	2
+ 905              		.set	.LANCHOR1,. + 0
+ 908              	CyFxGpifConfig:
+ 909 0000 C700     		.short	199
+ 910 0002 0000     		.space	2
+ 911 0004 00000000 		.word	CyFxGpifWavedata
+ 912 0008 00000000 		.word	CyFxGpifWavedataPosition
+ 913 000c 0700     		.short	7
+ 914 000e 0000     		.space	2
+ 915 0010 00000000 		.word	CyFxGpifTransition
+ 916 0014 4C00     		.short	76
+ 917 0016 0000     		.space	2
+ 918 0018 00000000 		.word	CyFxGpifRegValue
+ 919              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 920              	.LC0:
+ 921 0000 0D552074 		.ascii	"\015U to P DMA Callback called\015\012\000"
+ 921      6F205020 
+ 921      444D4120 
+ 921      43616C6C 
+ 921      6261636B 
+ 922              	.LC1:
+ 923 001e 43795533 		.ascii	"CyU3PDmaChannelCommitBuffer failed, Error code = %d"
+ 923      50446D61 
+ 923      4368616E 
+ 923      6E656C43 
+ 923      6F6D6D69 
+ 924 0051 0A00     		.ascii	"\012\000"
+ 925              	.LC2:
+ 926 0053 0D502074 		.ascii	"\015P to U DMA Callback called\015\012\000"
+ 926      6F205520 
+ 926      444D4120 
+ 926      43616C6C 
+ 926      6261636B 
+ 927              	.LC3:
+ 928 0071 4572726F 		.ascii	"Error! Invalid USB speed.\012\000"
+ 928      72212049 
+ 928      6E76616C 
+ 928      69642055 
+ 928      53422073 
+ 929              	.LC4:
+ 930 008c 43795533 		.ascii	"CyU3PSetEpConfig failed, Error code = %d\012\000"
+ 930      50536574 
+ 930      4570436F 
+ 930      6E666967 
+ 930      20666169 
+ 931              	.LC5:
+ 932 00b6 43795533 		.ascii	"CyU3PDmaChannelCreate failed, Error code = %d\012\000"
+ 932      50446D61 
+ 932      4368616E 
+ 932      6E656C43 
+ 932      72656174 
+ 933              	.LC6:
+ 934 00e5 43795533 		.ascii	"CyU3PDmaChannelSetXfer Failed, Error code = %d\012\000"
+ 934      50446D61 
+ 934      4368616E 
+ 934      6E656C53 
+ 934      65745866 
+ 935              	.LC7:
+ 936 0115 52657365 		.ascii	"Reset slave FIFO\012\000"
+ 936      7420736C 
+ 936      61766520 
+ 936      4649464F 
+ 936      0A00
+ 937              	.LC8:
+ 938 0127 0D092062 		.ascii	"\015\011 bReqType: %X\015\012\011 bType: %X\015\012"
+ 938      52657154 
+ 938      7970653A 
+ 938      2025580D 
+ 938      0A092062 
+ 939 0145 09206254 		.ascii	"\011 bTarget: %X\015\012\011 bRequest: %X\015\012\011"
+ 939      61726765 
+ 939      743A2025 
+ 939      580D0A09 
+ 939      20625265 
+ 940 0165 2056616C 		.ascii	" Value: %d\015\012\011 Index: %d\015\012\011 Length"
+ 940      75653A20 
+ 940      25640D0A 
+ 940      0920496E 
+ 940      6465783A 
+ 941 0186 3A202564 		.ascii	": %d\015\012\000"
+ 941      0D0A00
+ 942              	.LC9:
+ 943 018d 0D537461 		.ascii	"\015Standard Request received: %X\015\012\000"
+ 943      6E646172 
+ 943      64205265 
+ 943      71756573 
+ 943      74207265 
+ 944              	.LC10:
+ 945 01ae 0D09434C 		.ascii	"\015\011CLEAR_FEATURE\015\012\000"
+ 945      4541525F 
+ 945      46454154 
+ 945      5552450D 
+ 945      0A00
+ 946              	.LC11:
+ 947 01c0 0D56656E 		.ascii	"\015Vendor Request received: %X\015\012\000"
+ 947      646F7220 
+ 947      52657175 
+ 947      65737420 
+ 947      72656365 
+ 948              	.LC12:
+ 949 01df 0D09564E 		.ascii	"\015\011VND_CMD_SLAVESER_CFGLOAD\015\012\000"
+ 949      445F434D 
+ 949      445F534C 
+ 949      41564553 
+ 949      45525F43 
+ 950              	.LC13:
+ 951 01fc 0D096669 		.ascii	"\015\011filelen = %d\015\012\000"
+ 951      6C656C65 
+ 951      6E203D20 
+ 951      25640D0A 
+ 951      00
+ 952              	.LC14:
+ 953 020d 0D09564E 		.ascii	"\015\011VND_CMD_SLAVESER_CFGSTAT\015\012\000"
+ 953      445F434D 
+ 953      445F534C 
+ 953      41564553 
+ 953      45525F43 
+ 954              	.LC15:
+ 955 022a 0D20676C 		.ascii	"\015 glEp0Buffer = %X, wLength = %X\015\012\000"
+ 955      45703042 
+ 955      75666665 
+ 955      72203D20 
+ 955      25582C20 
+ 956              	.LC16:
+ 957 024d 0D095377 		.ascii	"\015\011Switch to slaveFIFO interface.\015\012\000"
+ 957      69746368 
+ 957      20746F20 
+ 957      736C6176 
+ 957      65464946 
+ 958              	.LC17:
+ 959 0270 0D095265 		.ascii	"\015\011Reset the FX3 device.\015\012\000"
+ 959      73657420 
+ 959      74686520 
+ 959      46583320 
+ 959      64657669 
+ 960              	.LC18:
+ 961 028a 0D095374 		.ascii	"\015\011Start the loop back function.\015\012\000"
+ 961      61727420 
+ 961      74686520 
+ 961      6C6F6F70 
+ 961      20626163 
+ 962              	.LC19:
+ 963 02ac 0D095374 		.ascii	"\015\011Stop the loop back function.\015\012\000"
+ 963      6F702074 
+ 963      6865206C 
+ 963      6F6F7020 
+ 963      6261636B 
+ 964              	.LC20:
+ 965 02cd 502D706F 		.ascii	"P-port Initialization failed, Error Code = %d\012\000"
+ 965      72742049 
+ 965      6E697469 
+ 965      616C697A 
+ 965      6174696F 
+ 966              	.LC21:
+ 967 02fc 43795533 		.ascii	"CyU3PGpifLoad failed, Error Code = %d\012\000"
+ 967      50477069 
+ 967      664C6F61 
+ 967      64206661 
+ 967      696C6564 
+ 968              	.LC22:
+ 969 0323 43795533 		.ascii	"CyU3PGpifSMStart failed, Error Code = %d\012\000"
+ 969      50477069 
+ 969      66534D53 
+ 969      74617274 
+ 969      20666169 
+ 970              	.LC23:
+ 971 034d 0D537461 		.ascii	"\015Start Configuration of FPGA\015\012\000"
+ 971      72742043 
+ 971      6F6E6669 
+ 971      67757261 
+ 971      74696F6E 
+ 972              	.LC24:
+ 973 036c 0D537769 		.ascii	"\015Switch to SlaveFIFO interface\015\012\000"
+ 973      74636820 
+ 973      746F2053 
+ 973      6C617665 
+ 973      4649464F 
+ 974              	.LC25:
+ 975 038d 44617461 		.ascii	"Data tracker: buffers received: %d, buffers sent: %"
+ 975      20747261 
+ 975      636B6572 
+ 975      3A206275 
+ 975      66666572 
+ 976 03c0 642E0D0A 		.ascii	"d.\015\012\000"
+ 976      00
+ 977              	.LC26:
+ 978 03c5 32313A53 		.ascii	"21:Slave_FIFO_sync\000"
+ 978      6C617665 
+ 978      5F464946 
+ 978      4F5F7379 
+ 978      6E6300
+ 979              		.data
+ 980              		.align	2
+ 983              	CyFxGpifRegValue:
+ 984 0000 80030080 		.word	-2147482752
+ 985 0004 AC100000 		.word	4268
+ 986 0008 02000701 		.word	17235970
+ 987 000c 44000000 		.word	68
+ 988 0010 00000000 		.word	0
+ 989 0014 00000000 		.word	0
+ 990 0018 00000000 		.word	0
+ 991 001c 82000000 		.word	130
+ 992 0020 82070000 		.word	1922
+ 993 0024 00150100 		.word	70912
+ 994 0028 8FFE0000 		.word	65167
+ 995 002c FF010000 		.word	511
+ 996 0030 00000000 		.word	0
+ 997 0034 00000000 		.word	0
+ 998 0038 00000000 		.word	0
+ 999 003c 00000000 		.word	0
+ 1000 0040 00000000 		.word	0
+ 1001 0044 10000000 		.word	16
+ 1002 0048 14000000 		.word	20
+ 1003 004c 13000000 		.word	19
+ 1004 0050 00000000 		.word	0
+ 1005 0054 17000000 		.word	23
+ 1006 0058 00000000 		.word	0
+ 1007 005c 00000000 		.word	0
+ 1008 0060 00000000 		.word	0
+ 1009 0064 00000000 		.word	0
+ 1010 0068 00000000 		.word	0
+ 1011 006c 00000000 		.word	0
+ 1012 0070 00000000 		.word	0
+ 1013 0074 06000000 		.word	6
+ 1014 0078 00000000 		.word	0
+ 1015 007c FFFF0000 		.word	65535
+ 1016 0080 0A010000 		.word	266
+ 1017 0084 00000000 		.word	0
+ 1018 0088 FFFF0000 		.word	65535
+ 1019 008c 00000000 		.word	0
+ 1020 0090 FFFF0000 		.word	65535
+ 1021 0094 0A010000 		.word	266
+ 1022 0098 00000000 		.word	0
+ 1023 009c FFFF0000 		.word	65535
+ 1024 00a0 00000000 		.word	0
+ 1025 00a4 00000000 		.word	0
+ 1026 00a8 00000000 		.word	0
+ 1027 00ac 00000000 		.word	0
+ 1028 00b0 00000000 		.word	0
+ 1029 00b4 00000000 		.word	0
+ 1030 00b8 00000000 		.word	0
+ 1031 00bc 00000000 		.word	0
+ 1032 00c0 00000000 		.word	0
+ 1033 00c4 00000000 		.word	0
+ 1034 00c8 00000000 		.word	0
+ 1035 00cc 00000000 		.word	0
+ 1036 00d0 00000000 		.word	0
+ 1037 00d4 00000000 		.word	0
+ 1038 00d8 00000000 		.word	0
+ 1039 00dc 00000000 		.word	0
+ 1040 00e0 00000000 		.word	0
+ 1041 00e4 00000000 		.word	0
+ 1042 00e8 00000000 		.word	0
+ 1043 00ec 00000000 		.word	0
+ 1044 00f0 00000000 		.word	0
+ 1045 00f4 00000000 		.word	0
+ 1046 00f8 00000000 		.word	0
+ 1047 00fc 00040180 		.word	-2147417088
+ 1048 0100 01040180 		.word	-2147417087
+ 1049 0104 02040180 		.word	-2147417086
+ 1050 0108 03040180 		.word	-2147417085
+ 1051 010c 00000000 		.word	0
+ 1052 0110 00000000 		.word	0
+ 1053 0114 00000000 		.word	0
+ 1054 0118 00000C00 		.word	786432
+ 1055 011c 00000000 		.word	0
+ 1056 0120 00000000 		.word	0
+ 1057 0124 00000000 		.word	0
+ 1058 0128 00000000 		.word	0
+ 1059 012c C1FFFFFF 		.word	-63
+ 1062              	CyFxGpifWavedataPosition:
+ 1063 0130 00       		.byte	0
+ 1064 0131 01       		.byte	1
+ 1065 0132 00       		.byte	0
+ 1066 0133 02       		.byte	2
+ 1067 0134 00       		.byte	0
+ 1068 0135 00       		.byte	0
+ 1069 0136 03       		.byte	3
+ 1070 0137 04       		.byte	4
+ 1071 0138 04       		.byte	4
+ 1072 0139 04       		.byte	4
+ 1073 013a 04       		.byte	4
+ 1074 013b 04       		.byte	4
+ 1075 013c 04       		.byte	4
+ 1076 013d 04       		.byte	4
+ 1077 013e 04       		.byte	4
+ 1078 013f 04       		.byte	4
+ 1079 0140 04       		.byte	4
+ 1080 0141 04       		.byte	4
+ 1081 0142 04       		.byte	4
+ 1082 0143 04       		.byte	4
+ 1083 0144 04       		.byte	4
+ 1084 0145 04       		.byte	4
+ 1085 0146 04       		.byte	4
+ 1086 0147 04       		.byte	4
+ 1087 0148 04       		.byte	4
+ 1088 0149 04       		.byte	4
+ 1089 014a 04       		.byte	4
+ 1090 014b 04       		.byte	4
+ 1091 014c 04       		.byte	4
+ 1092 014d 04       		.byte	4
+ 1093 014e 04       		.byte	4
+ 1094 014f 04       		.byte	4
+ 1095 0150 04       		.byte	4
+ 1096 0151 04       		.byte	4
+ 1097 0152 04       		.byte	4
+ 1098 0153 04       		.byte	4
+ 1099 0154 04       		.byte	4
+ 1100 0155 04       		.byte	4
+ 1101 0156 04       		.byte	4
+ 1102 0157 04       		.byte	4
+ 1103 0158 04       		.byte	4
+ 1104 0159 04       		.byte	4
+ 1105 015a 04       		.byte	4
+ 1106 015b 04       		.byte	4
+ 1107 015c 04       		.byte	4
+ 1108 015d 04       		.byte	4
+ 1109 015e 04       		.byte	4
+ 1110 015f 04       		.byte	4
+ 1111 0160 04       		.byte	4
+ 1112 0161 04       		.byte	4
+ 1113 0162 04       		.byte	4
+ 1114 0163 04       		.byte	4
+ 1115 0164 04       		.byte	4
+ 1116 0165 04       		.byte	4
+ 1117 0166 04       		.byte	4
+ 1118 0167 04       		.byte	4
+ 1119 0168 04       		.byte	4
+ 1120 0169 04       		.byte	4
+ 1121 016a 04       		.byte	4
+ 1122 016b 04       		.byte	4
+ 1123 016c 04       		.byte	4
+ 1124 016d 04       		.byte	4
+ 1125 016e 04       		.byte	4
+ 1126 016f 04       		.byte	4
+ 1127 0170 00       		.byte	0
+ 1128 0171 05       		.byte	5
+ 1129 0172 00       		.byte	0
+ 1130 0173 02       		.byte	2
+ 1131 0174 00       		.byte	0
+ 1132 0175 00       		.byte	0
+ 1133 0176 05       		.byte	5
+ 1134 0177 04       		.byte	4
+ 1135 0178 04       		.byte	4
+ 1136 0179 04       		.byte	4
+ 1137 017a 04       		.byte	4
+ 1138 017b 04       		.byte	4
+ 1139 017c 04       		.byte	4
+ 1140 017d 04       		.byte	4
+ 1141 017e 04       		.byte	4
+ 1142 017f 04       		.byte	4
+ 1143 0180 04       		.byte	4
+ 1144 0181 04       		.byte	4
+ 1145 0182 04       		.byte	4
+ 1146 0183 04       		.byte	4
+ 1147 0184 04       		.byte	4
+ 1148 0185 04       		.byte	4
+ 1149 0186 04       		.byte	4
+ 1150 0187 04       		.byte	4
+ 1151 0188 04       		.byte	4
+ 1152 0189 04       		.byte	4
+ 1153 018a 04       		.byte	4
+ 1154 018b 04       		.byte	4
+ 1155 018c 04       		.byte	4
+ 1156 018d 04       		.byte	4
+ 1157 018e 04       		.byte	4
+ 1158 018f 04       		.byte	4
+ 1159 0190 04       		.byte	4
+ 1160 0191 04       		.byte	4
+ 1161 0192 04       		.byte	4
+ 1162 0193 04       		.byte	4
+ 1163 0194 04       		.byte	4
+ 1164 0195 04       		.byte	4
+ 1165 0196 04       		.byte	4
+ 1166 0197 04       		.byte	4
+ 1167 0198 04       		.byte	4
+ 1168 0199 04       		.byte	4
+ 1169 019a 04       		.byte	4
+ 1170 019b 04       		.byte	4
+ 1171 019c 04       		.byte	4
+ 1172 019d 04       		.byte	4
+ 1173 019e 04       		.byte	4
+ 1174 019f 04       		.byte	4
+ 1175 01a0 04       		.byte	4
+ 1176 01a1 04       		.byte	4
+ 1177 01a2 04       		.byte	4
+ 1178 01a3 04       		.byte	4
+ 1179 01a4 04       		.byte	4
+ 1180 01a5 04       		.byte	4
+ 1181 01a6 04       		.byte	4
+ 1182 01a7 04       		.byte	4
+ 1183 01a8 04       		.byte	4
+ 1184 01a9 04       		.byte	4
+ 1185 01aa 04       		.byte	4
+ 1186 01ab 04       		.byte	4
+ 1187 01ac 04       		.byte	4
+ 1188 01ad 04       		.byte	4
+ 1189 01ae 04       		.byte	4
+ 1190 01af 04       		.byte	4
+ 1191 01b0 00       		.byte	0
+ 1192 01b1 06       		.byte	6
+ 1193 01b2 00       		.byte	0
+ 1194 01b3 02       		.byte	2
+ 1195 01b4 00       		.byte	0
+ 1196 01b5 00       		.byte	0
+ 1197 01b6 06       		.byte	6
+ 1198 01b7 04       		.byte	4
+ 1199 01b8 04       		.byte	4
+ 1200 01b9 04       		.byte	4
+ 1201 01ba 04       		.byte	4
+ 1202 01bb 04       		.byte	4
+ 1203 01bc 04       		.byte	4
+ 1204 01bd 04       		.byte	4
+ 1205 01be 04       		.byte	4
+ 1206 01bf 04       		.byte	4
+ 1207 01c0 04       		.byte	4
+ 1208 01c1 04       		.byte	4
+ 1209 01c2 04       		.byte	4
+ 1210 01c3 04       		.byte	4
+ 1211 01c4 04       		.byte	4
+ 1212 01c5 04       		.byte	4
+ 1213 01c6 04       		.byte	4
+ 1214 01c7 04       		.byte	4
+ 1215 01c8 04       		.byte	4
+ 1216 01c9 04       		.byte	4
+ 1217 01ca 04       		.byte	4
+ 1218 01cb 04       		.byte	4
+ 1219 01cc 04       		.byte	4
+ 1220 01cd 04       		.byte	4
+ 1221 01ce 04       		.byte	4
+ 1222 01cf 04       		.byte	4
+ 1223 01d0 04       		.byte	4
+ 1224 01d1 04       		.byte	4
+ 1225 01d2 04       		.byte	4
+ 1226 01d3 04       		.byte	4
+ 1227 01d4 04       		.byte	4
+ 1228 01d5 04       		.byte	4
+ 1229 01d6 04       		.byte	4
+ 1230 01d7 04       		.byte	4
+ 1231 01d8 04       		.byte	4
+ 1232 01d9 04       		.byte	4
+ 1233 01da 04       		.byte	4
+ 1234 01db 04       		.byte	4
+ 1235 01dc 04       		.byte	4
+ 1236 01dd 04       		.byte	4
+ 1237 01de 04       		.byte	4
+ 1238 01df 04       		.byte	4
+ 1239 01e0 04       		.byte	4
+ 1240 01e1 04       		.byte	4
+ 1241 01e2 04       		.byte	4
+ 1242 01e3 04       		.byte	4
+ 1243 01e4 04       		.byte	4
+ 1244 01e5 04       		.byte	4
+ 1245 01e6 04       		.byte	4
+ 1246 01e7 04       		.byte	4
+ 1247 01e8 04       		.byte	4
+ 1248 01e9 04       		.byte	4
+ 1249 01ea 04       		.byte	4
+ 1250 01eb 04       		.byte	4
+ 1251 01ec 04       		.byte	4
+ 1252 01ed 04       		.byte	4
+ 1253 01ee 04       		.byte	4
+ 1254 01ef 04       		.byte	4
+ 1255 01f0 00       		.byte	0
+ 1256 01f1 07       		.byte	7
+ 1257 01f2 00       		.byte	0
+ 1258 01f3 02       		.byte	2
+ 1259 01f4 00       		.byte	0
+ 1260 01f5 00       		.byte	0
+ 1261 01f6 07       		.byte	7
+ 1262 01f7 00       		.space	1
+ 1265              	CyFxGpifWavedata:
+ 1266 01f8 0160081E 		.word	503865345
+ 1267 01fc C4020300 		.word	197316
+ 1268 0200 00000080 		.word	-2147483648
+ 1269 0204 00000000 		.word	0
+ 1270 0208 00000000 		.word	0
+ 1271 020c 00000000 		.word	0
+ 1272 0210 0203084E 		.word	1309147906
+ 1273 0214 00030000 		.word	768
+ 1274 0218 00000080 		.word	-2147483648
+ 1275 021c 0660081E 		.word	503865350
+ 1276 0220 C4020300 		.word	197316
+ 1277 0224 00000080 		.word	-2147483648
+ 1278 0228 0160081E 		.word	503865345
+ 1279 022c C4020300 		.word	197316
+ 1280 0230 00000080 		.word	-2147483648
+ 1281 0234 0407044E 		.word	1308886788
+ 1282 0238 00030020 		.word	536871680
+ 1283 023c 000010C0 		.word	-1072693248
+ 1284 0240 0203084E 		.word	1309147906
+ 1285 0244 00030000 		.word	768
+ 1286 0248 00000080 		.word	-2147483648
+ 1287 024c 0160081E 		.word	503865345
+ 1288 0250 C4020300 		.word	197316
+ 1289 0254 00000080 		.word	-2147483648
+ 1290 0258 00000000 		.word	0
+ 1291 025c 00000000 		.word	0
+ 1292 0260 00000000 		.word	0
+ 1293 0264 00000000 		.word	0
+ 1294 0268 00000000 		.word	0
+ 1295 026c 00000000 		.word	0
+ 1296 0270 00000000 		.word	0
+ 1297 0274 00000000 		.word	0
+ 1298 0278 00000000 		.word	0
+ 1299 027c 0587733E 		.word	1047758597
+ 1300 0280 00030000 		.word	768
+ 1301 0284 000010C0 		.word	-1072693248
+ 1302 0288 00000000 		.word	0
+ 1303 028c 00000000 		.word	0
+ 1304 0290 00000000 		.word	0
+ 1305 0294 0327005E 		.word	1577068291
+ 1306 0298 0C030320 		.word	537068300
+ 1307 029c 00000080 		.word	-2147483648
+ 1308 02a0 00000000 		.word	0
+ 1309 02a4 00000000 		.word	0
+ 1310 02a8 00000000 		.word	0
+ 1311 02ac 0407044E 		.word	1308886788
+ 1312 02b0 00030020 		.word	536871680
+ 1313 02b4 000010C0 		.word	-1072693248
+ 1316              	CyFxGpifTransition:
+ 1317 02b8 0000     		.short	0
+ 1318 02ba 8080     		.short	-32640
+ 1319 02bc 2222     		.short	8738
+ 1320 02be 5555     		.short	21845
+ 1321 02c0 7F7F     		.short	32639
+ 1322 02c2 1F1F     		.short	7967
+ 1323 02c4 8888     		.short	-30584
+ 1324 02c6 0000     		.bss
+ 1325              		.align	2
+ 1326              		.set	.LANCHOR0,. + 0
+ 1329              	glDMARxCount:
+ 1330 0000 00000000 		.space	4
+ 1333              	glDMATxCount:
+ 1334 0004 00000000 		.space	4
+ 1337              	glIsApplnActive:
+ 1338 0008 00000000 		.space	4
+ 1339              		.ident	"GCC: (Sourcery CodeBench Lite 2013.11-24) 4.8.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 cyfxslfifosync.c
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:14     .text:00000000 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:17     .text:00000000 CyFxAppErrorHandler
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:30     .text:00000010 CyFxSlFifoApplnDebugInit
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:90     .text:000000c4 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:92     .text:000000c8 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:95     .text:000000c8 CyFxSlFifoUtoPDmaCallback
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:125    .text:00000124 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:129    .text:00000130 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:132    .text:00000130 CyFxSlFifoPtoUDmaCallback
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:162    .text:0000018c $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:166    .text:00000198 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:169    .text:00000198 CyFxSlFifoApplnStart
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:327    .text:000003b0 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:14     .text:00000000 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:17     .text:00000000 CyFxAppErrorHandler
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:30     .text:00000010 CyFxSlFifoApplnDebugInit
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:90     .text:000000c4 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:92     .text:000000c8 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:95     .text:000000c8 CyFxSlFifoUtoPDmaCallback
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:125    .text:00000124 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:129    .text:00000130 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:132    .text:00000130 CyFxSlFifoPtoUDmaCallback
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:162    .text:0000018c $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:166    .text:00000198 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:169    .text:00000198 CyFxSlFifoApplnStart
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:327    .text:000003b0 $d
                             *COM*:00000004 seqnum_p
                             *COM*:000000ac glChHandleSlFifoUtoP
                             *COM*:000000ac glChHandleSlFifoPtoU
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:339    .text:000003dc $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:342    .text:000003dc CyFxSlFifoApplnStop
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:394    .text:00000480 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:399    .text:00000490 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:402    .text:00000490 CyFxSlFifoApplnUSBSetupCB
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:575    .text:000006fc $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:339    .text:000003dc $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:342    .text:000003dc CyFxSlFifoApplnStop
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:397    .text:0000048c $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:403    .text:000004a0 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:406    .text:000004a0 CyFxSlFifoApplnUSBSetupCB
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:608    .text:0000077c $d
                             *COM*:00000020 glEp0Buffer
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:590    .text:00000734 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:593    .text:00000734 CyFxSlFifoApplnUSBEventCB
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:624    .text:0000078c $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:626    .text:00000790 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:629    .text:00000790 CyFxApplnLPMRqtCB
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:639    .text:00000798 CyFxSlFifoApplnInit
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:708    .text:00000878 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:714    .text:0000088c $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:717    .text:0000088c CyFxSwitchtoslFifo
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:747    .text:000008dc SlFifoAppThread_Entry
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:798    .text:00000984 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:805    .text:0000099c $a
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:808    .text:0000099c CyFxApplicationDefine
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:842    .text:00000a00 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:626    .text:000007c0 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:629    .text:000007c0 CyFxSlFifoApplnUSBEventCB
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:666    .text:00000830 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:670    .text:0000083c $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:673    .text:0000083c CyFxApplnLPMRqtCB
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:683    .text:00000844 CyFxSlFifoApplnInit
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:752    .text:00000924 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:758    .text:00000938 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:761    .text:00000938 CyFxSwitchtoslFifo
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:791    .text:00000988 SlFifoAppThread_Entry
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:842    .text:00000a30 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:849    .text:00000a48 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:852    .text:00000a48 CyFxApplicationDefine
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:886    .text:00000aac $d
                             *COM*:000000a8 slFifoAppThread
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:1281   .bss:00000008 glIsApplnActive
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:1277   .bss:00000004 glDMATxCount
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:1273   .bss:00000000 glDMARxCount
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:864    .rodata:00000000 CyFxGpifConfig
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:927    .data:00000000 CyFxGpifRegValue
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:1006   .data:00000130 CyFxGpifWavedataPosition
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:1209   .data:000001f8 CyFxGpifWavedata
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:1260   .data:000002b8 CyFxGpifTransition
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:860    .rodata:00000000 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:924    .data:00000000 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccIzzrHf.s:1269   .bss:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:1337   .bss:00000008 glIsApplnActive
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:1333   .bss:00000004 glDMATxCount
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:1329   .bss:00000000 glDMARxCount
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:908    .rodata:00000000 CyFxGpifConfig
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:983    .data:00000000 CyFxGpifRegValue
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:1062   .data:00000130 CyFxGpifWavedataPosition
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:1265   .data:000001f8 CyFxGpifWavedata
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:1316   .data:000002b8 CyFxGpifTransition
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:904    .rodata:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:980    .data:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccT1V5ja.s:1325   .bss:00000000 $d
 
 UNDEFINED SYMBOLS
 _tx_thread_sleep
@@ -1408,6 +1488,8 @@ CyU3PUsbResetEp
 CyU3PUsbGetEP0Data
 _txe_event_flags_set
 CyU3PUsbSendEP0Data
+CyU3PConnectState
+CyU3PDeviceReset
 filelen
 glConfigDone
 glFxConfigFpgaAppEvent

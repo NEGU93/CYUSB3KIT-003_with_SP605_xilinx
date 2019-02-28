@@ -51,7 +51,7 @@ CyU3PReturnStatus_t CyFxConfigFpga(uint32_t uiLen) {
       apiRetStatus = CyU3PSpiSetSsnLine (CyFalse);
 
       //CyU3PGpioSimpleGetValue (FPGA_INIT_B, &xFpga_Init_B);	// TODO: 2 times this line?
-      CyU3PGpioSimpleGetValue (FPGA_INIT_B, &xFpga_Init_B);
+      CyU3PGpioSimpleGetValue(FPGA_INIT_B, &xFpga_Init_B);
       if (xFpga_Init_B) {
     	  CyU3PDebugPrint(CY_FX_DEBUG_PRIORITY, "\rERROR: FPGA_Init_B was not reseted. Error code = %d\r\n", apiRetStatus);
     	  glConfigDone = CyFalse;
@@ -103,7 +103,7 @@ CyU3PReturnStatus_t CyFxConfigFpga(uint32_t uiLen) {
           }
       }
       CyU3PThreadSleep(1);
-      CyU3PDebugPrint (CY_FX_DEBUG_PRIORITY, "\r 5. Checking DONE signal\r\n");
+      CyU3PDebugPrint (CY_FX_DEBUG_PRIORITY, "\r 4. Checking DONE signal\r\n");
       apiRetStatus |= CyU3PGpioSimpleGetValue (FPGA_DONE, &xFpga_Done);
       if( (xFpga_Done != CyTrue) ){
     	  glConfigDone = CyFalse;

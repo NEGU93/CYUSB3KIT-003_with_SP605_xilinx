@@ -275,16 +275,16 @@
 DEFINED SYMBOLS
                             *ABS*:00000000 cyfxslfifousbdscr.c
                             *COM*:00000020 CyFxUsbDscrAlignBuffer
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:28     .rodata:00000000 CyFxUSBProductDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:40     .rodata:00000020 CyFxUSBManufactureDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:60     .rodata:00000040 CyFxUSBStringLangIDDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:68     .rodata:00000060 CyFxUSBFSConfigDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:103    .rodata:00000080 CyFxUSBHSConfigDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:138    .rodata:000000a0 CyFxUSBSSConfigDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:186    .rodata:000000e0 CyFxUSBDeviceQualDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:200    .rodata:00000100 CyFxUSBBOSDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:226    .rodata:00000120 CyFxUSB20DeviceDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:248    .rodata:00000140 CyFxUSB30DeviceDscr
-C:\Users\NEGU93\AppData\Local\Temp\ccI2tclq.s:25     .rodata:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:28     .rodata:00000000 CyFxUSBProductDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:40     .rodata:00000020 CyFxUSBManufactureDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:60     .rodata:00000040 CyFxUSBStringLangIDDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:68     .rodata:00000060 CyFxUSBFSConfigDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:103    .rodata:00000080 CyFxUSBHSConfigDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:138    .rodata:000000a0 CyFxUSBSSConfigDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:186    .rodata:000000e0 CyFxUSBDeviceQualDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:200    .rodata:00000100 CyFxUSBBOSDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:226    .rodata:00000120 CyFxUSB20DeviceDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:248    .rodata:00000140 CyFxUSB30DeviceDscr
+C:\Users\NEGU93\AppData\Local\Temp\ccaJlmAd.s:25     .rodata:00000000 $d
 
 NO UNDEFINED SYMBOLS

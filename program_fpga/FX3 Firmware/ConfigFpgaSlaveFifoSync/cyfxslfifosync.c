@@ -342,6 +342,7 @@ void CyFxSlFifoApplnStop (void) {
     CyU3PEpConfig_t epCfg;
     CyU3PReturnStatus_t apiRetStatus = CY_U3P_SUCCESS;
 
+    CyU3PDebugPrint (4, "Reset slave FIFO\n");
     /* Update the flag. */
     glIsApplnActive = CyFalse;
 
@@ -464,13 +465,25 @@ CyBool_t CyFxSlFifoApplnUSBSetupCB (uint32_t setupdat0, uint32_t setupdat1) {
     		CyU3PDebugPrint (4, "\r\tVND_CMD_SLAVESER_CFGSTAT\r\n", bRequest);
     		if ((bReqType & 0x80) == 0x80) {
     			glEp0Buffer [0]= glConfigDone;
+    			CyU3PDebugPrint (4, "\r glEp0Buffer = %X, wLength = %X\r\n", glEp0Buffer, wLength);
     			CyU3PUsbSendEP0Data (wLength, glEp0Buffer);
     			/* Switch to slaveFIFO interface when FPGA is configured successfully*/
     			if (glConfigDone) {
+    				CyU3PDebugPrint (4, "\r\tSwitch to slaveFIFO interface.\r\n");
     				CyU3PEventSet(&glFxConfigFpgaAppEvent, CY_FX_CONFIGFPGAAPP_SW_TO_SLFIFO_EVENT, CYU3P_EVENT_OR);
     			}
     			isHandled = CyTrue;
     		}
+    	}
+    	if(bRequest == 0xE0) {
+    		CyU3PDebugPrint (4, "\r\tReset the FX3 device.\r\n", bRequest);
+    		/* Request to reset the FX3 device. */
+    		CyU3PUsbAckSetup ();
+    		CyU3PThreadSleep (2000);				/* Delay for 2 seconds */
+    		CyU3PConnectState (CyFalse, CyTrue);
+    		CyU3PThreadSleep (1000);				/* Delay for 1 second */
+    		CyU3PDeviceReset (CyFalse);
+    		CyU3PThreadSleep (1000);				/* Delay for 1 second */
     	}
     }
     return isHandled;
@@ -487,11 +500,13 @@ void CyFxSlFifoApplnUSBEventCB (CyU3PUsbEventType_t evtype, uint16_t  evdata) {
 
             }
             /* Start the loop back function. */
+            CyU3PDebugPrint (4, "\r\tStart the loop back function.\r\n");
             CyU3PUsbLPMDisable();
             CyFxConfigFpgaApplnStart();
             break;
         case CY_U3P_USB_EVENT_RESET:
         case CY_U3P_USB_EVENT_DISCONNECT:
+        	CyU3PDebugPrint (4, "\r\tStop the loop back function.\r\n");
             /* Stop the loop back function. */
             if (glIsApplnActive) {
                 CyFxSlFifoApplnStop ();
@@ -542,7 +557,7 @@ void CyFxSlFifoApplnInit (void) {
         CyFxAppErrorHandler(apiRetStatus);
     }
 
-    CyU3PGpifSocketConfigure (0,CY_U3P_PIB_SOCKET_0,6,CyFalse,1);
+    CyU3PGpifSocketConfigure (0,CY_U3P_PIB_SOCKET_0,6,CyFalse,1);	// Selects watermark
 
    CyU3PGpifSocketConfigure (3,CY_U3P_PIB_SOCKET_3,6,CyFalse,1);
 
@@ -673,7 +688,7 @@ void CyFxSwitchtoslFifo(void) {
     io_cfg.useI2C    = CyFalse;
     io_cfg.useI2S    = CyFalse;
     io_cfg.useSpi    = CyFalse;
-#if (CY_FX_SLFIFO_GPIF_16_32BIT_CONF_SELECT == 0)
+#if (CY_FX_SLFIFO_GPIF_16_32BIT_CONF_SELECT == 0)	// Select for 16 or 32 bits
     io_cfg.isDQ32Bit = CyFalse;
     io_cfg.lppMode   = CY_U3P_IO_MATRIX_LPP_UART_ONLY;
     /*io_cfg.lppMode   = CY_U3P_IO_MATRIX_LPP_DEFAULT;*/

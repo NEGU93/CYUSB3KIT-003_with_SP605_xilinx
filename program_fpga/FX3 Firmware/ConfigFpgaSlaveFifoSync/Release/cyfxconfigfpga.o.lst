@@ -798,7 +798,7 @@
  753 0228 25640D0A 		.ascii	"%d\015\012\000"
  753      00
  754              	.LC12:
- 755 022d 0D20352E 		.ascii	"\015 5. Checking DONE signal\015\012\000"
+ 755 022d 0D20342E 		.ascii	"\015 4. Checking DONE signal\015\012\000"
  755      20436865 
  755      636B696E 
  755      6720444F 
@@ -1011,27 +1011,27 @@
  842              		.ident	"GCC: (Sourcery CodeBench Lite 2013.11-24) 4.8.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 cyfxconfigfpga.c
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:14     .text:00000000 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:17     .text:00000000 CyFxConfigFpga
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:187    .text:00000258 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:14     .text:00000000 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:17     .text:00000000 CyFxConfigFpga
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:187    .text:00000258 $d
                             *COM*:000000ac glChHandleUtoCPU
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:208    .text:000002a8 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:211    .text:000002a8 CyFxConfigFpgaApplnStart
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:328    .text:00000444 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:341    .text:00000474 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:344    .text:00000474 CyFxConfigFpgaApplnStop
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:364    .text:000004ac $d
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:368    .text:000004b8 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:371    .text:000004b8 CyFxConfigFpgaApplnInit
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:634    .text:00000870 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:208    .text:000002a8 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:211    .text:000002a8 CyFxConfigFpgaApplnStart
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:328    .text:00000444 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:341    .text:00000474 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:344    .text:00000474 CyFxConfigFpgaApplnStop
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:364    .text:000004ac $d
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:368    .text:000004b8 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:371    .text:000004b8 CyFxConfigFpgaApplnInit
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:634    .text:00000870 $d
                             *COM*:00000028 glFxConfigFpgaAppEvent
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:664    .text.startup:00000000 $a
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:667    .text.startup:00000000 main
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:835    .bss:00000000 uiPacketSize
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:840    .bss:00000004 filelen
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:828    .data:00000000 glConfigDone
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:824    .data:00000000 $d
-C:\Users\NEGU93\AppData\Local\Temp\ccbc6CSd.s:831    .bss:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:664    .text.startup:00000000 $a
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:667    .text.startup:00000000 main
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:835    .bss:00000000 uiPacketSize
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:840    .bss:00000004 filelen
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:828    .data:00000000 glConfigDone
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:824    .data:00000000 $d
+C:\Users\NEGU93\AppData\Local\Temp\ccuLwq5c.s:831    .bss:00000000 $d
 
 UNDEFINED SYMBOLS
 CyU3PDebugPrint
