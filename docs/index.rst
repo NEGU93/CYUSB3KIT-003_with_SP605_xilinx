@@ -18,6 +18,7 @@ Content
    
 	:maxdepth: 2
 
+	installation
 	constructor
 	programming
 	bulk_methods
