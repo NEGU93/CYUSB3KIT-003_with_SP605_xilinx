@@ -1,5 +1,5 @@
-Installing
-==========
+Getting Started
+===============
 
 Dependencies
 ------------
@@ -15,12 +15,13 @@ Cloning repository
 3. ``git clone https://github.com/NEGU93/CYUSB3KIT-003_with_SP605_xilinx.git``
 
 
-Compiling Code
---------------
+Compiling and Running
+---------------------
 
 1. ``sudo apt install cmake``
 2. ``cd fx3_manager_cpp_source/``
 3. ``cmake .``
 4. ``make``
+5. ``./testing_cpp_code``
 
 .. _EZ-USB_FX3_Software_Development_Kit: https://www.cypress.com/documentation/software-and-drivers/ez-usb-fx3-software-development-kit	
